@@ -29,21 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timeLabel = new System.Windows.Forms.Label();
+            this.dateTimeLabel = new System.Windows.Forms.Label();
             this.DspTimer = new System.Windows.Forms.Timer(this.components);
             this.LocateTimer = new System.Windows.Forms.Timer(this.components);
             this.taskInfoNotify = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
-            // timeLabel
+            // dateTimeLabel
             // 
-            this.timeLabel.AutoSize = true;
-            this.timeLabel.ForeColor = System.Drawing.Color.Red;
-            this.timeLabel.Location = new System.Drawing.Point(64, 4);
-            this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(109, 12);
-            this.timeLabel.TabIndex = 0;
-            this.timeLabel.Text = "2009/03/21 12:22:45";
+            this.dateTimeLabel.AutoSize = true;
+            this.dateTimeLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dateTimeLabel.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dateTimeLabel.ForeColor = System.Drawing.Color.Red;
+            this.dateTimeLabel.Location = new System.Drawing.Point(-133, 1);
+            this.dateTimeLabel.MaximumSize = new System.Drawing.Size(155, 14);
+            this.dateTimeLabel.Name = "dateTimeLabel";
+            this.dateTimeLabel.Size = new System.Drawing.Size(133, 12);
+            this.dateTimeLabel.TabIndex = 2;
+            this.dateTimeLabel.Text = "2009/03/21(日)  21:12:12";
+            this.dateTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dateTimeLabel.Click += new System.EventHandler(this.timeLabel_Click);
             // 
             // DspTimer
             // 
@@ -62,16 +67,24 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(174, 19);
-            this.Controls.Add(this.timeLabel);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(0, 17);
+            this.Controls.Add(this.dateTimeLabel);
+            this.Font = new System.Drawing.Font("MS UI Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(0, 17);
+            this.MinimizeBox = false;
             this.Name = "MainForm";
+            this.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "MainForm";
             this.TopMost = true;
-            this.TransparencyKey = System.Drawing.SystemColors.Control;
+            this.TransparencyKey = System.Drawing.Color.White;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -80,7 +93,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Label dateTimeLabel;
         private System.Windows.Forms.Timer DspTimer;
         private System.Windows.Forms.Timer LocateTimer;
         private System.Windows.Forms.NotifyIcon taskInfoNotify;

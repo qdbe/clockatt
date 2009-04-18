@@ -72,5 +72,10 @@ namespace W32NativeService
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern bool GetTitleBarInfo(IntPtr hwnd, ref wTITLEBARINFO tbi);
 
+        [DllImport("User32.dll")]
+        public static extern uint GetWindowThreadProcessId(IntPtr hWnd, ref  uint lpdwProcessId  );
+
+        [DllImport("User32.dll")]
+        public static extern int IsWindowVisible(IntPtr hWnd);
     }
 }
