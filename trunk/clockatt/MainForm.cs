@@ -31,6 +31,11 @@ namespace clockatt
             //this.UpdateStyles();
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            this.taskInfoNotify.Visible = false;
+        }
+
         private void LocateTimer_Tick(object sender, EventArgs e)
         {
             int hwnd =  W32Native.GetForegroundWindow();
@@ -111,6 +116,7 @@ namespace clockatt
         {
             this.DspTimer.Start();
             this.LocateTimer.Start();
+            this.taskInfoNotify.Icon = clockatt.Properties.Resources.clockAttIcon;
             this.taskInfoNotify.Visible = true;
         }
 
@@ -126,7 +132,7 @@ namespace clockatt
             this.dateTimeLabel.Text = GetFormatDateTime(nc);
             this.Invalidate();
             Application.DoEvents();
-            this.taskInfoNotify.BalloonTipText = this.dateTimeLabel.Text;
+            this.taskInfoNotify.Text = this.dateTimeLabel.Text;
             DateTime nt = DateTime.Now;
             this.DspTimer.Interval = 1000 - nt.Millisecond;
             DspTimer.Start();
@@ -139,7 +145,8 @@ namespace clockatt
 
         private void timeLabel_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("AA");
+            CalenderForm dlg = new CalenderForm();
+            dlg.ShowDialog(this);
         }
     }
 }

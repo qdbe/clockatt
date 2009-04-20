@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.dateTimeLabel = new System.Windows.Forms.Label();
             this.DspTimer = new System.Windows.Forms.Timer(this.components);
             this.LocateTimer = new System.Windows.Forms.Timer(this.components);
@@ -42,7 +41,7 @@
             this.dateTimeLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.dateTimeLabel.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dateTimeLabel.ForeColor = System.Drawing.Color.Red;
-            this.dateTimeLabel.Location = new System.Drawing.Point(-133, 1);
+            this.dateTimeLabel.Location = new System.Drawing.Point(7, 1);
             this.dateTimeLabel.MaximumSize = new System.Drawing.Size(155, 14);
             this.dateTimeLabel.Name = "dateTimeLabel";
             this.dateTimeLabel.Size = new System.Drawing.Size(133, 12);
@@ -63,7 +62,6 @@
             // 
             // taskInfoNotify
             // 
-            this.taskInfoNotify.Icon = ((System.Drawing.Icon)(resources.GetObject("taskInfoNotify.Icon")));
             this.taskInfoNotify.Text = "ClockAtt";
             this.taskInfoNotify.Visible = true;
             // 
@@ -72,7 +70,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(0, 17);
+            this.ClientSize = new System.Drawing.Size(140, 17);
             this.Controls.Add(this.dateTimeLabel);
             this.Font = new System.Drawing.Font("MS UI Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
