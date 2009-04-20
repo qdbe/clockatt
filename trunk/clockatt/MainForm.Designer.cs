@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.dateTimeLabel = new System.Windows.Forms.Label();
             this.DspTimer = new System.Windows.Forms.Timer(this.components);
             this.LocateTimer = new System.Windows.Forms.Timer(this.components);
@@ -62,6 +63,7 @@
             // 
             // taskInfoNotify
             // 
+            this.taskInfoNotify.Icon = ((System.Drawing.Icon)(resources.GetObject("taskInfoNotify.Icon")));
             this.taskInfoNotify.Text = "ClockAtt";
             this.taskInfoNotify.Visible = true;
             // 
