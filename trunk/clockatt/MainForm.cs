@@ -145,8 +145,24 @@ namespace clockatt
 
         private void timeLabel_Click(object sender, EventArgs e)
         {
-            CalenderForm dlg = new CalenderForm();
-            dlg.ShowDialog(this);
+        }
+
+        private void dateTimeLabel_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.RightClickMenu.Show(this,0,0);
+            }
+            else
+            {
+                CalenderForm dlg = new CalenderForm();
+                dlg.ShowDialog(this);
+            }
+        }
+
+        private void miQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
