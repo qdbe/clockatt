@@ -51,7 +51,6 @@
             this.dateTimeLabel.TabIndex = 2;
             this.dateTimeLabel.Text = "2009/03/21(日)  21:12:12";
             this.dateTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.dateTimeLabel.Click += new System.EventHandler(this.timeLabel_Click);
             this.dateTimeLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dateTimeLabel_MouseClick);
             // 
             // DspTimer
@@ -66,6 +65,7 @@
             // 
             // taskInfoNotify
             // 
+            this.taskInfoNotify.ContextMenuStrip = this.RightClickMenu;
             this.taskInfoNotify.Text = "ClockAtt";
             this.taskInfoNotify.Visible = true;
             // 
@@ -92,6 +92,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(157, 17);
+            this.ContextMenuStrip = this.RightClickMenu;
             this.Controls.Add(this.dateTimeLabel);
             this.Font = new System.Drawing.Font("MS UI Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
