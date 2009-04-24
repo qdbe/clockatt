@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Collections;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
@@ -18,17 +17,13 @@ namespace clockatt
     {
         int preHwnd = 0;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
-
-            //this.SetStyle(
-            //    ControlStyles.DoubleBuffer |
-            //    ControlStyles.UserPaint |
-            //    ControlStyles.AllPaintingInWmPaint,
-            //    true);
-
-            //this.UpdateStyles();
+            this.Icon = clockatt.Properties.Resources.clockAttIcon;
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -36,8 +31,15 @@ namespace clockatt
             this.taskInfoNotify.Visible = false;
         }
 
+        /// <summary>
+        /// 表示位置決定 タイマー処理
+        /// 一定間隔で呼び出される
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LocateTimer_Tick(object sender, EventArgs e)
         {
+            // 現在のアクティブウィンドウのハンドルを取得
             int hwnd =  W32Native.GetForegroundWindow();
             if (hwnd == 0)
             {
@@ -45,11 +47,14 @@ namespace clockatt
             }
             if (hwnd == (int)this.Handle)
             {
+                // アクティブウィンドが自分自身だった場合は
                 if (preHwnd == 0)
                 {
-                    this.SetDeskTopLeft();
+                    // 前のアクティブウィンドウがない場合にはデスクトップ右上にする
+                    this.SetDeskTopRight();
+                    return;
                 }
-                return;
+                hwnd = this.preHwnd;
             }
             uint wpid = 0;
             W32Native.GetWindowThreadProcessId((IntPtr)hwnd, ref wpid);
@@ -95,18 +100,22 @@ namespace clockatt
                 }
                 this.Location = new Point(leftposx, info.rcWindow.top + 3);
                 this.Height = titleHeight - 2;
-                preHwnd = hwnd;
+                this.preHwnd = hwnd;
             }
             else
             {
                 if (preHwnd == 0)
                 {
-                    SetDeskTopLeft();
+                    SetDeskTopRight();
                 }
             }
         }
 
-        private void SetDeskTopLeft()
+        /// <summary>
+        /// 表示位置をデスクトップの右上に設定する
+        /// アクティブウィンドウがない場合に利用
+        /// </summary>
+        private void SetDeskTopRight()
         {
             this.Location = new Point(Screen.FromControl(this).WorkingArea.Right - this.Width,
                 Screen.FromControl(this).WorkingArea.Top + 0);
@@ -118,6 +127,7 @@ namespace clockatt
             this.LocateTimer.Start();
             this.taskInfoNotify.Icon = clockatt.Properties.Resources.clockAttIcon;
             this.taskInfoNotify.Visible = true;
+            ClockConfig conf = new ClockConfig();
         }
 
         private void DspTimer_Tick(object sender, EventArgs e)
@@ -132,6 +142,8 @@ namespace clockatt
             this.dateTimeLabel.Text = GetFormatDateTime(nc);
             this.Invalidate();
             Application.DoEvents();
+            this.Width = this.dateTimeLabel.Width;
+            this.Height = this.dateTimeLabel.Height;
             this.taskInfoNotify.Text = this.dateTimeLabel.Text;
             DateTime nt = DateTime.Now;
             this.DspTimer.Interval = 1000 - nt.Millisecond;
@@ -141,10 +153,6 @@ namespace clockatt
         private string GetFormatDateTime(DateTime nc)
         {
             return nc.ToString();
-        }
-
-        private void timeLabel_Click(object sender, EventArgs e)
-        {
         }
 
         private void dateTimeLabel_MouseClick(object sender, MouseEventArgs e)
