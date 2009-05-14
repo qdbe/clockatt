@@ -25,6 +25,16 @@ namespace clockatt
             Sun
         };
 
+        public enum Column
+        {
+            StartYear = 1,
+            EndYear,
+            Month,
+            Day,
+            WeekDay,
+            Week
+        }
+
         /// <summary>
         /// 年の最低値
         /// </summary>
@@ -135,25 +145,25 @@ namespace clockatt
             int mm = checkdate.Month;
             int dd = checkdate.Day;
 
-            if (isYearRange(yy, this.StartYear, this.EndYear) != true ||
-                    isSame(mm, this.Month) != true )
+            if (IsYearRange(yy, this.StartYear, this.EndYear) != true ||
+                    IsSame(mm, this.Month) != true )
             {
                 return false;
             }
 
-            if(isSame(dd, this.Day) != true)
+            if(IsSame(dd, this.Day) != true)
             {
                 return false;
             }
 
             //第何週目かをチェック
-            if( isSame(this.GetWeekOfMonth(dd),this.WeekOfMonth) != true )
+            if( IsSame(this.GetWeekOfMonth(dd),this.WeekOfMonth) != true )
             {
                 return false;
             }
 
             // 曜日をチェック
-            if( isSame(checkdate.DayOfWeek,this.DayAtWeek) != true)
+            if( IsSame(checkdate.DayOfWeek,this.DayAtWeek) != true)
             {
                 return false;
             }
@@ -178,7 +188,7 @@ namespace clockatt
         /// <param name="st"></param>
         /// <param name="ed"></param>
         /// <returns></returns>
-        private bool isYearRange(int yy, int st, int ed)
+        private bool IsYearRange(int yy, int st, int ed)
         {
             if (st == ALLVALUE )
             {
@@ -204,7 +214,7 @@ namespace clockatt
         /// <param name="checkValue"></param>
         /// <param name="settingValue"></param>
         /// <returns></returns>
-        private bool isSame(int checkValue,int settingValue)
+        private bool IsSame(int checkValue,int settingValue)
         {
             if (settingValue == ALLVALUE)
             {
@@ -226,7 +236,7 @@ namespace clockatt
         /// <param name="checkValue"></param>
         /// <param name="settingValue"></param>
         /// <returns></returns>
-        private bool isSame(DayOfWeek checkValue, DayWeek settingValue)
+        private bool IsSame(DayOfWeek checkValue, DayWeek settingValue)
         {
             if (settingValue == DayWeek.ALL ||
                 settingValue == DayWeek.Mon && checkValue == DayOfWeek.Monday ||

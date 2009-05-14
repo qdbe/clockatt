@@ -11,6 +11,6 @@ namespace clockatt
         void ReadConfig(StreamReader sr);
         void WriteConfig(StreamWriter sw);
         void ReadLine(string rLine);
-        bool CanWrite;
+        bool CanWrite{get;}
     }
 }
