@@ -13,17 +13,6 @@ namespace clockatt
         /// 曜日
         /// </summary>
         /// <remarks>DayOfWeek は指定がないな状態を表せないので独自に定義</remarks>
-        public enum DayWeek
-        {
-            ALL,   // 指定なし
-            Mon,
-            Tue,
-            Wed,
-            Thu,
-            Fri,
-            Sat,
-            Sun
-        };
 
         public enum Column
         {
@@ -60,8 +49,52 @@ namespace clockatt
             this.pMonth = ALLVALUE;
             this.pDay = ALLVALUE;
             this.pWeekOfMonth = ALLVALUE;
-            this.pDayWeek = DayWeek.ALL;
+            this.pDayWeek = DayWeek.ALLVALUE;
         }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="strStartYear"></param>
+        /// <param name="?"></param>
+        public HolydayConfig(
+            string strStartYear,
+            string strEndYear,
+            string strMonth,
+            string strDay,
+            string strWeekDay,
+            string strWeekOfMonth
+            )
+        {
+            this.setConfValue(
+                strStartYear,
+                strEndYear,
+                strMonth,
+                strDay,
+                strWeekDay,
+                strWeekOfMonth
+                );
+        }
+
+        private void setConfValue(
+            string strStartYear,
+            string strEndYear,
+            string strMonth,
+            string strDay,
+            string strWeekDay,
+            string strWeekOfMonth
+            )
+        {
+            this.pStartYear = this.GetYear(strStartYear);
+            this.pEndYear = this.GetYear(strEndYear);
+            this.pMonth = this.GetMonth(strMonth);
+            this.pDay = this.GetDay(strDay);
+            this.pDayWeek = this.GetWeekDay();
+
+
+        }
+
+
 
         /// <summary>
         /// 開始年
@@ -101,7 +134,7 @@ namespace clockatt
         {
             get { return pDay; }
             set {
-                this.pDayWeek = DayWeek.ALL;
+                this.pDayWeek = DayWeek.ALLVALUE;
                 this.pWeekOfMonth = ALLVALUE;
                 pDay = value; 
             }
@@ -255,5 +288,39 @@ namespace clockatt
                 return false;
             }
         }
+
+        private bool isWildCard(string words)
+        {
+            if (words == "*")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private int GetInt(string rLine, string[] lineCols, int Cols)
+        {
+            string words = lineCols[Cols];
+            if (isWildCard(words) == true)
+            {
+                return HolydayConfig.ALLVALUE;
+            }
+            else
+            {
+                int result;
+                if (int.TryParse(words, out result) == true)
+                {
+                    return result;
+                }
+                else
+                {
+                    throw new ApplicationException(ERRMSG + rLine);
+                }
+            }
+        }
+
     }
 }

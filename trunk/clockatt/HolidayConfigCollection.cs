@@ -52,13 +52,21 @@ namespace clockatt
             {
                 throw new ApplicationException(ERRMSG_COLUMN + rLine);
             }
-            HolydayConfig hConf = new HolydayConfig();
-            hConf.StartYear = this.GetInt(rLine, lineCols, HolydayConfig.Column.StartYear);
-            hConf.EndYear = this.GetInt(rLine, lineCols, HolydayConfig.Column.EndYear);
-            hConf.Month = this.GetInt(rLine, lineCols, HolydayConfig.Column.Month);
-            hConf.Day = this.GetInt(rLine, lineCols, HolydayConfig.Column.Day);
-            hConf.DayAtWeek = this.GetDayAtWeek(rLine, lineCols, HolydayConfig.Column.WeekDay);
-            hConf.WeekOfMonth = this.GetInt
+            HolydayConfig hConf;
+            try
+            {
+
+                hConf = new HolydayConfig(lineCols[0],
+                    lineCols[1],
+                    lineCols[2],
+                    lineCols[3],
+                    lineCols[4],
+                    lineCols[5]);
+            }
+            catch (ApplicationException exp)
+            {
+                throw new ApplicationException(exp.Message + ":" + rLine);
+            }
             this.Add(hConf);
         }
 
@@ -92,69 +100,5 @@ namespace clockatt
                 return false;
             }
         }
-
-        /// <summary>
-        /// 一行からInt の値を取得する
-        /// </summary>
-        /// <param name="rLine"></param>
-        /// <param name="lineCols"></param>
-        /// <param name="Cols"></param>
-        /// <returns></returns>
-        private int GetInt(string rLine, string[] lineCols, HolydayConfig.Column Cols)
-        {
-            string words = lineCols[(int)Cols];
-            if (lineCols.Length < (int)Cols )
-            {
-                return HolydayConfig.ALLVALUE;
-            }
-            if (IsWildCard(words) == true)
-            {
-                return HolydayConfig.ALLVALUE;
-            }
-            else
-            {
-                int result;
-                if (int.TryParse(words, out result) == true)
-                {
-                    return result;
-                }
-                else
-                {
-                    throw new ApplicationException(ERRMSG + rLine);
-                }
-            }
-        }
-        /// <summary>
-        /// 一行から曜日の値を取得する
-        /// </summary>
-        /// <param name="rLine"></param>
-        /// <param name="lineCols"></param>
-        /// <param name="Cols"></param>
-        /// <returns></returns>
-        private HolydayConfig.DayWeek GetDayAtWeek(string rLine, string[] lineCols, HolydayConfig.Column Cols)
-        {
-            string words = lineCols[(int)Cols];
-            if (lineCols.Length < (int)Cols)
-            {
-                return HolydayConfig.ALLVALUE;
-            }
-            if (IsWildCard(words) == true)
-            {
-                return HolydayConfig.ALLVALUE;
-            }
-            else
-            {
-                int result;
-                if (int.TryParse(words, out result) == true)
-                {
-                    return result;
-                }
-                else
-                {
-                    throw new ApplicationException(ERRMSG + rLine);
-                }
-            }
-        }
-    
     }
 }
