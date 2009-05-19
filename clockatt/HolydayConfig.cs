@@ -85,12 +85,6 @@ namespace clockatt
             string strWeekOfMonth
             )
         {
-            this.pStartYear = this.GetYear(strStartYear);
-            this.pEndYear = this.GetYear(strEndYear);
-            this.pMonth = this.GetMonth(strMonth);
-            this.pDay = this.GetDay(strDay);
-            this.pDayWeek = this.GetWeekDay();
-
 
         }
 
@@ -271,22 +265,7 @@ namespace clockatt
         /// <returns></returns>
         private bool IsSame(DayOfWeek checkValue, DayWeek settingValue)
         {
-            if (settingValue == DayWeek.ALL ||
-                settingValue == DayWeek.Mon && checkValue == DayOfWeek.Monday ||
-                settingValue == DayWeek.Tue && checkValue == DayOfWeek.Tuesday ||
-                settingValue == DayWeek.Wed && checkValue == DayOfWeek.Wednesday ||
-                settingValue == DayWeek.Thu && checkValue == DayOfWeek.Thursday ||
-                settingValue == DayWeek.Fri && checkValue == DayOfWeek.Friday ||
-                settingValue == DayWeek.Sat && checkValue == DayOfWeek.Saturday ||
-                settingValue == DayWeek.Sun && checkValue == DayOfWeek.Sunday
-                )
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return checkValue.Equals(settingValue);
         }
 
         private bool isWildCard(string words)
@@ -317,7 +296,7 @@ namespace clockatt
                 }
                 else
                 {
-                    throw new ApplicationException(ERRMSG + rLine);
+                    throw new ApplicationException(/* TODO */ rLine);
                 }
             }
         }

@@ -73,7 +73,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ClockConfig.cs" />
-    <Compile Include="configAbstract.cs" />
+    <Compile Include="ConfigAbstract.cs" />
+    <Compile Include="ConfigMonth.cs" />
+    <Compile Include="ConfigYear.cs" />
     <Compile Include="DayWeek.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -140,6 +142,11 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
@@ -153,6 +160,11 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
