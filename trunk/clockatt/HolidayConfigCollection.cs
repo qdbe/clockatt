@@ -10,6 +10,19 @@ namespace clockatt
         protected const string ERRMSG = "休日設定に記載ミスがあります:";
         protected const string ERRMSG_COLUMN = "休日設定に記載ミスがあります:列数が不正です。タブ区切りで設定してください:";
 
+        /// <summary>
+        /// 設定ファイルのカラムを指定する
+        /// </summary>
+        public enum Column
+        {
+            StartYear = 0,
+            EndYear = 1,
+            Month = 2,
+            Day = 3,
+            WeekDay = 4,
+            WeekOfMonth = 5
+        }
+
         #region IConfig メンバ
         private bool pCanWrite = false;
 
@@ -56,12 +69,12 @@ namespace clockatt
             try
             {
 
-                hConf = new HolydayConfig(lineCols[0],
-                    lineCols[1],
-                    lineCols[2],
-                    lineCols[3],
-                    lineCols[4],
-                    lineCols[5]);
+                hConf = new HolydayConfig(lineCols[(int)Column.StartYear],
+                    lineCols[(int)Column.EndYear],
+                    lineCols[(int)Column.Month],
+                    lineCols[(int)Column.Day],
+                    lineCols[(int)Column.WeekDay],
+                    lineCols[(int)Column.WeekOfMonth]);
             }
             catch (ApplicationException exp)
             {

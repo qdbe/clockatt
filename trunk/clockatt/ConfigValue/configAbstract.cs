@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace clockatt
+namespace clockatt.ConfigValue
 {
     public abstract class ConfigAbstract
     {
@@ -15,6 +15,12 @@ namespace clockatt
             get { return pCurrentValue; }
             set { pCurrentValue = value; }
         }
+
+        /// <summary>
+        /// 表示文字列
+        /// </summary>
+        protected string[][] strFormats;
+
 
         /// <summary>
         /// ワイルドカード指定か否か

@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace clockatt
+namespace clockatt.ConfigValue
 {
-    public class ConfigMonth : ConfigInt
+    /// <summary>
+    /// 月の設定値を管理する
+    /// </summary>
+    public class ConfigMonthValue : ConfigIntValue
     {
         public new static readonly int ALL = 0;
         public new static readonly int InValid = 99;
@@ -13,6 +16,9 @@ namespace clockatt
         protected static int MinMonth = 1;
         protected static int MaxMonth = 12;
 
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
         protected override void InitValue()
         {
             this.MinValue = MinMonth;
@@ -114,19 +120,21 @@ namespace clockatt
             };
         }
 
-        public ConfigMonth()
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public ConfigMonthValue() : base()
         {
-            this.InitValue();
         }
 
 
-        public ConfigMonth(string strValue) 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="strValue"></param>
+        public ConfigMonthValue(string strValue) :
+            base(strValue)
         {
-            this.InitValue();
-            if (this.TryParse(strValue) == false)
-            {
-                this.CurrentValue = InValid;
-            }
         }
     }
 }

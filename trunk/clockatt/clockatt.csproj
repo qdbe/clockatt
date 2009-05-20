@@ -73,11 +73,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ClockConfig.cs" />
-    <Compile Include="ConfigAbstract.cs" />
-    <Compile Include="ConfigInt.cs" />
-    <Compile Include="ConfigMonth.cs" />
-    <Compile Include="ConfigYear.cs" />
-    <Compile Include="DayWeek.cs" />
+    <Compile Include="ConfigValue\ConfigAbstract.cs" />
+    <Compile Include="ConfigValue\ConfigDayValue.cs" />
+    <Compile Include="ConfigValue\ConfigIntValue.cs" />
+    <Compile Include="ConfigValue\ConfigMonthValue.cs" />
+    <Compile Include="ConfigValue\ConfigWeekOfMonthValue.cs" />
+    <Compile Include="ConfigValue\ConfigYearValue.cs" />
+    <Compile Include="ConfigValue\ConfigDayWeekValue.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
