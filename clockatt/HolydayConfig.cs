@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using clockatt.ConfigValue;
 
 namespace clockatt
 {
@@ -9,32 +10,92 @@ namespace clockatt
     /// </summary>
     public class HolydayConfig
     {
-        public enum Column
+
+        /// <summary>
+        /// 開始年
+        /// </summary>
+        private ConfigYearValue pStartYear;
+        public ConfigYearValue StartYear
         {
-            StartYear = 1,
-            EndYear,
-            Month,
-            Day,
-            WeekDay,
-            Week
+            get { return pStartYear; }
+            set { pStartYear = value; }
         }
 
         /// <summary>
-        /// 特定値がセットされていないことを指す
+        /// 終了年
         /// </summary>
-        public const int ALLVALUE = -1;
+        private ConfigYearValue pEndYear;
+        public ConfigYearValue EndYear
+        {
+            get { return pEndYear; }
+            set { pEndYear = value; }
+        }
+
+        /// <summary>
+        /// 月
+        /// </summary>
+        private ConfigMonthValue pMonth;
+        public ConfigMonthValue Month
+        {
+            get { return pMonth; }
+            set { pMonth = value; }
+        }
+
+        /// <summary>
+        /// 日付指定
+        /// </summary>
+        private ConfigDayValue pDay;
+        public ConfigDayValue Day
+        {
+            get { return pDay; }
+            set
+            {
+                this.pDayWeek.SetAllValue();
+                this.pWeekOfMonth.SetAllValue();
+                pDay = value;
+            }
+        }
+
+
+        /// <summary>
+        /// 曜日
+        /// </summary>
+        private ConfigDayWeekValue pDayWeek;
+        public ConfigDayWeekValue DayAtWeek
+        {
+            get { return pDayWeek; }
+            set
+            {
+                this.pDay.SetAllValue();
+                pDayWeek = value;
+            }
+        }
+
+        /// <summary>
+        /// 第 x 週(曜日指定とセットで指定が必要)
+        /// </summary>
+        private ConfigWeekOfMonthValue pWeekOfMonth;
+        public ConfigWeekOfMonthValue WeekOfMonth
+        {
+            get { return pWeekOfMonth; }
+            set
+            {
+                this.pDay.SetAllValue();
+                pWeekOfMonth = value;
+            }
+        }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public HolydayConfig()
         {
-            this.pStartYear = ALLVALUE;
-            this.pEndYear = ALLVALUE;
-            this.pMonth = ALLVALUE;
-            this.pDay = ALLVALUE;
-            this.pWeekOfMonth = ALLVALUE;
-            this.pDayWeek = DayWeek.ALLVALUE;
+            this.pStartYear = new ConfigYearValue();
+            this.pEndYear = new ConfigYearValue();
+            this.pMonth = new ConfigMonthValue();
+            this.pDay = new ConfigDayValue();
+            this.pDayWeek = new ConfigDayWeekValue();
+            this.pWeekOfMonth = new ConfigWeekOfMonthValue();
         }
 
         /// <summary>
@@ -70,80 +131,12 @@ namespace clockatt
             string strWeekOfMonth
             )
         {
-
-        }
-
-
-
-        /// <summary>
-        /// 開始年
-        /// </summary>
-        private int pStartYear;
-        public int StartYear
-        {
-            get { return pStartYear; }
-            set { pStartYear = value; }
-        }
-
-        /// <summary>
-        /// 終了年
-        /// </summary>
-        private int pEndYear;
-        public int EndYear
-        {
-            get { return pEndYear; }
-            set { pEndYear = value; }
-        }
-
-        /// <summary>
-        /// 月
-        /// </summary>
-        private int pMonth;
-        public int Month
-        {
-            get { return pMonth; }
-            set { pMonth = value; }
-        }
-
-        /// <summary>
-        /// 日付指定
-        /// </summary>
-        private int pDay;
-        public int Day
-        {
-            get { return pDay; }
-            set {
-                this.pDayWeek = DayWeek.ALLVALUE;
-                this.pWeekOfMonth = ALLVALUE;
-                pDay = value; 
-            }
-        }
-
-
-        /// <summary>
-        /// 曜日
-        /// </summary>
-        private DayWeek pDayWeek;
-        public DayWeek DayAtWeek
-        {
-            get { return pDayWeek; }
-            set {
-                this.pDay = ALLVALUE;
-                pDayWeek = value; 
-            }
-        }
-
-        /// <summary>
-        /// 第 x 週(曜日指定とセットで指定が必要)
-        /// </summary>
-        private int pWeekOfMonth;
-        public int WeekOfMonth
-        {
-            get { return pWeekOfMonth; }
-            set {
-                this.pDay = ALLVALUE;
-                pWeekOfMonth = value; 
-            }
+            this.pStartYear = new ConfigYearValue(strStartYear,true);
+            this.pEndYear = new ConfigYearValue(strEndYear,false);
+            this.pMonth = new ConfigMonthValue(strMonth);
+            this.pDay = new ConfigDayValue(strDay);
+            this.pDayWeek = new ConfigDayWeekValue(strWeekDay);
+            this.pWeekOfMonth = new ConfigWeekOfMonthValue(strWeekOfMonth);
         }
 
         /// <summary>
@@ -157,25 +150,25 @@ namespace clockatt
             int mm = checkdate.Month;
             int dd = checkdate.Day;
 
-            if (IsYearRange(yy, this.StartYear, this.EndYear) != true ||
-                    IsSame(mm, this.Month) != true )
+            if ( ConfigYearValue.IsYearRange(yy, this.StartYear, this.EndYear) != true ||
+                    this.Month.IsSame(mm) != true )
             {
                 return false;
             }
 
-            if(IsSame(dd, this.Day) != true)
+            if(this.Day.IsSame(dd) != true)
             {
                 return false;
             }
 
             //第何週目かをチェック
-            if( IsSame(this.GetWeekOfMonth(dd),this.WeekOfMonth) != true )
+            if( this.WeekOfMonth.IsSame(this.GetWeekOfMonth(dd)) != true )
             {
                 return false;
             }
 
             // 曜日をチェック
-            if( IsSame(checkdate.DayOfWeek,this.DayAtWeek) != true)
+            if( this.DayAtWeek.IsSame(checkdate.DayOfWeek) != true)
             {
                 return false;
             }
@@ -192,99 +185,5 @@ namespace clockatt
         {
             return (day - 1) / 7 + 1;
         }
-
-        /// <summary>
-        /// 年が指定範囲の間かどうかをチェックする
-        /// </summary>
-        /// <param name="yy"></param>
-        /// <param name="st"></param>
-        /// <param name="ed"></param>
-        /// <returns></returns>
-        private bool IsYearRange(int yy, int st, int ed)
-        {
-            if (st == ALLVALUE )
-            {
-                st = minYear;
-            }
-            if (ed == ALLVALUE)
-            {
-                ed = maxYear;
-            }
-            if (yy >= st && yy <= ed)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// 値が同じか否かをチェックする
-        /// </summary>
-        /// <param name="checkValue"></param>
-        /// <param name="settingValue"></param>
-        /// <returns></returns>
-        private bool IsSame(int checkValue,int settingValue)
-        {
-            if (settingValue == ALLVALUE)
-            {
-                return true;
-            }
-            else if (settingValue == checkValue)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// 値が同じか否かをチェックする
-        /// </summary>
-        /// <param name="checkValue"></param>
-        /// <param name="settingValue"></param>
-        /// <returns></returns>
-        private bool IsSame(DayOfWeek checkValue, DayWeek settingValue)
-        {
-            return checkValue.Equals(settingValue);
-        }
-
-        private bool isWildCard(string words)
-        {
-            if (words == "*")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private int GetInt(string rLine, string[] lineCols, int Cols)
-        {
-            string words = lineCols[Cols];
-            if (isWildCard(words) == true)
-            {
-                return HolydayConfig.ALLVALUE;
-            }
-            else
-            {
-                int result;
-                if (int.TryParse(words, out result) == true)
-                {
-                    return result;
-                }
-                else
-                {
-                    throw new ApplicationException(/* TODO */ rLine);
-                }
-            }
-        }
-
     }
 }

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace clockatt
+namespace clockatt.ConfigValue
 {
-    public abstract class ConfigInt : ConfigAbstract
+    /// <summary>
+    /// 数値を管理する 継承元クラス
+    /// </summary>
+    public abstract class ConfigIntValue : ConfigAbstract
     {
         public static readonly int ALL = 0;
         public static readonly int InValid = -1;
@@ -12,29 +15,24 @@ namespace clockatt
         protected int MaxValue = Int32.MaxValue;
         protected int MinValue = Int32.MinValue;
 
-        /// <summary>
-        /// 表示文字列
-        /// </summary>
-        protected string[][] strFormats;
-
-
         protected abstract void InitValue();
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public ConfigInt()
+        public ConfigIntValue()
         {
-            this.pCurrentValue = ALL;
+            InitValue();
         }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="strValue"></param>
-        public ConfigInt(string strValue)
+        public ConfigIntValue(string strValue)
             : base()
         {
+            InitValue();
             if (this.TryParse(strValue) == false)
             {
                 this.CurrentValue = InValid;
@@ -104,7 +102,7 @@ namespace clockatt
             }
             if (this.GetType().Equals(obj))
             {
-                if (this.pCurrentValue == ((ConfigInt)obj).CurrentValue)
+                if (this.pCurrentValue == ((ConfigIntValue)obj).CurrentValue)
                 {
                     return true;
                 }
@@ -121,7 +119,16 @@ namespace clockatt
             return pCurrentValue;
         }
 
+        public virtual void SetAllValue()
+        {
+            this.pCurrentValue = ALL;
+        }
 
+        /// <summary>
+        /// 同一の値か否かをチェックする
+        /// </summary>
+        /// <param name="checkValue"></param>
+        /// <returns></returns>
         public virtual bool IsSame(int checkValue)
         {
             if (this.CurrentValue == ALL)
