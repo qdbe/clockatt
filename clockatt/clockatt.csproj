@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="ClockConfig.cs" />
     <Compile Include="ConfigAbstract.cs" />
+    <Compile Include="ConfigInt.cs" />
     <Compile Include="ConfigMonth.cs" />
     <Compile Include="ConfigYear.cs" />
     <Compile Include="DayWeek.cs" />

@@ -9,11 +9,6 @@ namespace clockatt
     /// </summary>
     public class HolydayConfig
     {
-        /// <summary>
-        /// 曜日
-        /// </summary>
-        /// <remarks>DayOfWeek は指定がないな状態を表せないので独自に定義</remarks>
-
         public enum Column
         {
             StartYear = 1,
@@ -23,16 +18,6 @@ namespace clockatt
             WeekDay,
             Week
         }
-
-        /// <summary>
-        /// 年の最低値
-        /// </summary>
-        private const int minYear = 0;
-
-        /// <summary>
-        /// 年の最大値
-        /// </summary>
-        private const int maxYear = 9999;
 
         /// <summary>
         /// 特定値がセットされていないことを指す
