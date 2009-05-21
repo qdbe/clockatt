@@ -26,6 +26,8 @@ namespace clockatt.ConfigValue
 
             this.pCurrentValue = ALL;
 
+            this.InitialError = "月の指定が不正です";
+
             strFormats = new string[][]{
                     new string[]{
                         "ALL",

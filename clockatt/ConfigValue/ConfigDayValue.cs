@@ -13,12 +13,12 @@ namespace clockatt.ConfigValue
         public new static readonly int InValid = -99;
 
         /// <summary>
-        /// 年の最低値
+        /// 日の最低値
         /// </summary>
         public static readonly int MinDay = 1;
 
         /// <summary>
-        /// 年の最大値
+        /// 日の最大値
         /// </summary>
         public static readonly int MaxDay = 31;
 
@@ -30,6 +30,8 @@ namespace clockatt.ConfigValue
             this.pCurrentValue = ALL;
             this.MaxValue = MaxDay;
             this.MinValue = MinDay;
+
+            this.InitialError = "日付の指定が不正です";
         }
 
 

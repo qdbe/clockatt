@@ -30,6 +30,7 @@ namespace clockatt.ConfigValue
             this.pCurrentValue = ALL;
             this.MaxValue = MaxWeekOfMonth;
             this.MinValue = MinWeekOfMonth;
+            this.InitialError = "第何週かの指定が不正です";
         }
 
 

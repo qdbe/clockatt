@@ -75,6 +75,7 @@
     <Compile Include="ClockConfig.cs" />
     <Compile Include="ConfigValue\ConfigAbstract.cs" />
     <Compile Include="ConfigValue\ConfigDayValue.cs" />
+    <Compile Include="ConfigValue\ConfigInitException.cs" />
     <Compile Include="ConfigValue\ConfigIntValue.cs" />
     <Compile Include="ConfigValue\ConfigMonthValue.cs" />
     <Compile Include="ConfigValue\ConfigWeekOfMonthValue.cs" />
