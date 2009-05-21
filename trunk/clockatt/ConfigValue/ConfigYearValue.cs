@@ -30,6 +30,7 @@ namespace clockatt.ConfigValue
             this.pCurrentValue = ALL;
             this.MaxValue = MaxYear;
             this.MinValue = MinYear;
+            this.InitialError = "年の指定が不正です";
         }
 
 
@@ -63,7 +64,7 @@ namespace clockatt.ConfigValue
             }
             if (this.TryParse(strValue) == false)
             {
-                this.CurrentValue = InValid;
+                throw new ConfigInitException(this.InitialError);
             }
         }
 

@@ -17,6 +17,44 @@ namespace clockatt.ConfigValue
 
         protected abstract void InitValue();
 
+        protected string InitialError = "";
+
+        /// <summary>
+        /// すべてをあらわす数値か否か
+        /// </summary>
+        public virtual bool IsAllValue
+        {
+            get
+            {
+                if (this.CurrentValue == ALL)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 不正値か否か
+        /// </summary>
+        public virtual bool IsInValid
+        {
+            get
+            {
+                if (this.CurrentValue == InValid)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -35,7 +73,7 @@ namespace clockatt.ConfigValue
             InitValue();
             if (this.TryParse(strValue) == false)
             {
-                this.CurrentValue = InValid;
+                throw new ConfigInitException(this.InitialError);
             }
         }
 
@@ -143,6 +181,5 @@ namespace clockatt.ConfigValue
 
             return false;
         }
-
     }
 }

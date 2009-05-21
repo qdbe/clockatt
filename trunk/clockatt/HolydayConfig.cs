@@ -137,6 +137,18 @@ namespace clockatt
             this.pDay = new ConfigDayValue(strDay);
             this.pDayWeek = new ConfigDayWeekValue(strWeekDay);
             this.pWeekOfMonth = new ConfigWeekOfMonthValue(strWeekOfMonth);
+
+            if (this.pDay.IsAllValue == false &&
+                this.pDayWeek.IsAllValue == false )
+            {
+                throw new ConfigInitException("日付と曜日は同時に指定できません");
+            }
+
+            if (this.pWeekOfMonth.IsAllValue == false &&
+                this.pDayWeek.IsAllValue == true )
+            {
+                throw new ConfigInitException("第何週かを指定した場合には曜日も指定する必要があります");
+            }
         }
 
         /// <summary>
