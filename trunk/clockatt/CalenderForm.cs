@@ -28,12 +28,16 @@ namespace clockatt
 
         private int fontSize = 12;
 
-        public CalenderForm()
+        private HolidayConfigCollection pHolidays;
+
+
+        public CalenderForm(HolidayConfigCollection holidays)
         {
             InitializeComponent();
             DateTime dt = DateTime.Now;
             this.DispYear = dt.Year;
             this.DispMonth = dt.Month;
+            this.pHolidays = holidays;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -152,7 +156,8 @@ namespace clockatt
             Brush b = dayBrush;
             for (int i = 0; ; i++)
             {
-                if (dt.DayOfWeek == DayOfWeek.Sunday)
+                if (dt.DayOfWeek == DayOfWeek.Sunday ||
+                    this.pHolidays.IsHoliday(dt) == true )
                 {
                     x = DayLeft;
                     if (i != 0)
