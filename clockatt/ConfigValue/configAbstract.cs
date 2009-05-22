@@ -6,15 +6,6 @@ namespace clockatt.ConfigValue
 {
     public abstract class ConfigAbstract
     {
-        /// <summary>
-        /// 現在の値
-        /// </summary>
-        protected int pCurrentValue;
-        public int CurrentValue
-        {
-            get { return pCurrentValue; }
-            set { pCurrentValue = value; }
-        }
 
         /// <summary>
         /// 表示文字列

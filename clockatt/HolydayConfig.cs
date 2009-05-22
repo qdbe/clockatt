@@ -85,6 +85,18 @@ namespace clockatt
             }
         }
 
+
+        /// <summary>
+        /// 休日名称
+        /// </summary>
+        private ConfigHolidayName pHolidayName;
+
+        public ConfigHolidayName HolidayName
+        {
+            get { return pHolidayName; }
+            set { pHolidayName = value; }
+        }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -96,6 +108,7 @@ namespace clockatt
             this.pDay = new ConfigDayValue();
             this.pDayWeek = new ConfigDayWeekValue();
             this.pWeekOfMonth = new ConfigWeekOfMonthValue();
+            this.pHolidayName = new ConfigHolidayName();
         }
 
         /// <summary>
@@ -109,7 +122,8 @@ namespace clockatt
             string strMonth,
             string strDay,
             string strWeekDay,
-            string strWeekOfMonth
+            string strWeekOfMonth,
+            string strHolidayName
             )
         {
             this.setConfValue(
@@ -118,7 +132,8 @@ namespace clockatt
                 strMonth,
                 strDay,
                 strWeekDay,
-                strWeekOfMonth
+                strWeekOfMonth,
+                strHolidayName
                 );
         }
 
@@ -128,7 +143,8 @@ namespace clockatt
             string strMonth,
             string strDay,
             string strWeekDay,
-            string strWeekOfMonth
+            string strWeekOfMonth,
+            string strHolidayName
             )
         {
             this.pStartYear = new ConfigYearValue(strStartYear,true);
@@ -137,6 +153,7 @@ namespace clockatt
             this.pDay = new ConfigDayValue(strDay);
             this.pDayWeek = new ConfigDayWeekValue(strWeekDay);
             this.pWeekOfMonth = new ConfigWeekOfMonthValue(strWeekOfMonth);
+            this.pHolidayName = new ConfigHolidayName(strHolidayName);
 
             if (this.pDay.IsAllValue == false &&
                 this.pDayWeek.IsAllValue == false )

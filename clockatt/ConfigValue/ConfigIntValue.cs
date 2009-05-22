@@ -9,6 +9,17 @@ namespace clockatt.ConfigValue
     /// </summary>
     public abstract class ConfigIntValue : ConfigAbstract
     {
+
+        /// <summary>
+        /// 現在の値
+        /// </summary>
+        protected int pCurrentValue;
+        public int CurrentValue
+        {
+            get { return pCurrentValue; }
+            set { pCurrentValue = value; }
+        }
+
         public static readonly int ALL = 0;
         public static readonly int InValid = -1;
 

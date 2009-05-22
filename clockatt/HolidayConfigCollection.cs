@@ -95,23 +95,23 @@ namespace clockatt
             }
         }
 
-        #endregion
-
         /// <summary>
-        /// ワイルドカード指定か否かを判定する
+        /// 休日
         /// </summary>
-        /// <param name="words"></param>
+        /// <param name="day"></param>
         /// <returns></returns>
-        private bool IsWildCard(string words)
+        public bool IsHoliday(DateTime day)
         {
-            if( words == "*" )
+            for (int i = 0; i < this.Count; i++)
             {
-                return true;
+                if (this[i].IsHolyday(day) == true)
+                {
+                    return true;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
+
+        #endregion
     }
 }
