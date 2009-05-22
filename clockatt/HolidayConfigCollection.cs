@@ -20,7 +20,8 @@ namespace clockatt
             Month = 2,
             Day = 3,
             WeekDay = 4,
-            WeekOfMonth = 5
+            WeekOfMonth = 5,
+            HolidayName = 6
         }
 
         #region IConfig メンバ
@@ -60,7 +61,12 @@ namespace clockatt
                 // # で始まる場合はコメント扱い
                 return;
             }
+            if (rLine == string.Empty || rLine.Trim() == string.Empty )
+            {
+                return;
+            }
             string[] lineCols = rLine.Split(" \t　".ToCharArray());
+            // 休日名はオプション扱い
             if (lineCols.Length < 6)
             {
                 throw new ApplicationException(ERRMSG_COLUMN + rLine);
@@ -68,13 +74,22 @@ namespace clockatt
             HolydayConfig hConf;
             try
             {
-
+                string name;
+                if (lineCols.Length == 6)
+                {
+                    name = null;
+                }
+                else
+                {
+                    name = lineCols[(int)Column.HolidayName];
+                }
                 hConf = new HolydayConfig(lineCols[(int)Column.StartYear],
                     lineCols[(int)Column.EndYear],
                     lineCols[(int)Column.Month],
                     lineCols[(int)Column.Day],
                     lineCols[(int)Column.WeekDay],
-                    lineCols[(int)Column.WeekOfMonth]);
+                    lineCols[(int)Column.WeekOfMonth],
+                    name);
             }
             catch (ApplicationException exp)
             {

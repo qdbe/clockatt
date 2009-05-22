@@ -133,6 +133,7 @@ namespace clockatt.ConfigValue
                     return false;
                 }
                 this.pCurrentValue = parseValue;
+                return true;
             }
 
             return false;

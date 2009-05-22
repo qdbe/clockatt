@@ -43,9 +43,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CalenderForm";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CalenderForm_MouseDown);
+            this.LostFocus += new System.EventHandler(CalenderForm_LostFocus);
             this.ResumeLayout(false);
 
         }
+
 
         #endregion
 

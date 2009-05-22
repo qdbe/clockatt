@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using W32NativeService;
 using System.Runtime.InteropServices;
+using System.IO;
 
 
 namespace clockatt
@@ -18,12 +19,67 @@ namespace clockatt
         int preHwnd = 0;
 
         /// <summary>
+        /// カレンダー表示フォーム
+        /// </summary>
+        private CalenderForm pCalForm = null;
+
+        public CalenderForm CalForm
+        {
+            get { return pCalForm; }
+            set { pCalForm = value; }
+        }
+
+        private HolidayConfigCollection pHolidaySetting;
+
+        public HolidayConfigCollection HolidaySetting
+        {
+            get { return pHolidaySetting; }
+            set { pHolidaySetting = value; }
+        }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public MainForm()
         {
             InitializeComponent();
             this.Icon = clockatt.Properties.Resources.clockAttIcon;
+            InitData();
+        }
+
+        protected void InitData()
+        {
+            this.HolidaySetting = new HolidayConfigCollection();
+            string holidayConfigFile = (new FileInfo(Application.ExecutablePath)).DirectoryName + "\\Holiday.data";
+            if (File.Exists(holidayConfigFile))
+            {
+                StreamReader sr = null;
+                try
+                {
+                    sr = new StreamReader(holidayConfigFile);
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("休日の設定ファイルが開けませんでした" + exp.Message);
+                }
+                if (sr != null)
+                {
+                    try
+                    {
+                        HolidaySetting.ReadConfig(sr);
+                    }
+                    catch (ApplicationException exp)
+                    {
+                        MessageBox.Show(exp.Message);
+                    }
+                    sr.Close();
+                }
+
+            }
+            else{
+                MessageBox.Show("休日の設定ファイルが見つかりませんでした");
+            }
+
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -163,7 +219,7 @@ namespace clockatt
             }
             else
             {
-                CalenderForm dlg = new CalenderForm();
+                CalenderForm dlg = new CalenderForm(HolidaySetting);
                 dlg.ShowDialog(this);
             }
         }

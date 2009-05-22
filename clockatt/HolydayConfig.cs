@@ -169,6 +169,179 @@ namespace clockatt
         }
 
         /// <summary>
+        /// 春分の日のチェック
+        /// </summary>
+        /// <param name="yy"></param>
+        /// <param name="mm"></param>
+        /// <param name="dd"></param>
+        /// <returns></returns>
+        protected bool isVernalEquinoxDay(int yy, int mm, int dd)
+        {
+            if (mm != 3 )
+            {
+                return false;
+            }
+            // 春分の日のチェック
+
+            // 西暦年数の4での剰余が0の場合
+            // 　　1900年～1956年までは3月21日
+            // 　　1960年～2088年までは3月20日
+            // 　　2092年～2096年までは3月19日
+            if ( yy % 4 == 0 )
+            {
+                if (1900 <= yy && yy <= 1956 && dd == 21)
+                {
+                    return true;
+                }
+                if (1960 <= yy && yy <= 2088 && dd == 20)
+                {
+                    return true;
+                }
+                if (2092 <= yy && yy <= 2096 && dd == 19)
+                {
+                    return true;
+                }
+            }
+            // 西暦年数の4での剰余が1の場合
+            // 　　1901年～1989年までは3月21日
+            // 　　1993年～2097年までは3月20日
+            if (yy % 4 == 1)
+            {
+                if (1901 <= yy && yy <= 1989 && dd == 21)
+                {
+                    return true;
+                }
+                if (1993 <= yy && yy <= 2097 && dd == 20)
+                {
+                    return true;
+                }
+            }
+            // 西暦年数の4での剰余が2の場合
+            // 　　1902年～2022年までは3月21日
+            // 　　2026年～2098年までは3月20日
+            if (yy % 4 == 2)
+            {
+                if (1902 <= yy && yy <= 2022 && dd == 21)
+                {
+                    return true;
+                }
+                if (2026 <= yy && yy <= 2098 && dd == 20)
+                {
+                    return true;
+                }
+            }
+            // 西暦年数の4での剰余が3の場合
+            // 　　1903年～1923年までは3月22日
+            // 　　1927年～2055年までは3月21日
+　　        //     2059年～2099年までは3月20日
+            if (yy % 4 == 3)
+            {
+                if (1903 <= yy && yy <= 1923 && dd == 22)
+                {
+                    return true;
+                }
+                if (1927 <= yy && yy <= 2055 && dd == 21)
+                {
+                    return true;
+                }
+                if (2059 <= yy && yy <= 2099 && dd == 20)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+        /// <summary>
+        /// 春分の日のチェック
+        /// </summary>
+        /// <param name="yy"></param>
+        /// <param name="mm"></param>
+        /// <param name="dd"></param>
+        /// <returns></returns>
+        protected bool isAutumnEquinoxDay(int yy, int mm, int dd)
+        {
+            if (mm != 9)
+            {
+                return false;
+            }
+            // 春分の日のチェック
+
+            //西暦年数の4での剰余が0の場合
+            //  1900年～2008年までは9月23日
+            //  2012年～2096年までは9月22日
+            if (yy % 4 == 0)
+            {
+                if (1900 <= yy && yy <= 2008 && dd == 23)
+                {
+                    return true;
+                }
+                if (2012 <= yy && yy <= 2096 && dd == 22)
+                {
+                    return true;
+                }
+            }
+            //西暦年数の4での剰余が1の場合
+            //  1901年～1917年までは9月24日
+            //  1921年～2041年までは9月23日
+            //  2045年～2097年までは9月22日
+            if (yy % 4 == 1)
+            {
+                if (1901 <= yy && yy <= 1917 && dd == 24)
+                {
+                    return true;
+                }
+                if (1921 <= yy && yy <= 2041 && dd == 23)
+                {
+                    return true;
+                }
+                if (2045 <= yy && yy <= 2097 && dd == 22)
+                {
+                    return true;
+                }
+            }
+            //西暦年数の4での剰余が2の場合
+            //  1902年～1946年までは9月24日
+            //  1950年～2074年までは9月23日
+            //  2078年～2098年までは9月22日
+            if (yy % 4 == 2)
+            {
+                if (1902 <= yy && yy <= 1946 && dd == 24)
+                {
+                    return true;
+                }
+                if (1950 <= yy && yy <= 2074 && dd == 23)
+                {
+                    return true;
+                }
+                if (2078 <= yy && yy <= 2098 && dd == 22)
+                {
+                    return true;
+                }
+            }
+
+            //西暦年数の4での剰余が3の場合
+            //  1903年～1979年までは9月24日
+            //  1983年～2099年までは9月23日
+            if (yy % 4 == 3)
+            {
+                if (1903 <= yy && yy <= 1979 && dd == 24)
+                {
+                    return true;
+                }
+                if (1983 <= yy && yy <= 2099 && dd == 23)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+        /// <summary>
         /// 休日かどうかをチェックする
         /// </summary>
         /// <param name="checkdate"></param>
@@ -178,6 +351,12 @@ namespace clockatt
             int yy = checkdate.Year;
             int mm = checkdate.Month;
             int dd = checkdate.Day;
+
+            if (isVernalEquinoxDay(yy, mm, dd) == true ||
+                isAutumnEquinoxDay(yy, mm, dd) == true)
+            {
+                return true;
+            }
 
             if ( ConfigYearValue.IsYearRange(yy, this.StartYear, this.EndYear) != true ||
                     this.Month.IsSame(mm) != true )
