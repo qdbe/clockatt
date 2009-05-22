@@ -156,14 +156,17 @@ namespace clockatt
             Brush b = dayBrush;
             for (int i = 0; ; i++)
             {
-                if (dt.DayOfWeek == DayOfWeek.Sunday ||
-                    this.pHolidays.IsHoliday(dt) == true )
+                if (dt.DayOfWeek == DayOfWeek.Sunday )
                 {
                     x = DayLeft;
                     if (i != 0)
                     {
                         y += addHeight;
                     }
+                    b = dayBrushSun;
+                }
+                else if( this.pHolidays.IsHoliday(dt) == true )
+                {
                     b = dayBrushSun;
                 }
                 else if (dt.DayOfWeek == DayOfWeek.Saturday)
@@ -206,5 +209,11 @@ namespace clockatt
             this.Invalidate();
 
         }
+
+        void CalenderForm_LostFocus(object sender, System.EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

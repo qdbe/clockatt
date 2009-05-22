@@ -43,7 +43,7 @@ namespace clockatt.ConfigValue
                 return true;
             }
 
-            this.pCurrentValue = name;
+            this.pCurrentValue = strValue;
 
             return true;
         }
