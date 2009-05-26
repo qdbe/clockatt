@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.dayToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // CalenderForm
@@ -42,14 +44,17 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CalenderForm";
+            this.LostFocus += new System.EventHandler(this.CalenderForm_LostFocus);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CalenderForm_MouseDown);
-            this.LostFocus += new System.EventHandler(CalenderForm_LostFocus);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CalenderForm_MouseMove);
             this.ResumeLayout(false);
 
         }
 
 
         #endregion
+
+        private System.Windows.Forms.ToolTip dayToolTip;
 
     }
 }
