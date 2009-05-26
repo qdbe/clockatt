@@ -215,5 +215,15 @@ namespace clockatt
             this.Close();
         }
 
+        private void CalenderForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            ChangeToolTip(e.X, e.Y);
+        }
+
+        private void ChangeToolTip(int x, int y)
+        {
+        }
+
     }
+
 }
