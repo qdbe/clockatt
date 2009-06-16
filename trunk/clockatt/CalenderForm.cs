@@ -30,6 +30,8 @@ namespace clockatt
 
         private HolidayConfigCollection pHolidays;
 
+        private CalenderDrawInfo dayInfos;
+
 
         public CalenderForm(HolidayConfigCollection holidays)
         {
@@ -38,6 +40,8 @@ namespace clockatt
             this.DispYear = dt.Year;
             this.DispMonth = dt.Month;
             this.pHolidays = holidays;
+            this.dayInfos = new CalenderDrawInfo();
+            dayInfos.SetRect(DayLeft, DayTop, this.DispYear, this.DispMonth, this.fontSize);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -53,7 +57,7 @@ namespace clockatt
             // 曜日の描画
             PaintWeekDay(clip, g);
             // 日付の描画
-            PaintDay(clip, g);
+            dayInfos.DrawDays(clip, g);
         }
 
         protected virtual void PaintYearMonth(Rectangle clip, Graphics g)
@@ -205,6 +209,8 @@ namespace clockatt
             }
             this.DispMonth = dt.Month;
             this.DispYear = dt.Year;
+
+            dayInfos.SetRect(DayLeft, DayTop, this.DispYear, this.DispMonth, this.fontSize, Graphics.FromHwnd(this.Handle));
 
             this.Invalidate();
 

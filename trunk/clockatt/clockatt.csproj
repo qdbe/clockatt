@@ -64,7 +64,7 @@
   <ItemGroup>
     <Compile Include="CalendarConfig.cs" />
     <Compile Include="CalenderDayInfo.cs" />
-    <Compile Include="CalenderDayInfoCollection.cs" />
+    <Compile Include="CalenderDrawInfo.cs" />
     <Compile Include="CalenderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,7 +82,7 @@
     <Compile Include="ConfigValue\ConfigYearValue.cs" />
     <Compile Include="ConfigValue\ConfigDayWeekValue.cs" />
     <Compile Include="HolidayConfigCollection.cs" />
-    <Compile Include="HolydayConfig.cs" />
+    <Compile Include="HolidayConfig.cs" />
     <Compile Include="IConfig.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
