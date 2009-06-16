@@ -171,4 +171,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>rd /s/q $(TargetDir)Holiday
+mkdir $(TargetDir)Holiday
+copy $(ProjectDir)Holiday.data  $(TargetDir)Holiday
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>

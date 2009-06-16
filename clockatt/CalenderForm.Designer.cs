@@ -32,6 +32,12 @@
             this.dayToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
+            // dayToolTip
+            // 
+            this.dayToolTip.AutoPopDelay = 5000;
+            this.dayToolTip.InitialDelay = 100;
+            this.dayToolTip.ReshowDelay = 100;
+            // 
             // CalenderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);

@@ -15,7 +15,6 @@ namespace clockatt
         public DateTime DispDay
         {
             get { return pDispDay; }
-            set { pDispDay = value; }
         }
 
         /// <summary>
@@ -25,7 +24,47 @@ namespace clockatt
         public bool IsHoliday
         {
           get { return pIsHoliday; }
-          set { pIsHoliday = value; }
+        }
+
+        /// <summary>
+        /// 土曜日か否か
+        /// </summary>
+        private bool pIsSaturday = false;
+        public bool IsSaturday
+        {
+            get { return pIsSaturday; }
+        }
+
+        /// <summary>
+        /// 日曜日か否か
+        /// </summary>
+        private bool pIsSunday = false;
+        public bool IsSunday
+        {
+            get { return pIsSunday; }
+        }
+
+        public string GetDispStr()
+        {
+            return string.Format("{0, 2}", this.pDispDay.Day);
+        }
+
+        /// <summary>
+        /// 今日か否か(システム日付で判断)
+        /// </summary>
+        public bool IsToday
+        {
+            get
+            {
+                if (this.pDispDay.Date.CompareTo(DateTime.Now.Date) == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         /// <summary>
@@ -35,7 +74,6 @@ namespace clockatt
         public string HolidayName
         {
           get { return pHolidayName; }
-          set { pHolidayName = value; }
         }
 
         /// <summary>
@@ -48,33 +86,45 @@ namespace clockatt
             set { pDispRect = value; }
         }
 
-        public CalenderDayInfo(DateTime dt, Rectangle rect, HolidayConfigCollection holidays)
+        public CalenderDayInfo(DateTime dt, Rectangle rect, HolidayConfigCollection []holidays)
         {
-            this.DispDay = dt;
-            this.DispRect = rect;
-            HolidayConfig hconf = holidays.GetHolidayInfo(dt);
-            if( hconf != null )
+            this.pDispDay = dt;
+            this.pDispRect = rect;
+            for (int i = 0; i < holidays.Length; i++)
             {
-                this.pHolidayName = hconf.HolidayName.CurrentValue;
-                this.pIsHoliday = true;
+                HolidayConfig hconf = holidays[i].GetHolidayInfo(dt);
+                if (hconf != null)
+                {
+                    this.pHolidayName = hconf.HolidayName.CurrentValue;
+                    this.pIsHoliday = true;
+                }
+                else
+                {
+                    this.pHolidayName = string.Empty;
+                    this.pIsHoliday = false;
+                }
             }
-            else
+            if (dt.DayOfWeek == DayOfWeek.Saturday)
             {
-                this.pHolidayName = string.Empty;
-                this.pIsHoliday = false;
+                this.pIsSaturday = true;
+            }
+            if (dt.DayOfWeek == DayOfWeek.Sunday)
+            {
+                this.pIsSunday = true;
             }
         }
 
-        public void SetToolTip(Control con, ToolTip tooltip)
+        public bool SetToolTipIfInRect(Control con, ToolTip tooltip, int x, int y)
         {
+            if (!this.DispRect.Contains(x, y))
+            {
+                return false;
+            }
             if (this.IsHoliday == true)
             {
                 tooltip.SetToolTip(con, this.HolidayName);
             }
-            else
-            {
-                tooltip.SetToolTip(con, string.Empty);
-            }
+            return true;
         }
     }
 }
