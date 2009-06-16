@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace clockatt
 {
-    internal class CalenderDayInfo
+    public class CalenderDayInfo
     {
         /// <summary>
         /// 表示する日付
@@ -17,6 +19,26 @@ namespace clockatt
         }
 
         /// <summary>
+        /// 休日か否か
+        /// </summary>
+        private bool pIsHoliday = false;
+        public bool IsHoliday
+        {
+          get { return pIsHoliday; }
+          set { pIsHoliday = value; }
+        }
+
+        /// <summary>
+        /// 休日名称
+        /// </summary>
+        private string pHolidayName;
+        public string HolidayName
+        {
+          get { return pHolidayName; }
+          set { pHolidayName = value; }
+        }
+
+        /// <summary>
         /// 該当日を表示する矩形
         /// </summary>
         Rectangle pDispRect;
@@ -26,93 +48,33 @@ namespace clockatt
             set { pDispRect = value; }
         }
 
-        public void drawDay(Graphics g, )
+        public CalenderDayInfo(DateTime dt, Rectangle rect, HolidayConfigCollection holidays)
         {
-        }
-
-        protected virtual void PaintDay(Rectangle clip, Graphics g)
-        {
-            int x = DayLeft;
-            int y = DayTop;
-            int addHeight = 0;
-            Font dayFont = new Font("ＭＳ ゴシック", fontSize);
-            this.CharMargin = dayFont.Height + 5;
-            System.Drawing.Brush dayBrush = new System.Drawing.SolidBrush(Color.Black);
-            System.Drawing.Brush dayBrushHolyDay = new System.Drawing.SolidBrush(Color.Red);
-            System.Drawing.Brush dayBrushSun = new System.Drawing.SolidBrush(Color.Red);
-            System.Drawing.Brush dayBrushSat = new System.Drawing.SolidBrush(Color.Blue);
-            System.Drawing.Brush dayBrushToDay = new System.Drawing.SolidBrush(Color.Aqua);
-
-            addHeight = dayFont.Height + 0;
-
-
-            DateTime dt = new DateTime(this.DispYear, this.DispMonth, 1);
-
-            if (dt.DayOfWeek != DayOfWeek.Sunday)
+            this.DispDay = dt;
+            this.DispRect = rect;
+            HolidayConfig hconf = holidays.GetHolidayInfo(dt);
+            if( hconf != null )
             {
-                if (dt.DayOfWeek == DayOfWeek.Monday)
-                {
-                    x += this.CharMargin;
-                }
-                if (dt.DayOfWeek == DayOfWeek.Tuesday)
-                {
-                    x += this.CharMargin * 2;
-                }
-                if (dt.DayOfWeek == DayOfWeek.Wednesday)
-                {
-                    x += this.CharMargin * 3;
-                }
-                if (dt.DayOfWeek == DayOfWeek.Thursday)
-                {
-                    x += this.CharMargin * 4;
-                }
-                if (dt.DayOfWeek == DayOfWeek.Friday)
-                {
-                    x += this.CharMargin * 5;
-                }
-                if (dt.DayOfWeek == DayOfWeek.Saturday)
-                {
-                    x += this.CharMargin * 6;
-                }
+                this.pHolidayName = hconf.HolidayName.CurrentValue;
+                this.pIsHoliday = true;
             }
-
-
-            Brush b = dayBrush;
-            for (int i = 0; ; i++)
+            else
             {
-                if (dt.DayOfWeek == DayOfWeek.Sunday)
-                {
-                    x = DayLeft;
-                    if (i != 0)
-                    {
-                        y += addHeight;
-                    }
-                    b = dayBrushSun;
-                }
-                else if (this.pHolidays.IsHoliday(dt) == true)
-                {
-                    b = dayBrushSun;
-                }
-                else if (dt.DayOfWeek == DayOfWeek.Saturday)
-                {
-                    b = dayBrushSat;
-                }
-                else
-                {
-                    b = dayBrush;
-                }
-                string dispstr = string.Format("{0, 2}", dt.Day);
-                g.DrawString(dispstr, dayFont, b, x, y);
-
-                x += this.CharMargin;
-
-                dt = dt.AddDays(1);
-                if (dt.Month != this.DispMonth)
-                {
-                    break;
-                }
+                this.pHolidayName = string.Empty;
+                this.pIsHoliday = false;
             }
         }
 
+        public void SetToolTip(Control con, ToolTip tooltip)
+        {
+            if (this.IsHoliday == true)
+            {
+                tooltip.SetToolTip(con, this.HolidayName);
+            }
+            else
+            {
+                tooltip.SetToolTip(con, string.Empty);
+            }
+        }
     }
 }

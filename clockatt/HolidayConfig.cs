@@ -8,7 +8,7 @@ namespace clockatt
     /// <summary>
     /// 休日の設定
     /// </summary>
-    public class HolydayConfig
+    public class HolidayConfig
     {
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace clockatt
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public HolydayConfig()
+        public HolidayConfig()
         {
             this.pStartYear = new ConfigYearValue();
             this.pEndYear = new ConfigYearValue();
@@ -116,7 +116,7 @@ namespace clockatt
         /// </summary>
         /// <param name="strStartYear"></param>
         /// <param name="?"></param>
-        public HolydayConfig(
+        public HolidayConfig(
             string strStartYear,
             string strEndYear,
             string strMonth,

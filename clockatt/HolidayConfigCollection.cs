@@ -5,7 +5,7 @@ using System.IO;
 
 namespace clockatt
 {
-    public class HolidayConfigCollection : System.Collections.Generic.List<HolydayConfig>, IConfig
+    public class HolidayConfigCollection : System.Collections.Generic.List<HolidayConfig>, IConfig
     {
         protected const string ERRMSG = "休日設定に記載ミスがあります:";
         protected const string ERRMSG_COLUMN = "休日設定に記載ミスがあります:列数が不正です。タブ区切りで設定してください:";
@@ -71,7 +71,7 @@ namespace clockatt
             {
                 throw new ApplicationException(ERRMSG_COLUMN + rLine);
             }
-            HolydayConfig hConf;
+            HolidayConfig hConf;
             try
             {
                 string name;
@@ -83,7 +83,7 @@ namespace clockatt
                 {
                     name = lineCols[(int)Column.HolidayName];
                 }
-                hConf = new HolydayConfig(lineCols[(int)Column.StartYear],
+                hConf = new HolidayConfig(lineCols[(int)Column.StartYear],
                     lineCols[(int)Column.EndYear],
                     lineCols[(int)Column.Month],
                     lineCols[(int)Column.Day],
@@ -125,6 +125,23 @@ namespace clockatt
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// 休日情報を返す
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        public HolidayConfig GetHolidayInfo(DateTime day)
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                if (this[i].IsHolyday(day) == true)
+                {
+                    return this[i];
+                }
+            }
+            return null;
         }
 
         #endregion
