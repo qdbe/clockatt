@@ -16,7 +16,9 @@ namespace clockatt
 {
     public partial class MainForm : Form
     {
-        int preHwnd = 0;
+        private int preHwnd = 0;
+
+        static private string HOLIDAY_CONDIGDIR = "Holiday";
 
         /// <summary>
         /// カレンダー表示フォーム
@@ -29,13 +31,7 @@ namespace clockatt
             set { pCalForm = value; }
         }
 
-        private HolidayConfigCollection pHolidaySetting;
-
-        public HolidayConfigCollection HolidaySetting
-        {
-            get { return pHolidaySetting; }
-            set { pHolidaySetting = value; }
-        }
+        private HolidayConfigCollection []pHolidaySettings;
 
         /// <summary>
         /// コンストラクタ
@@ -47,44 +43,74 @@ namespace clockatt
             InitData();
         }
 
+        private DirectoryInfo CreateHolidayDirectoryIfNeed(DirectoryInfo executeDirectory)
+        {
+            DirectoryInfo []subdir =  executeDirectory.GetDirectories(HOLIDAY_CONDIGDIR);
+            if (subdir.Length != 0)
+            {
+                return subdir[0];
+            }
+            executeDirectory.CreateSubdirectory(HOLIDAY_CONDIGDIR);
+
+            subdir =  executeDirectory.GetDirectories(HOLIDAY_CONDIGDIR);
+            if (subdir.Length != 0)
+            {
+                return subdir[0];
+            }
+            return null;
+        }
+
         protected void InitData()
         {
-            this.HolidaySetting = new HolidayConfigCollection();
-            string holidayConfigFile = (new FileInfo(Application.ExecutablePath)).DirectoryName + "\\Holiday.data";
-            if (File.Exists(holidayConfigFile))
+            this.pHolidaySettings = new HolidayConfigCollection[]{};
+            DirectoryInfo executeDirectory = new DirectoryInfo((new FileInfo(Application.ExecutablePath)).DirectoryName);
+            
+            DirectoryInfo holidayDir = CreateHolidayDirectoryIfNeed(executeDirectory);
+
+            FileInfo[] holidayConfigFileInfos = holidayDir.GetFiles();
+            if (holidayConfigFileInfos.Length == 0)
             {
-                StreamReader sr = null;
-                try
+                MessageBox.Show("休日設定がされていません");
+            }
+
+            pHolidaySettings = new HolidayConfigCollection[holidayConfigFileInfos.Length];
+            string holidayConfigFile;
+            for( int i = 0; i < pHolidaySettings.Length; i++ )
+            {
+                holidayConfigFile = holidayConfigFileInfos[i].FullName;
+                pHolidaySettings[i] = new HolidayConfigCollection();
+                if (File.Exists(holidayConfigFile))
                 {
-                    sr = new StreamReader(holidayConfigFile);
-                }
-                catch (Exception exp)
-                {
-                    MessageBox.Show("休日の設定ファイルが開けませんでした" + exp.Message);
-                }
-                if (sr != null)
-                {
+                    StreamReader sr = null;
                     try
                     {
-                        HolidaySetting.ReadConfig(sr);
+                        sr = new StreamReader(holidayConfigFile);
                     }
-                    catch (ApplicationException exp)
+                    catch (Exception exp)
                     {
-                        MessageBox.Show(exp.Message);
+                        MessageBox.Show("休日の設定ファイルが開けませんでした" + exp.Message);
                     }
-                    sr.Close();
+                    if (sr != null)
+                    {
+                        try
+                        {
+                            pHolidaySettings[i].ReadConfig(sr);
+                        }
+                        catch (ApplicationException exp)
+                        {
+                            MessageBox.Show(exp.Message);
+                        }
+                        sr.Close();
+                    }
+
                 }
-
             }
-            else{
-                MessageBox.Show("休日の設定ファイルが見つかりませんでした");
-            }
-
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             this.taskInfoNotify.Visible = false;
+            this.taskInfoNotify.Dispose();
         }
 
         /// <summary>
@@ -219,7 +245,7 @@ namespace clockatt
             }
             else
             {
-                CalenderForm dlg = new CalenderForm(HolidaySetting);
+                CalenderForm dlg = new CalenderForm(this.pHolidaySettings);
                 dlg.ShowDialog(this);
             }
         }
