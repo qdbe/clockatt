@@ -11,7 +11,7 @@ namespace clockatt
 {
     public partial class CalenderForm : Form
     {
-        private int StartTop = 15;
+        private int StartTop = 20;
         private int StartLeft = 10;
 
         private int DispYear;
@@ -81,6 +81,14 @@ namespace clockatt
         {
             this.dayToolTip.SetToolTip(this, string.Empty);
             this.dayInfos.SetToolTip(this, this.dayToolTip, x, y);
+        }
+
+        private void CalenderForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
 
     }

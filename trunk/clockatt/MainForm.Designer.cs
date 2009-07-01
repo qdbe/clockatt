@@ -60,7 +60,7 @@
             // LocateTimer
             // 
             this.LocateTimer.Enabled = true;
-            this.LocateTimer.Interval = 10;
+            this.LocateTimer.Interval = 100;
             this.LocateTimer.Tick += new System.EventHandler(this.LocateTimer_Tick);
             // 
             // taskInfoNotify
