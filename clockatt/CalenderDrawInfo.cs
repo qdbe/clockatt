@@ -157,6 +157,28 @@ namespace clockatt
             }
         }
 
+        public virtual void SetDayPanels(Panel[] dayPanel)
+        {
+            int i = 0;
+            for (; i < this.Count; i++)
+            {
+                Panel pn = dayPanel[i];
+                pn.BorderStyle = BorderStyle.None;
+
+                pn.Visible = true;
+
+                pn.Location = this[i].DispRect.Location;
+                pn.Width = this[i].DispRect.Width;
+                pn.Height = this[i].DispRect.Height;
+            }
+
+            for (; i < dayPanel.Length; i++)
+            {
+                dayPanel[i].Visible = false;
+            }
+        }
+
+
         /// <summary>
         /// 月日を表示する
         /// </summary>
@@ -204,6 +226,61 @@ namespace clockatt
             {
                 g.DrawString(strWeekDay[i][0].ToString(), weekDayFont, (Brush)strWeekDay[i][1], this.weekDayDrawPoint[i].X, this.weekDayDrawPoint[i].Y);
             }
+        }
+
+        public void PaintDay(object sender, PaintEventArgs e)
+        {
+            Font dayFont = new Font(this.fontName, this.fontSize);
+
+            System.Drawing.Brush dayBrush = new System.Drawing.SolidBrush(Color.Black);
+            System.Drawing.Brush dayBrushHolyDay = new System.Drawing.SolidBrush(Color.Red);
+            System.Drawing.Brush dayBrushSun = new System.Drawing.SolidBrush(Color.Red);
+            System.Drawing.Brush dayBrushSat = new System.Drawing.SolidBrush(Color.Blue);
+
+
+            System.Drawing.Brush normalBackBrush = new System.Drawing.SolidBrush(Color.FromKnownColor(KnownColor.Control));
+            System.Drawing.Brush brushToDay = new System.Drawing.SolidBrush(Color.Aqua);
+
+            Brush charBrush = dayBrush;
+            Brush backBrush = normalBackBrush;
+            CalenderDayInfo cdi;
+            Control targetCon = (Control)sender;
+            cdi = (CalenderDayInfo)targetCon.Tag;
+            if (cdi.IsToday == true)
+            {
+                backBrush = brushToDay;
+            }
+            else
+            {
+                backBrush = normalBackBrush;
+            }
+
+            if (cdi.IsHoliday == true)
+            {
+                charBrush = dayBrushSun;
+            }
+            else if (cdi.IsSunday == true)
+            {
+                charBrush = dayBrushSun;
+            }
+            else if (cdi.IsSaturday == true)
+            {
+                charBrush = dayBrushSat;
+            }
+            else
+            {
+                charBrush = dayBrush;
+            }
+            e.Graphics.FillRectangle(backBrush, 0, 0, targetCon.Width, targetCon.Height);
+
+            e.Graphics.SetClip(e.ClipRectangle);
+
+            string str = cdi.GetDispStr();
+            e.Graphics.DrawString(str,
+                dayFont,
+                charBrush,
+                0,0);
+
         }
 
         /// <summary>
@@ -291,6 +368,28 @@ namespace clockatt
                 {
                     break;
                 }
+            }
+        }
+
+        internal CalenderDayPanel CalenderDayPanel
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public CalenderDayInfo CalenderDayInfo
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
             }
         }
 

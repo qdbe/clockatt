@@ -36,6 +36,39 @@ namespace clockatt
                 this.CreateGraphics());
         }
 
+        public HolidayConfigCollection HolidayConfigCollection
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        internal CalenderDrawInfo CalenderDrawInfo
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        internal CalenderDayPanel CalenderDayPanel
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.SetClip(e.ClipRectangle);

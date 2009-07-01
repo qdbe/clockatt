@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="clockatt.CalenderForm" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACEABAAICAAAAAaAECJAACDAQAAABAAAAIgAAAAQAA=</HashCode>
+      <FileName>CalenderForm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HolidayConfigCollection" />
+      <Property Name="CalenderDrawInfo" />
+      <Property Name="CalenderDayPanel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="clockatt.CalenderDrawInfo">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAQAICIAAIAgACAAAIAAABAAAAIBFAEAIgACAAAAA=</HashCode>
+      <FileName>CalenderDrawInfo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CalenderDayPanel" />
+      <Property Name="CalenderDayInfo" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="clockatt.CalenderDayPanel">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="clockatt.CalenderDayPanel.DrawDayEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CalenderDayPanel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAQA=</HashCode>
+      <FileName>CalenderDayPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="clockatt.CalenderDayInfo" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ECAEAEAAgCAAAAAAAAAAAAAAEBAAAIEAQAACAAgAAQA=</HashCode>
+      <FileName>CalenderDayInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="clockatt.CalendarConfig">
+    <Position X="2.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAgAMAAABAAAQAAACgAAiAAAAAAAAAAAIAEAAAhAAA=</HashCode>
+      <FileName>CalendarConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="clockatt.HolidayConfig">
+    <Position X="2.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgEARCAoAAEAAQKAAACAAAAAAAAAIAEwAEAAAAAQAA=</HashCode>
+      <FileName>HolidayConfig.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HolidayConfigCollection" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="clockatt.HolidayConfigCollection">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="clockatt.HolidayConfigCollection.Column" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>HolidayConfigCollection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ACBEAAAAAIAAAAAAEABAAAAAAAAAAAAgAAAAAAAIAAI=</HashCode>
+      <FileName>HolidayConfigCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.242" />
+  </Class>
+  <Font Name="MS UI Gothic" Size="9" />
+</ClassDiagram>

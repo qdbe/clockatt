@@ -393,5 +393,16 @@ namespace clockatt
         {
             return (day - 1) / 7 + 1;
         }
+
+        public HolidayConfigCollection HolidayConfigCollection
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
     }
 }

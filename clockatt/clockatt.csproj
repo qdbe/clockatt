@@ -64,6 +64,9 @@
   <ItemGroup>
     <Compile Include="CalendarConfig.cs" />
     <Compile Include="CalenderDayInfo.cs" />
+    <Compile Include="CalenderDayPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CalenderDrawInfo.cs" />
     <Compile Include="CalenderForm.cs">
       <SubType>Form</SubType>
@@ -121,6 +124,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="CalenderFormClassDg.cd" />
+    <None Include="ConfigClassDg.cd" />
     <None Include="Holiday.data" />
     <None Include="Resources\clockAttIcon.ico" />
   </ItemGroup>
