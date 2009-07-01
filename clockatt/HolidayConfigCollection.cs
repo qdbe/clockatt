@@ -65,7 +65,7 @@ namespace clockatt
             {
                 return;
             }
-            string[] lineCols = rLine.Split(" \t　".ToCharArray());
+            string[] lineCols = rLine.Split(" \t　".ToCharArray(),7);
             // 休日名はオプション扱い
             if (lineCols.Length < 6)
             {

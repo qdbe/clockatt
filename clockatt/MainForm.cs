@@ -17,6 +17,7 @@ namespace clockatt
     public partial class MainForm : Form
     {
         private int preHwnd = 0;
+        private Rectangle preRect = Rectangle.Empty;
 
         static private string HOLIDAY_CONDIGDIR = "Holiday";
 
@@ -173,6 +174,16 @@ namespace clockatt
                     }
                 }
                 int leftposx = info.rcWindow.right - this.Width - leftLength - 1;
+                Point newpos = new Point(leftposx, info.rcWindow.top + 3);
+                int newheight = titleHeight - 2;
+
+                // 前回と同じ結果である
+                if (this.Height == newheight &&
+                    newpos.Equals(this.Location))
+                {
+                    return ;
+                }
+
                 if( ( titleWidth - this.Width - leftLength - 1 ) < 0 )
                 {
                     this.Hide();
@@ -181,7 +192,8 @@ namespace clockatt
                     this.Show();
                 }
                 this.Location = new Point(leftposx, info.rcWindow.top + 3);
-                this.Height = titleHeight - 2;
+                this.Height = newheight;
+
                 this.preHwnd = hwnd;
             }
             else
@@ -214,22 +226,32 @@ namespace clockatt
 
         private void DspTimer_Tick(object sender, EventArgs e)
         {
+            DspTimer.Stop();
+
             this.SetTimeLabel();
+
+            DateTime nt = DateTime.Now;
+            this.DspTimer.Interval = 1000 - nt.Millisecond;
+            DspTimer.Start();
         }
 
         private void SetTimeLabel()
         {
-            DspTimer.Stop();
             DateTime nc = DateTime.Now;
             this.dateTimeLabel.Text = GetFormatDateTime(nc);
             this.Invalidate();
             Application.DoEvents();
-            this.Width = this.dateTimeLabel.Width;
-            this.Height = this.dateTimeLabel.Height;
+
+            // 必要ならサイズを変更する
+            if (this.Width != this.dateTimeLabel.Width)
+            {
+                this.Width = this.dateTimeLabel.Width;
+            }
+            //if (this.Height != this.dateTimeLabel.Height)
+            //{
+            //    this.Height = this.dateTimeLabel.Height;
+            //}
             this.taskInfoNotify.Text = this.dateTimeLabel.Text;
-            DateTime nt = DateTime.Now;
-            this.DspTimer.Interval = 1000 - nt.Millisecond;
-            DspTimer.Start();
         }
 
         private string GetFormatDateTime(DateTime nc)
