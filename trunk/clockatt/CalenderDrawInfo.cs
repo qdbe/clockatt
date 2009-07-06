@@ -11,9 +11,13 @@ namespace clockatt
     {
         private int fontSize = 12;
 
+        private int margin = 2;
+
         private string fontName = "ＭＳ ゴシック";
 
         private static int WeekDayCount = 7;
+
+        public static int MaxDayCount = 31;
 
         private Point headDrawPoint = new Point();
         private Point[] weekDayDrawPoint = new Point[WeekDayCount];
@@ -58,6 +62,7 @@ namespace clockatt
             int dispYear, 
             int dispMonth, 
             int fontSize,
+            CalenderDayPanel []panels,
             Graphics g)
         {
             int x = startX;
@@ -79,7 +84,7 @@ namespace clockatt
             x = startX;
             y = startY + yearMonthFont.Height + 5;
             Font weekDayFont = baseFont;
-            charMargin = weekDayFont.Height + 5;
+            charMargin = weekDayFont.Height + 5 + this.margin;
 
             for (int i = 0; i < WeekDayCount; i++)
             {
@@ -94,10 +99,16 @@ namespace clockatt
             x = startX;
             y += weekDayFont.Height + 0;
             Font dayFont = baseFont;
-            charMargin = dayFont.Height + 5;
-            addHeight = dayFont.Height + 0;
 
             DateTime dt = new DateTime(dispYear, dispMonth, 1);
+
+            string dispstr = string.Format("{0, 2}", 88);
+            SizeF strsize = g.MeasureString(dispstr, dayFont);
+            strsize.Height += this.margin;
+            strsize.Width += this.margin;
+            charMargin = dayFont.Height + 5 + this.margin;
+            addHeight = dayFont.Height + 0 + this.margin;
+
 
             if (dt.DayOfWeek != DayOfWeek.Sunday)
             {
@@ -129,9 +140,17 @@ namespace clockatt
 
             this.Clear();
 
-            for (int j = 0; ; j++)
+            int maxDate = DateTime.DaysInMonth(dispYear,dispMonth);
+            for (int j = 0; j < panels.Length; j++)
             {
-                if (dt.DayOfWeek == DayOfWeek.Sunday)
+                if (maxDate <= j)
+                {
+                    panels[j].ClearDrawInfo();
+                    continue;
+                }
+                DateTime dayDt = new DateTime(dispYear, dispMonth, j+1);
+
+                if (dayDt.DayOfWeek == DayOfWeek.Sunday)
                 {
                     x = startX;
                     if (j != 0)
@@ -139,45 +158,18 @@ namespace clockatt
                         y += addHeight;
                     }
                 }
-                string dispstr = string.Format("{0, 2}", dt.Day);
-                SizeF strsize = g.MeasureString(dispstr,dayFont);
                 CalenderDayInfo info = new CalenderDayInfo(
-                    dt,
+                    dayDt,
                     new Rectangle(x, y, (int)strsize.Width, (int)strsize.Height),
                     this.pHolidays);
                 this.Add(info);
+                panels[j].SetDrawInfo(info);
+                panels[j].DrawDay += new CalenderDayPanel.DrawDayEventHandler(this.PaintDay);
 
                 x += charMargin;
 
-                dt = dt.AddDays(1);
-                if (dt.Month != dispMonth)
-                {
-                    break;
-                }
             }
         }
-
-        public virtual void SetDayPanels(Panel[] dayPanel)
-        {
-            int i = 0;
-            for (; i < this.Count; i++)
-            {
-                Panel pn = dayPanel[i];
-                pn.BorderStyle = BorderStyle.None;
-
-                pn.Visible = true;
-
-                pn.Location = this[i].DispRect.Location;
-                pn.Width = this[i].DispRect.Width;
-                pn.Height = this[i].DispRect.Height;
-            }
-
-            for (; i < dayPanel.Length; i++)
-            {
-                dayPanel[i].Visible = false;
-            }
-        }
-
 
         /// <summary>
         /// 月日を表示する
@@ -238,21 +230,17 @@ namespace clockatt
             System.Drawing.Brush dayBrushSat = new System.Drawing.SolidBrush(Color.Blue);
 
 
-            System.Drawing.Brush normalBackBrush = new System.Drawing.SolidBrush(Color.FromKnownColor(KnownColor.Control));
-            System.Drawing.Brush brushToDay = new System.Drawing.SolidBrush(Color.Aqua);
+            e.Graphics.SetClip(e.ClipRectangle);
 
             Brush charBrush = dayBrush;
-            Brush backBrush = normalBackBrush;
-            CalenderDayInfo cdi;
-            Control targetCon = (Control)sender;
-            cdi = (CalenderDayInfo)targetCon.Tag;
+            CalenderDayInfo cdi = ((CalenderDayPanel)sender).DayInfo;
             if (cdi.IsToday == true)
             {
-                backBrush = brushToDay;
+                ((CalenderDayPanel)sender).BackColor = Color.Aqua;
             }
             else
             {
-                backBrush = normalBackBrush;
+                ((CalenderDayPanel)sender).BackColor = Color.FromKnownColor(KnownColor.Control);
             }
 
             if (cdi.IsHoliday == true)
@@ -271,127 +259,23 @@ namespace clockatt
             {
                 charBrush = dayBrush;
             }
-            e.Graphics.FillRectangle(backBrush, 0, 0, targetCon.Width, targetCon.Height);
-
-            e.Graphics.SetClip(e.ClipRectangle);
 
             string str = cdi.GetDispStr();
             e.Graphics.DrawString(str,
                 dayFont,
                 charBrush,
-                0,0);
+                1,1);
 
         }
-
-        /// <summary>
-        /// 日を表示する
-        /// </summary>
-        /// <param name="clicpRect"></param>
-        /// <param name="g"></param>
-        public virtual void PaintDay(
-            Rectangle clicpRect,
-            Graphics g
-            )
-        {
-            Font dayFont = new Font(this.fontName, this.fontSize);
-
-            System.Drawing.Brush dayBrush = new System.Drawing.SolidBrush(Color.Black);
-            System.Drawing.Brush dayBrushHolyDay = new System.Drawing.SolidBrush(Color.Red);
-            System.Drawing.Brush dayBrushSun = new System.Drawing.SolidBrush(Color.Red);
-            System.Drawing.Brush dayBrushSat = new System.Drawing.SolidBrush(Color.Blue);
-
-
-            System.Drawing.Brush normalBackBrush = new System.Drawing.SolidBrush(Color.FromKnownColor(KnownColor.Control));
-            System.Drawing.Brush brushToDay = new System.Drawing.SolidBrush(Color.Aqua);
-
-            Brush charBrush = dayBrush;
-            Brush backBrush = normalBackBrush;
-            CalenderDayInfo cdi;
-            for (int i = 0; i < this.Count; i++)
-            {
-                cdi = this[i];
-                if (cdi.IsToday == true)
-                {
-                    backBrush = brushToDay;
-                }
-                else
-                {
-                    backBrush = normalBackBrush;
-                }
-
-                if (cdi.IsHoliday == true)
-                {
-                    charBrush = dayBrushSun;
-                }
-                else if (cdi.IsSunday == true)
-                {
-                    charBrush = dayBrushSun;
-                }
-                else if (cdi.IsSaturday == true)
-                {
-                    charBrush = dayBrushSat;
-                }
-                else
-                {
-                    charBrush = dayBrush;
-                }
-
-                g.FillRectangle(backBrush, cdi.DispRect);
-
-                string str = cdi.GetDispStr();
-                g.DrawString(str, 
-                    dayFont, 
-                    charBrush, 
-                    cdi.DispRect.X,
-                    cdi.DispRect.Y);
-            }
-        }
-
 
         public virtual void Draw(
             Rectangle clicpRect,
             Graphics g
             )
         {
-
             PaintYearMonth(clicpRect, g);
             PaintWeekDay(clicpRect, g);
-            PaintDay(clicpRect, g);
+            //PaintDay(clicpRect, g);
         }
-
-
-        public void SetToolTip(Control target, ToolTip dayToolTip, int x, int y)
-        {
-            for (int i = 0; i < this.Count; i++)
-            {
-                if (this[i].SetToolTipIfInRect(target, dayToolTip, x, y) == true)
-                {
-                    break;
-                }
-            }
-        }
-
-        internal CalenderDayPanel CalenderDayPanel
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public CalenderDayInfo CalenderDayInfo
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
     }
 }

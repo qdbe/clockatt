@@ -42,7 +42,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(165, 148);
+            this.ClientSize = new System.Drawing.Size(178, 169);
             this.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CalenderForm";
@@ -52,7 +52,6 @@
             this.Text = "CalenderForm";
             this.LostFocus += new System.EventHandler(this.CalenderForm_LostFocus);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CalenderForm_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CalenderForm_MouseMove);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CalenderForm_KeyDown);
             this.ResumeLayout(false);
 
