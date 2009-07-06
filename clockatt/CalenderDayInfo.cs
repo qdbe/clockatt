@@ -113,18 +113,5 @@ namespace clockatt
                 this.pIsSunday = true;
             }
         }
-
-        public bool SetToolTipIfInRect(Control con, ToolTip tooltip, int x, int y)
-        {
-            if (!this.DispRect.Contains(x, y))
-            {
-                return false;
-            }
-            if (this.IsHoliday == true)
-            {
-                tooltip.SetToolTip(con, this.HolidayName);
-            }
-            return true;
-        }
     }
 }

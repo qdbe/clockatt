@@ -23,6 +23,8 @@ namespace clockatt
 
         private CalenderDrawInfo dayInfos;
 
+        private CalenderDayPanel []dayPanes;
+
 
         public CalenderForm(HolidayConfigCollection[] holidays)
         {
@@ -32,41 +34,10 @@ namespace clockatt
             this.DispMonth = dt.Month;
             this.pHolidays = holidays;
             this.dayInfos = new CalenderDrawInfo(this.pHolidays);
+            this.dayPanes = CalenderDayPanel.CreatePanels(this);
             dayInfos.SetRect(StartLeft, StartTop, this.DispYear, this.DispMonth, this.fontSize,
+                dayPanes,
                 this.CreateGraphics());
-        }
-
-        public HolidayConfigCollection HolidayConfigCollection
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        internal CalenderDrawInfo CalenderDrawInfo
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        internal CalenderDayPanel CalenderDayPanel
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -77,7 +48,12 @@ namespace clockatt
 
 
 
-        private void CalenderForm_MouseDown(object sender, MouseEventArgs e)
+        public void CalenderForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.DoMouseClick(sender, e);
+        }
+
+        public void DoMouseClick(object sender, MouseEventArgs e)
         {
             int limits = this.Width / 2;
 
@@ -94,6 +70,7 @@ namespace clockatt
             this.DispYear = dt.Year;
 
             dayInfos.SetRect(StartLeft, StartTop, this.DispYear, this.DispMonth, this.fontSize,
+                this.dayPanes,
                 this.CreateGraphics());
 
             this.Invalidate();
@@ -113,7 +90,6 @@ namespace clockatt
         private void ChangeToolTip(int x, int y)
         {
             this.dayToolTip.SetToolTip(this, string.Empty);
-            this.dayInfos.SetToolTip(this, this.dayToolTip, x, y);
         }
 
         private void CalenderForm_KeyDown(object sender, KeyEventArgs e)
