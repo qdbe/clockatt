@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace clockatt
@@ -27,15 +28,32 @@ namespace clockatt
             get { return pDayInfo; }
         }
 
+        public delegate void DayPanelMouseDownEnventHandler(object sender, MouseEventArgs e);
+        public event DayPanelMouseDownEnventHandler MouseDownOnDay = null;
+
         public CalenderDayPanel() : base()
         {
             this.BorderStyle = BorderStyle.None;
-            this.Click += new EventHandler(CalenderDayPanel_Click);
+            this.MouseDown += new MouseEventHandler(CalenderDayPanel_MouseDown);
         }
 
-        private void CalenderDayPanel_Click(object sender, EventArgs e)
+        void CalenderDayPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            // 親のマウスクリックを呼び出す
+            if (e.Button == MouseButtons.Left)
+            {
+                // 月日の変更を実施する
+                if (this.MouseDownOnDay != null)
+                {
+                    MouseEventArgs args = new MouseEventArgs(
+                        e.Button,
+                        e.Clicks,
+                        e.X + this.Location.X,
+                        e.Y + this.Location.Y,
+                        e.Delta);
+
+                    this.MouseDownOnDay(Parent, args);
+               }
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -46,7 +64,7 @@ namespace clockatt
             }
         }
 
-        public static CalenderDayPanel[] CreatePanels(Form parents)
+        public static CalenderDayPanel[] CreatePanels(Form parents, DayPanelMouseDownEnventHandler mouseDownDay)
         {
             parents.SuspendLayout();
 
@@ -55,6 +73,7 @@ namespace clockatt
             for( int i = 0; i < panels.Length; i++ )
             {
                 panels[i] = new CalenderDayPanel();
+                panels[i].MouseDownOnDay += mouseDownDay;
                 parents.Controls.Add(panels[i]);
             }
             parents.ResumeLayout();
@@ -77,7 +96,6 @@ namespace clockatt
             this.pDayInfo = dayInfo;
             this.pDispDay = dayInfo.DispDay.Day;
             this.DrawDay = null;
-
         }
 
         public void SetToolTip(string strValue)

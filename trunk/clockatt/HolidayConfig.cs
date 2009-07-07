@@ -11,6 +11,9 @@ namespace clockatt
     public class HolidayConfig
     {
 
+        public const string VERNALEQUINOXDAY = "春分の日";
+        public const string AUTUMNEQUINOXDAY = "秋分の日";
+
         /// <summary>
         /// 開始年
         /// </summary>
@@ -175,7 +178,18 @@ namespace clockatt
         /// <param name="mm"></param>
         /// <param name="dd"></param>
         /// <returns></returns>
-        protected bool isVernalEquinoxDay(int yy, int mm, int dd)
+        public static bool IsVernalEquinoxDay(DateTime dt)
+        {
+            return IsVernalEquinoxDay(dt.Year, dt.Month, dt.Day);
+        }
+        /// <summary>
+        /// 春分の日のチェック
+        /// </summary>
+        /// <param name="yy"></param>
+        /// <param name="mm"></param>
+        /// <param name="dd"></param>
+        /// <returns></returns>
+        public static bool IsVernalEquinoxDay(int yy, int mm, int dd)
         {
             if (mm != 3 )
             {
@@ -253,21 +267,32 @@ namespace clockatt
             return false;
         }
 
-
         /// <summary>
-        /// 春分の日のチェック
+        /// 秋分の日のチェック
         /// </summary>
         /// <param name="yy"></param>
         /// <param name="mm"></param>
         /// <param name="dd"></param>
         /// <returns></returns>
-        protected bool isAutumnEquinoxDay(int yy, int mm, int dd)
+        public static bool IsAutumnEquinoxDay(DateTime dt)
+        {
+            return IsAutumnEquinoxDay(dt.Year, dt.Month, dt.Day);
+        }
+
+        /// <summary>
+        /// 秋分の日のチェック
+        /// </summary>
+        /// <param name="yy"></param>
+        /// <param name="mm"></param>
+        /// <param name="dd"></param>
+        /// <returns></returns>
+        public static bool IsAutumnEquinoxDay(int yy, int mm, int dd)
         {
             if (mm != 9)
             {
                 return false;
             }
-            // 春分の日のチェック
+            // 秋分の日のチェック
 
             //西暦年数の4での剰余が0の場合
             //  1900年～2008年までは9月23日
@@ -346,17 +371,11 @@ namespace clockatt
         /// </summary>
         /// <param name="checkdate"></param>
         /// <returns></returns>
-        public bool IsHolyday(DateTime checkdate)
+        public bool IsHoliday(DateTime checkdate)
         {
             int yy = checkdate.Year;
             int mm = checkdate.Month;
             int dd = checkdate.Day;
-
-            if (isVernalEquinoxDay(yy, mm, dd) == true ||
-                isAutumnEquinoxDay(yy, mm, dd) == true)
-            {
-                return true;
-            }
 
             if ( ConfigYearValue.IsYearRange(yy, this.StartYear, this.EndYear) != true ||
                     this.Month.IsSame(mm) != true )
@@ -381,6 +400,7 @@ namespace clockatt
                 return false;
             }
 
+            System.Diagnostics.Debug.WriteLine("IsHoliday" + checkdate.ToShortDateString());
             return true;
         }
 
@@ -392,17 +412,6 @@ namespace clockatt
         private int GetWeekOfMonth(int day)
         {
             return (day - 1) / 7 + 1;
-        }
-
-        public HolidayConfigCollection HolidayConfigCollection
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
         }
     }
 }

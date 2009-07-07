@@ -267,7 +267,7 @@ namespace clockatt
             }
             else
             {
-                CalenderForm dlg = new CalenderForm(this.pHolidaySettings);
+                CalenderForm dlg = new CalenderForm(this,this.pHolidaySettings);
                 dlg.ShowDialog(this);
             }
         }
