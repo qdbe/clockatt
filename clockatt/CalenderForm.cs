@@ -11,11 +11,13 @@ namespace clockatt
 {
     public partial class CalenderForm : Form
     {
-        private int StartTop = 20;
+        private int StartTop = 5;
         private int StartLeft = 10;
 
         private int DispYear;
         private int DispMonth;
+
+        private Form callerForm;
 
         private int fontSize = 12;
 
@@ -26,18 +28,52 @@ namespace clockatt
         private CalenderDayPanel []dayPanes;
 
 
-        public CalenderForm(HolidayConfigCollection[] holidays)
+        public CalenderForm(Form parent, HolidayConfigCollection[] holidays)
         {
+            this.callerForm = parent;
             InitializeComponent();
             DateTime dt = DateTime.Now;
             this.DispYear = dt.Year;
             this.DispMonth = dt.Month;
             this.pHolidays = holidays;
             this.dayInfos = new CalenderDrawInfo(this.pHolidays);
-            this.dayPanes = CalenderDayPanel.CreatePanels(this);
-            dayInfos.SetRect(StartLeft, StartTop, this.DispYear, this.DispMonth, this.fontSize,
+            this.dayPanes = CalenderDayPanel.CreatePanels(this, new CalenderDayPanel.DayPanelMouseDownEnventHandler(DoMouseClick));
+            Size needSize = dayInfos.SetRect(StartLeft, StartTop, this.DispYear, this.DispMonth, this.fontSize,
                 dayPanes,
                 this.CreateGraphics());
+            this.Size = needSize;
+            ResetPos(needSize);
+
+            this.Invalidate(true);
+        }
+
+        private void ResetPos(Size needSize)
+        {
+            // 親の右端から
+            Point newpos = this.callerForm.Location;
+            newpos.X += this.callerForm.Width;
+            newpos.Y += this.callerForm.Height;
+
+            newpos.X -= needSize.Width;
+            if (newpos.X <= 0)
+            {
+                newpos.X = 0;
+            }
+            if (newpos.X + needSize.Width > Screen.PrimaryScreen.WorkingArea.Width)
+            {
+                newpos.X = Screen.PrimaryScreen.WorkingArea.Width - needSize.Width;
+            }
+
+            if (newpos.Y <= 0)
+            {
+                newpos.Y = 0;
+            }
+            if (newpos.Y + needSize.Height > Screen.PrimaryScreen.WorkingArea.Height)
+            {
+                newpos.Y = Screen.PrimaryScreen.WorkingArea.Height - needSize.Height;
+            }
+
+            this.Location = newpos;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -69,11 +105,13 @@ namespace clockatt
             this.DispMonth = dt.Month;
             this.DispYear = dt.Year;
 
-            dayInfos.SetRect(StartLeft, StartTop, this.DispYear, this.DispMonth, this.fontSize,
+            Size needSize = dayInfos.SetRect(StartLeft, StartTop, this.DispYear, this.DispMonth, this.fontSize,
                 this.dayPanes,
                 this.CreateGraphics());
+            this.Size = needSize;
+            ResetPos(needSize);
 
-            this.Invalidate();
+            this.Invalidate(true);
 
         }
 
@@ -99,7 +137,6 @@ namespace clockatt
                 this.Close();
             }
         }
-
     }
 
 }

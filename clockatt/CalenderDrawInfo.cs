@@ -56,7 +56,7 @@ namespace clockatt
         /// <param name="dispMonth"></param>
         /// <param name="fontSize"></param>
         /// <param name="g"></param>
-        public virtual void SetRect(
+        public virtual Size SetRect(
             int startX, 
             int startY, 
             int dispYear, 
@@ -69,6 +69,10 @@ namespace clockatt
             int y = startY;
             int addHeight = 0;
             int charMargin = 0;
+
+            Size needSize = new Size();
+            needSize.Width = startX;
+            needSize.Height = startY;
 
             this.pDispMonth = dispMonth;
             this.pDispYear = dispYear;
@@ -162,13 +166,30 @@ namespace clockatt
                     dayDt,
                     new Rectangle(x, y, (int)strsize.Width, (int)strsize.Height),
                     this.pHolidays);
+
+                if (needSize.Width <
+                    x + strsize.Width)
+                {
+                    needSize.Width = x + (int)strsize.Width;
+                }
+                if (needSize.Height <
+                    y + strsize.Height)
+                {
+                    needSize.Height = y + (int)strsize.Height;
+                }
+
+
                 this.Add(info);
                 panels[j].SetDrawInfo(info);
                 panels[j].DrawDay += new CalenderDayPanel.DrawDayEventHandler(this.PaintDay);
 
                 x += charMargin;
-
             }
+
+            needSize.Width += startX;
+            needSize.Height += addHeight / 2;
+
+            return needSize;
         }
 
         /// <summary>

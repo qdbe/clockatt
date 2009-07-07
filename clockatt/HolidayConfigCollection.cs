@@ -42,7 +42,8 @@ namespace clockatt
         /// <param name="sr"></param>
         public void ReadConfig(StreamReader sr)
         {
-            for (;!sr.EndOfStream; )
+            this.Add(new HolidayConfig());  // 春分の日、秋分の日用データ
+            for (; !sr.EndOfStream; )
             {
                 string rLine = sr.ReadLine();
                 this.ReadLine(rLine);
@@ -65,7 +66,7 @@ namespace clockatt
             {
                 return;
             }
-            string[] lineCols = rLine.Split(" \t　".ToCharArray(),7);
+            string[] lineCols = rLine.Split(" \t　".ToCharArray());
             // 休日名はオプション扱い
             if (lineCols.Length < 6)
             {
@@ -119,7 +120,7 @@ namespace clockatt
         {
             for (int i = 0; i < this.Count; i++)
             {
-                if (this[i].IsHolyday(day) == true)
+                if (this[i].IsHoliday(day) == true)
                 {
                     return true;
                 }
@@ -134,9 +135,10 @@ namespace clockatt
         /// <returns></returns>
         public HolidayConfig GetHolidayInfo(DateTime day)
         {
+            
             for (int i = 0; i < this.Count; i++)
             {
-                if (this[i].IsHolyday(day) == true)
+                if (this[i].IsHoliday(day) == true)
                 {
                     return this[i];
                 }
