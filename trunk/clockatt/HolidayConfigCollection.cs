@@ -42,7 +42,6 @@ namespace clockatt
         /// <param name="sr"></param>
         public void ReadConfig(StreamReader sr)
         {
-            this.Add(new HolidayConfig());  // 春分の日、秋分の日用データ
             for (; !sr.EndOfStream; )
             {
                 string rLine = sr.ReadLine();

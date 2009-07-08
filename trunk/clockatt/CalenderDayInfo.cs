@@ -91,16 +91,6 @@ namespace clockatt
             this.pDispDay = dt;
             this.pDispRect = rect;
             this.pHolidayName = string.Empty;
-            if (HolidayConfig.IsVernalEquinoxDay(dt) == true)
-            {
-                this.pHolidayName = HolidayConfig.VERNALEQUINOXDAY;
-                this.pIsHoliday = true;
-            }
-            else if (HolidayConfig.IsAutumnEquinoxDay(dt) == true)
-            {
-                this.pHolidayName = HolidayConfig.AUTUMNEQUINOXDAY;
-                this.pIsHoliday = true;
-            }
             for (int i = 0; i < holidays.Length; i++)
             {
                 HolidayConfig hconf = holidays[i].GetHolidayInfo(dt);

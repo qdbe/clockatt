@@ -172,7 +172,7 @@ namespace clockatt
         }
 
         /// <summary>
-        /// 春分の日のチェック
+        /// 計算による春分の日のチェック
         /// </summary>
         /// <param name="yy"></param>
         /// <param name="mm"></param>
@@ -183,7 +183,7 @@ namespace clockatt
             return IsVernalEquinoxDay(dt.Year, dt.Month, dt.Day);
         }
         /// <summary>
-        /// 春分の日のチェック
+        /// 計算による春分の日のチェック
         /// </summary>
         /// <param name="yy"></param>
         /// <param name="mm"></param>
@@ -268,7 +268,7 @@ namespace clockatt
         }
 
         /// <summary>
-        /// 秋分の日のチェック
+        /// 計算による秋分の日のチェック
         /// </summary>
         /// <param name="yy"></param>
         /// <param name="mm"></param>
@@ -280,7 +280,7 @@ namespace clockatt
         }
 
         /// <summary>
-        /// 秋分の日のチェック
+        /// 計算による秋分の日のチェック
         /// </summary>
         /// <param name="yy"></param>
         /// <param name="mm"></param>
