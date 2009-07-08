@@ -99,6 +99,34 @@ namespace clockatt
         }
 
         /// <summary>
+        /// 日曜日のフォント色
+        /// </summary>
+        private string pSunDayColor;
+        public string SunDayColor
+        {
+            get { return pSunDayColor; }
+            set
+            {
+                Color tColor = Color.FromName(value);
+                pSunDayColor = value;
+            }
+        }
+
+        /// <summary>
+        /// 曜日表示のフォント色
+        /// </summary>
+        private string pWeekColor;
+        public string WeekColor
+        {
+            get { return pWeekColor; }
+            set
+            {
+                Color tColor = Color.FromName(value);
+                pWeekColor = value;
+            }
+        }
+
+        /// <summary>
         /// 曜日と日付の間にボーダーを描画するか否か
         /// </summary>
         private bool pShowBorder = true;

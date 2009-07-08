@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing;
 
 namespace clockatt.ConfigValue
 {
-    public class ConfigHolidayName : ConfigAbstract
+    public class ConfigFontName : ConfigAbstract
     {
         /// <summary>
         /// 現在の値
@@ -21,16 +22,17 @@ namespace clockatt.ConfigValue
         /// </summary>
         protected override void InitValue()
         {
-            this.pCurrentValue = string.Empty;
+            this.pCurrentValue = "ＭＳ ゴシック";
+            this.InitialError = "月の指定が不正です";
         }
 
 
-        public ConfigHolidayName()
+        public ConfigFontName()
         {
             this.InitValue();
         }
 
-        public ConfigHolidayName(string name)
+        public ConfigFontName(string name)
         {
             this.TryParse(name);
         }
@@ -43,7 +45,19 @@ namespace clockatt.ConfigValue
                 return true;
             }
 
-            this.pCurrentValue = strValue;
+            try
+            {
+                Font testFont = new Font(strValue, 10);
+                if( testFont == null )
+                {
+                    throw new ConfigInitException(this.InitialError);
+                }
+                this.pCurrentValue = strValue;
+            }
+            catch (Exception e)
+            {
+                throw new ConfigInitException(this.InitialError,e);
+            }
 
             return true;
         }

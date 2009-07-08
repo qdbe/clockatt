@@ -4,32 +4,51 @@ using System.Text;
 
 namespace clockatt.ConfigValue
 {
-    /// <summary>
-    /// 数値を管理する 継承元クラス
-    /// </summary>
-    public abstract class ConfigIntValue : ConfigAbstract
+    public abstract class ConfigHolidayIntValue : ConfigIntValue
     {
+        public static readonly int ALL = 0;
+        public static readonly int InValid = -1;
 
         /// <summary>
-        /// 現在の値
+        /// すべてをあらわす数値か否か
         /// </summary>
-        protected int pCurrentValue;
-        public int CurrentValue
+        public virtual bool IsAllValue
         {
-            get { return pCurrentValue; }
-            set { pCurrentValue = value; }
+            get
+            {
+                if (this.CurrentValue == ALL)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
-
-        protected int MaxValue = Int32.MaxValue;
-        protected int MinValue = Int32.MinValue;
-
-
+        /// <summary>
+        /// 不正値か否か
+        /// </summary>
+        public virtual bool IsInValid
+        {
+            get
+            {
+                if (this.CurrentValue == InValid)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public ConfigIntValue()
+        public ConfigHolidayIntValue()
         {
             InitValue();
         }
@@ -38,7 +57,7 @@ namespace clockatt.ConfigValue
         /// コンストラクタ
         /// </summary>
         /// <param name="strValue"></param>
-        public ConfigIntValue(string strValue)
+        public ConfigHolidayIntValue(string strValue)
             : base()
         {
             InitValue();
@@ -58,6 +77,11 @@ namespace clockatt.ConfigValue
             if (strValue == null)
             {
                 return false;
+            }
+            if (this.isWildCard(strValue) == true)
+            {
+                this.pCurrentValue = ALL;
+                return true;
             }
 
             // 書式文字からの変換
@@ -94,36 +118,10 @@ namespace clockatt.ConfigValue
             return false;
         }
 
-        /// <summary>
-        /// 等価であるかどうかの判定
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(object obj)
+        public virtual void SetAllValue()
         {
-            if (obj == null)
-            {
-                return false;
-            }
-            if (this.GetType().Equals(obj))
-            {
-                if (this.pCurrentValue == ((ConfigIntValue)obj).CurrentValue)
-                {
-                    return true;
-                }
-            }
-            return false;
+            this.pCurrentValue = ALL;
         }
-
-        /// <summary>
-        /// ハッシュコードを返す
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return pCurrentValue;
-        }
-
 
         /// <summary>
         /// 同一の値か否かをチェックする
@@ -132,6 +130,11 @@ namespace clockatt.ConfigValue
         /// <returns></returns>
         public virtual bool IsSame(int checkValue)
         {
+            if (this.CurrentValue == ALL)
+            {
+                return true;
+            }
+
             if (this.CurrentValue == checkValue)
             {
                 return true;
@@ -139,5 +142,6 @@ namespace clockatt.ConfigValue
 
             return false;
         }
+
     }
 }

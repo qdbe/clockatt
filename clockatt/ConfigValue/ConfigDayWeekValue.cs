@@ -8,7 +8,7 @@ namespace clockatt.ConfigValue
     /// <summary>
     /// 曜日の設定値を管理する
     /// </summary>
-    public class ConfigDayWeekValue : ConfigIntValue
+    public class ConfigDayWeekValue : ConfigHolidayIntValue
     {
         public new static readonly int ALL = 0;
         public static readonly int Mon = 1;

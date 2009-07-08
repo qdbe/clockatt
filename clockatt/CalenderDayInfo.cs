@@ -98,6 +98,7 @@ namespace clockatt
                 {
                     this.pHolidayName = hconf.HolidayName.CurrentValue;
                     this.pIsHoliday = true;
+                    break;
                 }
                 else
                 {

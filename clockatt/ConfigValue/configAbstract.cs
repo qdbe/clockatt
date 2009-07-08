@@ -6,6 +6,10 @@ namespace clockatt.ConfigValue
 {
     public abstract class ConfigAbstract
     {
+        /// <summary>
+        /// 初期化失敗時のエラーメッセージ
+        /// </summary>
+        protected string InitialError = "";
 
         /// <summary>
         /// 表示文字列
@@ -37,5 +41,8 @@ namespace clockatt.ConfigValue
         /// </summary>
         /// <returns></returns>
         public override abstract int GetHashCode();
+
+        protected abstract void InitValue();
+
     }
 }
