@@ -88,6 +88,8 @@ namespace clockatt
 
         public void SetDrawInfo(CalenderDayInfo dayInfo)
         {
+            System.Diagnostics.Debug.WriteLine(dayInfo.DispDay.ToShortDateString() + " Is Set to Panel");
+
             this.Location = dayInfo.DispRect.Location;
             this.Width = dayInfo.DispRect.Width;
             this.Height = dayInfo.DispRect.Height;

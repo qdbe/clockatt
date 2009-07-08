@@ -255,6 +255,7 @@ namespace clockatt
 
             Brush charBrush = dayBrush;
             CalenderDayInfo cdi = ((CalenderDayPanel)sender).DayInfo;
+            System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " Paint Happend");
             if (cdi.IsToday == true)
             {
                 ((CalenderDayPanel)sender).BackColor = Color.Aqua;
@@ -267,18 +268,22 @@ namespace clockatt
             if (cdi.IsHoliday == true)
             {
                 charBrush = dayBrushSun;
+                System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " is Holiday");
             }
             else if (cdi.IsSunday == true)
             {
                 charBrush = dayBrushSun;
+                System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " IsSunday");
             }
             else if (cdi.IsSaturday == true)
             {
                 charBrush = dayBrushSat;
+                System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " IsSaturday");
             }
             else
             {
                 charBrush = dayBrush;
+                System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " Is Normal");
             }
 
             string str = cdi.GetDispStr();

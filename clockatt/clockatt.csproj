@@ -125,6 +125,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="ConfigClassDg.cd" />
+    <None Include="EquinoxHoliday.data" />
     <None Include="Holiday.data" />
     <None Include="Resources\clockAttIcon.ico" />
   </ItemGroup>
@@ -179,6 +180,7 @@
     <PostBuildEvent>rd /s/q $(TargetDir)Holiday
 mkdir $(TargetDir)Holiday
 copy $(ProjectDir)Holiday.data  $(TargetDir)Holiday
+copy $(ProjectDir)EquinoxHoliday.data  $(TargetDir)Holiday
 </PostBuildEvent>
   </PropertyGroup>
 </Project>
