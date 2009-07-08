@@ -10,5 +10,10 @@ namespace clockatt.ConfigValue
             base(msg)
         {
         }
+
+        public ConfigInitException(string msg, Exception e) :
+            base(msg,e)
+        {
+        }
     }
 }

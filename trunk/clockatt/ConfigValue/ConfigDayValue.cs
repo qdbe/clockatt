@@ -7,7 +7,7 @@ namespace clockatt.ConfigValue
     /// <summary>
     /// 日付の設定値を管理する
     /// </summary>
-    public class ConfigDayValue : ConfigIntValue
+    public class ConfigDayValue : ConfigHolidayIntValue
     {
         public new static readonly int ALL = -1;
         public new static readonly int InValid = -99;

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing;
 
 namespace clockatt.ConfigValue
 {
-    public class ConfigHolidayName : ConfigAbstract
+    public class ConfigColor : ConfigAbstract
     {
         /// <summary>
         /// 現在の値
@@ -22,15 +23,16 @@ namespace clockatt.ConfigValue
         protected override void InitValue()
         {
             this.pCurrentValue = string.Empty;
+            this.InitialError = "色の指定が不正です";
         }
 
 
-        public ConfigHolidayName()
+        public ConfigColor()
         {
             this.InitValue();
         }
 
-        public ConfigHolidayName(string name)
+        public ConfigColor(string name)
         {
             this.TryParse(name);
         }
@@ -43,7 +45,22 @@ namespace clockatt.ConfigValue
                 return true;
             }
 
-            this.pCurrentValue = strValue;
+            try
+            {
+                Color testColor = Color.FromName(strValue);
+                if( testColor.A == 0 &&
+                    testColor.R == 0 &&
+                    testColor.G == 0 &&
+                    testColor.B == 0 )
+                {
+                    throw new ConfigInitException(this.InitialError);
+                }
+                this.pCurrentValue = strValue;
+            }
+            catch (Exception e)
+            {
+                throw new ConfigInitException(this.InitialError,e);
+            }
 
             return true;
         }

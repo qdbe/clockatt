@@ -48,71 +48,52 @@ namespace clockatt
         }
 
         /// <summary>
-        /// 出力位置を決定する
+        /// 年月の出力位置を決定する
         /// </summary>
         /// <param name="startX"></param>
         /// <param name="startY"></param>
-        /// <param name="dispYear"></param>
-        /// <param name="dispMonth"></param>
-        /// <param name="fontSize"></param>
-        /// <param name="g"></param>
-        public virtual Size SetRect(
-            int startX, 
-            int startY, 
-            int dispYear, 
-            int dispMonth, 
-            int fontSize,
-            CalenderDayPanel []panels,
-            Graphics g)
+        /// <param name="yearFont"></param>
+        /// <returns></returns>
+        private int SetRectYearMonth(
+            int startX,
+            int startY,
+            Font yearFont)
         {
-            int x = startX;
-            int y = startY;
-            int addHeight = 0;
-            int charMargin = 0;
-
-            Size needSize = new Size();
-            needSize.Width = startX;
-            needSize.Height = startY;
-
-            this.pDispMonth = dispMonth;
-            this.pDispYear = dispYear;
-
-            Font baseFont = new Font(this.fontName, this.fontSize);
-
             // 年＋月の位置
             this.headDrawPoint.X = startX;
             this.headDrawPoint.Y = startY;
 
-            // 曜日の位置
-            Font yearMonthFont = baseFont;
-            x = startX;
-            y = startY + yearMonthFont.Height + 5;
-            Font weekDayFont = baseFont;
-            charMargin = weekDayFont.Height + 5 + this.margin;
+            return startY + yearFont.Height + 5;
+        }
+
+        private int SetRectWeek(
+            int startX,
+            int startY,
+            Font weekFont)
+        {
+            int charMargin = weekFont.Height + 5 + this.margin;
+
+            int x = startX;
 
             for (int i = 0; i < WeekDayCount; i++)
             {
                 this.weekDayDrawPoint[i].X = x;
-                this.weekDayDrawPoint[i].Y = y;
+                this.weekDayDrawPoint[i].Y = startY;
 
                 x += charMargin;
             }
 
+            return startY += weekFont.Height + 0;
+        }
 
-            // 日付の位置
-            x = startX;
-            y += weekDayFont.Height + 0;
-            Font dayFont = baseFont;
 
-            DateTime dt = new DateTime(dispYear, dispMonth, 1);
-
-            string dispstr = string.Format("{0, 2}", 88);
-            SizeF strsize = g.MeasureString(dispstr, dayFont);
-            strsize.Height += this.margin;
-            strsize.Width += this.margin;
-            charMargin = dayFont.Height + 5 + this.margin;
-            addHeight = dayFont.Height + 0 + this.margin;
-
+        private int GetDayStartX(
+            DateTime dt,
+            int startX,
+            int charMargin
+            )
+        {
+            int x = startX;
 
             if (dt.DayOfWeek != DayOfWeek.Sunday)
             {
@@ -142,9 +123,47 @@ namespace clockatt
                 }
             }
 
+            return x;
+        }
+
+        private SizeF GetDayStringSize(Graphics g, Font dayFont)
+        {
+            string dispstr = string.Format("{0, 2}", 88);
+            SizeF strsize = g.MeasureString(dispstr, dayFont);
+            strsize.Height += this.margin;
+            strsize.Width += this.margin;
+
+            return strsize;
+        }
+
+        private Size SetRectDay(
+            int startX,
+            int startY,
+            Font dayFont,
+            CalenderDayPanel[] panels,
+            Graphics g)
+        {
+            int x = startX;
+            int y = startY;
+
+
+            DateTime dt = new DateTime(this.DispYear, this.DispMonth, 1);
+
+
+            SizeF strsize = GetDayStringSize(g, dayFont);
+
+
+            int charMargin = dayFont.Height + 5 + this.margin;
+            int addHeight = dayFont.Height + 0 + this.margin;
+
+
+            x = GetDayStartX(dt, startX, charMargin);
+
             this.Clear();
 
-            int maxDate = DateTime.DaysInMonth(dispYear,dispMonth);
+            Size needSize = new Size(startX,startY);
+
+            int maxDate = DateTime.DaysInMonth(this.DispYear, this.DispMonth);
             for (int j = 0; j < panels.Length; j++)
             {
                 if (maxDate <= j)
@@ -152,7 +171,7 @@ namespace clockatt
                     panels[j].ClearDrawInfo();
                     continue;
                 }
-                DateTime dayDt = new DateTime(dispYear, dispMonth, j+1);
+                DateTime dayDt = new DateTime(this.DispYear, this.DispMonth, j + 1);
 
                 if (dayDt.DayOfWeek == DayOfWeek.Sunday)
                 {
@@ -162,24 +181,24 @@ namespace clockatt
                         y += addHeight;
                     }
                 }
+
                 CalenderDayInfo info = new CalenderDayInfo(
                     dayDt,
                     new Rectangle(x, y, (int)strsize.Width, (int)strsize.Height),
                     this.pHolidays);
 
-                if (needSize.Width <
-                    x + strsize.Width)
+                if (needSize.Width < (x + (int)strsize.Width))
                 {
                     needSize.Width = x + (int)strsize.Width;
                 }
-                if (needSize.Height <
-                    y + strsize.Height)
+                if (needSize.Height < (y + (int)strsize.Height))
                 {
                     needSize.Height = y + (int)strsize.Height;
                 }
 
 
                 this.Add(info);
+
                 panels[j].SetDrawInfo(info);
                 panels[j].DrawDay += new CalenderDayPanel.DrawDayEventHandler(this.PaintDay);
 
@@ -188,6 +207,45 @@ namespace clockatt
 
             needSize.Width += startX;
             needSize.Height += addHeight / 2;
+
+            return needSize;
+        }
+
+
+
+        /// <summary>
+        /// 出力位置を決定する
+        /// </summary>
+        /// <param name="startX"></param>
+        /// <param name="startY"></param>
+        /// <param name="dispYear"></param>
+        /// <param name="dispMonth"></param>
+        /// <param name="fontSize"></param>
+        /// <param name="g"></param>
+        public virtual Size SetRect(
+            int startX, 
+            int startY, 
+            int dispYear, 
+            int dispMonth, 
+            int fontSize,
+            CalenderDayPanel []panels,
+            Graphics g)
+        {
+            this.pDispMonth = dispMonth;
+            this.pDispYear = dispYear;
+
+            Font baseFont = new Font(this.fontName, fontSize);
+
+            // 年＋月の位置
+            int y = SetRectYearMonth(startX, startY, baseFont);
+
+            // 曜日の位置
+
+            y = SetRectWeek(startX, y, baseFont);
+
+            // 日付の位置
+
+            Size needSize = SetRectDay(startX, y, baseFont, panels, g);
 
             return needSize;
         }

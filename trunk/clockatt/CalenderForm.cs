@@ -34,7 +34,8 @@ namespace clockatt
             InitializeComponent();
             DateTime dt = DateTime.Now;
             this.DispYear = dt.Year;
-            this.DispMonth = dt.Month;
+            this.DispMonth = 3;
+//            this.DispMonth = dt.Month;
             this.pHolidays = holidays;
             this.dayInfos = new CalenderDrawInfo(this.pHolidays);
             this.dayPanes = CalenderDayPanel.CreatePanels(this, new CalenderDayPanel.DayPanelMouseDownEnventHandler(DoMouseClick));
