@@ -4,17 +4,8 @@ using System.Text;
 
 namespace clockatt.ConfigValue
 {
-    public class ConfigHolidayName : ConfigAbstract
+    public class ConfigHolidayName : ConfigStringValue
     {
-        /// <summary>
-        /// 現在の値
-        /// </summary>
-        protected string pCurrentValue;
-        public string CurrentValue
-        {
-            get { return pCurrentValue; }
-            set { pCurrentValue = value; }
-        }
 
         /// <summary>
         /// 初期化処理
