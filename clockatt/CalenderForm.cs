@@ -27,17 +27,19 @@ namespace clockatt
 
         private CalenderDayPanel []dayPanes;
 
+        private CalendarConfigration Config { get; set; }
 
-        public CalenderForm(Form parent, HolidayConfigCollection[] holidays)
+
+        public CalenderForm(Form parent, HolidayConfigCollection[] holidays, CalendarConfigration config)
         {
             this.callerForm = parent;
+            this.Config = config;
             InitializeComponent();
             DateTime dt = DateTime.Now;
             this.DispYear = dt.Year;
-            this.DispMonth = 3;
-//            this.DispMonth = dt.Month;
+            this.DispMonth = dt.Month;
             this.pHolidays = holidays;
-            this.dayInfos = new CalenderDrawInfo(this.pHolidays);
+            this.dayInfos = new CalenderDrawInfo(this.pHolidays, this.Config);
             this.dayPanes = CalenderDayPanel.CreatePanels(this, new CalenderDayPanel.DayPanelMouseDownEnventHandler(DoMouseClick));
             Size needSize = dayInfos.SetRect(StartLeft, StartTop, this.DispYear, this.DispMonth, this.fontSize,
                 dayPanes,

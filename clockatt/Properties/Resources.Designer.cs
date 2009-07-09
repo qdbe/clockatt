@@ -60,9 +60,9 @@ namespace clockatt.Properties {
             }
         }
         
-        public static System.Drawing.Icon clockAttIcon {
+        public static System.Drawing.Icon clockatt256 {
             get {
-                object obj = ResourceManager.GetObject("clockAttIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("clockatt256", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

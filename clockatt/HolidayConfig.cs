@@ -17,43 +17,27 @@ namespace clockatt
         /// <summary>
         /// 開始年
         /// </summary>
-        private ConfigYearValue pStartYear;
-        public ConfigYearValue StartYear
-        {
-            get { return pStartYear; }
-            set { pStartYear = value; }
-        }
+        public ConfigYearValue StartYear { get; set; }
 
         /// <summary>
         /// 終了年
         /// </summary>
-        private ConfigYearValue pEndYear;
-        public ConfigYearValue EndYear
-        {
-            get { return pEndYear; }
-            set { pEndYear = value; }
-        }
+        public ConfigYearValue EndYear { get; set; }
 
         /// <summary>
         /// 月
         /// </summary>
-        private ConfigMonthValue pMonth;
-        public ConfigMonthValue Month
-        {
-            get { return pMonth; }
-            set { pMonth = value; }
-        }
+        public ConfigMonthValue Month { get; set; }
 
         /// <summary>
         /// 日付指定
         /// </summary>
         private ConfigDayValue pDay;
-        public ConfigDayValue Day
-        {
+        public ConfigDayValue Day {
             get { return pDay; }
             set
             {
-                this.pDayWeek.SetAllValue();
+                this.pDayAtWeek.SetAllValue();
                 this.pWeekOfMonth.SetAllValue();
                 pDay = value;
             }
@@ -63,14 +47,14 @@ namespace clockatt
         /// <summary>
         /// 曜日
         /// </summary>
-        private ConfigDayWeekValue pDayWeek;
+        private ConfigDayWeekValue pDayAtWeek;
         public ConfigDayWeekValue DayAtWeek
         {
-            get { return pDayWeek; }
+            get { return pDayAtWeek; }
             set
             {
                 this.pDay.SetAllValue();
-                pDayWeek = value;
+                pDayAtWeek = value;
             }
         }
 
@@ -105,13 +89,13 @@ namespace clockatt
         /// </summary>
         public HolidayConfig()
         {
-            this.pStartYear = new ConfigYearValue();
-            this.pEndYear = new ConfigYearValue();
-            this.pMonth = new ConfigMonthValue();
-            this.pDay = new ConfigDayValue();
-            this.pDayWeek = new ConfigDayWeekValue();
-            this.pWeekOfMonth = new ConfigWeekOfMonthValue();
-            this.pHolidayName = new ConfigHolidayName();
+            this.StartYear = new ConfigYearValue();
+            this.EndYear = new ConfigYearValue();
+            this.Month = new ConfigMonthValue();
+            this.Day = new ConfigDayValue();
+            this.DayAtWeek = new ConfigDayWeekValue();
+            this.WeekOfMonth = new ConfigWeekOfMonthValue();
+            this.HolidayName = new ConfigHolidayName();
         }
 
         /// <summary>
@@ -150,22 +134,22 @@ namespace clockatt
             string strHolidayName
             )
         {
-            this.pStartYear = new ConfigYearValue(strStartYear,true);
-            this.pEndYear = new ConfigYearValue(strEndYear,false);
-            this.pMonth = new ConfigMonthValue(strMonth);
+            this.StartYear = new ConfigYearValue(strStartYear,true);
+            this.EndYear = new ConfigYearValue(strEndYear,false);
+            this.Month = new ConfigMonthValue(strMonth);
             this.pDay = new ConfigDayValue(strDay);
-            this.pDayWeek = new ConfigDayWeekValue(strWeekDay);
+            this.pDayAtWeek = new ConfigDayWeekValue(strWeekDay);
             this.pWeekOfMonth = new ConfigWeekOfMonthValue(strWeekOfMonth);
             this.pHolidayName = new ConfigHolidayName(strHolidayName);
 
             if (this.pDay.IsAllValue == false &&
-                this.pDayWeek.IsAllValue == false )
+                this.pDayAtWeek.IsAllValue == false )
             {
                 throw new ConfigInitException("日付と曜日は同時に指定できません");
             }
 
             if (this.pWeekOfMonth.IsAllValue == false &&
-                this.pDayWeek.IsAllValue == true )
+                this.pDayAtWeek.IsAllValue == true )
             {
                 throw new ConfigInitException("第何週かを指定した場合には曜日も指定する必要があります");
             }
