@@ -128,7 +128,7 @@ namespace clockatt.ConfigValue
         /// </summary>
         /// <param name="checkValue"></param>
         /// <returns></returns>
-        public virtual bool IsSame(int checkValue)
+        public override bool IsSame(int checkValue)
         {
             if (this.CurrentValue == ALL)
             {

@@ -9,11 +9,7 @@ namespace clockatt
 {
     internal class CalenderDrawInfo : System.Collections.Generic.List<CalenderDayInfo>
     {
-        private int fontSize = 12;
-
         private int margin = 2;
-
-        private string fontName = "ＭＳ ゴシック";
 
         private static int WeekDayCount = 7;
 
@@ -24,27 +20,20 @@ namespace clockatt
 
         private HolidayConfigCollection []pHolidays;
 
-        private int pDispYear = 0;
-        public int DispYear
-        {
-            get { return pDispYear; }
-            set { pDispYear = value; }
-        }
+        private CalendarConfigration Config { get; set; }
 
-        private int pDispMonth = 0;
-        public int DispMonth
-        {
-            get { return pDispMonth; }
-            set { pDispMonth = value; }
-        }
+        public int DispYear { get; set; }
+
+        public int DispMonth { get; set ; }
 
         /// <summary>
         /// 初期化
         /// </summary>
         /// <param name="holiday"></param>
-        public CalenderDrawInfo(HolidayConfigCollection []holiday)
+        public CalenderDrawInfo(HolidayConfigCollection []holiday, CalendarConfigration config)
         {
             this.pHolidays = holiday;
+            this.Config = config;
         }
 
         /// <summary>
@@ -231,21 +220,22 @@ namespace clockatt
             CalenderDayPanel []panels,
             Graphics g)
         {
-            this.pDispMonth = dispMonth;
-            this.pDispYear = dispYear;
+            this.DispMonth = dispMonth;
+            this.DispYear = dispYear;
 
-            Font baseFont = new Font(this.fontName, fontSize);
+            Font basefont = new Font(this.Config.YearMonthFont.FontFamily.Name, this.Config.FontSize);
+
 
             // 年＋月の位置
-            int y = SetRectYearMonth(startX, startY, baseFont);
+            int y = SetRectYearMonth(startX, startY, basefont);
 
             // 曜日の位置
 
-            y = SetRectWeek(startX, y, baseFont);
+            y = SetRectWeek(startX, y, basefont);
 
             // 日付の位置
 
-            Size needSize = SetRectDay(startX, y, baseFont, panels, g);
+            Size needSize = SetRectDay(startX, y, basefont, panels, g);
 
             return needSize;
         }
@@ -258,8 +248,8 @@ namespace clockatt
         protected virtual void PaintYearMonth(Rectangle clip, Graphics g)
         {
 
-            Font yearMonthFont = new Font(this.fontName, this.fontSize);
-            System.Drawing.Brush yearMonthBrush = new System.Drawing.SolidBrush(Color.Black);
+            Font yearMonthFont = new Font(this.Config.YearMonthFont.FontFamily.Name, this.Config.FontSize);
+            System.Drawing.Brush yearMonthBrush = new System.Drawing.SolidBrush(this.Config.YearMonthColor);
 
             string dispString = string.Format("{0}年 {1}月",
                 this.DispYear,
@@ -277,10 +267,10 @@ namespace clockatt
         /// <param name="g"></param>
         protected virtual void PaintWeekDay(Rectangle clip, Graphics g)
         {
-            Font weekDayFont = new Font(this.fontName, this.fontSize);
-            System.Drawing.Brush weekDayBrush = new System.Drawing.SolidBrush(Color.Black);
-            System.Drawing.Brush weekDayBrushSun = new System.Drawing.SolidBrush(Color.Red);
-            System.Drawing.Brush weekDayBrushSat = new System.Drawing.SolidBrush(Color.Blue);
+            Font weekDayFont = new Font(this.Config.WeekFont.FontFamily.Name, this.Config.FontSize);
+            System.Drawing.Brush weekDayBrush = new System.Drawing.SolidBrush(this.Config.WeekColor);
+            System.Drawing.Brush weekDayBrushSun = new System.Drawing.SolidBrush(this.Config.WeekSundayColor);
+            System.Drawing.Brush weekDayBrushSat = new System.Drawing.SolidBrush(this.Config.WeekSaturndayColor);
 
             object[][] strWeekDay = new object[][]{
                         new object[]{ "日", weekDayBrushSun },
@@ -301,12 +291,12 @@ namespace clockatt
 
         public void PaintDay(object sender, PaintEventArgs e)
         {
-            Font dayFont = new Font(this.fontName, this.fontSize);
+            Font dayFont = new Font(this.Config.DayFont.FontFamily.Name, this.Config.FontSize);
 
-            System.Drawing.Brush dayBrush = new System.Drawing.SolidBrush(Color.Black);
-            System.Drawing.Brush dayBrushHolyDay = new System.Drawing.SolidBrush(Color.Red);
-            System.Drawing.Brush dayBrushSun = new System.Drawing.SolidBrush(Color.Red);
-            System.Drawing.Brush dayBrushSat = new System.Drawing.SolidBrush(Color.Blue);
+            System.Drawing.Brush dayBrush = new System.Drawing.SolidBrush(this.Config.DayColor);
+            System.Drawing.Brush dayBrushHolyDay = new System.Drawing.SolidBrush(this.Config.DayHolidayColor);
+            System.Drawing.Brush dayBrushSun = new System.Drawing.SolidBrush(this.Config.DaySundayColor);
+            System.Drawing.Brush dayBrushSat = new System.Drawing.SolidBrush(this.Config.DaySaturndayColor);
 
 
             e.Graphics.SetClip(e.ClipRectangle);
@@ -316,11 +306,11 @@ namespace clockatt
             System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " Paint Happend");
             if (cdi.IsToday == true)
             {
-                ((CalenderDayPanel)sender).BackColor = Color.Aqua;
+                ((CalenderDayPanel)sender).BackColor = this.Config.DayTodayBackColor;
             }
             else
             {
-                ((CalenderDayPanel)sender).BackColor = Color.FromKnownColor(KnownColor.Control);
+                ((CalenderDayPanel)sender).BackColor = this.Config.BackColor;
             }
 
             if (cdi.IsHoliday == true)

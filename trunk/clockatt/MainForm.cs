@@ -19,18 +19,10 @@ namespace clockatt
         private int preHwnd = 0;
         private Rectangle preRect = Rectangle.Empty;
 
-        static private string HOLIDAY_CONDIGDIR = "Holiday";
+        static private readonly string HOLIDAY_CONDIGDIR = "Holiday";
 
-        /// <summary>
-        /// カレンダー表示フォーム
-        /// </summary>
-        private CalenderForm pCalForm = null;
-
-        public CalenderForm CalForm
-        {
-            get { return pCalForm; }
-            set { pCalForm = value; }
-        }
+        ClockConfigration pClockConfig;
+        CalendarConfigration pCelnedarConfig;
 
         private HolidayConfigCollection []pHolidaySettings;
 
@@ -40,8 +32,8 @@ namespace clockatt
         public MainForm()
         {
             InitializeComponent();
-            this.Icon = clockatt.Properties.Resources.clockAttIcon;
-            InitData();
+            this.Icon = clockatt.Properties.Resources.clockatt256;
+            initData();
         }
 
         private DirectoryInfo CreateHolidayDirectoryIfNeed(DirectoryInfo executeDirectory)
@@ -61,11 +53,9 @@ namespace clockatt
             return null;
         }
 
-        protected void InitData()
+        private void initHolidayConfig(DirectoryInfo executeDirectory)
         {
-            this.pHolidaySettings = new HolidayConfigCollection[]{};
-            DirectoryInfo executeDirectory = new DirectoryInfo((new FileInfo(Application.ExecutablePath)).DirectoryName);
-            
+            this.pHolidaySettings = new HolidayConfigCollection[] { };
             DirectoryInfo holidayDir = CreateHolidayDirectoryIfNeed(executeDirectory);
 
             FileInfo[] holidayConfigFileInfos = holidayDir.GetFiles();
@@ -76,7 +66,7 @@ namespace clockatt
 
             pHolidaySettings = new HolidayConfigCollection[holidayConfigFileInfos.Length];
             string holidayConfigFile;
-            for( int i = 0; i < pHolidaySettings.Length; i++ )
+            for (int i = 0; i < pHolidaySettings.Length; i++)
             {
                 holidayConfigFile = holidayConfigFileInfos[i].FullName;
                 pHolidaySettings[i] = new HolidayConfigCollection();
@@ -108,8 +98,35 @@ namespace clockatt
             }
         }
 
+        private void initClockConfig()
+        {
+            pClockConfig = new ClockConfigration();
+            pClockConfig.Reload();
+            dateTimeLabel.Font = new Font(pClockConfig.DrawFont.FontFamily.Name,pClockConfig.FontSize);
+            dateTimeLabel.ForeColor = pClockConfig.ForeColor;
+            dateTimeLabel.BackColor = pClockConfig.BackColor;
+            this.BackColor = pClockConfig.BackColor;
+        }
+
+        private void initCalendarConfig()
+        {
+            pCelnedarConfig = new CalendarConfigration();
+            pCelnedarConfig.Reload();
+        }
+
+        private void initData()
+        {
+            DirectoryInfo executeDirectory = new DirectoryInfo((new FileInfo(Application.ExecutablePath)).DirectoryName);
+
+            initHolidayConfig(executeDirectory);
+            initClockConfig();
+            initCalendarConfig();
+        }
+
         protected override void OnClosing(CancelEventArgs e)
         {
+            this.pClockConfig.Save();
+            this.pClockConfig.Save();
             this.taskInfoNotify.Visible = false;
             this.taskInfoNotify.Dispose();
         }
@@ -219,9 +236,8 @@ namespace clockatt
         {
             this.DspTimer.Start();
             this.LocateTimer.Start();
-            this.taskInfoNotify.Icon = clockatt.Properties.Resources.clockAttIcon;
+            this.taskInfoNotify.Icon = clockatt.Properties.Resources.clockatt256;
             this.taskInfoNotify.Visible = true;
-            ClockConfig conf = new ClockConfig();
         }
 
         private void DspTimer_Tick(object sender, EventArgs e)
@@ -267,7 +283,7 @@ namespace clockatt
             }
             else
             {
-                CalenderForm dlg = new CalenderForm(this,this.pHolidaySettings);
+                CalenderForm dlg = new CalenderForm(this,this.pHolidaySettings,this.pCelnedarConfig);
                 dlg.ShowDialog(this);
             }
         }
