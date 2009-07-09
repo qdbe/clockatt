@@ -5,16 +5,13 @@ using System.Drawing;
 
 namespace clockatt.ConfigValue
 {
-    public class ConfigColor : ConfigAbstract
+    public class ConfigColor : ConfigStringValue
     {
-        /// <summary>
-        /// 現在の値
-        /// </summary>
-        protected string pCurrentValue;
-        public string CurrentValue
+
+        Color pColorValue = Color.Black;
+        public Color ColorValue
         {
-            get { return pCurrentValue; }
-            set { pCurrentValue = value; }
+            get { return this.pColorValue; }
         }
 
         /// <summary>
@@ -47,14 +44,15 @@ namespace clockatt.ConfigValue
 
             try
             {
-                Color testColor = Color.FromName(strValue);
-                if( testColor.A == 0 &&
-                    testColor.R == 0 &&
-                    testColor.G == 0 &&
-                    testColor.B == 0 )
+                Color parsedColor = Color.FromName(strValue);
+                if (parsedColor.A == 0 &&
+                    parsedColor.R == 0 &&
+                    parsedColor.G == 0 &&
+                    parsedColor.B == 0)
                 {
                     throw new ConfigInitException(this.InitialError);
                 }
+                this.pColorValue = parsedColor;
                 this.pCurrentValue = strValue;
             }
             catch (Exception e)

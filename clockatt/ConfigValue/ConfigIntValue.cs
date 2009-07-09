@@ -139,5 +139,10 @@ namespace clockatt.ConfigValue
 
             return false;
         }
+
+        public override string ToString()
+        {
+            return this.CurrentValue.ToString();
+        }
     }
 }

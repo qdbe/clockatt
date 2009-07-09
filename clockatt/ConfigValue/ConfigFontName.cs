@@ -5,18 +5,8 @@ using System.Drawing;
 
 namespace clockatt.ConfigValue
 {
-    public class ConfigFontName : ConfigAbstract
+    public class ConfigFontName : ConfigStringValue
     {
-        /// <summary>
-        /// 現在の値
-        /// </summary>
-        protected string pCurrentValue;
-        public string CurrentValue
-        {
-            get { return pCurrentValue; }
-            set { pCurrentValue = value; }
-        }
-
         /// <summary>
         /// 初期化処理
         /// </summary>

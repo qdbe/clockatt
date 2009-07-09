@@ -85,6 +85,7 @@
     <Compile Include="ConfigValue\ConfigInitException.cs" />
     <Compile Include="ConfigValue\ConfigIntValue.cs" />
     <Compile Include="ConfigValue\ConfigMonthValue.cs" />
+    <Compile Include="ConfigValue\ConfigStringValue.cs" />
     <Compile Include="ConfigValue\ConfigWeekOfMonthValue.cs" />
     <Compile Include="ConfigValue\ConfigYearValue.cs" />
     <Compile Include="ConfigValue\ConfigDayWeekValue.cs" />
@@ -128,7 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ConfigClassDg.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="EquinoxHoliday.data" />
     <None Include="Holiday.data" />
     <None Include="Resources\clockAttIcon.ico" />
