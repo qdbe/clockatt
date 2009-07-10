@@ -272,7 +272,20 @@ namespace clockatt
 
         private string GetFormatDateTime(DateTime nc)
         {
-            return nc.ToString();
+            StringBuilder formatString = new StringBuilder();
+
+            if (this.pClockConfig.IsShowYear == true)
+            {
+                formatString.Append("yyyy/");
+            }
+            formatString.Append("mm/dd");
+            if (this.pClockConfig.IsShowWeek == true)
+            {
+                formatString.Append(nc.DayOfWeek.ToString() + " ");
+            }
+            
+
+            return nc.ToString(formatString.ToString());
         }
 
         private void dateTimeLabel_MouseClick(object sender, MouseEventArgs e)
