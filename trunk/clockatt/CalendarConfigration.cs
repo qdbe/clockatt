@@ -17,7 +17,6 @@ namespace clockatt
         /// フォントサイズ
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("Control")]
         public Color BackColor { get; set; }
 
         
@@ -25,21 +24,18 @@ namespace clockatt
         /// フォントサイズ
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("9")]
         public float FontSize { get; set; }
 
         /// <summary>
         /// フォント名
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("ＭＳ ゴシック")]
         public Font YearMonthFont { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("Black")]
         public Color YearMonthColor { get; set; }
 
 
@@ -47,28 +43,24 @@ namespace clockatt
         /// フォント名
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("ＭＳ ゴシック")]
         public Font WeekFont { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("Black")]
         public Color WeekColor { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("Red")]
         public Color WeekSundayColor { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("Blue")]
         public Color WeekSaturndayColor { get; set; }
 
 
@@ -76,28 +68,24 @@ namespace clockatt
         /// フォント名
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("ＭＳ ゴシック")]
         public Font DayFont { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("Black")]
         public Color DayColor { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("Red")]
         public Color DaySundayColor { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("Blue")]
         public Color DaySaturndayColor { get; set; }
 
 
@@ -105,14 +93,12 @@ namespace clockatt
         /// フォント色
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("Red")]
         public Color DayHolidayColor { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
         [UserScopedSetting()]
-        [DefaultSettingValue("Aqua")]
         public Color DayTodayBackColor { get; set; }
 
         public CalendarConfigration()

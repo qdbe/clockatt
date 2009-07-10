@@ -18,7 +18,6 @@ namespace clockatt
         public Color BackColor { get; set; }
 
         [UserScopedSetting()]
-        [DefaultSettingValue("White")]
         public Color ForeColor { get; set; }
 
         public ClockConfigration()
@@ -27,6 +26,7 @@ namespace clockatt
             this.FontSize = 9;
             this.BackColor = Color.FromKnownColor(KnownColor.GradientActiveCaption);
             this.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+            this.ForeColor = Color.Red;
         }
     }
 }
