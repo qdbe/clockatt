@@ -20,6 +20,15 @@ namespace clockatt
         [UserScopedSetting()]
         public Color ForeColor { get; set; }
 
+        [UserScopedSetting()]
+        public bool IsShowYear { get; set; }
+
+        [UserScopedSetting()]
+        public bool IsShowWeek { get; set; }
+
+        [UserScopedSetting()]
+        public bool IsShowTime { get; set; }
+
         public ClockConfigration()
         {
             this.DrawFont = new Font("MS UI Gothic",9);
@@ -27,6 +36,10 @@ namespace clockatt
             this.BackColor = Color.FromKnownColor(KnownColor.GradientActiveCaption);
             this.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
             this.ForeColor = Color.Red;
+
+            this.IsShowTime = true;
+            this.IsShowWeek = true;
+            this.IsShowYear = true;
         }
     }
 }
