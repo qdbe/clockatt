@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Configuration;
 
-namespace clockatt
+namespace clockatt.Configration
 {
     /// <summary>
     /// カレンダーの設定値

@@ -4,7 +4,7 @@ using System.Text;
 using System.Configuration;
 using System.Drawing;
 
-namespace clockatt
+namespace clockatt.Configration
 {
     public class ClockConfigration : ApplicationSettingsBase
     {

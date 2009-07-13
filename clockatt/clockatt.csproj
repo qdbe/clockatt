@@ -62,7 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalendarConfigration.cs" />
+    <Compile Include="Configration\CalendarConfigration.cs" />
     <Compile Include="CalenderDayInfo.cs" />
     <Compile Include="CalenderDayPanel.cs">
       <SubType>Component</SubType>
@@ -74,7 +74,19 @@
     <Compile Include="CalenderForm.Designer.cs">
       <DependentUpon>CalenderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClockConfigration.cs" />
+    <Compile Include="Configration\ClockConfigration.cs" />
+    <Compile Include="Configration\ConfigBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configration\ConfigBaseForm.Designer.cs">
+      <DependentUpon>ConfigBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configration\ConfigClockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configration\ConfigClockForm.Designer.cs">
+      <DependentUpon>ConfigClockForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigValue\ConfigAbstract.cs" />
     <Compile Include="ConfigValue\ConfigDayValue.cs" />
     <Compile Include="ConfigValue\ConfigHolidayIntValue.cs" />
@@ -100,6 +112,12 @@
     <EmbeddedResource Include="CalenderForm.resx">
       <DependentUpon>CalenderForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Configration\ConfigBaseForm.resx">
+      <DependentUpon>ConfigBaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configration\ConfigClockForm.resx">
+      <DependentUpon>ConfigClockForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,7 +132,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
@@ -122,6 +140,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="TimeUtil.cs" />
     <Compile Include="W32Native.cs" />
   </ItemGroup>
   <ItemGroup>

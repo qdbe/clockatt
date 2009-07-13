@@ -34,6 +34,7 @@
             this.LocateTimer = new System.Windows.Forms.Timer(this.components);
             this.taskInfoNotify = new System.Windows.Forms.NotifyIcon(this.components);
             this.RightClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.miConfigClock = new System.Windows.Forms.ToolStripMenuItem();
             this.miQuit = new System.Windows.Forms.ToolStripMenuItem();
             this.RightClickMenu.SuspendLayout();
             this.SuspendLayout();
@@ -71,17 +72,25 @@
             // RightClickMenu
             // 
             this.RightClickMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miConfigClock,
             this.miQuit});
             this.RightClickMenu.Name = "RightClickMenu";
             this.RightClickMenu.ShowImageMargin = false;
-            this.RightClickMenu.Size = new System.Drawing.Size(86, 26);
+            this.RightClickMenu.Size = new System.Drawing.Size(118, 48);
+            // 
+            // miConfigClock
+            // 
+            this.miConfigClock.Name = "miConfigClock";
+            this.miConfigClock.Size = new System.Drawing.Size(117, 22);
+            this.miConfigClock.Text = "時計表示設定";
+            this.miConfigClock.Click += new System.EventHandler(this.miConfigClock_Click);
             // 
             // miQuit
             // 
             this.miQuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.miQuit.Name = "miQuit";
             this.miQuit.ShortcutKeyDisplayString = "";
-            this.miQuit.Size = new System.Drawing.Size(85, 22);
+            this.miQuit.Size = new System.Drawing.Size(117, 22);
             this.miQuit.Text = "終了(&Q)";
             this.miQuit.Click += new System.EventHandler(this.miQuit_Click);
             // 
@@ -113,6 +122,7 @@
 
         }
 
+
         #endregion
 
         private System.Windows.Forms.Label dateTimeLabel;
@@ -121,5 +131,6 @@
         private System.Windows.Forms.NotifyIcon taskInfoNotify;
         private System.Windows.Forms.ContextMenuStrip RightClickMenu;
         private System.Windows.Forms.ToolStripMenuItem miQuit;
+        private System.Windows.Forms.ToolStripMenuItem miConfigClock;
     }
 }
