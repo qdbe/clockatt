@@ -281,10 +281,47 @@ namespace clockatt
             formatString.Append("mm/dd");
             if (this.pClockConfig.IsShowWeek == true)
             {
-                formatString.Append(nc.DayOfWeek.ToString() + " ");
+                formatString.Append("(");
+                switch (nc.DayOfWeek)
+                {
+                    case DayOfWeek.Monday:
+                        formatString.Append("月");
+                        break;
+                    case DayOfWeek.Tuesday:
+                        formatString.Append("火");
+                        break;
+                    case DayOfWeek.Wednesday:
+                        formatString.Append("水");
+                        break;
+                    case DayOfWeek.Thursday:
+                        formatString.Append("木");
+                        break;
+                    case DayOfWeek.Friday:
+                        formatString.Append("金");
+                        break;
+                    case DayOfWeek.Saturday:
+                        formatString.Append("土");
+                        break;
+                    case DayOfWeek.Sunday:
+                        formatString.Append("日");
+                        break;
+                    default:
+                        break;
+                }
+                formatString.Append(")");
             }
-            
 
+            if (this.pClockConfig.IsShowTime == true)
+            {
+                if (this.pClockConfig.IsShowSecond == true)
+                {
+                    formatString.Append(" " + nc.ToLongTimeString());
+                }
+                else
+                {
+                    formatString.Append(" " + nc.ToShortTimeString());
+                }
+            }
             return nc.ToString(formatString.ToString());
         }
 
