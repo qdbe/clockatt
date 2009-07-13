@@ -29,6 +29,9 @@ namespace clockatt
         [UserScopedSetting()]
         public bool IsShowTime { get; set; }
 
+        [UserScopedSetting()]
+        public bool IsShowSecond { get; set; }
+
         public ClockConfigration()
         {
             this.DrawFont = new Font("MS UI Gothic",9);
@@ -40,6 +43,7 @@ namespace clockatt
             this.IsShowTime = true;
             this.IsShowWeek = true;
             this.IsShowYear = true;
+            this.IsShowSecond = true;
         }
     }
 }
