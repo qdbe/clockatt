@@ -98,6 +98,12 @@
     <Compile Include="ConfigValue\ConfigWeekOfMonthValue.cs" />
     <Compile Include="ConfigValue\ConfigYearValue.cs" />
     <Compile Include="ConfigValue\ConfigDayWeekValue.cs" />
+    <Compile Include="FormControls\FontSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormControls\FontSelector.Designer.cs">
+      <DependentUpon>FontSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="HolidayConfigCollection.cs" />
     <Compile Include="HolidayConfig.cs" />
     <Compile Include="IConfig.cs" />
@@ -117,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Configration\ConfigClockForm.resx">
       <DependentUpon>ConfigClockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControls\FontSelector.resx">
+      <DependentUpon>FontSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

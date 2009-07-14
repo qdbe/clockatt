@@ -98,14 +98,18 @@ namespace clockatt
             }
         }
 
+        private void setTimeLabelDesign()
+        {
+            dateTimeLabel.Font = new Font(pClockConfig.DrawFont.FontFamily.Name, pClockConfig.FontSize);
+            dateTimeLabel.ForeColor = pClockConfig.ForeColor;
+            dateTimeLabel.BackColor = pClockConfig.BackColor;
+            this.BackColor = pClockConfig.BackColor;
+        }
+
         private void initClockConfig()
         {
             pClockConfig = new ClockConfigration();
             pClockConfig.Reload();
-            dateTimeLabel.Font = new Font(pClockConfig.DrawFont.FontFamily.Name,pClockConfig.FontSize);
-            dateTimeLabel.ForeColor = pClockConfig.ForeColor;
-            dateTimeLabel.BackColor = pClockConfig.BackColor;
-            this.BackColor = pClockConfig.BackColor;
         }
 
         private void initCalendarConfig()
@@ -120,6 +124,7 @@ namespace clockatt
 
             initHolidayConfig(executeDirectory);
             initClockConfig();
+            setTimeLabelDesign();
             initCalendarConfig();
         }
 
@@ -295,6 +300,7 @@ namespace clockatt
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 this.SetTimeLabel();
+                setTimeLabelDesign();
             }
         }
 
