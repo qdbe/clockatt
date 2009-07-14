@@ -130,8 +130,10 @@ namespace clockatt
 
         protected override void OnClosing(CancelEventArgs e)
         {
+            Properties.Settings.Synchronized(this.pClockConfig);
+            Properties.Settings.Default.Save();
             this.pClockConfig.Save();
-            this.pClockConfig.Save();
+            this.pCelnedarConfig.Save();
             this.taskInfoNotify.Visible = false;
             this.taskInfoNotify.Dispose();
         }

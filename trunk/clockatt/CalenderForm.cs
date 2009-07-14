@@ -35,6 +35,7 @@ namespace clockatt
         {
             this.callerForm = parent;
             this.Config = config;
+            this.BackColor = config.BackColor;
             InitializeComponent();
             DateTime dt = DateTime.Now;
             this.DispYear = dt.Year;
