@@ -20,6 +20,9 @@ namespace clockatt.Configration
         {
             InitializeComponent();
             this.BindSettings();
+            this.SettingDrawFont.SetSampleControl(this.labelSample, "Font");
+            this.SettingBackColor.SetSampleControl(this.labelSample, "BackColor");
+            this.SettingForeColor.SetSampleControl(this.labelSample, "ForeColor");
         }
 
         private void chkDispTime_CheckedChanged(object sender, EventArgs e)
@@ -33,9 +36,8 @@ namespace clockatt.Configration
 
         public override void RedrawSample()
         {
-            this.labelSample.Font =  new Font(this.SettingDrawFont.Text.Split(",".ToCharArray())[0], Convert.ToSingle(this.SettingFontSize.Value));
-            this.labelSample.ForeColor = Color.FromName(this.SettingForeColor.Text);
-            this.labelSample.BackColor = Color.FromName(this.SettingBackColor.Text);
+            this.labelSample.Font =  new Font(this.SettingDrawFont.SelectedValue.FontFamily,
+                this.SettingFontSize.SelectedValue);
 
             this.labelSample.Text = TimeUtil.GetFormatDateTime(DateTime.Now,
                 this.SettingIsShowYear.Checked,
@@ -44,33 +46,6 @@ namespace clockatt.Configration
                 this.SettingIsShowSecond.Checked);
         }
 
-        private void btnFontSearch_Click(object sender, EventArgs e)
-        {
-            this.fontDialog1.Font = new Font(this.SettingDrawFont.Text, 10);
-            this.fontDialog1.ShowColor = false;
-            if (this.fontDialog1.ShowDialog(this) == DialogResult.OK)
-            {
-                this.SettingDrawFont.Text = this.fontDialog1.Font.Name;
-            }
-        }
-
-        private void btnForeColorSearch_Click(object sender, EventArgs e)
-        {
-            this.colorDialog1.Color = Color.FromName(this.SettingForeColor.Text);
-            if (this.colorDialog1.ShowDialog(this) == DialogResult.OK)
-            {
-                this.SettingForeColor.Text = this.colorDialog1.Color.Name;
-            }
-        }
-
-        private void btnBackColorSearch_Click(object sender, EventArgs e)
-        {
-            this.colorDialog1.Color = Color.FromName(this.SettingBackColor.Text);
-            if (this.colorDialog1.ShowDialog(this) == DialogResult.OK)
-            {
-                this.SettingBackColor.Text = this.colorDialog1.Color.Name;
-            }
-        }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
@@ -79,6 +54,15 @@ namespace clockatt.Configration
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        private void SettingIsShowTime_ChekedChanged(object sender, EventArgs e)
+        {
+            if (this.SettingIsShowTime.Checked == false)
+            {
+                this.SettingIsShowSecond.Checked = false;
+            }
+            this.SettingIsShowSecond.Enabled = this.SettingIsShowTime.Checked;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
+using clockatt.FormControls;
 
 namespace clockatt.Configration
 {
@@ -36,24 +37,16 @@ namespace clockatt.Configration
         {
             foreach (SettingsProperty prop in this.SettingData.Properties)
             {
-                if (this.Controls["Setting" + prop.Name] is NumericUpDown )
+                Binding newbind = new Binding("SelectedValue", this.SettingData, prop.Name, true, DataSourceUpdateMode.OnValidation);
+                Control con = this.Controls["Setting" + prop.Name];
+                con.DataBindings.Add(newbind);
+                if (con is CheckBoxSelector)
                 {
-                    ((NumericUpDown)this.Controls["Setting" + prop.Name]).ValueChanged += new EventHandler(ConfigBaseForm_ValueChanged);
-                    Binding newbind = new Binding("Value", this.SettingData, prop.Name, true, DataSourceUpdateMode.OnValidation);
-                    this.Controls["Setting" + prop.Name].DataBindings.Add(newbind);
+                    ((CheckBoxSelector)con).ChekedChanged += new EventHandler(ConfigBaseForm_ChekedChanged);
                 }
-                if (this.Controls["Setting" + prop.Name] is TextBox)
+                else if( con is NumSelector)
                 {
-                    ((TextBox)this.Controls["Setting" + prop.Name]).TextChanged += new EventHandler(ConfigBaseForm_TextChanged);
-                    Binding newbind = new Binding("Text", this.SettingData, prop.Name, true, DataSourceUpdateMode.OnValidation);
-                    this.Controls["Setting" + prop.Name].DataBindings.Add(newbind);
-                }
-
-                if (this.Controls["Setting" + prop.Name] is CheckBox)
-                {
-                    ((CheckBox)this.Controls["Setting" + prop.Name]).CheckedChanged += new EventHandler(ConfigBaseForm_CheckedChanged);
-                    Binding newbind = new Binding("Checked", this.SettingData, prop.Name, true, DataSourceUpdateMode.OnValidation);
-                    this.Controls["Setting" + prop.Name].DataBindings.Add(newbind);
+                    ((NumSelector)con).ValueChanged += new EventHandler(ConfigBaseForm_ValueChanged);
                 }
             }
         }
@@ -63,18 +56,14 @@ namespace clockatt.Configration
             this.RedrawSample();
         }
 
+        void ConfigBaseForm_ChekedChanged(object sender, EventArgs e)
+        {
+            this.RedrawSample();
+        }
+
         public virtual void RedrawSample()
         {
         }
 
-        void ConfigBaseForm_CheckedChanged(object sender, EventArgs e)
-        {
-            this.RedrawSample();
-        }
-
-        void ConfigBaseForm_TextChanged(object sender, EventArgs e)
-        {
-            this.RedrawSample();
-        }
     }
 }
