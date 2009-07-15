@@ -11,6 +11,7 @@ namespace clockatt.Configration
     /// <summary>
     /// カレンダーの設定値
     /// </summary>
+    [SettingsGroupName("Calendar")]
     public class CalendarConfigration : ApplicationSettingsBase
     {
         /// <summary>
@@ -101,9 +102,9 @@ namespace clockatt.Configration
         [UserScopedSetting()]
         public Color DayTodayBackColor { get; set; }
 
-        public CalendarConfigration()
+        public CalendarConfigration(System.Configuration.SettingsBase setting)
         {
-            this.BackColor = Color.LightSteelBlue;
+            this.BackColor = (Color)setting.PropertyValues["Cal_BackColor"].PropertyValue;
             this.FontSize = 12;
             this.YearMonthFont = new Font("ＭＳ ゴシック", this.FontSize);
             this.YearMonthColor = Color.Black;

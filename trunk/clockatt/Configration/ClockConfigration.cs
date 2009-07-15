@@ -6,13 +6,11 @@ using System.Drawing;
 
 namespace clockatt.Configration
 {
+    [SettingsGroupName("Clock")]
     public class ClockConfigration : ApplicationSettingsBase
     {
         [UserScopedSetting()]
         public Font DrawFont { get; set; }
-
-        [UserScopedSetting()]
-        public float FontSize { get; set; }
 
         [UserScopedSetting()]
         public Color BackColor { get; set; }
@@ -27,6 +25,9 @@ namespace clockatt.Configration
         public bool IsShowWeek { get; set; }
 
         [UserScopedSetting()]
+        public bool IsWeekWareki { get; set; }
+
+        [UserScopedSetting()]
         public bool IsShowTime { get; set; }
 
         [UserScopedSetting()]
@@ -35,13 +36,12 @@ namespace clockatt.Configration
         public ClockConfigration()
         {
             this.DrawFont = new Font("MS UI Gothic",9);
-            this.FontSize = 9;
             this.BackColor = Color.FromKnownColor(KnownColor.LightSteelBlue);
-            //this.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
             this.ForeColor = Color.Red;
 
             this.IsShowTime = true;
             this.IsShowWeek = true;
+            this.IsWeekWareki = true;
             this.IsShowYear = true;
             this.IsShowSecond = true;
         }

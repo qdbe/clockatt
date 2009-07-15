@@ -11,31 +11,36 @@ namespace clockatt.FormControls
 {
     public partial class FontSelector : ConfigSelectorBase
     {
-        private Font pSelectedFont;
-
         public Font SelectedValue
         {
-            get { return pSelectedFont; }
-            set { 
-                pSelectedFont = value;
-                this.txtFontName.Text = pSelectedFont.Name;
-                this.toolTip1.SetToolTip(this.txtFontName, this.txtFontName.Text);
-                this.SetSampleProperty(this.pSelectedFont);
-            }
+            get { return (Font)this.pSelectedValue; }
         }
 
         public FontSelector()
         {
             InitializeComponent();
-            this.SelectedValue = this.Font;
+            this.SetValue(this.Font);
         }
+
+        public override void SetValue(object value)
+        {
+            if (!(value is Font))
+            {
+                throw new ArgumentException(value.GetType().Name + "は引数にセットできません");
+            }
+            pSelectedValue = value;
+            this.txtFontName.Text = ((Font)pSelectedValue).Name;
+            this.toolTip1.SetToolTip(this.txtFontName, this.txtFontName.Text);
+            this.SetSampleProperty(this.pSelectedValue);
+        }
+
 
         private void btnFontSearch_Click(object sender, EventArgs e)
         {
-            this.fontSelectDialog.Font = this.SelectedValue;
+            this.fontSelectDialog.Font = (Font)this.pSelectedValue;
             if (this.fontSelectDialog.ShowDialog(this) == DialogResult.OK)
             {
-                this.SelectedValue = this.fontSelectDialog.Font;
+                this.SetValue(this.fontSelectDialog.Font);
             }
         }
 

@@ -42,9 +42,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Silver;
+            this.BackColor = global::clockatt.Properties.Settings.Default.Cal_BackColor;
             this.ClientSize = new System.Drawing.Size(178, 180);
-            this.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::clockatt.Properties.Settings.Default, "Cal_BackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::clockatt.Properties.Settings.Default, "Cal_Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::clockatt.Properties.Settings.Default, "Cal_ForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::clockatt.Properties.Settings.Default.Cal_Font;
+            this.ForeColor = global::clockatt.Properties.Settings.Default.Cal_ForeColor;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CalenderForm";
             this.ShowIcon = false;

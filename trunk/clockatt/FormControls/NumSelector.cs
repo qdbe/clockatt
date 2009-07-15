@@ -10,20 +10,20 @@ namespace clockatt.FormControls
 {
     public partial class NumSelector : ConfigSelectorBase
     {
-        private int pSelectedValue;
         private const int INITIAL_FONT_SIZE = 9;
 
         public event EventHandler ValueChanged;
 
-        public int SelectedValue
+        public override void SetValue(object value)
         {
-            get { return pSelectedValue; }
-            set
+            if (!(value is int))
             {
-                pSelectedValue = value;
-                this.numText.Value = pSelectedValue;
-                this.SetSampleProperty(this.pSelectedValue);
+                throw new ArgumentException(value.GetType().Name + "は引数にセットできません");
             }
+
+            pSelectedValue = value;
+            this.numText.Value = (int)value;
+            this.SetSampleProperty(this.pSelectedValue);
         }
 
         public NumSelector()
