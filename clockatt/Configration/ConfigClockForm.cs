@@ -16,32 +16,23 @@ namespace clockatt.Configration
             InitializeComponent();
         }
 
-        public ConfigClockForm(ApplicationSettingsBase settings) : base(settings)
+        public ConfigClockForm(System.Configuration.SettingsBase settings) : base(settings)
         {
             InitializeComponent();
-            this.BindSettings();
+            this.GetFromSettings();
             this.SettingDrawFont.SetSampleControl(this.labelSample, "Font");
             this.SettingBackColor.SetSampleControl(this.labelSample, "BackColor");
             this.SettingForeColor.SetSampleControl(this.labelSample, "ForeColor");
         }
 
-        private void chkDispTime_CheckedChanged(object sender, EventArgs e)
-        {
-            this.SettingIsShowSecond.Enabled = this.SettingIsShowTime.Checked;
-            if (this.SettingIsShowSecond.Enabled == false)
-            {
-                this.SettingIsShowSecond.Checked = false;
-            }
-        }
-
         public override void RedrawSample()
         {
-            this.labelSample.Font =  new Font(this.SettingDrawFont.SelectedValue.FontFamily,
-                this.SettingFontSize.SelectedValue);
+            this.labelSample.Font =  this.SettingDrawFont.SelectedValue;
 
             this.labelSample.Text = TimeUtil.GetFormatDateTime(DateTime.Now,
                 this.SettingIsShowYear.Checked,
                 this.SettingIsShowWeek.Checked,
+                this.SettingIsWeekWareki.Checked,
                 this.SettingIsShowTime.Checked,
                 this.SettingIsShowSecond.Checked);
         }
@@ -51,6 +42,7 @@ namespace clockatt.Configration
         {
             if (this.ValidateChildren() == true)
             {
+                this.SetDataToSettings();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -63,6 +55,15 @@ namespace clockatt.Configration
                 this.SettingIsShowSecond.Checked = false;
             }
             this.SettingIsShowSecond.Enabled = this.SettingIsShowTime.Checked;
+        }
+
+        private void SettingIsShowWeek_ChekedChanged(object sender, EventArgs e)
+        {
+            if (this.SettingIsShowWeek.Checked == false)
+            {
+                this.SettingIsWeekWareki.Checked = false;
+            }
+            this.SettingIsWeekWareki.Enabled = this.SettingIsShowWeek.Checked;
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Resources;
 [assembly: AssemblyTitle("ClockATT")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GI-Engineering")]
+[assembly: AssemblyCompany("godz")]
 [assembly: AssemblyProduct("ClockATT")]
 [assembly: AssemblyCopyright("Copyright © Y.N 2009 Under GPL-Ver.2")]
 [assembly: AssemblyTrademark("")]

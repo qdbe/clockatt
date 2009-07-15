@@ -22,5 +22,281 @@ namespace clockatt.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LightSteelBlue")]
+        public global::System.Drawing.Color BackColor {
+            get {
+                return ((global::System.Drawing.Color)(this["BackColor"]));
+            }
+            set {
+                this["BackColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Red")]
+        public global::System.Drawing.Color ForeColor {
+            get {
+                return ((global::System.Drawing.Color)(this["ForeColor"]));
+            }
+            set {
+                this["ForeColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MS UI Gothic, 9pt")]
+        public global::System.Drawing.Font Font {
+            get {
+                return ((global::System.Drawing.Font)(this["Font"]));
+            }
+            set {
+                this["Font"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsShowYear {
+            get {
+                return ((bool)(this["IsShowYear"]));
+            }
+            set {
+                this["IsShowYear"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsShowWeek {
+            get {
+                return ((bool)(this["IsShowWeek"]));
+            }
+            set {
+                this["IsShowWeek"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsWeekWareki {
+            get {
+                return ((bool)(this["IsWeekWareki"]));
+            }
+            set {
+                this["IsWeekWareki"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsShowTime {
+            get {
+                return ((bool)(this["IsShowTime"]));
+            }
+            set {
+                this["IsShowTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsShowSecond {
+            get {
+                return ((bool)(this["IsShowSecond"]));
+            }
+            set {
+                this["IsShowSecond"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color Cal_ForeColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_ForeColor"]));
+            }
+            set {
+                this["Cal_ForeColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LightSteelBlue")]
+        public global::System.Drawing.Color Cal_BackColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_BackColor"]));
+            }
+            set {
+                this["Cal_BackColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MS UI Gothic, 9pt")]
+        public global::System.Drawing.Font Cal_Font {
+            get {
+                return ((global::System.Drawing.Font)(this["Cal_Font"]));
+            }
+            set {
+                this["Cal_Font"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MS UI Gothic, 9pt")]
+        public global::System.Drawing.Font Cal_YearMonthFont {
+            get {
+                return ((global::System.Drawing.Font)(this["Cal_YearMonthFont"]));
+            }
+            set {
+                this["Cal_YearMonthFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color Cal_YearMonthColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_YearMonthColor"]));
+            }
+            set {
+                this["Cal_YearMonthColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MS UI Gothic, 9pt")]
+        public global::System.Drawing.Font Cal_WeekFont {
+            get {
+                return ((global::System.Drawing.Font)(this["Cal_WeekFont"]));
+            }
+            set {
+                this["Cal_WeekFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color Cal_WeekColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_WeekColor"]));
+            }
+            set {
+                this["Cal_WeekColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Blue")]
+        public global::System.Drawing.Color Cal_WeekSaturndayColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_WeekSaturndayColor"]));
+            }
+            set {
+                this["Cal_WeekSaturndayColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Red")]
+        public global::System.Drawing.Color Cal_WeekSundayColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_WeekSundayColor"]));
+            }
+            set {
+                this["Cal_WeekSundayColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MS UI Gothic, 9pt")]
+        public global::System.Drawing.Font Cal_DayFont {
+            get {
+                return ((global::System.Drawing.Font)(this["Cal_DayFont"]));
+            }
+            set {
+                this["Cal_DayFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color Cal_DayColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_DayColor"]));
+            }
+            set {
+                this["Cal_DayColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Red")]
+        public global::System.Drawing.Color Cal_DayHolidayColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_DayHolidayColor"]));
+            }
+            set {
+                this["Cal_DayHolidayColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Blue")]
+        public global::System.Drawing.Color Cal_DaySaturndayColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_DaySaturndayColor"]));
+            }
+            set {
+                this["Cal_DaySaturndayColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Red")]
+        public global::System.Drawing.Color Cal_DaySundayColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_DaySundayColor"]));
+            }
+            set {
+                this["Cal_DaySundayColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Aqua")]
+        public global::System.Drawing.Color Cal_DayTodayBackColor {
+            get {
+                return ((global::System.Drawing.Color)(this["Cal_DayTodayBackColor"]));
+            }
+            set {
+                this["Cal_DayTodayBackColor"] = value;
+            }
+        }
     }
 }

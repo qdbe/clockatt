@@ -16,21 +16,31 @@ namespace clockatt
 {
     public partial class MainForm : Form
     {
+        private const int SizeMargin = 2;
         private int preHwnd = 0;
         private Rectangle preRect = Rectangle.Empty;
 
         static private readonly string HOLIDAY_CONDIGDIR = "Holiday";
 
-        ClockConfigration pClockConfig;
-        CalendarConfigration pCelnedarConfig;
-
         private HolidayConfigCollection []pHolidaySettings;
+
+        private string pDispString = string.Empty;
+
+        private Brush pDrawBrush;
+
+        public string DispString
+        {
+            get { return pDispString; }
+            set { pDispString = value; }
+        }
+
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public MainForm()
         {
+            pDrawBrush = new SolidBrush(this.ForeColor);
             InitializeComponent();
             this.Icon = clockatt.Properties.Resources.clockatt256;
             initData();
@@ -100,40 +110,25 @@ namespace clockatt
 
         private void setTimeLabelDesign()
         {
-            dateTimeLabel.Font = new Font(pClockConfig.DrawFont.FontFamily.Name, pClockConfig.FontSize);
-            dateTimeLabel.ForeColor = pClockConfig.ForeColor;
-            dateTimeLabel.BackColor = pClockConfig.BackColor;
-            this.BackColor = pClockConfig.BackColor;
+            this.Font = (Font)Properties.Settings.Default.PropertyValues["Font"].PropertyValue;
+            this.ForeColor = (Color)Properties.Settings.Default.PropertyValues["ForeColor"].PropertyValue;
+            pDrawBrush = new SolidBrush(this.ForeColor);
+            this.BackColor = (Color)Properties.Settings.Default.PropertyValues["BackColor"].PropertyValue;
         }
 
-        private void initClockConfig()
-        {
-            pClockConfig = new ClockConfigration();
-            pClockConfig.Reload();
-        }
-
-        private void initCalendarConfig()
-        {
-            pCelnedarConfig = new CalendarConfigration();
-            pCelnedarConfig.Reload();
-        }
 
         private void initData()
         {
             DirectoryInfo executeDirectory = new DirectoryInfo((new FileInfo(Application.ExecutablePath)).DirectoryName);
 
             initHolidayConfig(executeDirectory);
-            initClockConfig();
+            Properties.Settings.Default.Reload();
             setTimeLabelDesign();
-            initCalendarConfig();
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            Properties.Settings.Synchronized(this.pClockConfig);
             Properties.Settings.Default.Save();
-            this.pClockConfig.Save();
-            this.pCelnedarConfig.Save();
             this.taskInfoNotify.Visible = false;
             this.taskInfoNotify.Dispose();
         }
@@ -261,44 +256,45 @@ namespace clockatt
         private void SetTimeLabel()
         {
             DateTime nc = DateTime.Now;
-            this.dateTimeLabel.Text = TimeUtil.GetFormatDateTime(nc,
-                this.pClockConfig.IsShowYear,
-                this.pClockConfig.IsShowWeek,
-                this.pClockConfig.IsShowTime,
-                this.pClockConfig.IsShowSecond);
+            this.pDispString = TimeUtil.GetFormatDateTime(nc,
+                (bool)Properties.Settings.Default.PropertyValues["IsShowYear"].PropertyValue,
+                (bool)Properties.Settings.Default.PropertyValues["IsShowWeek"].PropertyValue,
+                (bool)Properties.Settings.Default.PropertyValues["IsWeekWareki"].PropertyValue,
+                (bool)Properties.Settings.Default.PropertyValues["IsShowTime"].PropertyValue,
+                (bool)Properties.Settings.Default.PropertyValues["IsShowSecond"].PropertyValue);
+
+            Graphics g = Graphics.FromHwnd(this.Handle);
+            SizeF newsize = g.MeasureString(this.pDispString, this.Font);
 
             this.Invalidate();
-            Application.DoEvents();
 
             // 必要ならサイズを変更する
-            if (this.Width != this.dateTimeLabel.Width)
+            if (this.Width != newsize.Width)
             {
-                this.Width = this.dateTimeLabel.Width;
+                this.Width = (int)newsize.Width + SizeMargin;
             }
-            //if (this.Height != this.dateTimeLabel.Height)
-            //{
-            //    this.Height = this.dateTimeLabel.Height;
-            //}
-            this.taskInfoNotify.Text = this.dateTimeLabel.Text;
+            this.taskInfoNotify.Text = this.pDispString;
         }
 
 
-        private void dateTimeLabel_MouseClick(object sender, MouseEventArgs e)
+        private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                this.RightClickMenu.Show(this,0,0);
+                this.RightClickMenu.Show(this, 0, 0);
             }
             else
             {
-                CalenderForm dlg = new CalenderForm(this,this.pHolidaySettings,this.pCelnedarConfig);
+                CalendarConfigration calConf = new CalendarConfigration(Properties.Settings.Default);
+
+                CalenderForm dlg = new CalenderForm(this, this.pHolidaySettings, calConf);
                 dlg.ShowDialog(this);
             }
         }
 
         void miConfigClock_Click(object sender, System.EventArgs e)
         {
-            Configration.ConfigClockForm dlg = new ConfigClockForm(this.pClockConfig);
+            Configration.ConfigClockForm dlg = new ConfigClockForm(Properties.Settings.Default);
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 this.SetTimeLabel();
@@ -311,5 +307,13 @@ namespace clockatt
         {
             this.Close();
         }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.SetClip(e.ClipRectangle);
+            e.Graphics.DrawString(this.pDispString, this.Font, this.pDrawBrush, 1, 1);
+        }
+
+
     }
 }

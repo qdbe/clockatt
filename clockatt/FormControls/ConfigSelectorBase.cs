@@ -11,11 +11,16 @@ namespace clockatt.FormControls
 {
     public partial class ConfigSelectorBase : UserControl
     {
+
+        protected object pSelectedValue;
+
         private Control pSampleControl;
         public Control SampleControl
         {
             get { return pSampleControl; }
         }
+
+        public string SettingName { get; set; }
 
         private string pSampleProperty;
         public string SampleProperty
@@ -51,6 +56,21 @@ namespace clockatt.FormControls
             {
                 pi.SetValue(this.pSampleControl, setValue, null);
             }
+        }
+
+        public virtual void SetValue(object value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void GetDataFromSettings(System.Configuration.SettingsBase setting)
+        {
+            this.SetValue(setting.PropertyValues[this.SettingName].PropertyValue);
+        }
+
+        public virtual void SetDataToSettings(System.Configuration.SettingsBase setting)
+        {
+            setting.PropertyValues[this.SettingName].PropertyValue = this.pSelectedValue;
         }
     }
 }

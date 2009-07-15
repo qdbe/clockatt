@@ -10,34 +10,31 @@ namespace clockatt.FormControls
 {
     public partial class ColorSelector : ConfigSelectorBase
     {
-        private Color pSelectedColor;
-
-        public Color SelectedValue
+        public override void SetValue(object value)
         {
-            get { return pSelectedColor; }
-            set
+            if (!(value is Color))
             {
-                pSelectedColor = value;
-                this.txtColorName.Text = pSelectedColor.Name;
-                this.toolTip1.SetToolTip(this.txtColorName, this.txtColorName.Text);
-                this.SetSampleProperty(this.pSelectedColor);
+                throw new ArgumentException(value.GetType().Name + "は引数にセットできません");
             }
+            pSelectedValue = value;
+            this.txtColorName.Text = ((Color)value).Name;
+            this.toolTip1.SetToolTip(this.txtColorName, this.txtColorName.Text);
+            this.SetSampleProperty(this.pSelectedValue);
         }
-
 
 
         public ColorSelector()
         {
             InitializeComponent();
-            this.SelectedValue = this.BackColor;
+            this.SetValue(this.BackColor);
         }
 
         private void btnColorSearch_Click(object sender, EventArgs e)
         {
-            this.colorSelectDialog.Color = this.SelectedValue;
+            this.colorSelectDialog.Color = (Color)this.pSelectedValue;
             if (this.colorSelectDialog.ShowDialog(this) == DialogResult.OK)
             {
-                this.SelectedValue = this.colorSelectDialog.Color;
+                this.SetValue(this.colorSelectDialog.Color);
             }
         }
 

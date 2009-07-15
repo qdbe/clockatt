@@ -10,17 +10,14 @@ namespace clockatt.FormControls
 {
     public partial class CheckBoxSelector : ConfigSelectorBase
     {
-        public bool SelectedValue
+        public override void SetValue(object value)
         {
-            get { return this.chkBox.Checked; }
-            set
+            if (!(value is bool))
             {
-                System.Diagnostics.Debug.WriteLine(this.Name + "SelectedValue=" + value.ToString());
-                System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(true);
-                System.Diagnostics.Debug.WriteLine(st.ToString());
-                this.chkBox.Checked = value;
-                this.SetSampleProperty(this.chkBox.Checked);
+                throw new ArgumentException(value.GetType().Name + "は引数にセットできません");
             }
+
+            this.chkBox.Checked = (bool)value;
         }
 
         public string DispText
@@ -37,13 +34,9 @@ namespace clockatt.FormControls
 
         public bool Checked
         {
-            get { return this.SelectedValue; }
+            get { return this.chkBox.Checked; }
             set {
-                this.chkBox.Checked = value;
-                this.SetSampleProperty(this.chkBox.Checked);
-                System.Diagnostics.Debug.WriteLine(this.Name + "Checked=" + value.ToString());
-                System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(true);
-                System.Diagnostics.Debug.WriteLine(st.ToString());
+                this.SetValue(value);
             }
         }
 
@@ -52,8 +45,7 @@ namespace clockatt.FormControls
         public CheckBoxSelector()
         {
             InitializeComponent();
-            System.Diagnostics.Debug.WriteLine(this.Name + "CheckBoxSelector");
-            this.SelectedValue = true;
+            this.SetValue(true);
             this.chkBox.CheckedChanged += new EventHandler(chkBox_CheckedChanged);
         }
 

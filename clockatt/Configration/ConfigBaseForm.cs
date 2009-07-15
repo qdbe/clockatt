@@ -16,13 +16,13 @@ namespace clockatt.Configration
         {
             InitializeComponent();
         }
-        public ConfigBaseForm(ApplicationSettingsBase settings)
+        public ConfigBaseForm(System.Configuration.SettingsBase settings)
         {
             InitializeComponent();
             this.SettingData = settings;
         }
 
-        protected ApplicationSettingsBase SettingData { get; set; }
+        protected System.Configuration.SettingsBase SettingData { get; set; }
 
         private void btnApply_Click(object sender, EventArgs e)
         {
@@ -33,20 +33,31 @@ namespace clockatt.Configration
         {
         }
 
-        protected virtual void BindSettings()
+        protected virtual void GetFromSettings()
         {
-            foreach (SettingsProperty prop in this.SettingData.Properties)
+            foreach (Control con in this.Controls)
             {
-                Binding newbind = new Binding("SelectedValue", this.SettingData, prop.Name, true, DataSourceUpdateMode.OnValidation);
-                Control con = this.Controls["Setting" + prop.Name];
-                con.DataBindings.Add(newbind);
+                if (con is ConfigSelectorBase)
+                {
+                    ConfigSelectorBase selecor = (ConfigSelectorBase)con;
+                    selecor.GetDataFromSettings(this.SettingData);
+                }
+
                 if (con is CheckBoxSelector)
                 {
                     ((CheckBoxSelector)con).ChekedChanged += new EventHandler(ConfigBaseForm_ChekedChanged);
                 }
-                else if( con is NumSelector)
+            }
+        }
+
+        protected virtual void SetDataToSettings()
+        {
+            foreach (Control con in this.Controls)
+            {
+                if (con is ConfigSelectorBase)
                 {
-                    ((NumSelector)con).ValueChanged += new EventHandler(ConfigBaseForm_ValueChanged);
+                    ConfigSelectorBase selecor = (ConfigSelectorBase)con;
+                    selecor.SetDataToSettings(this.SettingData);
                 }
             }
         }
