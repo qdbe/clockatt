@@ -197,7 +197,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Silver;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(499, 265);
             this.Controls.Add(this.SettingBackColor);
             this.Controls.Add(this.SettingForeColor);
@@ -212,6 +212,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.SettingIsShowSecond);
             this.Controls.Add(this.SettingIsShowYear);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "ConfigClockForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

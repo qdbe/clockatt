@@ -103,7 +103,7 @@ namespace clockatt.Configration
 
         public CalendarConfigration()
         {
-            this.BackColor = Color.Silver;
+            this.BackColor = Color.LightSteelBlue;
             this.FontSize = 12;
             this.YearMonthFont = new Font("ＭＳ ゴシック", this.FontSize);
             this.YearMonthColor = Color.Black;

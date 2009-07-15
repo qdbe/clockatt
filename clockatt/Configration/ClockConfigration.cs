@@ -36,8 +36,8 @@ namespace clockatt.Configration
         {
             this.DrawFont = new Font("MS UI Gothic",9);
             this.FontSize = 9;
-            this.BackColor = Color.FromKnownColor(KnownColor.GradientActiveCaption);
-            this.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+            this.BackColor = Color.FromKnownColor(KnownColor.LightSteelBlue);
+            //this.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
             this.ForeColor = Color.Red;
 
             this.IsShowTime = true;

@@ -15,6 +15,9 @@ namespace clockatt.FormControls
             get { return this.chkBox.Checked; }
             set
             {
+                System.Diagnostics.Debug.WriteLine(this.Name + "SelectedValue=" + value.ToString());
+                System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(true);
+                System.Diagnostics.Debug.WriteLine(st.ToString());
                 this.chkBox.Checked = value;
                 this.SetSampleProperty(this.chkBox.Checked);
             }
@@ -35,7 +38,13 @@ namespace clockatt.FormControls
         public bool Checked
         {
             get { return this.SelectedValue; }
-            set { this.SelectedValue = value; }
+            set {
+                this.chkBox.Checked = value;
+                this.SetSampleProperty(this.chkBox.Checked);
+                System.Diagnostics.Debug.WriteLine(this.Name + "Checked=" + value.ToString());
+                System.Diagnostics.StackTrace st = new System.Diagnostics.StackTrace(true);
+                System.Diagnostics.Debug.WriteLine(st.ToString());
+            }
         }
 
         public event EventHandler ChekedChanged = null;
@@ -43,6 +52,7 @@ namespace clockatt.FormControls
         public CheckBoxSelector()
         {
             InitializeComponent();
+            System.Diagnostics.Debug.WriteLine(this.Name + "CheckBoxSelector");
             this.SelectedValue = true;
             this.chkBox.CheckedChanged += new EventHandler(chkBox_CheckedChanged);
         }
