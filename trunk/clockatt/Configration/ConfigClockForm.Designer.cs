@@ -210,6 +210,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "ConfigClock";
+            this.Load += new System.EventHandler(this.ConfigClockForm_Load);
             this.Controls.SetChildIndex(this.SettingIsShowYear, 0);
             this.Controls.SetChildIndex(this.SettingIsShowSecond, 0);
             this.Controls.SetChildIndex(this.label4, 0);
