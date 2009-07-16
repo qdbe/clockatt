@@ -42,6 +42,7 @@ namespace clockatt.FormControls
         {
             this.pSampleControl = target;
             this.pSampleProperty = targetProperty;
+            this.SetSampleProperty(this.pSelectedValue);
         }
 
         public void SetSampleProperty(object setValue)
@@ -55,6 +56,7 @@ namespace clockatt.FormControls
             if( ptype.FullName == pi.PropertyType.FullName)
             {
                 pi.SetValue(this.pSampleControl, setValue, null);
+                this.pSampleControl.Invalidate(true);
             }
         }
 

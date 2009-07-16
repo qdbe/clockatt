@@ -43,8 +43,17 @@ namespace clockatt
             pDrawBrush = new SolidBrush(this.ForeColor);
             InitializeComponent();
             this.Icon = clockatt.Properties.Resources.clockatt256;
-            initData();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            initData();
+            this.DspTimer.Start();
+            this.LocateTimer.Start();
+            this.taskInfoNotify.Icon = clockatt.Properties.Resources.clockatt256;
+            this.taskInfoNotify.Visible = true;
+        }
+
 
         private DirectoryInfo CreateHolidayDirectoryIfNeed(DirectoryInfo executeDirectory)
         {
@@ -232,14 +241,6 @@ namespace clockatt
         {
             this.Location = new Point(Screen.FromControl(this).WorkingArea.Right - this.Width,
                 Screen.FromControl(this).WorkingArea.Top + 0);
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            this.DspTimer.Start();
-            this.LocateTimer.Start();
-            this.taskInfoNotify.Icon = clockatt.Properties.Resources.clockatt256;
-            this.taskInfoNotify.Visible = true;
         }
 
         private void DspTimer_Tick(object sender, EventArgs e)

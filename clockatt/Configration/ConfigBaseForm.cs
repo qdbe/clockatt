@@ -33,7 +33,7 @@ namespace clockatt.Configration
         {
         }
 
-        protected virtual void GetFromSettings()
+        protected virtual void GetDataFromSettings()
         {
             foreach (Control con in this.Controls)
             {

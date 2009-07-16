@@ -19,7 +19,7 @@ namespace clockatt.Configration
         public ConfigClockForm(System.Configuration.SettingsBase settings) : base(settings)
         {
             InitializeComponent();
-            this.GetFromSettings();
+            this.GetDataFromSettings();
             this.SettingDrawFont.SetSampleControl(this.labelSample, "Font");
             this.SettingBackColor.SetSampleControl(this.labelSample, "BackColor");
             this.SettingForeColor.SetSampleControl(this.labelSample, "ForeColor");
@@ -64,6 +64,11 @@ namespace clockatt.Configration
                 this.SettingIsWeekWareki.Checked = false;
             }
             this.SettingIsWeekWareki.Enabled = this.SettingIsShowWeek.Checked;
+        }
+
+        private void ConfigClockForm_Load(object sender, EventArgs e)
+        {
+            RedrawSample();
         }
     }
 }
