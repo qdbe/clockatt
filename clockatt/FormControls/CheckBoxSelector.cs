@@ -61,5 +61,10 @@ namespace clockatt.FormControls
         {
             return typeof(bool);
         }
+
+        public override void SetDataToSettings(System.Configuration.SettingsBase setting)
+        {
+            setting.PropertyValues[this.SettingName].PropertyValue = this.chkBox.Checked;
+        }
     }
 }

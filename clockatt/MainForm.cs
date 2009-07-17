@@ -257,6 +257,7 @@ namespace clockatt
         private void SetTimeLabel()
         {
             DateTime nc = DateTime.Now;
+            System.Configuration.SettingsPropertyValue showYear = Properties.Settings.Default.PropertyValues["IsShowYear"];
             this.pDispString = TimeUtil.GetFormatDateTime(nc,
                 (bool)Properties.Settings.Default.PropertyValues["IsShowYear"].PropertyValue,
                 (bool)Properties.Settings.Default.PropertyValues["IsShowWeek"].PropertyValue,
