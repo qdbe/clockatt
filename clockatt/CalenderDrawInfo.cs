@@ -27,6 +27,8 @@ namespace clockatt
 
         public int DispMonth { get; set ; }
 
+        private Size pNeedSize;
+
         /// <summary>
         /// 初期化
         /// </summary>
@@ -44,19 +46,29 @@ namespace clockatt
         /// <param name="startY"></param>
         /// <param name="yearFont"></param>
         /// <returns></returns>
-        private int SetRectYearMonth(
+        private void SetRectYearMonth(
             int startX,
             int startY,
+            Graphics g,
             Font yearFont)
         {
             // 年＋月の位置
             this.headDrawPoint.X = startX;
             this.headDrawPoint.Y = startY;
 
-            return startY + yearFont.Height + 5;
+            string dispstr = string.Format("{0, 2}", 88);
+            
+            string dispString = string.Format("{0}年 {1}月",
+                2000,
+                12
+                );
+
+            SizeF strsize = g.MeasureString(dispstr, yearFont);
+            this.pNeedSize.Width = this.headDrawPoint.X + (int)strsize.Width + startX;
+            this.pNeedSize.Height = startY + yearFont.Height + 5;
         }
 
-        private int SetRectWeek(
+        private void SetRectWeek(
             int startX,
             int startY,
             Font weekFont)
@@ -72,8 +84,11 @@ namespace clockatt
 
                 x += charMargin;
             }
-
-            return startY += weekFont.Height + 0;
+            if (pNeedSize.Width < x )
+            {
+                pNeedSize.Width = x;
+            }
+            pNeedSize.Height = startY + weekFont.Height + 0;
         }
 
 
@@ -126,7 +141,7 @@ namespace clockatt
             return strsize;
         }
 
-        private Size SetRectDay(
+        private void SetRectDay(
             int startX,
             int startY,
             Font dayFont,
@@ -177,13 +192,13 @@ namespace clockatt
                     new Rectangle(x, y, (int)strsize.Width, (int)strsize.Height),
                     this.pHolidays);
 
-                if (needSize.Width < (x + (int)strsize.Width))
+                if (this.pNeedSize.Width < (x + (int)strsize.Width))
                 {
-                    needSize.Width = x + (int)strsize.Width;
+                    this.pNeedSize.Width = x + (int)strsize.Width;
                 }
-                if (needSize.Height < (y + (int)strsize.Height))
+                if (this.pNeedSize.Height < (y + (int)strsize.Height))
                 {
-                    needSize.Height = y + (int)strsize.Height;
+                    this.pNeedSize.Height = y + (int)strsize.Height;
                 }
 
 
@@ -195,10 +210,8 @@ namespace clockatt
                 x += charMargin;
             }
 
-            needSize.Width += startX;
-            needSize.Height += addHeight / 2;
-
-            return needSize;
+            this.pNeedSize.Width += startX;
+            this.pNeedSize.Height += addHeight / 2;
         }
 
 
@@ -224,21 +237,22 @@ namespace clockatt
             this.DispMonth = dispMonth;
             this.DispYear = dispYear;
 
-            Font basefont = new Font(this.Config.YearMonthFont.FontFamily.Name, this.Config.FontSize);
+            Font basefont = this.Config.YearMonthFont;
 
+            this.pNeedSize = new Size(0,0);
 
             // 年＋月の位置
-            int y = SetRectYearMonth(startX, startY, basefont);
+            SetRectYearMonth(startX, startY, g, basefont);
 
             // 曜日の位置
 
-            y = SetRectWeek(startX, y, basefont);
+            SetRectWeek(startX, this.pNeedSize.Height, basefont);
 
             // 日付の位置
 
-            Size needSize = SetRectDay(startX, y, basefont, panels, g);
+            SetRectDay(startX, this.pNeedSize.Height, basefont, panels, g);
 
-            return needSize;
+            return this.pNeedSize;
         }
 
         /// <summary>
@@ -249,7 +263,7 @@ namespace clockatt
         protected virtual void PaintYearMonth(Rectangle clip, Graphics g)
         {
 
-            Font yearMonthFont = new Font(this.Config.YearMonthFont.FontFamily.Name, this.Config.FontSize);
+            Font yearMonthFont = this.Config.YearMonthFont;
             System.Drawing.Brush yearMonthBrush = new System.Drawing.SolidBrush(this.Config.YearMonthColor);
 
             string dispString = string.Format("{0}年 {1}月",
@@ -268,7 +282,7 @@ namespace clockatt
         /// <param name="g"></param>
         protected virtual void PaintWeekDay(Rectangle clip, Graphics g)
         {
-            Font weekDayFont = new Font(this.Config.WeekFont.FontFamily.Name, this.Config.FontSize);
+            Font weekDayFont = this.Config.WeekFont;
             System.Drawing.Brush weekDayBrush = new System.Drawing.SolidBrush(this.Config.WeekColor);
             System.Drawing.Brush weekDayBrushSun = new System.Drawing.SolidBrush(this.Config.WeekSundayColor);
             System.Drawing.Brush weekDayBrushSat = new System.Drawing.SolidBrush(this.Config.WeekSaturndayColor);
@@ -292,7 +306,7 @@ namespace clockatt
 
         public void PaintDay(object sender, PaintEventArgs e)
         {
-            Font dayFont = new Font(this.Config.DayFont.FontFamily.Name, this.Config.FontSize);
+            Font dayFont = this.Config.DayFont;
 
             System.Drawing.Brush dayBrush = new System.Drawing.SolidBrush(this.Config.DayColor);
             System.Drawing.Brush dayBrushHolyDay = new System.Drawing.SolidBrush(this.Config.DayHolidayColor);
