@@ -11,13 +11,14 @@ namespace clockatt.FormControls
 {
     public partial class ConfigSelectorBase : UserControl
     {
+        public event EventHandler SamplePropertyChenged = null;
 
         protected object pSelectedValue;
 
-        private Control pSampleControl;
-        public Control SampleControl
+        private object pSampleObject;
+        public object SampleObject
         {
-            get { return pSampleControl; }
+            get { return pSampleObject; }
         }
 
         public string SettingName { get; set; }
@@ -38,25 +39,32 @@ namespace clockatt.FormControls
             return null;
         }
 
-        public void SetSampleControl(Control target, string targetProperty)
+        public void SetSampleObject(object target, string targetProperty)
         {
-            this.pSampleControl = target;
+            this.pSampleObject = target;
             this.pSampleProperty = targetProperty;
             this.SetSampleProperty(this.pSelectedValue);
         }
 
         public void SetSampleProperty(object setValue)
         {
-            if (this.pSampleControl == null)
+            if (this.SampleObject == null)
             {
                 return;
             }
-            PropertyInfo pi = this.pSampleControl.GetType().GetProperty(this.pSampleProperty);
+            PropertyInfo pi = this.SampleObject.GetType().GetProperty(this.pSampleProperty);
             Type ptype = this.GetSamplePropertyType();
             if( ptype.FullName == pi.PropertyType.FullName)
             {
-                pi.SetValue(this.pSampleControl, setValue, null);
-                this.pSampleControl.Invalidate(true);
+                pi.SetValue(this.SampleObject, setValue, null);
+                if (this.SampleObject is Control)
+                {
+                    ((Control)this.SampleObject).Invalidate(true);
+                }
+                if( SamplePropertyChenged != null )
+                {
+                    SamplePropertyChenged(this,new EventArgs());
+                }
             }
         }
 

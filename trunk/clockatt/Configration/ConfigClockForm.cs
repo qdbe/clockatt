@@ -20,9 +20,9 @@ namespace clockatt.Configration
         {
             InitializeComponent();
             this.GetDataFromSettings();
-            this.SettingDrawFont.SetSampleControl(this.labelSample, "Font");
-            this.SettingBackColor.SetSampleControl(this.labelSample, "BackColor");
-            this.SettingForeColor.SetSampleControl(this.labelSample, "ForeColor");
+            this.SettingDrawFont.SetSampleObject(this.labelSample, "Font");
+            this.SettingBackColor.SetSampleObject(this.labelSample, "BackColor");
+            this.SettingForeColor.SetSampleObject(this.labelSample, "ForeColor");
         }
 
         public override void RedrawSample()
