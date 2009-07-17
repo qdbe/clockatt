@@ -64,7 +64,7 @@ namespace clockatt
             }
         }
 
-        public static CalenderDayPanel[] CreatePanels(Form parents, DayPanelMouseDownEnventHandler mouseDownDay)
+        public static CalenderDayPanel[] CreatePanels(Control parents, DayPanelMouseDownEnventHandler mouseDownDay)
         {
             parents.SuspendLayout();
 

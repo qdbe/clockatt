@@ -46,14 +46,12 @@
             // 
             // btnApply
             // 
-            this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnApply.Location = new System.Drawing.Point(120, 244);
             this.btnApply.TabIndex = 11;
             this.btnApply.Visible = false;
             // 
             // btnOk
             // 
-            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOk.Location = new System.Drawing.Point(12, 244);
             this.btnOk.TabIndex = 10;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);

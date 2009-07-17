@@ -16,7 +16,7 @@ namespace clockatt
 {
     public partial class MainForm : Form
     {
-        private const int SizeMargin = 2;
+        private const int SizeMargin = 4;
         private int preHwnd = 0;
         private Rectangle preRect = Rectangle.Empty;
 
@@ -43,6 +43,7 @@ namespace clockatt
             pDrawBrush = new SolidBrush(this.ForeColor);
             InitializeComponent();
             this.Icon = clockatt.Properties.Resources.clockatt256;
+            this.SetTimeLabel();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -131,7 +132,12 @@ namespace clockatt
             DirectoryInfo executeDirectory = new DirectoryInfo((new FileInfo(Application.ExecutablePath)).DirectoryName);
 
             initHolidayConfig(executeDirectory);
-            Properties.Settings.Default.Reload();
+            if (Properties.Settings.Default.IsInitial == true)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.IsInitial = false;
+            }
+            ////Properties.Settings.Default.Reload();
             setTimeLabelDesign();
         }
 
@@ -257,7 +263,6 @@ namespace clockatt
         private void SetTimeLabel()
         {
             DateTime nc = DateTime.Now;
-            System.Configuration.SettingsPropertyValue showYear = Properties.Settings.Default.PropertyValues["IsShowYear"];
             this.pDispString = TimeUtil.GetFormatDateTime(nc,
                 (bool)Properties.Settings.Default.PropertyValues["IsShowYear"].PropertyValue,
                 (bool)Properties.Settings.Default.PropertyValues["IsShowWeek"].PropertyValue,
@@ -268,14 +273,21 @@ namespace clockatt
             Graphics g = Graphics.FromHwnd(this.Handle);
             SizeF newsize = g.MeasureString(this.pDispString, this.Font);
 
-            this.Invalidate();
+
+            newsize.Width += SizeMargin;
+            newsize.Height += SizeMargin;
 
             // 必要ならサイズを変更する
-            if (this.Width != newsize.Width)
+            if (this.Width != (int)newsize.Width)
             {
-                this.Width = (int)newsize.Width + SizeMargin;
+                this.Width = (int)newsize.Width;
+            }
+            if (this.Height != (int)newsize.Height)
+            {
+                this.Height = (int)newsize.Height;
             }
             this.taskInfoNotify.Text = this.pDispString;
+            this.Invalidate();
         }
 
 
@@ -313,7 +325,15 @@ namespace clockatt
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.SetClip(e.ClipRectangle);
-            e.Graphics.DrawString(this.pDispString, this.Font, this.pDrawBrush, 1, 1);
+            e.Graphics.DrawString(this.pDispString, this.Font, this.pDrawBrush, 2, 2);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Configration.ConfigCalendarForm dlg = new ConfigCalendarForm(Properties.Settings.Default);
+            if (dlg.ShowDialog(this) == DialogResult.OK)
+            {
+            }
         }
 
 

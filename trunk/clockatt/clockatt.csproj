@@ -74,12 +74,17 @@
     <Compile Include="CalenderForm.Designer.cs">
       <DependentUpon>CalenderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configration\ClockConfigration.cs" />
     <Compile Include="Configration\ConfigBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Configration\ConfigBaseForm.Designer.cs">
       <DependentUpon>ConfigBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configration\ConfigCalendarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configration\ConfigCalendarForm.Designer.cs">
+      <DependentUpon>ConfigCalendarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Configration\ConfigClockForm.cs">
       <SubType>Form</SubType>
@@ -145,6 +150,9 @@
     <EmbeddedResource Include="Configration\ConfigBaseForm.resx">
       <DependentUpon>ConfigBaseForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Configration\ConfigCalendarForm.resx">
+      <DependentUpon>ConfigCalendarForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configration\ConfigClockForm.resx">
       <DependentUpon>ConfigClockForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -194,12 +202,12 @@
   <ItemGroup>
     <PublishFile Include="clockAttIcon.ico">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

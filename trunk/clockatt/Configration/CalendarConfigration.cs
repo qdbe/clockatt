@@ -11,113 +11,94 @@ namespace clockatt.Configration
     /// <summary>
     /// カレンダーの設定値
     /// </summary>
-    [SettingsGroupName("Calendar")]
-    public class CalendarConfigration : ApplicationSettingsBase
+    public class CalendarConfigration
     {
         /// <summary>
         /// フォントサイズ
         /// </summary>
-        [UserScopedSetting()]
         public Color BackColor { get; set; }
 
         
         /// <summary>
-        /// フォントサイズ
-        /// </summary>
-        [UserScopedSetting()]
-        public float FontSize { get; set; }
-
-        /// <summary>
         /// フォント名
         /// </summary>
-        [UserScopedSetting()]
         public Font YearMonthFont { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
-        [UserScopedSetting()]
         public Color YearMonthColor { get; set; }
 
 
         /// <summary>
         /// フォント名
         /// </summary>
-        [UserScopedSetting()]
         public Font WeekFont { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
-        [UserScopedSetting()]
         public Color WeekColor { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
-        [UserScopedSetting()]
         public Color WeekSundayColor { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
-        [UserScopedSetting()]
         public Color WeekSaturndayColor { get; set; }
 
 
         /// <summary>
         /// フォント名
         /// </summary>
-        [UserScopedSetting()]
         public Font DayFont { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
-        [UserScopedSetting()]
         public Color DayColor { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
-        [UserScopedSetting()]
         public Color DaySundayColor { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
-        [UserScopedSetting()]
         public Color DaySaturndayColor { get; set; }
 
 
         /// <summary>
         /// フォント色
         /// </summary>
-        [UserScopedSetting()]
         public Color DayHolidayColor { get; set; }
 
         /// <summary>
         /// フォント色
         /// </summary>
-        [UserScopedSetting()]
         public Color DayTodayBackColor { get; set; }
+
+        private const int INITIAL_FONTSIZE = 10;
 
         public CalendarConfigration(System.Configuration.SettingsBase setting)
         {
             this.BackColor = (Color)setting.PropertyValues["Cal_BackColor"].PropertyValue;
-            this.FontSize = 12;
-            this.YearMonthFont = new Font("ＭＳ ゴシック", this.FontSize);
-            this.YearMonthColor = Color.Black;
-            this.WeekFont = new Font("ＭＳ ゴシック", this.FontSize);
-            this.WeekColor = Color.Black;
-            this.WeekSaturndayColor = Color.Blue;
-            this.WeekSundayColor = Color.Red;
-            this.DayFont = new Font("ＭＳ ゴシック", this.FontSize);
-            this.DayColor = Color.Black;
-            this.DayHolidayColor = Color.Red;
-            this.DaySaturndayColor = Color.Blue;
-            this.DaySundayColor = Color.Red;
-            this.DayTodayBackColor = Color.Aqua;
+            this.YearMonthFont = (Font)setting.PropertyValues["Cal_YearMonthFont"].PropertyValue;
+            this.YearMonthColor = (Color)setting.PropertyValues["Cal_YearMonthColor"].PropertyValue; ;
+            this.WeekFont = (Font)setting.PropertyValues["Cal_WeekFont"].PropertyValue;
+            this.WeekColor = (Color)setting.PropertyValues["Cal_WeekColor"].PropertyValue; ; ;
+            this.WeekSaturndayColor = (Color)setting.PropertyValues["Cal_WeekSaturndayColor"].PropertyValue; ; ;
+            this.WeekSundayColor = (Color)setting.PropertyValues["Cal_WeekSundayColor"].PropertyValue; ; ;
+            this.DayFont = (Font)setting.PropertyValues["Cal_DayFont"].PropertyValue;
+            this.DayColor = (Color)setting.PropertyValues["Cal_DayColor"].PropertyValue; ; ;
+            this.DayHolidayColor = (Color)setting.PropertyValues["Cal_DayHolidayColor"].PropertyValue; ; ;
+            this.DaySaturndayColor = (Color)setting.PropertyValues["Cal_DaySaturndayColor"].PropertyValue; ; ;
+            this.DaySundayColor = (Color)setting.PropertyValues["Cal_DaySundayColor"].PropertyValue; ; ;
+            this.DayTodayBackColor = (Color)setting.PropertyValues["Cal_DayTodayBackColor"].PropertyValue; ; ;
         }
     }
 }

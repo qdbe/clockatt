@@ -33,16 +33,16 @@
       <Value Profile="(Default)">LightSteelBlue</Value>
     </Setting>
     <Setting Name="Cal_Font" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">MS UI Gothic, 9pt</Value>
+      <Value Profile="(Default)">MS UI Gothic, 12pt</Value>
     </Setting>
     <Setting Name="Cal_YearMonthFont" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">MS UI Gothic, 9pt</Value>
+      <Value Profile="(Default)">MS UI Gothic, 12pt</Value>
     </Setting>
     <Setting Name="Cal_YearMonthColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="Cal_WeekFont" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">MS UI Gothic, 9pt</Value>
+      <Value Profile="(Default)">MS UI Gothic, 12pt</Value>
     </Setting>
     <Setting Name="Cal_WeekColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
@@ -54,7 +54,7 @@
       <Value Profile="(Default)">Red</Value>
     </Setting>
     <Setting Name="Cal_DayFont" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">MS UI Gothic, 9pt</Value>
+      <Value Profile="(Default)">MS UI Gothic, 12pt</Value>
     </Setting>
     <Setting Name="Cal_DayColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
@@ -70,6 +70,9 @@
     </Setting>
     <Setting Name="Cal_DayTodayBackColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Aqua</Value>
+    </Setting>
+    <Setting Name="IsInitial" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

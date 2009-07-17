@@ -43,7 +43,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = global::clockatt.Properties.Settings.Default.Cal_BackColor;
-            this.ClientSize = new System.Drawing.Size(178, 180);
+            this.ClientSize = new System.Drawing.Size(178, 208);
             this.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::clockatt.Properties.Settings.Default, "Cal_BackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::clockatt.Properties.Settings.Default, "Cal_Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::clockatt.Properties.Settings.Default, "Cal_ForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
