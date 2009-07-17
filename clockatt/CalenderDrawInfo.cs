@@ -223,14 +223,12 @@ namespace clockatt
         /// <param name="startY"></param>
         /// <param name="dispYear"></param>
         /// <param name="dispMonth"></param>
-        /// <param name="fontSize"></param>
         /// <param name="g"></param>
         public virtual Size SetRect(
             int startX, 
             int startY, 
             int dispYear, 
             int dispMonth, 
-            int fontSize,
             CalenderDayPanel []panels,
             Graphics g)
         {

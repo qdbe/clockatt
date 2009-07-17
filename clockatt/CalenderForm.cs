@@ -20,8 +20,6 @@ namespace clockatt
 
         private Form callerForm;
 
-        private int fontSize = 12;
-
         private HolidayConfigCollection[] pHolidays;
 
         private CalenderDrawInfo dayInfos;
@@ -43,8 +41,12 @@ namespace clockatt
             this.pHolidays = holidays;
             this.dayInfos = new CalenderDrawInfo(this.pHolidays, this.Config);
             this.dayPanes = CalenderDayPanel.CreatePanels(this, new CalenderDayPanel.DayPanelMouseDownEnventHandler(DoMouseClick));
-            Size needSize = dayInfos.SetRect(StartLeft, StartTop, this.DispYear, this.DispMonth, this.fontSize,
-                dayPanes,
+            Size needSize = dayInfos.SetRect(
+                StartLeft, 
+                StartTop, 
+                this.DispYear, 
+                this.DispMonth, 
+                dayPanes, 
                 this.CreateGraphics());
             this.Size = needSize;
             ResetPos(needSize);
@@ -110,7 +112,11 @@ namespace clockatt
             this.DispMonth = dt.Month;
             this.DispYear = dt.Year;
 
-            Size needSize = dayInfos.SetRect(StartLeft, StartTop, this.DispYear, this.DispMonth, this.fontSize,
+            Size needSize = dayInfos.SetRect(
+                StartLeft, 
+                StartTop, 
+                this.DispYear, 
+                this.DispMonth, 
                 this.dayPanes,
                 this.CreateGraphics());
             this.Size = needSize;

@@ -86,6 +86,11 @@ namespace clockatt.Configration
 
         public CalendarConfigration(System.Configuration.SettingsBase setting)
         {
+            this.SetSettingValue(setting);
+        }
+
+        public void SetSettingValue(System.Configuration.SettingsBase setting)
+        {
             this.BackColor = (Color)setting.PropertyValues["Cal_BackColor"].PropertyValue;
             this.YearMonthFont = (Font)setting.PropertyValues["Cal_YearMonthFont"].PropertyValue;
             this.YearMonthColor = (Color)setting.PropertyValues["Cal_YearMonthColor"].PropertyValue; ;
