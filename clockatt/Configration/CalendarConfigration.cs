@@ -93,17 +93,17 @@ namespace clockatt.Configration
         {
             this.BackColor = (Color)setting.PropertyValues["Cal_BackColor"].PropertyValue;
             this.YearMonthFont = (Font)setting.PropertyValues["Cal_YearMonthFont"].PropertyValue;
-            this.YearMonthColor = (Color)setting.PropertyValues["Cal_YearMonthColor"].PropertyValue; ;
+            this.YearMonthColor = (Color)setting.PropertyValues["Cal_YearMonthColor"].PropertyValue;
             this.WeekFont = (Font)setting.PropertyValues["Cal_WeekFont"].PropertyValue;
-            this.WeekColor = (Color)setting.PropertyValues["Cal_WeekColor"].PropertyValue; ; ;
-            this.WeekSaturndayColor = (Color)setting.PropertyValues["Cal_WeekSaturndayColor"].PropertyValue; ; ;
-            this.WeekSundayColor = (Color)setting.PropertyValues["Cal_WeekSundayColor"].PropertyValue; ; ;
+            this.WeekColor = (Color)setting.PropertyValues["Cal_WeekColor"].PropertyValue; ;
+            this.WeekSaturndayColor = (Color)setting.PropertyValues["Cal_WeekSaturndayColor"].PropertyValue;
+            this.WeekSundayColor = (Color)setting.PropertyValues["Cal_WeekSundayColor"].PropertyValue;
             this.DayFont = (Font)setting.PropertyValues["Cal_DayFont"].PropertyValue;
-            this.DayColor = (Color)setting.PropertyValues["Cal_DayColor"].PropertyValue; ; ;
-            this.DayHolidayColor = (Color)setting.PropertyValues["Cal_DayHolidayColor"].PropertyValue; ; ;
-            this.DaySaturndayColor = (Color)setting.PropertyValues["Cal_DaySaturndayColor"].PropertyValue; ; ;
-            this.DaySundayColor = (Color)setting.PropertyValues["Cal_DaySundayColor"].PropertyValue; ; ;
-            this.DayTodayBackColor = (Color)setting.PropertyValues["Cal_DayTodayBackColor"].PropertyValue; ; ;
+            this.DayColor = (Color)setting.PropertyValues["Cal_DayColor"].PropertyValue;
+            this.DayHolidayColor = (Color)setting.PropertyValues["Cal_DayHolidayColor"].PropertyValue;
+            this.DaySaturndayColor = (Color)setting.PropertyValues["Cal_DaySaturndayColor"].PropertyValue;
+            this.DaySundayColor = (Color)setting.PropertyValues["Cal_DaySundayColor"].PropertyValue;
+            this.DayTodayBackColor = (Color)setting.PropertyValues["Cal_DayTodayBackColor"].PropertyValue;
         }
     }
 }

@@ -51,6 +51,7 @@
             // 
             this.txtColorName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtColorName.ForeColor = System.Drawing.SystemColors.WindowText;
             this.txtColorName.Location = new System.Drawing.Point(0, 0);
             this.txtColorName.Name = "txtColorName";
             this.txtColorName.ReadOnly = true;

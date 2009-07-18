@@ -13,6 +13,7 @@ namespace clockatt.Configration
     {
         private CalendarConfigration dispConfig;
         private CalenderDrawInfo dayInfos;
+        private CalenderDayPanel[] daypanels;
 
         public ConfigCalendarForm()
         {
@@ -50,7 +51,13 @@ namespace clockatt.Configration
 
         void selector_SamplePropertyChenged(object sender, EventArgs e)
         {
-            this.samplePanel.Invalidate();
+            Size needSize = dayInfos.SetRect(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
+                this.samplePanel.CreateGraphics());
+            int diffHeight = needSize.Height - this.samplePanel.Height;
+            this.Height += diffHeight;
+            this.samplePanel.Width = needSize.Width;
+            this.samplePanel.Height = needSize.Height;
+            this.Invalidate(true);
         }
 
         void samplePanel_Paint(object sender, PaintEventArgs e)
@@ -62,7 +69,7 @@ namespace clockatt.Configration
         private void SetSamplePanel(HolidayConfigCollection[] holidays)
         {
             dayInfos = new CalenderDrawInfo(holidays, this.dispConfig);
-            CalenderDayPanel[] daypanels = CalenderDayPanel.CreatePanels(this.samplePanel, new CalenderDayPanel.DayPanelMouseDownEnventHandler(dummy_MouseDown));
+            daypanels = CalenderDayPanel.CreatePanels(this.samplePanel, new CalenderDayPanel.DayPanelMouseDownEnventHandler(dummy_MouseDown));
             Size needSize = dayInfos.SetRect(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
                 this.samplePanel.CreateGraphics() );
             this.samplePanel.Width = needSize.Width;
@@ -85,7 +92,7 @@ namespace clockatt.Configration
 
         public override void RedrawSample()
         {
-            this.samplePanel.Invalidate();
+            this.samplePanel.Invalidate(true);
         }
 
     }

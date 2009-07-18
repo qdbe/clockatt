@@ -56,22 +56,24 @@ namespace clockatt
             this.headDrawPoint.X = startX;
             this.headDrawPoint.Y = startY;
 
-            string dispstr = string.Format("{0, 2}", 88);
-            
             string dispString = string.Format("{0}年 {1}月",
                 2000,
                 12
                 );
 
-            SizeF strsize = g.MeasureString(dispstr, yearFont);
-            this.pNeedSize.Width = this.headDrawPoint.X + (int)strsize.Width + startX;
+            SizeF strsize = g.MeasureString(dispString, yearFont);
+            if (this.pNeedSize.Width < (startX + (int)strsize.Width + startX))
+            {
+                this.pNeedSize.Width = (startX + (int)strsize.Width + startX);
+            }
             this.pNeedSize.Height = startY + yearFont.Height + 5;
         }
 
         private void SetRectWeek(
             int startX,
             int startY,
-            Font weekFont)
+            Font weekFont,
+            Graphics g)
         {
             int charMargin = weekFont.Height + 5 + this.margin;
 
@@ -84,11 +86,14 @@ namespace clockatt
 
                 x += charMargin;
             }
-            if (pNeedSize.Width < x )
+            SizeF strsize = g.MeasureString("日", weekFont);
+
+            if (this.pNeedSize.Width < (x + startX))
             {
-                pNeedSize.Width = x;
+                this.pNeedSize.Width = x + startX;
             }
-            pNeedSize.Height = startY + weekFont.Height + 0;
+
+            pNeedSize.Height += (int)strsize.Height + 5;
         }
 
 
@@ -166,7 +171,7 @@ namespace clockatt
 
             this.Clear();
 
-            Size needSize = new Size(startX,startY);
+//            Size needSize = new Size(startX,startY);
 
             int maxDate = DateTime.DaysInMonth(this.DispYear, this.DispMonth);
             for (int j = 0; j < panels.Length; j++)
@@ -235,20 +240,18 @@ namespace clockatt
             this.DispMonth = dispMonth;
             this.DispYear = dispYear;
 
-            Font basefont = this.Config.YearMonthFont;
-
             this.pNeedSize = new Size(0,0);
 
             // 年＋月の位置
-            SetRectYearMonth(startX, startY, g, basefont);
+            SetRectYearMonth(startX, startY, g, this.Config.YearMonthFont);
 
             // 曜日の位置
 
-            SetRectWeek(startX, this.pNeedSize.Height, basefont);
+            SetRectWeek(startX, this.pNeedSize.Height, this.Config.WeekFont, g);
 
             // 日付の位置
 
-            SetRectDay(startX, this.pNeedSize.Height, basefont, panels, g);
+            SetRectDay(startX, this.pNeedSize.Height, this.Config.DayFont, panels, g);
 
             return this.pNeedSize;
         }
@@ -316,10 +319,14 @@ namespace clockatt
 
             Brush charBrush = dayBrush;
             CalenderDayInfo cdi = ((CalenderDayPanel)sender).DayInfo;
+            System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString());
+
+
             System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " Paint Happend");
             if (cdi.IsToday == true)
             {
                 ((CalenderDayPanel)sender).BackColor = this.Config.DayTodayBackColor;
+                System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + (new System.Diagnostics.StackTrace()).ToString());
             }
             else
             {
@@ -328,7 +335,7 @@ namespace clockatt
 
             if (cdi.IsHoliday == true)
             {
-                charBrush = dayBrushSun;
+                charBrush = dayBrushHolyDay;
                 System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " is Holiday");
             }
             else if (cdi.IsSunday == true)

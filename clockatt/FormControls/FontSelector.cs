@@ -29,7 +29,7 @@ namespace clockatt.FormControls
                 throw new ArgumentException(value.GetType().Name + "は引数にセットできません");
             }
             pSelectedValue = value;
-            this.txtFontName.Text = ((Font)pSelectedValue).Name;
+            this.txtFontName.Text = ((Font)pSelectedValue).Name + ", " + ((Font)pSelectedValue).SizeInPoints.ToString() + "Point";
             this.toolTip1.SetToolTip(this.txtFontName, this.txtFontName.Text);
             this.SetSampleProperty(this.pSelectedValue);
         }
