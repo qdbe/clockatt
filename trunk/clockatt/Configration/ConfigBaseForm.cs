@@ -50,6 +50,18 @@ namespace clockatt.Configration
             }
         }
 
+        protected virtual void GetDefaultDataFromSettings()
+        {
+            foreach (Control con in this.Controls)
+            {
+                if (con is ConfigSelectorBase)
+                {
+                    ConfigSelectorBase selecor = (ConfigSelectorBase)con;
+                    selecor.GetDefaultDataFromSettings(this.SettingData);
+                }
+            }
+        }
+
         protected virtual void SetDataToSettings()
         {
             foreach (Control con in this.Controls)
@@ -74,6 +86,16 @@ namespace clockatt.Configration
 
         public virtual void RedrawSample()
         {
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            this.GetDataFromSettings();
+        }
+
+        private void btnDefault_Click(object sender, EventArgs e)
+        {
+            this.GetDefaultDataFromSettings();
         }
 
     }

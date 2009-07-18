@@ -131,16 +131,6 @@ namespace clockatt
             this.Close();
         }
 
-        private void CalenderForm_MouseMove(object sender, MouseEventArgs e)
-        {
-            ChangeToolTip(e.X, e.Y);
-        }
-
-        private void ChangeToolTip(int x, int y)
-        {
-            this.dayToolTip.SetToolTip(this, string.Empty);
-        }
-
         private void CalenderForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)

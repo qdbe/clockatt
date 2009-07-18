@@ -70,5 +70,10 @@ namespace clockatt.Configration
         {
             RedrawSample();
         }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

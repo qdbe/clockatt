@@ -78,6 +78,11 @@ namespace clockatt.FormControls
             this.SetValue(setting.PropertyValues[this.SettingName].PropertyValue);
         }
 
+        public virtual void GetDefaultDataFromSettings(System.Configuration.SettingsBase setting)
+        {
+            this.SetValue(setting.PropertyValues[this.SettingName].Property.DefaultValue);
+        }
+
         public virtual void SetDataToSettings(System.Configuration.SettingsBase setting)
         {
             setting.PropertyValues[this.SettingName].PropertyValue = this.pSelectedValue;

@@ -58,21 +58,26 @@
             SeeingWeekFont = new clockatt.FormControls.FontSelector();
             this.SuspendLayout();
             // 
-            // btnApply
+            // btnReset
             // 
-            this.btnApply.Location = new System.Drawing.Point(117, 481);
-            this.btnApply.TabIndex = 15;
+            this.btnReset.Location = new System.Drawing.Point(117, 424);
+            this.btnReset.TabIndex = 15;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(9, 481);
+            this.btnOk.Location = new System.Drawing.Point(9, 424);
             this.btnOk.TabIndex = 14;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(574, 481);
+            this.btnCancel.Location = new System.Drawing.Point(574, 424);
             this.btnCancel.TabIndex = 16;
+            // 
+            // btnDefault
+            // 
+            this.btnDefault.Location = new System.Drawing.Point(224, 424);
+            this.btnDefault.TabIndex = 15;
             // 
             // SeeingWeekFont
             // 
@@ -264,9 +269,9 @@
             // samplePanel
             // 
             this.samplePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.samplePanel.Location = new System.Drawing.Point(192, 250);
+            this.samplePanel.Location = new System.Drawing.Point(40, 248);
             this.samplePanel.Name = "samplePanel";
-            this.samplePanel.Size = new System.Drawing.Size(295, 213);
+            this.samplePanel.Size = new System.Drawing.Size(196, 164);
             this.samplePanel.TabIndex = 13;
             // 
             // SettingDayHolidayColor
@@ -308,7 +313,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(681, 513);
+            this.ClientSize = new System.Drawing.Size(681, 456);
             this.Controls.Add(this.samplePanel);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -357,8 +362,9 @@
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.SettingYearMonthFont, 0);
             this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.btnApply, 0);
+            this.Controls.SetChildIndex(this.btnReset, 0);
             this.Controls.SetChildIndex(this.btnOk, 0);
+            this.Controls.SetChildIndex(this.btnDefault, 0);
             this.Controls.SetChildIndex(SeeingWeekFont, 0);
             this.Controls.SetChildIndex(this.SettingBackColor, 0);
             this.Controls.SetChildIndex(this.SettingDayHolidayColor, 0);

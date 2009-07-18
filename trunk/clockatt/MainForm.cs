@@ -331,9 +331,7 @@ namespace clockatt
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Configration.ConfigCalendarForm dlg = new ConfigCalendarForm(Properties.Settings.Default, this.pHolidaySettings);
-            if (dlg.ShowDialog(this) == DialogResult.OK)
-            {
-            }
+            dlg.ShowDialog(this);
         }
 
 

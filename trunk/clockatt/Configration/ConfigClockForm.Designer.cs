@@ -44,11 +44,10 @@
             this.grpSampleDisplay.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnApply
+            // btnReset
             // 
-            this.btnApply.Location = new System.Drawing.Point(120, 244);
-            this.btnApply.TabIndex = 11;
-            this.btnApply.Visible = false;
+            this.btnReset.Location = new System.Drawing.Point(120, 244);
+            this.btnReset.TabIndex = 11;
             // 
             // btnOk
             // 
@@ -62,6 +61,11 @@
             this.btnCancel.CausesValidation = false;
             this.btnCancel.Location = new System.Drawing.Point(392, 244);
             this.btnCancel.TabIndex = 12;
+            // 
+            // btnDefault
+            // 
+            this.btnDefault.Location = new System.Drawing.Point(228, 244);
+            this.btnDefault.TabIndex = 11;
             // 
             // grpSampleDisplay
             // 
@@ -218,10 +222,11 @@
             this.Controls.SetChildIndex(this.SettingIsShowWeek, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.grpSampleDisplay, 0);
+            this.Controls.SetChildIndex(this.btnDefault, 0);
             this.Controls.SetChildIndex(this.SettingDrawFont, 0);
             this.Controls.SetChildIndex(this.SettingForeColor, 0);
             this.Controls.SetChildIndex(this.SettingBackColor, 0);
-            this.Controls.SetChildIndex(this.btnApply, 0);
+            this.Controls.SetChildIndex(this.btnReset, 0);
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnCancel, 0);
             this.grpSampleDisplay.ResumeLayout(false);
