@@ -24,7 +24,7 @@ namespace clockatt.Configration
             : base(settings)
         {
             InitializeComponent();
-            this.GetDataFromSettings();
+            this.GetDataFromSettings(this);
             this.SettingBackColor.SetSampleObject(this.samplePanel, "BackColor");
             this.dispConfig = new CalendarConfigration(settings);
 
@@ -84,7 +84,7 @@ namespace clockatt.Configration
         {
             if (this.ValidateChildren() == true)
             {
-                this.SetDataToSettings();
+                this.SetDataToSettings(this);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

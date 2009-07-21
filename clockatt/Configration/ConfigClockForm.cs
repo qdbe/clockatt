@@ -19,7 +19,7 @@ namespace clockatt.Configration
         public ConfigClockForm(System.Configuration.SettingsBase settings) : base(settings)
         {
             InitializeComponent();
-            this.GetDataFromSettings();
+            this.GetDataFromSettings(this);
             this.SettingDrawFont.SetSampleObject(this.labelSample, "Font");
             this.SettingBackColor.SetSampleObject(this.labelSample, "BackColor");
             this.SettingForeColor.SetSampleObject(this.labelSample, "ForeColor");
@@ -42,7 +42,7 @@ namespace clockatt.Configration
         {
             if (this.ValidateChildren() == true)
             {
-                this.SetDataToSettings();
+                this.SetDataToSettings(this);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

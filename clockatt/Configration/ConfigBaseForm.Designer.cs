@@ -39,9 +39,9 @@
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnReset.Location = new System.Drawing.Point(120, 280);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.Size = new System.Drawing.Size(140, 23);
             this.btnReset.TabIndex = 1;
-            this.btnReset.Text = "リセット(&R)";
+            this.btnReset.Text = "今回の変更を元に戻す(&R)";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
@@ -59,7 +59,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(392, 280);
+            this.btnCancel.Location = new System.Drawing.Point(505, 280);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(87, 23);
             this.btnCancel.TabIndex = 3;
@@ -69,14 +69,12 @@
             // btnDefault
             // 
             this.btnDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDefault.Enabled = false;
-            this.btnDefault.Location = new System.Drawing.Point(216, 280);
+            this.btnDefault.Location = new System.Drawing.Point(276, 280);
             this.btnDefault.Name = "btnDefault";
-            this.btnDefault.Size = new System.Drawing.Size(104, 23);
+            this.btnDefault.Size = new System.Drawing.Size(138, 23);
             this.btnDefault.TabIndex = 2;
-            this.btnDefault.Text = "規定値に戻す(&D)";
+            this.btnDefault.Text = "規定値に戻して閉じる(&D)";
             this.btnDefault.UseVisualStyleBackColor = true;
-            this.btnDefault.Visible = false;
             this.btnDefault.Click += new System.EventHandler(this.btnDefault_Click);
             // 
             // ConfigBaseForm
@@ -85,7 +83,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(499, 312);
+            this.ClientSize = new System.Drawing.Size(612, 312);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnDefault);

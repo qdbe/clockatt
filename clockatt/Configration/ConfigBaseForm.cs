@@ -33,14 +33,18 @@ namespace clockatt.Configration
         {
         }
 
-        protected virtual void GetDataFromSettings()
+        protected virtual void GetDataFromSettings(Control parent)
         {
-            foreach (Control con in this.Controls)
+            foreach (Control con in parent.Controls)
             {
                 if (con is ConfigSelectorBase)
                 {
                     ConfigSelectorBase selecor = (ConfigSelectorBase)con;
                     selecor.GetDataFromSettings(this.SettingData);
+                }
+                else if (con.Controls.Count > 0)
+                {
+                    GetDataFromSettings(con);
                 }
 
                 if (con is CheckBoxSelector)
@@ -50,28 +54,36 @@ namespace clockatt.Configration
             }
         }
 
-        protected virtual void GetDefaultDataFromSettings()
+        protected virtual void GetDefaultDataFromSettings(Control parent)
         {
-            Properties.Settings defset = new clockatt.Properties.Settings();
+            Properties.Settings defset = Properties.Settings.Default;
             defset.Reset();
-            foreach (Control con in this.Controls)
+            foreach (Control con in parent.Controls)
             {
                 if (con is ConfigSelectorBase)
                 {
                     ConfigSelectorBase selecor = (ConfigSelectorBase)con;
                     selecor.GetDataFromSettings(defset);
                 }
+                else if (con.Controls.Count > 0)
+                {
+                    GetDefaultDataFromSettings(con);
+                }
             }
         }
 
-        protected virtual void SetDataToSettings()
+        protected virtual void SetDataToSettings(Control parent)
         {
-            foreach (Control con in this.Controls)
+            foreach (Control con in parent.Controls)
             {
                 if (con is ConfigSelectorBase)
                 {
                     ConfigSelectorBase selecor = (ConfigSelectorBase)con;
                     selecor.SetDataToSettings(this.SettingData);
+                }
+                else if (con.Controls.Count > 0)
+                {
+                    SetDataToSettings(con);
                 }
             }
         }
@@ -92,13 +104,17 @@ namespace clockatt.Configration
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            this.GetDataFromSettings();
+            this.GetDataFromSettings(this);
         }
 
         private void btnDefault_Click(object sender, EventArgs e)
         {
-            this.GetDefaultDataFromSettings();
-
+            if( MessageBox.Show(this,"設定を既定値に戻してよろしいですか？","",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes )
+            {
+                this.GetDefaultDataFromSettings(this);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
     }
