@@ -69,12 +69,14 @@
             // btnDefault
             // 
             this.btnDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDefault.Enabled = false;
             this.btnDefault.Location = new System.Drawing.Point(216, 280);
             this.btnDefault.Name = "btnDefault";
             this.btnDefault.Size = new System.Drawing.Size(104, 23);
             this.btnDefault.TabIndex = 2;
             this.btnDefault.Text = "規定値に戻す(&D)";
             this.btnDefault.UseVisualStyleBackColor = true;
+            this.btnDefault.Visible = false;
             this.btnDefault.Click += new System.EventHandler(this.btnDefault_Click);
             // 
             // ConfigBaseForm
