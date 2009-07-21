@@ -308,7 +308,15 @@ namespace clockatt
 
         void miConfigClock_Click(object sender, System.EventArgs e)
         {
-            Configration.ConfigClockForm dlg = new ConfigClockForm(Properties.Settings.Default);
+            //Configration.ConfigClockForm dlg = new ConfigClockForm(Properties.Settings.Default);
+            //if (dlg.ShowDialog(this) == DialogResult.OK)
+            //{
+            //    this.SetTimeLabel();
+            //    setTimeLabelDesign();
+            //}
+
+
+            Configration.ConfigrationDlg dlg = new ConfigrationDlg(Properties.Settings.Default, this.pHolidaySettings);
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 this.SetTimeLabel();

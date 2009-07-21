@@ -33,9 +33,8 @@
             this.LocateTimer = new System.Windows.Forms.Timer(this.components);
             this.taskInfoNotify = new System.Windows.Forms.NotifyIcon(this.components);
             this.RightClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miConfigClock = new System.Windows.Forms.ToolStripMenuItem();
+            this.miConfigration = new System.Windows.Forms.ToolStripMenuItem();
             this.miQuit = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.RightClickMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,35 +56,27 @@
             // RightClickMenu
             // 
             this.RightClickMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miConfigClock,
-            this.toolStripMenuItem1,
+            this.miConfigration,
             this.miQuit});
             this.RightClickMenu.Name = "RightClickMenu";
             this.RightClickMenu.ShowImageMargin = false;
-            this.RightClickMenu.Size = new System.Drawing.Size(156, 92);
+            this.RightClickMenu.Size = new System.Drawing.Size(128, 70);
             // 
-            // miConfigClock
+            // miConfigration
             // 
-            this.miConfigClock.Name = "miConfigClock";
-            this.miConfigClock.Size = new System.Drawing.Size(155, 22);
-            this.miConfigClock.Text = "時計表示設定(&T)";
-            this.miConfigClock.Click += new System.EventHandler(this.miConfigClock_Click);
+            this.miConfigration.Name = "miConfigration";
+            this.miConfigration.Size = new System.Drawing.Size(127, 22);
+            this.miConfigration.Text = "設定(&C)";
+            this.miConfigration.Click += new System.EventHandler(this.miConfigClock_Click);
             // 
             // miQuit
             // 
             this.miQuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.miQuit.Name = "miQuit";
             this.miQuit.ShortcutKeyDisplayString = "";
-            this.miQuit.Size = new System.Drawing.Size(155, 22);
+            this.miQuit.Size = new System.Drawing.Size(127, 22);
             this.miQuit.Text = "終了(&Q)";
             this.miQuit.Click += new System.EventHandler(this.miQuit_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(155, 22);
-            this.toolStripMenuItem1.Text = "カレンダー表示設定(&C)";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // MainForm
             // 
@@ -109,7 +100,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "MainForm";
             this.TopMost = true;
-            this.TransparencyKey = System.Drawing.Color.White;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseClick);
             this.RightClickMenu.ResumeLayout(false);
@@ -125,7 +115,6 @@
         private System.Windows.Forms.NotifyIcon taskInfoNotify;
         private System.Windows.Forms.ContextMenuStrip RightClickMenu;
         private System.Windows.Forms.ToolStripMenuItem miQuit;
-        private System.Windows.Forms.ToolStripMenuItem miConfigClock;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem miConfigration;
     }
 }
