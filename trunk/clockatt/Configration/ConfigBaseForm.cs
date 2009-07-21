@@ -52,12 +52,14 @@ namespace clockatt.Configration
 
         protected virtual void GetDefaultDataFromSettings()
         {
+            Properties.Settings defset = new clockatt.Properties.Settings();
+            defset.Reset();
             foreach (Control con in this.Controls)
             {
                 if (con is ConfigSelectorBase)
                 {
                     ConfigSelectorBase selecor = (ConfigSelectorBase)con;
-                    selecor.GetDefaultDataFromSettings(this.SettingData);
+                    selecor.GetDataFromSettings(defset);
                 }
             }
         }
@@ -96,6 +98,7 @@ namespace clockatt.Configration
         private void btnDefault_Click(object sender, EventArgs e)
         {
             this.GetDefaultDataFromSettings();
+
         }
 
     }
