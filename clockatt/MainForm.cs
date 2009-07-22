@@ -225,7 +225,7 @@ namespace clockatt
                 else{
                     this.Show();
                 }
-                this.Location = new Point(leftposx, info.rcWindow.top + 3);
+                this.Location = new Point(leftposx, info.rcWindow.top + 4);
                 this.Height = newheight;
 
                 this.preHwnd = hwnd;
