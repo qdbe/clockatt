@@ -80,7 +80,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(120, 454);
+            this.btnReset.Location = new System.Drawing.Point(121, 454);
             this.btnReset.TabIndex = 2;
             // 
             // btnOk
@@ -96,7 +96,7 @@
             // 
             // btnDefault
             // 
-            this.btnDefault.Location = new System.Drawing.Point(248, 454);
+            this.btnDefault.Location = new System.Drawing.Point(276, 454);
             this.btnDefault.TabIndex = 3;
             // 
             // CalWeekFont
@@ -114,6 +114,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.configTabs.Controls.Add(this.clockTab);
             this.configTabs.Controls.Add(this.calendarTab);
+            this.configTabs.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.configTabs.Location = new System.Drawing.Point(25, 12);
             this.configTabs.Name = "configTabs";
             this.configTabs.SelectedIndex = 0;
@@ -531,7 +532,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfigrationDlg";
-            this.TransparencyKey = System.Drawing.Color.Empty;
             this.Load += new System.EventHandler(this.ConfigrationDlg_Load);
             this.Controls.SetChildIndex(this.configTabs, 0);
             this.Controls.SetChildIndex(this.btnReset, 0);
