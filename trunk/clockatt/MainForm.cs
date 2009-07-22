@@ -28,6 +28,8 @@ namespace clockatt
 
         private Brush pDrawBrush;
 
+        private TitileHistoryLogger logger = new TitileHistoryLogger();
+
         public string DispString
         {
             get { return pDispString; }
@@ -185,6 +187,15 @@ namespace clockatt
             bool ret = W32Native.GetWindowInfo((IntPtr)hwnd, ref info);
             if (ret == true)
             {
+                if (Properties.Settings.Default.IsLogTitleHistory == true)
+                {
+                    StringBuilder titleSb = new StringBuilder(200);
+                    W32Native.GetWindowText(hwnd, titleSb, 100);
+                    logger.LogOutput(Properties.Settings.Default.TitleHistoryLogRetainDay,
+                        Properties.Settings.Default.TitleHistoryLogDir,
+                        titleSb.ToString());
+                }
+
                 W32Native.wTITLEBARINFO tbi = new W32Native.wTITLEBARINFO();
                 tbi.cbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(tbi);
                 bool result = W32Native.GetTitleBarInfo((IntPtr)hwnd, ref tbi);
@@ -308,14 +319,6 @@ namespace clockatt
 
         void miConfigClock_Click(object sender, System.EventArgs e)
         {
-            //Configration.ConfigClockForm dlg = new ConfigClockForm(Properties.Settings.Default);
-            //if (dlg.ShowDialog(this) == DialogResult.OK)
-            //{
-            //    this.SetTimeLabel();
-            //    setTimeLabelDesign();
-            //}
-
-
             Configration.ConfigrationDlg dlg = new ConfigrationDlg(Properties.Settings.Default, this.pHolidaySettings);
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {

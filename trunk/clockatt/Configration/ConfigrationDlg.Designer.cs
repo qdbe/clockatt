@@ -71,11 +71,19 @@
             this.label8 = new System.Windows.Forms.Label();
             this.CalWeekSundayColor = new clockatt.FormControls.ColorSelector();
             this.CalDaySundayColor = new clockatt.FormControls.ColorSelector();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.LogIsLogTitleHistory = new clockatt.FormControls.CheckBoxSelector();
+            this.LogTitleHistoryLogDir = new clockatt.FormControls.FolderSelector();
+            this.LogTitleHistoryLogRetainDay = new clockatt.FormControls.NumSelector();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             CalWeekFont = new clockatt.FormControls.FontSelector();
             this.configTabs.SuspendLayout();
             this.clockTab.SuspendLayout();
             this.grpSampleDisplay.SuspendLayout();
             this.calendarTab.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnReset
@@ -114,6 +122,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.configTabs.Controls.Add(this.clockTab);
             this.configTabs.Controls.Add(this.calendarTab);
+            this.configTabs.Controls.Add(this.tabPage1);
             this.configTabs.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.configTabs.Location = new System.Drawing.Point(25, 12);
             this.configTabs.Name = "configTabs";
@@ -524,6 +533,76 @@
             this.CalDaySundayColor.Size = new System.Drawing.Size(200, 20);
             this.CalDaySundayColor.TabIndex = 10;
             // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.tabPage1.Controls.Add(this.label19);
+            this.tabPage1.Controls.Add(this.label18);
+            this.tabPage1.Controls.Add(this.label17);
+            this.tabPage1.Controls.Add(this.LogTitleHistoryLogRetainDay);
+            this.tabPage1.Controls.Add(this.LogTitleHistoryLogDir);
+            this.tabPage1.Controls.Add(this.LogIsLogTitleHistory);
+            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(689, 411);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "タイトル履歴";
+            // 
+            // LogIsLogTitleHistory
+            // 
+            this.LogIsLogTitleHistory.Checked = true;
+            this.LogIsLogTitleHistory.DispText = "タイトル履歴をログに記録する";
+            this.LogIsLogTitleHistory.Location = new System.Drawing.Point(60, 44);
+            this.LogIsLogTitleHistory.Name = "LogIsLogTitleHistory";
+            this.LogIsLogTitleHistory.SettingName = "IsLogTitleHistory";
+            this.LogIsLogTitleHistory.Size = new System.Drawing.Size(200, 20);
+            this.LogIsLogTitleHistory.TabIndex = 0;
+            this.LogIsLogTitleHistory.ChekedChanged += new System.EventHandler(this.LogIsLogTitleHistory_ChekedChanged);
+            // 
+            // LogTitleHistoryLogDir
+            // 
+            this.LogTitleHistoryLogDir.Location = new System.Drawing.Point(156, 72);
+            this.LogTitleHistoryLogDir.Name = "LogTitleHistoryLogDir";
+            this.LogTitleHistoryLogDir.SettingName = "TitleHistoryLogDir";
+            this.LogTitleHistoryLogDir.Size = new System.Drawing.Size(404, 20);
+            this.LogTitleHistoryLogDir.TabIndex = 1;
+            // 
+            // LogTitleHistoryLogRetainDay
+            // 
+            this.LogTitleHistoryLogRetainDay.Location = new System.Drawing.Point(156, 100);
+            this.LogTitleHistoryLogRetainDay.Name = "LogTitleHistoryLogRetainDay";
+            this.LogTitleHistoryLogRetainDay.SettingName = "TitleHistoryLogRetainDay";
+            this.LogTitleHistoryLogRetainDay.Size = new System.Drawing.Size(92, 20);
+            this.LogTitleHistoryLogRetainDay.TabIndex = 2;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(60, 76);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(94, 12);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "書き出し先フォルダ";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(60, 104);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(53, 12);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "保存日数";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(256, 104);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(17, 12);
+            this.label19.TabIndex = 3;
+            this.label19.Text = "日";
+            // 
             // ConfigrationDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -545,6 +624,8 @@
             this.grpSampleDisplay.PerformLayout();
             this.calendarTab.ResumeLayout(false);
             this.calendarTab.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -593,5 +674,12 @@
         private System.Windows.Forms.Label label16;
         private clockatt.FormControls.CheckBoxSelector ClockIsShowSecond;
         private clockatt.FormControls.CheckBoxSelector ClockIsShowYear;
+        private System.Windows.Forms.TabPage tabPage1;
+        private clockatt.FormControls.CheckBoxSelector LogIsLogTitleHistory;
+        private clockatt.FormControls.NumSelector LogTitleHistoryLogRetainDay;
+        private clockatt.FormControls.FolderSelector LogTitleHistoryLogDir;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
     }
 }

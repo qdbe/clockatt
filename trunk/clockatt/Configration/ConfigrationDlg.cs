@@ -138,5 +138,11 @@ namespace clockatt.Configration
         {
             RedrawSample();
         }
+
+        private void LogIsLogTitleHistory_ChekedChanged(object sender, EventArgs e)
+        {
+            this.LogTitleHistoryLogDir.Enabled = this.LogIsLogTitleHistory.Checked;
+            this.LogTitleHistoryLogRetainDay.Enabled = this.LogIsLogTitleHistory.Checked;
+        }
     }
 }
