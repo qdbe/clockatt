@@ -127,6 +127,12 @@
     <Compile Include="FormControls\ConfigSelectorBase.Designer.cs">
       <DependentUpon>ConfigSelectorBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormControls\FolderSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormControls\FolderSelector.Designer.cs">
+      <DependentUpon>FolderSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormControls\FontSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -174,6 +180,9 @@
     <EmbeddedResource Include="FormControls\ColorSelector.resx">
       <DependentUpon>ColorSelector.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormControls\FolderSelector.resx">
+      <DependentUpon>FolderSelector.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormControls\FontSelector.resx">
       <DependentUpon>FontSelector.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,6 +212,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="TimeUtil.cs" />
+    <Compile Include="TitileHistoryLogger.cs" />
     <Compile Include="W32Native.cs" />
   </ItemGroup>
   <ItemGroup>
