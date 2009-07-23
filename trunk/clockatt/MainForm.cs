@@ -28,7 +28,7 @@ namespace clockatt
 
         private Brush pDrawBrush;
 
-        private TitileHistoryLogger logger = new TitileHistoryLogger();
+        private TitileHistoryLogger logger;
 
         public string DispString
         {
@@ -46,6 +46,7 @@ namespace clockatt
             InitializeComponent();
             this.Icon = clockatt.Properties.Resources.clockatt256;
             this.SetTimeLabel();
+            logger = new TitileHistoryLogger();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -148,6 +149,7 @@ namespace clockatt
             Properties.Settings.Default.Save();
             this.taskInfoNotify.Visible = false;
             this.taskInfoNotify.Dispose();
+            this.logger.Dispose();
         }
 
         /// <summary>

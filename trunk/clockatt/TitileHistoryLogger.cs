@@ -44,7 +44,7 @@ namespace clockatt
             string writeLog = string.Format(
                 LogFileFormat,
                 current.ToShortDateString(),
-                current.ToShortTimeString(),
+                current.ToLongTimeString(),
                 titleText);
 
             this.logStreamWriter.WriteLine(writeLog);
@@ -62,7 +62,7 @@ namespace clockatt
             {
                 this.logStreamWriter.Close();
             }
-            this.logStreamWriter = this.LogFile.CreateText();
+            this.logStreamWriter = new StreamWriter(this.LogFile.Open(FileMode.Append,FileAccess.Write), Encoding.GetEncoding("shift-jis"));
         }
 
         private void DeleteOldLogIfNeed(DateTime current)
@@ -90,6 +90,7 @@ namespace clockatt
         {
             if (logStreamWriter != null)
             {
+                logStreamWriter.Flush();
                 logStreamWriter.Close();
                 logStreamWriter.Dispose();
                 logStreamWriter = null;
