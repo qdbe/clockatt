@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Collections;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Text;
@@ -138,9 +139,9 @@ namespace clockatt
             if (Properties.Settings.Default.IsInitial == true)
             {
                 Properties.Settings.Default.Upgrade();
+
                 Properties.Settings.Default.IsInitial = false;
             }
-            ////Properties.Settings.Default.Reload();
             setTimeLabelDesign();
         }
 

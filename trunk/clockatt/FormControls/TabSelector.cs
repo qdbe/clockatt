@@ -29,6 +29,23 @@ namespace clockatt.FormControls
 
         private const string SelectChar = "*";
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            if (this.TabCount == 0)
+            {
+                base.OnPaint(e);
+                return;
+            }
+            TabPage currentPage = this.TabPages[0];
+
+            Brush backBrush = new SolidBrush(currentPage.BackColor);
+
+            e.Graphics.SetClip(e.ClipRectangle);
+
+            e.Graphics.FillRectangle(backBrush, 0, 0, this.Width, this.Height);
+
+        }
+
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
             TabPage currentPage = this.TabPages[e.Index];
@@ -36,26 +53,19 @@ namespace clockatt.FormControls
             Brush backBrush = new SolidBrush(currentPage.BackColor);
             Brush foreBrush = new SolidBrush(currentPage.ForeColor);
 
-            if (e.Index == 0)
-            {
-                // タブの右側も描画する
-                Graphics g = this.CreateGraphics();
-
-                g.FillRectangle(backBrush, 0, 0, e.Bounds.Width, e.Bounds.Height);
-            }
-
-
             e.Graphics.FillRectangle(backBrush, e.Bounds);
 
+            int selectMargin = 0;
             if (e.State == DrawItemState.Selected)
             {
                 e.DrawFocusRectangle();
+                selectMargin = 1;
             }
 
             StringFormat format = new StringFormat();
 		    format.Alignment=StringAlignment.Near;
 
-            e.Graphics.DrawString(currentPage.Text, e.Font, foreBrush, e.Bounds.X+2, e.Bounds.Y + 2, format);
+            e.Graphics.DrawString(currentPage.Text, e.Font, foreBrush, e.Bounds.X + 3 + selectMargin, e.Bounds.Y + 3 + selectMargin, format);
 
             if ((e.Index + 1) == this.TabPages.Count)
             {

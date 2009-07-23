@@ -3,28 +3,28 @@
   <Profiles />
   <Settings>
     <Setting Name="BackColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">LightSteelBlue</Value>
+      <Value Profile="(Default)">ActiveCaption</Value>
     </Setting>
     <Setting Name="ForeColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Red</Value>
+      <Value Profile="(Default)">255, 255, 192</Value>
     </Setting>
     <Setting Name="Font" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">MS UI Gothic, 9pt</Value>
     </Setting>
     <Setting Name="IsShowYear" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="IsShowWeek" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="IsWeekWareki" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="IsShowTime" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="IsShowSecond" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Cal_ForeColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
@@ -69,7 +69,7 @@
       <Value Profile="(Default)">Red</Value>
     </Setting>
     <Setting Name="Cal_DayTodayBackColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Aqua</Value>
+      <Value Profile="(Default)">128, 255, 255</Value>
     </Setting>
     <Setting Name="IsInitial" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
