@@ -6,10 +6,13 @@ using System.IO;
 
 namespace clockatt
 {
+    /// <summary>
+    /// 設定ファイルを扱うインターフェース
+    /// </summary>
     public interface IConfig
     {
-        void ReadConfig(StreamReader sr);
-        void WriteConfig(StreamWriter sw);
+        void ReadConfig(TextReader sr);
+        void WriteConfig(TextWriter sw);
         void ReadLine(string rLine);
         bool CanWrite{get;}
     }

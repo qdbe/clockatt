@@ -6,28 +6,85 @@ using System.Runtime;
 
 namespace clockatt
 {
+    /// <summary>
+    /// タイトル履歴を記録するログ出力クラス
+    /// </summary>
     public class TitileHistoryLogger : IDisposable
     {
+        /// <summary>
+        /// 保存日数
+        /// </summary>
         private int LogRetainDay;
+
+        /// <summary>
+        /// ログ出力フォルダ
+        /// </summary>
         private string LogDir;
+
+        /// <summary>
+        /// 現在のログ出力先ファイル
+        /// </summary>
         private FileInfo LogFile;
+
+        /// <summary>
+        /// ログファイル名フォーマット
+        /// </summary>
         private const string LogFileNameFormat = "yyyyMMdd";
-        private StreamWriter logStreamWriter;
-        private string preOutput = string.Empty;
+
+        /// <summary>
+        /// ログファイル名拡張子
+        /// </summary>
+        private const string LogFileExtension = ".log";
+
+        /// <summary>
+        /// ログ出力フォーマット
+        /// </summary>
         private const string LogFileFormat = "{0}\t{1}\t{2}";
+
+
+        /// <summary>
+        /// ログ出力用ストリーム
+        /// </summary>
+        private StreamWriter logStreamWriter;
+
+        /// <summary>
+        /// 前回出力ログ内容
+        /// </summary>
+        private string preOutput = string.Empty;
+
+        /// <summary>
+        /// 一定時間にログにフラッシュする為のタイマー
+        /// </summary>
         private System.Windows.Forms.Timer flushTimer;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public TitileHistoryLogger()
         {
             this.LogFile = null;
 
+            InitFlushTimer();
+        }
+
+        /// <summary>
+        /// ログのフラッシュ用タイマーの初期化
+        /// </summary>
+        private void InitFlushTimer()
+        {
             flushTimer = new System.Windows.Forms.Timer();
             flushTimer.Interval = 60 * 1000;
             flushTimer.Tick += new EventHandler(flushTimer_Tick);
             flushTimer.Start();
         }
 
-        void flushTimer_Tick(object sender, EventArgs e)
+        /// <summary>
+        /// ログのフラッシュ処理
+        /// タイマーにより起動される
+        /// </summary>
+        /// <param name="sender">-</param>
+        /// <param name="e">-</param>
+        private void flushTimer_Tick(object sender, EventArgs e)
         {
             if (this.logStreamWriter != null)
             {
@@ -35,37 +92,74 @@ namespace clockatt
             }
         }
 
+        /// <summary>
+        /// ログ出力を行う
+        /// </summary>
+        /// <param name="logRetainDay"></param>
+        /// <param name="logDir"></param>
+        /// <param name="titleText"></param>
         public void LogOutput(int logRetainDay, string logDir, string titleText)
         {
             if (preOutput == titleText)
             {
                 return;
             }
-
             preOutput = titleText;
 
+            DateTime currentDateTime = DateTime.Now;
+
+            FileInfo fi = SetLogFileInfo(logRetainDay, logDir, ref currentDateTime);
+
+            OpenLogFile(fi);
+
+            DeleteOldLogIfNeed(currentDateTime);
+
+            string writeLog = CreateLogOutput(titleText, currentDateTime);
+
+            this.logStreamWriter.WriteLine(writeLog);
+        }
+
+        /// <summary>
+        /// ログ出力内容を作成する
+        /// </summary>
+        /// <param name="titleText"></param>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
+        private static string CreateLogOutput(string titleText, DateTime currentDateTime)
+        {
+            string writeLog = string.Format(
+                LogFileFormat,
+                currentDateTime.ToShortDateString(),
+                currentDateTime.ToLongTimeString(),
+                titleText);
+            return writeLog;
+        }
+
+        /// <summary>
+        /// ログ出力先のファイル情報を生成する
+        /// </summary>
+        /// <param name="logRetainDay"></param>
+        /// <param name="logDir"></param>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
+        private FileInfo SetLogFileInfo(int logRetainDay, string logDir, ref DateTime currentDateTime)
+        {
             this.LogRetainDay = logRetainDay;
             this.LogDir = logDir;
             if (this.LogDir.EndsWith(@"\") == false)
             {
                 this.LogDir = this.LogDir + "\\";
             }
-            DateTime current = DateTime.Now;
             FileInfo fi = new FileInfo(this.LogDir +
-                current.ToString(LogFileNameFormat) +
-                ".log");
-            OpenLogFile(fi);
-            DeleteOldLogIfNeed(current);
-
-            string writeLog = string.Format(
-                LogFileFormat,
-                current.ToShortDateString(),
-                current.ToLongTimeString(),
-                titleText);
-
-            this.logStreamWriter.WriteLine(writeLog);
+                currentDateTime.ToString(LogFileNameFormat) +
+                LogFileExtension);
+            return fi;
         }
 
+        /// <summary>
+        /// ログファイルをオープンする
+        /// </summary>
+        /// <param name="newfile"></param>
         private void OpenLogFile(FileInfo newfile)
         {
             if (this.LogFile != null && 
@@ -81,27 +175,39 @@ namespace clockatt
             this.logStreamWriter = new StreamWriter(this.LogFile.Open(FileMode.Append,FileAccess.Write,FileShare.Read), Encoding.GetEncoding("shift-jis"));
         }
 
+        /// <summary>
+        /// 不要なログを削除する
+        /// </summary>
+        /// <param name="current"></param>
         private void DeleteOldLogIfNeed(DateTime current)
         {
             DirectoryInfo di = new DirectoryInfo(this.LogDir);
-            FileInfo []files = di.GetFiles("*.log");
-            DateTime deleteDate = new DateTime(current.Ticks);
-            deleteDate.AddDays(-this.LogRetainDay);
-            string currentName = current.ToString(LogFileNameFormat);
-            
+            DateTime deleteBaseDate = current.AddDays(-this.LogRetainDay);
+            string deleteBaseName = deleteBaseDate.ToString(LogFileNameFormat);
+
+            FileInfo[] files = di.GetFiles("*" + LogFileExtension);
             for (int i = 0; i < files.Length; i++)
             {
-                string basename = files[i].Name.Replace(files[i].Extension, "");
-                if (currentName.CompareTo(basename) > 0)
+                string targetBasename = files[i].Name.Replace(files[i].Extension, "");
+                if (deleteBaseName.CompareTo(targetBasename) >= 0)
                 {
-                    files[i].Delete();
+                    // 削除できなくともエラーは無視する
+                    try
+                    {
+                        files[i].Delete();
+                    }
+                    catch 
+                    {
+                    }
                 }
             }
         }
 
 
         #region IDisposable メンバ
-
+        /// <summary>
+        /// 最終処理
+        /// </summary>
         public void Dispose()
         {
             if (flushTimer != null)

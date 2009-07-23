@@ -29,7 +29,7 @@ namespace clockatt.Configration
         {
             this.labelSample.Font =  this.SettingDrawFont.SelectedValue;
 
-            this.labelSample.Text = TimeUtil.GetFormatDateTime(DateTime.Now,
+            this.labelSample.Text = DateTimeFormatUtil.GetFormatDateTime(DateTime.Now,
                 this.SettingIsShowYear.Checked,
                 this.SettingIsShowWeek.Checked,
                 this.SettingIsWeekWareki.Checked,
