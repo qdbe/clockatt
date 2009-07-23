@@ -114,7 +114,7 @@ namespace clockatt.Configration
         {
             this.clockSamplelabel.Font = this.ClockDrawFont.SelectedValue;
 
-            this.clockSamplelabel.Text = TimeUtil.GetFormatDateTime(DateTime.Now,
+            this.clockSamplelabel.Text = DateTimeFormatUtil.GetFormatDateTime(DateTime.Now,
                 this.ClockIsShowYear.Checked,
                 this.ClockIsShowWeek.Checked,
                 this.ClockIsWeekWareki.Checked,

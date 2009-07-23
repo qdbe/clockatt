@@ -40,11 +40,15 @@ namespace clockatt
         /// 設定ファイルを読み込む
         /// </summary>
         /// <param name="sr"></param>
-        public void ReadConfig(StreamReader sr)
+        public void ReadConfig(TextReader sr)
         {
-            for (; !sr.EndOfStream; )
+            for (;;)
             {
                 string rLine = sr.ReadLine();
+                if (rLine == null)
+                {
+                    break;
+                }
                 this.ReadLine(rLine);
             }
         }
@@ -102,7 +106,7 @@ namespace clockatt
         /// 設定値を書き戻す
         /// </summary>
         /// <param name="sw"></param>
-        public void WriteConfig(System.IO.StreamWriter sw)
+        public void WriteConfig(TextWriter sw)
         {
             if (this.CanWrite != true)
             {

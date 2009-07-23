@@ -4,8 +4,21 @@ using System.Text;
 
 namespace clockatt
 {
-    static public class TimeUtil
+    /// <summary>
+    /// 日時フォーマット用ツールクラス
+    /// </summary>
+    static public class DateTimeFormatUtil
     {
+        /// <summary>
+        /// 設定に基づき描画する日時文字列を作成する
+        /// </summary>
+        /// <param name="nc"></param>
+        /// <param name="isShowYear"></param>
+        /// <param name="isShowWeek"></param>
+        /// <param name="isWeekWareki"></param>
+        /// <param name="isShowTime"></param>
+        /// <param name="isShowSecond"></param>
+        /// <returns></returns>
         public static string GetFormatDateTime(
             DateTime nc, 
             bool isShowYear,
@@ -16,41 +29,42 @@ namespace clockatt
             )
         {
             StringBuilder formatString = new StringBuilder();
-            StringBuilder weekTime = new StringBuilder();
 
             if (isShowYear == true)
             {
                 formatString.Append("yyyy/");
             }
             formatString.Append("MM/dd");
-            weekTime.Append(nc.ToString(formatString.ToString()));
+
+            StringBuilder weekTimeBuilder = new StringBuilder();
+            weekTimeBuilder.Append(nc.ToString(formatString.ToString()));
             if (isShowWeek == true)
             {
-                weekTime.Append("(");
+                weekTimeBuilder.Append("(");
                 if (isWeekWareki == true)
                 {
                     switch (nc.DayOfWeek)
                     {
                         case DayOfWeek.Monday:
-                            weekTime.Append("月");
+                            weekTimeBuilder.Append("月");
                             break;
                         case DayOfWeek.Tuesday:
-                            weekTime.Append("火");
+                            weekTimeBuilder.Append("火");
                             break;
                         case DayOfWeek.Wednesday:
-                            weekTime.Append("水");
+                            weekTimeBuilder.Append("水");
                             break;
                         case DayOfWeek.Thursday:
-                            weekTime.Append("木");
+                            weekTimeBuilder.Append("木");
                             break;
                         case DayOfWeek.Friday:
-                            weekTime.Append("金");
+                            weekTimeBuilder.Append("金");
                             break;
                         case DayOfWeek.Saturday:
-                            weekTime.Append("土");
+                            weekTimeBuilder.Append("土");
                             break;
                         case DayOfWeek.Sunday:
-                            weekTime.Append("日");
+                            weekTimeBuilder.Append("日");
                             break;
                         default:
                             break;
@@ -61,45 +75,45 @@ namespace clockatt
                     switch (nc.DayOfWeek)
                     {
                         case DayOfWeek.Monday:
-                            weekTime.Append("Mon");
+                            weekTimeBuilder.Append("Mon");
                             break;
                         case DayOfWeek.Tuesday:
-                            weekTime.Append("Tue");
+                            weekTimeBuilder.Append("Tue");
                             break;
                         case DayOfWeek.Wednesday:
-                            weekTime.Append("Wed");
+                            weekTimeBuilder.Append("Wed");
                             break;
                         case DayOfWeek.Thursday:
-                            weekTime.Append("Thu");
+                            weekTimeBuilder.Append("Thu");
                             break;
                         case DayOfWeek.Friday:
-                            weekTime.Append("Fri");
+                            weekTimeBuilder.Append("Fri");
                             break;
                         case DayOfWeek.Saturday:
-                            weekTime.Append("Sat");
+                            weekTimeBuilder.Append("Sat");
                             break;
                         case DayOfWeek.Sunday:
-                            weekTime.Append("Sun");
+                            weekTimeBuilder.Append("Sun");
                             break;
                         default:
                             break;
                     }
                 }
-                weekTime.Append(")");
+                weekTimeBuilder.Append(")");
             }
 
             if (isShowTime == true)
             {
                 if (isShowSecond == true)
                 {
-                    weekTime.Append(" " + nc.ToLongTimeString());
+                    weekTimeBuilder.Append(" " + nc.ToLongTimeString());
                 }
                 else
                 {
-                    weekTime.Append(" " + nc.ToShortTimeString());
+                    weekTimeBuilder.Append(" " + nc.ToShortTimeString());
                 }
             }
-            return weekTime.ToString();
+            return weekTimeBuilder.ToString();
         }
     }
 }
