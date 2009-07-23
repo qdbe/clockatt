@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Runtime;
 
 namespace clockatt
 {
@@ -14,10 +15,24 @@ namespace clockatt
         private StreamWriter logStreamWriter;
         private string preOutput = string.Empty;
         private const string LogFileFormat = "{0}\t{1}\t{2}";
+        private System.Windows.Forms.Timer flushTimer;
 
         public TitileHistoryLogger()
         {
             this.LogFile = null;
+
+            flushTimer = new System.Windows.Forms.Timer();
+            flushTimer.Interval = 60 * 1000;
+            flushTimer.Tick += new EventHandler(flushTimer_Tick);
+            flushTimer.Start();
+        }
+
+        void flushTimer_Tick(object sender, EventArgs e)
+        {
+            if (this.logStreamWriter != null)
+            {
+                this.logStreamWriter.Flush();
+            }
         }
 
         public void LogOutput(int logRetainDay, string logDir, string titleText)
@@ -26,6 +41,7 @@ namespace clockatt
             {
                 return;
             }
+
             preOutput = titleText;
 
             this.LogRetainDay = logRetainDay;
@@ -62,7 +78,7 @@ namespace clockatt
             {
                 this.logStreamWriter.Close();
             }
-            this.logStreamWriter = new StreamWriter(this.LogFile.Open(FileMode.Append,FileAccess.Write), Encoding.GetEncoding("shift-jis"));
+            this.logStreamWriter = new StreamWriter(this.LogFile.Open(FileMode.Append,FileAccess.Write,FileShare.Read), Encoding.GetEncoding("shift-jis"));
         }
 
         private void DeleteOldLogIfNeed(DateTime current)
@@ -88,6 +104,11 @@ namespace clockatt
 
         public void Dispose()
         {
+            if (flushTimer != null)
+            {
+                flushTimer.Stop();
+                flushTimer = null;
+            }
             if (logStreamWriter != null)
             {
                 logStreamWriter.Flush();
