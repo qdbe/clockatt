@@ -5,10 +5,13 @@ using System.IO;
 
 namespace clockatt
 {
+    /// <summary>
+    /// 休日設定のコレクションクラス
+    /// </summary>
     public class HolidayConfigCollection : System.Collections.Generic.List<HolidayConfig>, IConfig
     {
-        protected const string ERRMSG = "休日設定に記載ミスがあります:";
-        protected const string ERRMSG_COLUMN = "休日設定に記載ミスがあります:列数が不正です。タブ区切りで設定してください:";
+        private const string ERRMSG = "休日設定に記載ミスがあります:";
+        private const string ERRMSG_COLUMN = "休日設定に記載ミスがあります:列数が不正です。タブ区切りで設定してください:";
 
         /// <summary>
         /// 設定ファイルのカラムを指定する
@@ -24,15 +27,31 @@ namespace clockatt
             HolidayName = 6
         }
 
-        #region IConfig メンバ
-        private bool pCanWrite = false;
+        /// <summary>
+        /// 休日名の指定なし
+        /// </summary>
+        private const int NOHOLIDAYNAME = 6;
+        /// <summary>
+        /// 最低限必要とするカラム数
+        /// </summary>
+        private const int NEEDCOLUMNCOUNT = 6;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public HolidayConfigCollection()
+        {
+            this.CanWrite = false;
+        }
+
+        #region IConfig メンバ
         /// <summary>
         /// 書き込み可能か否か
         /// </summary>
         public bool CanWrite
         {
-            get { return this.pCanWrite; }
+            get;
+            private set;
         }
     
 
@@ -71,7 +90,7 @@ namespace clockatt
             }
             string[] lineCols = rLine.Split(" \t　".ToCharArray());
             // 休日名はオプション扱い
-            if (lineCols.Length < 6)
+            if (lineCols.Length < NEEDCOLUMNCOUNT)
             {
                 throw new ApplicationException(ERRMSG_COLUMN + rLine);
             }
@@ -79,7 +98,7 @@ namespace clockatt
             try
             {
                 string name;
-                if (lineCols.Length == 6)
+                if (lineCols.Length == NOHOLIDAYNAME)
                 {
                     name = null;
                 }
@@ -115,7 +134,7 @@ namespace clockatt
         }
 
         /// <summary>
-        /// 休日
+        /// 休日か否かを返す
         /// </summary>
         /// <param name="day"></param>
         /// <returns></returns>
