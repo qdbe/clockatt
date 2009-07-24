@@ -33,7 +33,7 @@ namespace clockatt
         /// <summary>
         /// 休日設定ファイルが保存されているフォルダ名
         /// </summary>
-        static private readonly string HOLIDAY_CONDIGDIR = "Holiday";
+        private const string HOLIDAY_CONDIGDIR = "Holiday";
 
         /// <summary>
         /// 休日設定(複数可)
@@ -76,6 +76,7 @@ namespace clockatt
             InitTaskInfoNotify();
         }
 
+        #region 初期化処理
         /// <summary>
         /// タスクバーに表示するNotifyの設定
         /// </summary>
@@ -93,18 +94,7 @@ namespace clockatt
             this.DspTimer.Start();
             this.LocateTimer.Start();
         }
-
-        /// <summary>
-        /// 表示用タイマーのイベントハンドラ
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DspTimer_Tick(object sender, EventArgs e)
-        {
-            SetNewDateTime();
-        }
-
-
+        
         /// <summary>
         /// 休日設定のフォルダ情報を取得する
         /// 休日設定フォルダがない場合には、休日設定フォルダを作成する
@@ -188,17 +178,6 @@ namespace clockatt
             return result;
         }
 
-        /// <summary>
-        /// 日時表示用の設定値をセットする
-        /// </summary>
-        private void SetDisplayDesign()
-        {
-            this.Font = (Font)Properties.Settings.Default.PropertyValues["Font"].PropertyValue;
-            this.ForeColor = (Color)Properties.Settings.Default.PropertyValues["ForeColor"].PropertyValue;
-            DrawBrush = new SolidBrush(this.ForeColor);
-            this.BackColor = (Color)Properties.Settings.Default.PropertyValues["BackColor"].PropertyValue;
-        }
-
 
         /// <summary>
         /// 各種データの初期化
@@ -217,6 +196,10 @@ namespace clockatt
             SetDisplayDesign();
         }
 
+        #endregion 初期化処理
+
+        #region 終了処理
+
         /// <summary>
         /// 閉じる場合の処理
         /// </summary>
@@ -229,6 +212,21 @@ namespace clockatt
             this.logger.Dispose();
         }
 
+        #endregion 終了処理
+
+
+        #region タイマー関連
+
+        /// <summary>
+        /// 表示用タイマーのイベントハンドラ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DspTimer_Tick(object sender, EventArgs e)
+        {
+            SetNewDateTime();
+        }
+
         /// <summary>
         /// 表示位置決定 タイマー処理
         /// 一定間隔で呼び出される
@@ -239,6 +237,11 @@ namespace clockatt
         {
             SetForeGround();
         }
+
+        #endregion タイマー関連
+
+
+        #region アクティブウィンドウ張り付き
 
         /// <summary>
         /// カレントウィンドウ位置をアクティブウィンドウのタイトルバーにあわせる
@@ -336,6 +339,12 @@ namespace clockatt
             Point newpos = new Point(leftposx, info.rcWindow.top + 3);
             int newheight = titleHeight - 2;
 
+            if( newheight > Screen.PrimaryScreen.WorkingArea.Height ||
+                newheight < 0 )
+            {
+                newheight = 0;
+            }
+
             // 前回と同じ結果である
             if (this.Height == newheight &&
                 newpos.Equals(this.Location))
@@ -354,22 +363,6 @@ namespace clockatt
             this.Location = new Point(leftposx, info.rcWindow.top + 4);
             this.Height = newheight;
 
-        }
-
-        /// <summary>
-        /// タイトル履歴ログを出力する
-        /// </summary>
-        /// <param name="hwnd"></param>
-        private void OutputTitleHistory(int hwnd)
-        {
-            if (Properties.Settings.Default.IsLogTitleHistory == true)
-            {
-                StringBuilder titleSb = new StringBuilder(200);
-                W32Native.GetWindowText(hwnd, titleSb, 100);
-                logger.LogOutput(Properties.Settings.Default.TitleHistoryLogRetainDay,
-                    Properties.Settings.Default.TitleHistoryLogDir,
-                    titleSb.ToString());
-            }
         }
 
         /// <summary>
@@ -395,7 +388,37 @@ namespace clockatt
             this.Location = new Point(Screen.FromControl(this).WorkingArea.Right - this.Width,
                 Screen.FromControl(this).WorkingArea.Top + 0);
         }
+        
+        /// <summary>
+        /// タイトル履歴ログを出力する
+        /// </summary>
+        /// <param name="hwnd"></param>
+        private void OutputTitleHistory(int hwnd)
+        {
+            if (Properties.Settings.Default.IsLogTitleHistory == true)
+            {
+                StringBuilder titleSb = new StringBuilder(200);
+                W32Native.GetWindowText(hwnd, titleSb, 100);
+                logger.LogOutput(Properties.Settings.Default.TitleHistoryLogRetainDay,
+                    Properties.Settings.Default.TitleHistoryLogDir,
+                    titleSb.ToString());
+            }
+        }
 
+        #endregion アクティブウィンドウ張り付き
+
+        #region 描画関連
+
+        /// <summary>
+        /// 日時表示用の設定値をセットする
+        /// </summary>
+        private void SetDisplayDesign()
+        {
+            this.Font = (Font)Properties.Settings.Default.PropertyValues["Font"].PropertyValue;
+            this.ForeColor = (Color)Properties.Settings.Default.PropertyValues["ForeColor"].PropertyValue;
+            DrawBrush = new SolidBrush(this.ForeColor);
+            this.BackColor = (Color)Properties.Settings.Default.PropertyValues["BackColor"].PropertyValue;
+        }
 
 
         /// <summary>
@@ -418,7 +441,7 @@ namespace clockatt
         private void SetDateTimeLabel()
         {
             DateTime nc = DateTime.Now;
-            this.DispString = DateTimeFormatUtil.GetFormatDateTime(nc,
+            this.DispString = DateTimeFormatUtil.GetFormatedDateTime(nc,
                 (bool)Properties.Settings.Default.PropertyValues["IsShowYear"].PropertyValue,
                 (bool)Properties.Settings.Default.PropertyValues["IsShowWeek"].PropertyValue,
                 (bool)Properties.Settings.Default.PropertyValues["IsWeekWareki"].PropertyValue,
@@ -454,6 +477,20 @@ namespace clockatt
                 this.Height = (int)newsize.Height;
             }
         }
+
+        /// <summary>
+        /// 描画は独自に行う
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.SetClip(e.ClipRectangle);
+            e.Graphics.DrawString(this.DispString, this.Font, this.DrawBrush, 2, 2);
+        }
+
+        #endregion 描画関連
+
+        #region マウス処理
 
         /// <summary>
         /// マウスクリックイベント
@@ -524,15 +561,6 @@ namespace clockatt
             this.Close();
         }
 
-        /// <summary>
-        /// 描画は独自に行う
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            e.Graphics.SetClip(e.ClipRectangle);
-            e.Graphics.DrawString(this.DispString, this.Font, this.DrawBrush, 2, 2);
-        }
-
+        #endregion マウス処理
     }
 }

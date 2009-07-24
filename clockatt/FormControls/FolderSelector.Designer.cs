@@ -55,7 +55,7 @@
             this.txtFolderName.Location = new System.Drawing.Point(0, 0);
             this.txtFolderName.Name = "txtFolderName";
             this.txtFolderName.Size = new System.Drawing.Size(328, 19);
-            this.txtFolderName.TabIndex = 1;
+            this.txtFolderName.TabIndex = 0;
             // 
             // btnFolderSearch
             // 
@@ -63,7 +63,7 @@
             this.btnFolderSearch.Location = new System.Drawing.Point(329, 0);
             this.btnFolderSearch.Name = "btnFolderSearch";
             this.btnFolderSearch.Size = new System.Drawing.Size(75, 20);
-            this.btnFolderSearch.TabIndex = 0;
+            this.btnFolderSearch.TabIndex = 1;
             this.btnFolderSearch.Text = "フォルダ選択";
             this.btnFolderSearch.UseVisualStyleBackColor = true;
             this.btnFolderSearch.Click += new System.EventHandler(this.btnFolderSearch_Click);

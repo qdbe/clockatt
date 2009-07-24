@@ -19,7 +19,7 @@ namespace clockatt
         /// <param name="isShowTime"></param>
         /// <param name="isShowSecond"></param>
         /// <returns></returns>
-        public static string GetFormatDateTime(
+        public static string GetFormatedDateTime(
             DateTime nc, 
             bool isShowYear,
             bool isShowWeek,
@@ -36,84 +36,28 @@ namespace clockatt
             }
             formatString.Append("MM/dd");
 
-            StringBuilder weekTimeBuilder = new StringBuilder();
-            weekTimeBuilder.Append(nc.ToString(formatString.ToString()));
             if (isShowWeek == true)
             {
-                weekTimeBuilder.Append("(");
-                if (isWeekWareki == true)
-                {
-                    switch (nc.DayOfWeek)
-                    {
-                        case DayOfWeek.Monday:
-                            weekTimeBuilder.Append("月");
-                            break;
-                        case DayOfWeek.Tuesday:
-                            weekTimeBuilder.Append("火");
-                            break;
-                        case DayOfWeek.Wednesday:
-                            weekTimeBuilder.Append("水");
-                            break;
-                        case DayOfWeek.Thursday:
-                            weekTimeBuilder.Append("木");
-                            break;
-                        case DayOfWeek.Friday:
-                            weekTimeBuilder.Append("金");
-                            break;
-                        case DayOfWeek.Saturday:
-                            weekTimeBuilder.Append("土");
-                            break;
-                        case DayOfWeek.Sunday:
-                            weekTimeBuilder.Append("日");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (nc.DayOfWeek)
-                    {
-                        case DayOfWeek.Monday:
-                            weekTimeBuilder.Append("Mon");
-                            break;
-                        case DayOfWeek.Tuesday:
-                            weekTimeBuilder.Append("Tue");
-                            break;
-                        case DayOfWeek.Wednesday:
-                            weekTimeBuilder.Append("Wed");
-                            break;
-                        case DayOfWeek.Thursday:
-                            weekTimeBuilder.Append("Thu");
-                            break;
-                        case DayOfWeek.Friday:
-                            weekTimeBuilder.Append("Fri");
-                            break;
-                        case DayOfWeek.Saturday:
-                            weekTimeBuilder.Append("Sat");
-                            break;
-                        case DayOfWeek.Sunday:
-                            weekTimeBuilder.Append("Sun");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                weekTimeBuilder.Append(")");
+                formatString.Append("(ddd)");
+            }
+            IFormatProvider culture = System.Globalization.CultureInfo.CurrentCulture;
+            if( !isWeekWareki )
+            {
+                culture = System.Globalization.CultureInfo.InvariantCulture;
             }
 
             if (isShowTime == true)
             {
                 if (isShowSecond == true)
                 {
-                    weekTimeBuilder.Append(" " + nc.ToLongTimeString());
+                    formatString.Append(" HH:mm:ss");
                 }
                 else
                 {
-                    weekTimeBuilder.Append(" " + nc.ToShortTimeString());
+                    formatString.Append(" HH:mm");
                 }
             }
-            return weekTimeBuilder.ToString();
+            return nc.ToString(formatString.ToString(), culture);
         }
     }
 }

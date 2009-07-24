@@ -76,13 +76,7 @@ namespace clockatt
         /// <summary>
         /// 休日名称
         /// </summary>
-        private ConfigHolidayName pHolidayName;
-
-        public ConfigHolidayName HolidayName
-        {
-            get { return pHolidayName; }
-            set { pHolidayName = value; }
-        }
+        public ConfigHolidayName HolidayName { get; set; }
 
         /// <summary>
         /// コンストラクタ
@@ -124,6 +118,16 @@ namespace clockatt
                 );
         }
 
+        /// <summary>
+        /// 値をセットする
+        /// </summary>
+        /// <param name="strStartYear"></param>
+        /// <param name="strEndYear"></param>
+        /// <param name="strMonth"></param>
+        /// <param name="strDay"></param>
+        /// <param name="strWeekDay"></param>
+        /// <param name="strWeekOfMonth"></param>
+        /// <param name="strHolidayName"></param>
         private void setConfValue(
             string strStartYear,
             string strEndYear,
@@ -140,7 +144,7 @@ namespace clockatt
             this.pDay = new ConfigDayValue(strDay);
             this.pDayAtWeek = new ConfigDayWeekValue(strWeekDay);
             this.pWeekOfMonth = new ConfigWeekOfMonthValue(strWeekOfMonth);
-            this.pHolidayName = new ConfigHolidayName(strHolidayName);
+            this.HolidayName = new ConfigHolidayName(strHolidayName);
 
             if (this.pDay.IsAllValue == false &&
                 this.pDayAtWeek.IsAllValue == false )
@@ -157,6 +161,7 @@ namespace clockatt
 
         /// <summary>
         /// 計算による春分の日のチェック
+        /// 利用していないが残しておく
         /// </summary>
         /// <param name="yy"></param>
         /// <param name="mm"></param>
@@ -166,8 +171,10 @@ namespace clockatt
         {
             return IsVernalEquinoxDay(dt.Year, dt.Month, dt.Day);
         }
+
         /// <summary>
         /// 計算による春分の日のチェック
+        /// 利用していないが残しておく
         /// </summary>
         /// <param name="yy"></param>
         /// <param name="mm"></param>
@@ -253,6 +260,7 @@ namespace clockatt
 
         /// <summary>
         /// 計算による秋分の日のチェック
+        /// 利用していないが残しておく
         /// </summary>
         /// <param name="yy"></param>
         /// <param name="mm"></param>
@@ -265,6 +273,7 @@ namespace clockatt
 
         /// <summary>
         /// 計算による秋分の日のチェック
+        /// 利用していないが残しておく
         /// </summary>
         /// <param name="yy"></param>
         /// <param name="mm"></param>
@@ -384,7 +393,6 @@ namespace clockatt
                 return false;
             }
 
-            System.Diagnostics.Debug.WriteLine("IsHoliday" + checkdate.ToShortDateString());
             return true;
         }
 

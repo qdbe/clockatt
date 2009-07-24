@@ -6,37 +6,75 @@ using System.Windows.Forms;
 
 namespace clockatt
 {
-    class CalenderDayPanel : Panel
+    class CalenderDayPanel : Panel, clockatt.ICalenderDayPanel
     {
-        int pDispDay;
-        public int DispDay
-        {
-            get { return pDispDay; }
-        }
+        /// <summary>
+        /// 表示する日
+        /// </summary>
+        public int DispDay { get; private set; }
 
-        public static readonly int MAXDAYCOUNT = 31;
-
+        /// <summary>
+        /// 休日名称を表示する為のToolTip
+        /// </summary>
         private ToolTip holidayTooltip = new ToolTip();
 
-        public delegate void DrawDayEventHandler(object sender, PaintEventArgs e);
+        /// <summary>
+        /// 日の描画イベントハンドラ
+        /// </summary>
+        public event PaintEventHandler DrawDay = null;
 
-        public event DrawDayEventHandler DrawDay = null;
-
-        private CalenderDayInfo pDayInfo;
+        /// <summary>
+        /// 出力日の情報
+        /// </summary>
         public CalenderDayInfo DayInfo
         {
-            get { return pDayInfo; }
+            get;
+            private set;
         }
 
-        public delegate void DayPanelMouseDownEnventHandler(object sender, MouseEventArgs e);
-        public event DayPanelMouseDownEnventHandler MouseDownOnDay = null;
 
-        public CalenderDayPanel() : base()
+        /// <summary>
+        /// マウスクリック時のハンドラ
+        /// </summary>
+        public event MouseEventHandler MouseDownOnDay = null;
+
+        /// <summary>
+        /// private コンストラクタ
+        /// </summary>
+        private CalenderDayPanel() : base()
         {
             this.BorderStyle = BorderStyle.None;
             this.MouseDown += new MouseEventHandler(CalenderDayPanel_MouseDown);
         }
 
+        /// <summary>
+        /// コンストラクタはこのメソッドを通じてのみ行う
+        /// </summary>
+        /// <param name="parents"></param>
+        /// <param name="createCount"></param>
+        /// <param name="mouseDownDay"></param>
+        /// <returns></returns>
+        public static CalenderDayPanel[] CreatePanels(Control parents, int createCount, MouseEventHandler mouseDownDay)
+        {
+            parents.SuspendLayout();
+
+            CalenderDayPanel[] panels = new CalenderDayPanel[createCount];
+
+            for (int i = 0; i < panels.Length; i++)
+            {
+                panels[i] = new CalenderDayPanel();
+                panels[i].MouseDownOnDay += mouseDownDay;
+                parents.Controls.Add(panels[i]);
+            }
+            parents.ResumeLayout();
+            return panels;
+        }
+
+        /// <summary>
+        /// 左クリック時は年月の切り替えを行う
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void CalenderDayPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -56,6 +94,10 @@ namespace clockatt
             }
         }
 
+        /// <summary>
+        /// 描画は独自に実施
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
             if( this.DrawDay != null )
@@ -64,55 +106,58 @@ namespace clockatt
             }
         }
 
-        public static CalenderDayPanel[] CreatePanels(Control parents, DayPanelMouseDownEnventHandler mouseDownDay)
+        /// <summary>
+        /// 背景色を設定する
+        /// </summary>
+        /// <param name="backColor"></param>
+        public void SetBackColor(Color backColor)
         {
-            parents.SuspendLayout();
-
-            CalenderDayPanel[] panels = new CalenderDayPanel[CalenderDayPanel.MAXDAYCOUNT];
-
-            for( int i = 0; i < panels.Length; i++ )
-            {
-                panels[i] = new CalenderDayPanel();
-                panels[i].MouseDownOnDay += mouseDownDay;
-                parents.Controls.Add(panels[i]);
-            }
-            parents.ResumeLayout();
-            return panels;
+            this.BackColor = backColor;
         }
 
-        public void ClearDrawInfo()
+
+        /// <summary>
+        /// 自身を描画しないようにする
+        /// </summary>
+        public void HideMe()
         {
             this.Visible = false;
             this.ClearToolTip();
         }
 
+        /// <summary>
+        /// 描画情報を初期化する
+        /// </summary>
+        /// <param name="dayInfo"></param>
         public void SetDrawInfo(CalenderDayInfo dayInfo)
         {
-            System.Diagnostics.Debug.WriteLine(dayInfo.DispDay.ToShortDateString() + " Is Set to Panel");
-
             this.Location = dayInfo.DispRect.Location;
             this.Width = dayInfo.DispRect.Width;
             this.Height = dayInfo.DispRect.Height;
             this.Visible = true;
             this.SetToolTip(dayInfo.HolidayName);
-            this.pDayInfo = dayInfo;
-            this.pDispDay = dayInfo.DispDay.Day;
+            
+            this.DayInfo = dayInfo;
+            this.DispDay = dayInfo.DispDay.Day;
             this.DrawDay = null;
         }
 
+        /// <summary>
+        /// ツールチップを設定する
+        /// </summary>
+        /// <param name="strValue"></param>
         public void SetToolTip(string strValue)
         {
             this.holidayTooltip.SetToolTip(this,strValue);
         }
 
+        /// <summary>
+        /// ツールチップをクリアする
+        /// </summary>
         public void ClearToolTip()
         {
             this.holidayTooltip.SetToolTip(this, "");
         }
 
-        protected override void OnClick(EventArgs e)
-        {
-            base.OnClick(e);
-        }
     }
 }

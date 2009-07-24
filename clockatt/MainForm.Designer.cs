@@ -60,12 +60,12 @@
             this.miQuit});
             this.RightClickMenu.Name = "RightClickMenu";
             this.RightClickMenu.ShowImageMargin = false;
-            this.RightClickMenu.Size = new System.Drawing.Size(128, 70);
+            this.RightClickMenu.Size = new System.Drawing.Size(86, 48);
             // 
             // miConfigration
             // 
             this.miConfigration.Name = "miConfigration";
-            this.miConfigration.Size = new System.Drawing.Size(127, 22);
+            this.miConfigration.Size = new System.Drawing.Size(85, 22);
             this.miConfigration.Text = "設定(&C)";
             this.miConfigration.Click += new System.EventHandler(this.miConfigClock_Click);
             // 
@@ -74,7 +74,7 @@
             this.miQuit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.miQuit.Name = "miQuit";
             this.miQuit.ShortcutKeyDisplayString = "";
-            this.miQuit.Size = new System.Drawing.Size(127, 22);
+            this.miQuit.Size = new System.Drawing.Size(85, 22);
             this.miQuit.Text = "終了(&Q)";
             this.miQuit.Click += new System.EventHandler(this.miQuit_Click);
             // 

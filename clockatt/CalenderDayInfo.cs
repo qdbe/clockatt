@@ -86,6 +86,12 @@ namespace clockatt
             set { pDispRect = value; }
         }
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="rect"></param>
+        /// <param name="holidays"></param>
         public CalenderDayInfo(DateTime dt, Rectangle rect, HolidayConfigCollection []holidays)
         {
             this.pDispDay = dt;

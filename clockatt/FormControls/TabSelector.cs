@@ -27,8 +27,6 @@ namespace clockatt.FormControls
 
         }
 
-        private const string SelectChar = "*";
-
         protected override void OnPaint(PaintEventArgs e)
         {
             if (this.TabCount == 0)

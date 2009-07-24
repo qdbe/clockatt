@@ -57,6 +57,7 @@
             this.txtFontName.ReadOnly = true;
             this.txtFontName.Size = new System.Drawing.Size(127, 19);
             this.txtFontName.TabIndex = 1;
+            this.txtFontName.TabStop = false;
             // 
             // panel1
             // 
