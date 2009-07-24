@@ -10,23 +10,54 @@ namespace clockatt
 {
     internal class CalenderDrawInfo : System.Collections.Generic.List<CalenderDayInfo>
     {
+        /// <summary>
+        /// 描画用マージン値
+        /// </summary>
         private int margin = 2;
 
+        /// <summary>
+        /// 一週間の曜日数
+        /// </summary>
         private static int WeekDayCount = 7;
 
-        public static int MaxDayCount = 31;
+        /// <summary>
+        /// 一ヶ月の最大日数
+        /// </summary>
+        public const int MaxDayCount = 31;
 
+        /// <summary>
+        /// 年・月の表示位置
+        /// </summary>
         private Point headDrawPoint = new Point();
+
+        /// <summary>
+        /// 曜日の表示位置
+        /// </summary>
         private Point[] weekDayDrawPoint = new Point[WeekDayCount];
 
+        /// <summary>
+        /// 休日情報
+        /// </summary>
         private HolidayConfigCollection []pHolidays;
 
+        /// <summary>
+        /// カレンダーの表示設定
+        /// </summary>
         private CalendarConfigration Config { get; set; }
 
-        public int DispYear { get; set; }
+        /// <summary>
+        /// 表示年
+        /// </summary>
+        private int DispYear { get; set; }
 
-        public int DispMonth { get; set ; }
+        /// <summary>
+        /// 表示月
+        /// </summary>
+        private int DispMonth { get; set; }
 
+        /// <summary>
+        /// 表示に必要なサイズ
+        /// </summary>
         private Size pNeedSize;
 
         /// <summary>
@@ -42,11 +73,12 @@ namespace clockatt
         /// <summary>
         /// 年月の出力位置を決定する
         /// </summary>
-        /// <param name="startX"></param>
-        /// <param name="startY"></param>
-        /// <param name="yearFont"></param>
+        /// <param name="startX">左側の開始位置</param>
+        /// <param name="startY">上側の開始位置</param>
+        /// <param name="yearFont">表示フォント</param>
+        /// <param name="g">描画対象</param>
         /// <returns></returns>
-        private void SetRectYearMonth(
+        private void SetYearMonthLocation(
             int startX,
             int startY,
             Graphics g,
@@ -62,14 +94,19 @@ namespace clockatt
                 );
 
             SizeF strsize = g.MeasureString(dispString, yearFont);
-            if (this.pNeedSize.Width < (startX + (int)strsize.Width + startX))
-            {
-                this.pNeedSize.Width = (startX + (int)strsize.Width + startX);
-            }
+
+            SetNeedSize((startX + (int)strsize.Width + startX));
             this.pNeedSize.Height = startY + yearFont.Height + 5;
         }
 
-        private void SetRectWeek(
+        /// <summary>
+        /// 曜日の表示位置を決定する
+        /// </summary>
+        /// <param name="startX">左側の開始位置</param>
+        /// <param name="startY">上側の開始位置</param>
+        /// <param name="weekFont">曜日の表示フォント</param>
+        /// <param name="g">描画対象</param>
+        private void SetWeekLocation(
             int startX,
             int startY,
             Font weekFont,
@@ -88,15 +125,19 @@ namespace clockatt
             }
             SizeF strsize = g.MeasureString("日", weekFont);
 
-            if (this.pNeedSize.Width < (x + startX))
-            {
-                this.pNeedSize.Width = x + startX;
-            }
 
-            pNeedSize.Height += (int)strsize.Height + 5;
+            SetNeedSize((x + startX));
+
+            this.pNeedSize.Height += (int)strsize.Height + 5;
         }
 
-
+        /// <summary>
+        /// １日の表示開始位置を取得する
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="startX"></param>
+        /// <param name="charMargin"></param>
+        /// <returns></returns>
         private int GetDayStartX(
             DateTime dt,
             int startX,
@@ -136,6 +177,12 @@ namespace clockatt
             return x;
         }
 
+        /// <summary>
+        /// 一日分の描画サイズを計算する
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="dayFont"></param>
+        /// <returns></returns>
         private SizeF GetDayStringSize(Graphics g, Font dayFont)
         {
             string dispstr = string.Format("{0, 2}", 88);
@@ -146,11 +193,19 @@ namespace clockatt
             return strsize;
         }
 
-        private void SetRectDay(
+        /// <summary>
+        /// 日の表示位置を決定する
+        /// </summary>
+        /// <param name="startX">左側の開始位置</param>
+        /// <param name="startY">上側の開始位置</param>
+        /// <param name="dayFont">描画フォント</param>
+        /// <param name="panels">日配置用パネル</param>
+        /// <param name="g">描画対象</param>
+        private void SetDayLocation(
             int startX,
             int startY,
             Font dayFont,
-            CalenderDayPanel[] panels,
+            ICalenderDayPanel[] panels,
             Graphics g)
         {
             int x = startX;
@@ -171,14 +226,32 @@ namespace clockatt
 
             this.Clear();
 
-//            Size needSize = new Size(startX,startY);
+            SetEachDayLocation(startX, panels, x, y, strsize, charMargin, addHeight);
 
+            //マージン分を追加
+            this.pNeedSize.Width += startX;
+            this.pNeedSize.Height += addHeight / 2;
+        }
+
+        /// <summary>
+        /// 各日の配置場所を決定する
+        /// </summary>
+        /// <param name="startX"></param>
+        /// <param name="panels"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="strsize"></param>
+        /// <param name="charMargin"></param>
+        /// <param name="addHeight"></param>
+        private void SetEachDayLocation(int startX, ICalenderDayPanel[] panels, int x, int y, SizeF strsize, int charMargin, int addHeight)
+        {
             int maxDate = DateTime.DaysInMonth(this.DispYear, this.DispMonth);
+
             for (int j = 0; j < panels.Length; j++)
             {
                 if (maxDate <= j)
                 {
-                    panels[j].ClearDrawInfo();
+                    panels[j].HideMe();
                     continue;
                 }
                 DateTime dayDt = new DateTime(this.DispYear, this.DispMonth, j + 1);
@@ -196,27 +269,43 @@ namespace clockatt
                     dayDt,
                     new Rectangle(x, y, (int)strsize.Width, (int)strsize.Height),
                     this.pHolidays);
-
-                if (this.pNeedSize.Width < (x + (int)strsize.Width))
-                {
-                    this.pNeedSize.Width = x + (int)strsize.Width;
-                }
-                if (this.pNeedSize.Height < (y + (int)strsize.Height))
-                {
-                    this.pNeedSize.Height = y + (int)strsize.Height;
-                }
-
-
                 this.Add(info);
 
                 panels[j].SetDrawInfo(info);
-                panels[j].DrawDay += new CalenderDayPanel.DrawDayEventHandler(this.PaintDay);
+                panels[j].DrawDay += new PaintEventHandler(this.PaintDay);
+
+                SetNeedSize(x + (int)strsize.Width, 
+                    y + (int)strsize.Height);
 
                 x += charMargin;
             }
 
-            this.pNeedSize.Width += startX;
-            this.pNeedSize.Height += addHeight / 2;
+        }
+
+        /// <summary>
+        /// 必要サイズを更新する
+        /// </summary>
+        /// <param name="x"></param>
+        private void SetNeedSize(int x)
+        {
+            if (this.pNeedSize.Width < x)
+            {
+                this.pNeedSize.Width = x;
+            }
+        }
+
+        /// <summary>
+        /// 必要サイズを更新する
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void SetNeedSize(int x, int y)
+        {
+            SetNeedSize(x);
+            if (this.pNeedSize.Height < y)
+            {
+                this.pNeedSize.Height = y;
+            }
         }
 
 
@@ -229,12 +318,12 @@ namespace clockatt
         /// <param name="dispYear"></param>
         /// <param name="dispMonth"></param>
         /// <param name="g"></param>
-        public virtual Size SetRect(
+        public virtual Size SetLocation(
             int startX, 
             int startY, 
             int dispYear, 
             int dispMonth, 
-            CalenderDayPanel []panels,
+            ICalenderDayPanel []panels,
             Graphics g)
         {
             this.DispMonth = dispMonth;
@@ -243,15 +332,15 @@ namespace clockatt
             this.pNeedSize = new Size(0,0);
 
             // 年＋月の位置
-            SetRectYearMonth(startX, startY, g, this.Config.YearMonthFont);
+            SetYearMonthLocation(startX, startY, g, this.Config.YearMonthFont);
 
             // 曜日の位置
 
-            SetRectWeek(startX, this.pNeedSize.Height, this.Config.WeekFont, g);
+            SetWeekLocation(startX, this.pNeedSize.Height, this.Config.WeekFont, g);
 
             // 日付の位置
 
-            SetRectDay(startX, this.pNeedSize.Height, this.Config.DayFont, panels, g);
+            SetDayLocation(startX, this.pNeedSize.Height, this.Config.DayFont, panels, g);
 
             return this.pNeedSize;
         }
@@ -261,18 +350,18 @@ namespace clockatt
         /// </summary>
         /// <param name="clip"></param>
         /// <param name="g"></param>
-        protected virtual void PaintYearMonth(Rectangle clip, Graphics g)
+        protected virtual void PaintYearMonth(Graphics g)
         {
-
-            Font yearMonthFont = this.Config.YearMonthFont;
-            System.Drawing.Brush yearMonthBrush = new System.Drawing.SolidBrush(this.Config.YearMonthColor);
-
             string dispString = string.Format("{0}年 {1}月",
                 this.DispYear,
                 this.DispMonth
                 );
 
-            g.DrawString(dispString, yearMonthFont, yearMonthBrush, this.headDrawPoint.X, this.headDrawPoint.Y);
+            g.DrawString(dispString, 
+                this.Config.YearMonthFont, 
+                new System.Drawing.SolidBrush(this.Config.YearMonthColor), 
+                this.headDrawPoint.X, 
+                this.headDrawPoint.Y);
 
         }
 
@@ -281,9 +370,8 @@ namespace clockatt
         /// </summary>
         /// <param name="clip"></param>
         /// <param name="g"></param>
-        protected virtual void PaintWeekDay(Rectangle clip, Graphics g)
+        protected virtual void PaintWeekDay(Graphics g)
         {
-            Font weekDayFont = this.Config.WeekFont;
             System.Drawing.Brush weekDayBrush = new System.Drawing.SolidBrush(this.Config.WeekColor);
             System.Drawing.Brush weekDayBrushSun = new System.Drawing.SolidBrush(this.Config.WeekSundayColor);
             System.Drawing.Brush weekDayBrushSat = new System.Drawing.SolidBrush(this.Config.WeekSaturndayColor);
@@ -301,75 +389,95 @@ namespace clockatt
             Brush b = weekDayBrush;
             for (int i = 0; i < strWeekDay.Length; i++)
             {
-                g.DrawString(strWeekDay[i][0].ToString(), weekDayFont, (Brush)strWeekDay[i][1], this.weekDayDrawPoint[i].X, this.weekDayDrawPoint[i].Y);
+                g.DrawString(
+                    strWeekDay[i][0].ToString(), 
+                    this.Config.WeekFont, 
+                    (Brush)strWeekDay[i][1], 
+                    this.weekDayDrawPoint[i].X, 
+                    this.weekDayDrawPoint[i].Y);
             }
         }
 
+        /// <summary>
+        /// 日を表示する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void PaintDay(object sender, PaintEventArgs e)
         {
             Font dayFont = this.Config.DayFont;
 
-            System.Drawing.Brush dayBrush = new System.Drawing.SolidBrush(this.Config.DayColor);
-            System.Drawing.Brush dayBrushHolyDay = new System.Drawing.SolidBrush(this.Config.DayHolidayColor);
-            System.Drawing.Brush dayBrushSun = new System.Drawing.SolidBrush(this.Config.DaySundayColor);
-            System.Drawing.Brush dayBrushSat = new System.Drawing.SolidBrush(this.Config.DaySaturndayColor);
-
+            ICalenderDayPanel panel = (ICalenderDayPanel)sender;
 
             e.Graphics.SetClip(e.ClipRectangle);
 
-            Brush charBrush = dayBrush;
-            CalenderDayInfo cdi = ((CalenderDayPanel)sender).DayInfo;
-            System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString());
+            CalenderDayInfo cdi = panel.DayInfo;
 
+            SetDayBackColor(panel, cdi);
 
-            System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " Paint Happend");
-            if (cdi.IsToday == true)
-            {
-                ((CalenderDayPanel)sender).BackColor = this.Config.DayTodayBackColor;
-                System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + (new System.Diagnostics.StackTrace()).ToString());
-            }
-            else
-            {
-                ((CalenderDayPanel)sender).BackColor = this.Config.BackColor;
-            }
-
-            if (cdi.IsHoliday == true)
-            {
-                charBrush = dayBrushHolyDay;
-                System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " is Holiday");
-            }
-            else if (cdi.IsSunday == true)
-            {
-                charBrush = dayBrushSun;
-                System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " IsSunday");
-            }
-            else if (cdi.IsSaturday == true)
-            {
-                charBrush = dayBrushSat;
-                System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " IsSaturday");
-            }
-            else
-            {
-                charBrush = dayBrush;
-                System.Diagnostics.Debug.WriteLine(cdi.DispDay.ToShortDateString() + " Is Normal");
-            }
-
-            string str = cdi.GetDispStr();
-            e.Graphics.DrawString(str,
+            e.Graphics.DrawString(
+                cdi.GetDispStr(),
                 dayFont,
-                charBrush,
+                GetDayBrush(cdi),
                 1,1);
 
         }
 
+        /// <summary>
+        /// 日の背景色をセットする
+        /// </summary>
+        /// <param name="panel"></param>
+        /// <param name="cdi"></param>
+        private void SetDayBackColor(ICalenderDayPanel panel, CalenderDayInfo cdi)
+        {
+            if (cdi.IsToday == true)
+            {
+                panel.SetBackColor(this.Config.DayTodayBackColor);
+            }
+            else
+            {
+                panel.SetBackColor(this.Config.BackColor);
+            }
+        }
+
+        /// <summary>
+        /// 日の文字色を取得する
+        /// </summary>
+        /// <param name="cdi"></param>
+        /// <returns></returns>
+        private Brush GetDayBrush(CalenderDayInfo cdi)
+        {
+            if (cdi.IsHoliday == true)
+            {
+                return new System.Drawing.SolidBrush(this.Config.DayHolidayColor);
+            }
+            else if (cdi.IsSunday == true)
+            {
+                return new System.Drawing.SolidBrush(this.Config.DaySundayColor);
+            }
+            else if (cdi.IsSaturday == true)
+            {
+                return new System.Drawing.SolidBrush(this.Config.DaySaturndayColor);
+            }
+            else
+            {
+                return new System.Drawing.SolidBrush(this.Config.DayColor);
+            }
+        }
+
+        /// <summary>
+        /// 描画処理
+        /// </summary>
+        /// <param name="clicpRect"></param>
+        /// <param name="g"></param>
         public virtual void Draw(
             Rectangle clicpRect,
             Graphics g
             )
         {
-            PaintYearMonth(clicpRect, g);
-            PaintWeekDay(clicpRect, g);
-            //PaintDay(clicpRect, g);
+            PaintYearMonth(g);
+            PaintWeekDay(g);
+            // 日の描画は各パネルが行う
         }
     }
 }

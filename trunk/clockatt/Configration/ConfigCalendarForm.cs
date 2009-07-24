@@ -51,7 +51,7 @@ namespace clockatt.Configration
 
         void selector_SamplePropertyChenged(object sender, EventArgs e)
         {
-            Size needSize = dayInfos.SetRect(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
+            Size needSize = dayInfos.SetLocation(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
                 this.samplePanel.CreateGraphics());
             int diffHeight = needSize.Height - this.samplePanel.Height;
             this.Height += diffHeight;
@@ -69,8 +69,8 @@ namespace clockatt.Configration
         private void SetSamplePanel(HolidayConfigCollection[] holidays)
         {
             dayInfos = new CalenderDrawInfo(holidays, this.dispConfig);
-            daypanels = CalenderDayPanel.CreatePanels(this.samplePanel, new CalenderDayPanel.DayPanelMouseDownEnventHandler(dummy_MouseDown));
-            Size needSize = dayInfos.SetRect(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
+            daypanels = CalenderDayPanel.CreatePanels(this.samplePanel, CalenderDrawInfo.MaxDayCount, new MouseEventHandler(dummy_MouseDown));
+            Size needSize = dayInfos.SetLocation(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
                 this.samplePanel.CreateGraphics() );
             this.samplePanel.Width = needSize.Width;
             this.samplePanel.Height = needSize.Height;

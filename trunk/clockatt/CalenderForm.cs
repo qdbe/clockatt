@@ -90,7 +90,7 @@ namespace clockatt
         private void CreateChildControls()
         {
             this.dayInfos = new CalenderDrawInfo(this.pHolidays, this.Config);
-            this.dayPanes = CalenderDayPanel.CreatePanels(this, new CalenderDayPanel.DayPanelMouseDownEnventHandler(DoMouseClick));
+            this.dayPanes = CalenderDayPanel.CreatePanels(this, CalenderDrawInfo.MaxDayCount, new MouseEventHandler(DoMouseClick));
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace clockatt
         /// </summary>
         private void SetPaintLocationInfo()
         {
-            Size needSize = dayInfos.SetRect(
+            Size needSize = dayInfos.SetLocation(
                 StartLeft,
                 StartTop,
                 this.DispYear,

@@ -56,8 +56,8 @@ namespace clockatt.Configration
         private void SetCalendarSamplePanel(HolidayConfigCollection[] holidays)
         {
             dayInfos = new CalenderDrawInfo(holidays, this.dispConfig);
-            daypanels = CalenderDayPanel.CreatePanels(this.calendarSamplePanel, new CalenderDayPanel.DayPanelMouseDownEnventHandler(dummy_MouseDown));
-            Size needSize = dayInfos.SetRect(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
+            daypanels = CalenderDayPanel.CreatePanels(this.calendarSamplePanel, CalenderDrawInfo.MaxDayCount, new MouseEventHandler(dummy_MouseDown));
+            Size needSize = dayInfos.SetLocation(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
                 this.calendarSamplePanel.CreateGraphics());
             this.calendarSamplePanel.Width = needSize.Width;
             this.calendarSamplePanel.Height = needSize.Height;
@@ -80,7 +80,7 @@ namespace clockatt.Configration
 
         void selector_SampleCalendarPropertyChenged(object sender, EventArgs e)
         {
-            Size needSize = dayInfos.SetRect(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
+            Size needSize = dayInfos.SetLocation(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
                 this.calendarSamplePanel.CreateGraphics());
             int diffHeight = needSize.Height - this.calendarSamplePanel.Height;
             this.Height += diffHeight;
@@ -114,7 +114,7 @@ namespace clockatt.Configration
         {
             this.clockSamplelabel.Font = this.ClockDrawFont.SelectedValue;
 
-            this.clockSamplelabel.Text = DateTimeFormatUtil.GetFormatDateTime(DateTime.Now,
+            this.clockSamplelabel.Text = DateTimeFormatUtil.GetFormatedDateTime(DateTime.Now,
                 this.ClockIsShowYear.Checked,
                 this.ClockIsShowWeek.Checked,
                 this.ClockIsWeekWareki.Checked,

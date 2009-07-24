@@ -57,6 +57,7 @@
             this.txtColorName.ReadOnly = true;
             this.txtColorName.Size = new System.Drawing.Size(127, 19);
             this.txtColorName.TabIndex = 1;
+            this.txtColorName.TabStop = false;
             // 
             // btnColorSearch
             // 
