@@ -13,15 +13,17 @@ namespace clockatt.ConfigValue
         /// <summary>
         /// 現在の値
         /// </summary>
-        protected int pCurrentValue;
-        public int CurrentValue
-        {
-            get { return pCurrentValue; }
-            set { pCurrentValue = value; }
-        }
+        public int CurrentValue { get; set; }
 
 
+        /// <summary>
+        /// 最大値
+        /// </summary>
         protected int MaxValue = Int32.MaxValue;
+
+        /// <summary>
+        /// 最小値
+        /// </summary>
         protected int MinValue = Int32.MinValue;
 
 
@@ -29,9 +31,8 @@ namespace clockatt.ConfigValue
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public ConfigIntValue()
+        public ConfigIntValue():base()
         {
-            InitValue();
         }
 
         /// <summary>
@@ -41,7 +42,6 @@ namespace clockatt.ConfigValue
         public ConfigIntValue(string strValue)
             : base()
         {
-            InitValue();
             if (this.TryParse(strValue) == false)
             {
                 throw new ConfigInitException(this.InitialError);
@@ -61,24 +61,22 @@ namespace clockatt.ConfigValue
             }
 
             // 書式文字からの変換
-            if (strFormats != null &&
-                strFormats.Length > 0)
+            if (ParseFromFormat(strValue) == true)
             {
-                string lowerValue = strValue.ToLower();
-                for (int i = 0; i < strFormats.Length; i++)
-                {
-                    for (int j = 0; j < strFormats[i].Length; j++)
-                    {
-                        if (strFormats[i][j].ToLower() == lowerValue)
-                        {
-                            this.pCurrentValue = j;
-                            return true;
-                        }
-                    }
-                }
+                return true;
             }
 
             // 数字からの変換
+            return ParseAsInt(strValue);
+        }
+
+        /// <summary>
+        /// 数値としてパースする
+        /// </summary>
+        /// <param name="strValue"></param>
+        /// <returns></returns>
+        protected virtual bool ParseAsInt(string strValue)
+        {
             int parseValue = 0;
             if (int.TryParse(strValue, out parseValue) == true)
             {
@@ -87,10 +85,36 @@ namespace clockatt.ConfigValue
                 {
                     return false;
                 }
-                this.pCurrentValue = parseValue;
+                this.CurrentValue = parseValue;
                 return true;
             }
 
+            return false;
+        }
+
+        /// <summary>
+        /// 特別な書式としてパースする
+        /// </summary>
+        /// <param name="strValue"></param>
+        /// <returns></returns>
+        protected virtual bool ParseFromFormat(string strValue)
+        {
+            if (this.strFormats != null &&
+                this.strFormats.Length > 0)
+            {
+                string lowerValue = strValue.ToLower();
+                for (int i = 0; i < this.strFormats.Length; i++)
+                {
+                    for (int j = 0; j < this.strFormats[i].Length; j++)
+                    {
+                        if (this.strFormats[i][j].ToLower() == lowerValue)
+                        {
+                            this.CurrentValue = j;
+                            return true;
+                        }
+                    }
+                }
+            }
             return false;
         }
 
@@ -107,7 +131,7 @@ namespace clockatt.ConfigValue
             }
             if (this.GetType().Equals(obj))
             {
-                if (this.pCurrentValue == ((ConfigIntValue)obj).CurrentValue)
+                if (this.CurrentValue == ((ConfigIntValue)obj).CurrentValue)
                 {
                     return true;
                 }
@@ -121,7 +145,7 @@ namespace clockatt.ConfigValue
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return pCurrentValue;
+            return CurrentValue;
         }
 
 
@@ -140,6 +164,10 @@ namespace clockatt.ConfigValue
             return false;
         }
 
+        /// <summary>
+        /// 文字列化
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return this.CurrentValue.ToString();

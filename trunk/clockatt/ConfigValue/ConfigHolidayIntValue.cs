@@ -6,7 +6,14 @@ namespace clockatt.ConfigValue
 {
     public abstract class ConfigHolidayIntValue : ConfigIntValue
     {
+        /// <summary>
+        /// 全てを表す
+        /// </summary>
         public static readonly int ALL = 0;
+
+        /// <summary>
+        /// 不正値
+        /// </summary>
         public static readonly int InValid = -1;
 
         /// <summary>
@@ -48,9 +55,8 @@ namespace clockatt.ConfigValue
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public ConfigHolidayIntValue()
+        public ConfigHolidayIntValue() : base()
         {
-            InitValue();
         }
 
         /// <summary>
@@ -58,9 +64,7 @@ namespace clockatt.ConfigValue
         /// </summary>
         /// <param name="strValue"></param>
         public ConfigHolidayIntValue(string strValue)
-            : base()
         {
-            InitValue();
             if (this.TryParse(strValue) == false)
             {
                 throw new ConfigInitException(this.InitialError);
@@ -80,47 +84,26 @@ namespace clockatt.ConfigValue
             }
             if (this.isWildCard(strValue) == true)
             {
-                this.pCurrentValue = ALL;
+                this.CurrentValue = ALL;
                 return true;
             }
 
             // 書式文字からの変換
-            if (strFormats != null &&
-                strFormats.Length > 0)
+            if (this.ParseFromFormat(strValue) == true)
             {
-                string lowerValue = strValue.ToLower();
-                for (int i = 0; i < strFormats.Length; i++)
-                {
-                    for (int j = 0; j < strFormats[i].Length; j++)
-                    {
-                        if (strFormats[i][j].ToLower() == lowerValue)
-                        {
-                            this.pCurrentValue = j;
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            // 数字からの変換
-            int parseValue = 0;
-            if (int.TryParse(strValue, out parseValue) == true)
-            {
-                if (parseValue < MinValue ||
-                    parseValue > MaxValue)
-                {
-                    return false;
-                }
-                this.pCurrentValue = parseValue;
                 return true;
             }
 
-            return false;
+            // 数字からの変換
+            return this.ParseAsInt(strValue);
         }
 
+        /// <summary>
+        /// 全ての値を現在値としてセットする
+        /// </summary>
         public virtual void SetAllValue()
         {
-            this.pCurrentValue = ALL;
+            this.CurrentValue = ALL;
         }
 
         /// <summary>

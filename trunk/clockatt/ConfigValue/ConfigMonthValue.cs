@@ -10,10 +10,22 @@ namespace clockatt.ConfigValue
     /// </summary>
     public class ConfigMonthValue : ConfigHolidayIntValue
     {
+        /// <summary>
+        /// 全て
+        /// </summary>
         public new static readonly int ALL = 0;
+        /// <summary>
+        /// 不正値
+        /// </summary>
         public new static readonly int InValid = 99;
 
+        /// <summary>
+        /// 最小月
+        /// </summary>
         protected static int MinMonth = 1;
+        /// <summary>
+        /// 最大月
+        /// </summary>
         protected static int MaxMonth = 12;
 
         /// <summary>
@@ -24,10 +36,17 @@ namespace clockatt.ConfigValue
             this.MinValue = MinMonth;
             this.MaxValue = MaxMonth;
 
-            this.pCurrentValue = ALL;
+            this.CurrentValue = ALL;
 
             this.InitialError = "月の指定が不正です";
 
+        }
+
+        /// <summary>
+        /// 表示書式の初期化
+        /// </summary>
+        protected override void InitFormatString()
+        {
             strFormats = new string[][]{
                     new string[]{
                         "ALL",
@@ -121,6 +140,7 @@ namespace clockatt.ConfigValue
                     }
             };
         }
+        
 
         /// <summary>
         /// コンストラクタ

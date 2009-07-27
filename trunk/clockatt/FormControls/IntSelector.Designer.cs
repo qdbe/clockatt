@@ -1,6 +1,6 @@
 ﻿namespace clockatt.FormControls
 {
-    partial class NumSelector
+    partial class IntSelector
     {
         /// <summary> 
         /// 必要なデザイナ変数です。

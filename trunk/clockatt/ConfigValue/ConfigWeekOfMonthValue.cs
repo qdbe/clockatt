@@ -9,7 +9,13 @@ namespace clockatt.ConfigValue
     /// </summary>
     public class ConfigWeekOfMonthValue : ConfigHolidayIntValue
     {
+        /// <summary>
+        /// 全て
+        /// </summary>
         public new static readonly int ALL = 0;
+        /// <summary>
+        /// 不正値
+        /// </summary>
         public new static readonly int InValid = -99;
 
         /// <summary>
@@ -27,7 +33,7 @@ namespace clockatt.ConfigValue
         /// </summary>
         protected override void InitValue()
         {
-            this.pCurrentValue = ALL;
+            this.CurrentValue = ALL;
             this.MaxValue = MaxWeekOfMonth;
             this.MinValue = MinWeekOfMonth;
             this.InitialError = "第何週かの指定が不正です";

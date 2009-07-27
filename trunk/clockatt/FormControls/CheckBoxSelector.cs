@@ -8,18 +8,15 @@ using System.Windows.Forms;
 
 namespace clockatt.FormControls
 {
+    /// <summary>
+    /// チェックボックス指定コントロール
+    /// </summary>
     public partial class CheckBoxSelector : ConfigSelectorBase
     {
-        public override void SetValue(object value)
-        {
-            if (!(value is bool))
-            {
-                throw new ArgumentException(value.GetType().Name + "は引数にセットできません");
-            }
 
-            this.chkBox.Checked = (bool)value;
-        }
-
+        /// <summary>
+        /// 表示テキスト
+        /// </summary>
         public string DispText
         {
             get
@@ -32,6 +29,9 @@ namespace clockatt.FormControls
             }
         }
 
+        /// <summary>
+        /// チェックされているか否か
+        /// </summary>
         public bool Checked
         {
             get { return this.chkBox.Checked; }
@@ -40,8 +40,9 @@ namespace clockatt.FormControls
             }
         }
 
-        public event EventHandler ChekedChanged = null;
-
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public CheckBoxSelector()
         {
             InitializeComponent();
@@ -49,22 +50,45 @@ namespace clockatt.FormControls
             this.chkBox.CheckedChanged += new EventHandler(chkBox_CheckedChanged);
         }
 
-        void chkBox_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// 値をセットする
+        /// </summary>
+        /// <param name="value"></param>
+        public override void SetValue(object value)
         {
-            if (this.ChekedChanged != null)
+            if (!(value is bool))
             {
-                this.ChekedChanged(this, e);
+                throw new ArgumentException(value.GetType().Name + "は引数にセットできません");
             }
+
+            this.chkBox.Checked = (bool)value;
+            this.pSelectedValue = value;
+            this.SetSampleProperty(value);
         }
 
+
+        /// <summary>
+        /// 内部のチェックボックス変更時の処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void chkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.SetValue(this.chkBox.Checked);
+        }
+
+        /// <summary>
+        /// サンプルプロパティ値の型
+        /// </summary>
+        /// <returns></returns>
         protected override Type GetSamplePropertyType()
         {
             return typeof(bool);
         }
 
-        public override void SetDataToSettings(System.Configuration.SettingsBase setting)
-        {
-            setting.PropertyValues[this.SettingName].PropertyValue = this.chkBox.Checked;
-        }
+        //public override void SetDataToSettings(System.Configuration.SettingsBase setting)
+        //{
+        //    setting.PropertyValues[this.SettingName].PropertyValue = this.chkBox.Checked;
+        //}
     }
 }

@@ -9,7 +9,14 @@ namespace clockatt.ConfigValue
     /// </summary>
     public class ConfigDayValue : ConfigHolidayIntValue
     {
+        /// <summary>
+        /// 全てを表す
+        /// </summary>
         public new static readonly int ALL = -1;
+
+        /// <summary>
+        /// 不正値
+        /// </summary>
         public new static readonly int InValid = -99;
 
         /// <summary>
@@ -27,7 +34,7 @@ namespace clockatt.ConfigValue
         /// </summary>
         protected override void InitValue()
         {
-            this.pCurrentValue = ALL;
+            this.CurrentValue = ALL;
             this.MaxValue = MaxDay;
             this.MinValue = MinDay;
 

@@ -80,18 +80,6 @@
     <Compile Include="Configration\ConfigBaseForm.Designer.cs">
       <DependentUpon>ConfigBaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Configration\ConfigCalendarForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Configration\ConfigCalendarForm.Designer.cs">
-      <DependentUpon>ConfigCalendarForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Configration\ConfigClockForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Configration\ConfigClockForm.Designer.cs">
-      <DependentUpon>ConfigClockForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Configration\ConfigrationDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,11 +127,11 @@
     <Compile Include="FormControls\FontSelector.Designer.cs">
       <DependentUpon>FontSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormControls\NumSelector.cs">
+    <Compile Include="FormControls\IntSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FormControls\NumSelector.Designer.cs">
-      <DependentUpon>NumSelector.cs</DependentUpon>
+    <Compile Include="FormControls\IntSelector.Designer.cs">
+      <DependentUpon>IntSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="FormControls\TabSelector.cs">
       <SubType>Component</SubType>
@@ -166,12 +154,6 @@
     <EmbeddedResource Include="Configration\ConfigBaseForm.resx">
       <DependentUpon>ConfigBaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Configration\ConfigCalendarForm.resx">
-      <DependentUpon>ConfigCalendarForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Configration\ConfigClockForm.resx">
-      <DependentUpon>ConfigClockForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Configration\ConfigrationDlg.resx">
       <DependentUpon>ConfigrationDlg.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,8 +169,8 @@
     <EmbeddedResource Include="FormControls\FontSelector.resx">
       <DependentUpon>FontSelector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormControls\NumSelector.resx">
-      <DependentUpon>NumSelector.cs</DependentUpon>
+    <EmbeddedResource Include="FormControls\IntSelector.resx">
+      <DependentUpon>IntSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

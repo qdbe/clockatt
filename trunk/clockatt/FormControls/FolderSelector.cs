@@ -9,14 +9,24 @@ using System.IO;
 
 namespace clockatt.FormControls
 {
+    /// <summary>
+    /// フォルダ選択コントロール
+    /// </summary>
     public partial class FolderSelector : ConfigSelectorBase
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public FolderSelector()
         {
             InitializeComponent();
             this.SetValue(string.Empty);
         }
 
+        /// <summary>
+        /// 値の設定
+        /// </summary>
+        /// <param name="value"></param>
         public override void SetValue(object value)
         {
             if (!(value is string))
@@ -29,6 +39,11 @@ namespace clockatt.FormControls
             this.SetSampleProperty(this.pSelectedValue);
         }
 
+        /// <summary>
+        /// フォルダ選択ダイアログの表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFolderSearch_Click(object sender, EventArgs e)
         {
             this.folderSelectDlg.SelectedPath = this.txtFolderName.Text;
@@ -40,16 +55,30 @@ namespace clockatt.FormControls
             }
         }
 
+        /// <summary>
+        /// サンプルプロパティ値の型
+        /// </summary>
+        /// <returns></returns>
         protected override Type GetSamplePropertyType()
         {
             return typeof(string);
         }
 
+        /// <summary>
+        /// フォーカスを受けた時は一旦エラーなしとする
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FolderSelector_Enter(object sender, EventArgs e)
         {
             this.errorProvider1.SetError(this, "");
         }
 
+        /// <summary>
+        /// バリデーションを実施
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FolderSelector_Validating(object sender, CancelEventArgs e)
         {
             if (this.Enabled == true)
@@ -74,6 +103,11 @@ namespace clockatt.FormControls
             }
         }
 
+        /// <summary>
+        /// バリデーション完了時
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FolderSelector_Validated(object sender, EventArgs e)
         {
             this.pSelectedValue = this.txtFolderName.Text;
