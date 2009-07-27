@@ -9,7 +9,13 @@ namespace clockatt.ConfigValue
     /// </summary>
     public class ConfigYearValue : ConfigHolidayIntValue
     {
+        /// <summary>
+        /// 全て
+        /// </summary>
         public new static readonly int ALL = -1;
+        /// <summary>
+        /// 不正値
+        /// </summary>
         public new static readonly int InValid = -99;
 
         /// <summary>
@@ -27,7 +33,7 @@ namespace clockatt.ConfigValue
         /// </summary>
         protected override void InitValue()
         {
-            this.pCurrentValue = ALL;
+            this.CurrentValue = ALL;
             this.MaxValue = MaxYear;
             this.MinValue = MinYear;
             this.InitialError = "年の指定が不正です";
@@ -48,23 +54,19 @@ namespace clockatt.ConfigValue
         /// <param name="strValue"></param>
         /// <param name="isStartYear">開始年か否か</param>
         public ConfigYearValue(string strValue, bool isStartYear)
+            : base(strValue)
         {
-            InitValue();
             if (isWildCard(strValue))
             {
                 if (isStartYear == true)
                 {
-                    this.pCurrentValue = MinYear;
+                    this.CurrentValue = MinYear;
                 }
                 else
                 {
-                    this.pCurrentValue = MaxYear;
+                    this.CurrentValue = MaxYear;
                 }
                 return;
-            }
-            if (this.TryParse(strValue) == false)
-            {
-                throw new ConfigInitException(this.InitialError);
             }
         }
 

@@ -12,36 +12,50 @@ namespace clockatt.ConfigValue
         /// </summary>
         protected override void InitValue()
         {
-            this.pCurrentValue = string.Empty;
+            this.CurrentValue = string.Empty;
         }
 
-
-        public ConfigHolidayName()
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public ConfigHolidayName(): base()
         {
-            this.InitValue();
         }
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public ConfigHolidayName(string name)
+            : base()
         {
             this.TryParse(name);
         }
 
+        /// <summary>
+        /// 文字列をパースする
+        /// </summary>
+        /// <param name="strValue"></param>
+        /// <returns></returns>
         public override bool TryParse(string strValue)
         {
             if (strValue == null)
             {
-                this.pCurrentValue = string.Empty;
+                this.CurrentValue = string.Empty;
                 return true;
             }
 
-            this.pCurrentValue = strValue;
+            this.CurrentValue = strValue;
 
             return true;
         }
 
+        /// <summary>
+        /// ハッシュコードを取得する
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
-            return this.pCurrentValue.GetHashCode();
+            return this.CurrentValue.GetHashCode();
         }
     }
 }

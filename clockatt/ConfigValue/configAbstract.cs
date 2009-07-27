@@ -34,6 +34,28 @@ namespace clockatt.ConfigValue
             }
         }
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public ConfigAbstract()
+        {
+            this.InitValue();
+            this.InitFormatString();
+        }
+
+
+        /// <summary>
+        /// 表示文字列を初期化する
+        /// </summary>
+        protected virtual void InitFormatString()
+        {
+        }
+
+        /// <summary>
+        /// 文字列からパースする
+        /// </summary>
+        /// <param name="strValue"></param>
+        /// <returns></returns>
         public abstract bool TryParse(string strValue);
 
         /// <summary>
@@ -42,6 +64,9 @@ namespace clockatt.ConfigValue
         /// <returns></returns>
         public override abstract int GetHashCode();
 
+        /// <summary>
+        /// 値を初期化する
+        /// </summary>
         protected abstract void InitValue();
 
     }

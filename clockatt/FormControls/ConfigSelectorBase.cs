@@ -11,48 +11,83 @@ namespace clockatt.FormControls
 {
     public partial class ConfigSelectorBase : UserControl
     {
-        public event EventHandler SamplePropertyChenged = null;
+        /// <summary>
+        /// 対応するサンプル表示の変更イベント
+        /// 値に変更があった場合に呼び出される
+        /// </summary>
+        public event EventHandler SamplePropertyChanged = null;
 
+        /// <summary>
+        /// 現在の設定値
+        /// </summary>
         protected object pSelectedValue;
 
-        private object pSampleObject;
+        /// <summary>
+        /// サンプル表示を行う対象コントロール
+        /// </summary>
         public object SampleObject
         {
-            get { return pSampleObject; }
+            get;
+            private set;
         }
 
-        public string SettingName { get; set; }
 
-        private string pSampleProperty;
+        /// <summary>
+        /// サンプル表示を行う対象コントロールのプロパティ名
+        /// </summary>
         public string SampleProperty
         {
-            get { return pSampleProperty; }
+            get;
+            private set;
         }
 
+        /// <summary>
+        /// 対応するアプリケーション設定値の名称
+        /// </summary>
+        public string SettingName { get; set; }
+
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public ConfigSelectorBase()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// サンプル表示を行う対象コントロールのプロパティの型
+        /// </summary>
+        /// <returns></returns>
         protected virtual Type GetSamplePropertyType()
         {
             return null;
         }
 
+        /// <summary>
+        /// サンプル表示を行う対象コントロールを設定する
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="targetProperty"></param>
         public void SetSampleObject(object target, string targetProperty)
         {
-            this.pSampleObject = target;
-            this.pSampleProperty = targetProperty;
+            this.SampleObject = target;
+            this.SampleProperty = targetProperty;
             this.SetSampleProperty(this.pSelectedValue);
         }
 
+        /// <summary>
+        /// サンプル表示のプロパティ値を設定する
+        /// </summary>
+        /// <param name="setValue"></param>
         public void SetSampleProperty(object setValue)
         {
             if (this.SampleObject == null)
             {
+                CallSamplePropertyChanged(this, new EventArgs());
                 return;
             }
-            PropertyInfo pi = this.SampleObject.GetType().GetProperty(this.pSampleProperty);
+            PropertyInfo pi = this.SampleObject.GetType().GetProperty(this.SampleProperty);
             Type ptype = this.GetSamplePropertyType();
             if( ptype.FullName == pi.PropertyType.FullName)
             {
@@ -61,28 +96,45 @@ namespace clockatt.FormControls
                 {
                     ((Control)this.SampleObject).Invalidate(true);
                 }
-                if( SamplePropertyChenged != null )
-                {
-                    SamplePropertyChenged(this,new EventArgs());
-                }
+                CallSamplePropertyChanged(this, new EventArgs());
             }
         }
 
-        public virtual void SetValue(object value)
+        /// <summary>
+        /// 変更イベントを呼び出す
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void CallSamplePropertyChanged(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (SamplePropertyChanged != null)
+            {
+                SamplePropertyChanged(sender, e);
+            }
         }
 
+        /// <summary>
+        /// 現在の値を設定する
+        /// </summary>
+        /// <param name="value"></param>
+        public virtual void SetValue(object value)
+        {
+            this.pSelectedValue = value;
+        }
+
+        /// <summary>
+        /// アプリケーション設定から値を取得し現在値として保持する
+        /// </summary>
+        /// <param name="setting"></param>
         public virtual void GetDataFromSettings(System.Configuration.SettingsBase setting)
         {
             this.SetValue(setting.PropertyValues[this.SettingName].PropertyValue);
         }
 
-        //public virtual void GetDefaultDataFromSettings(System.Configuration.SettingsBase setting)
-        //{
-        //    this.SetValue(setting.PropertyValues[this.SettingName].Property.DefaultValue);
-        //}
-
+        /// <summary>
+        /// アプリケーション設定に現在地を設定する
+        /// </summary>
+        /// <param name="setting"></param>
         public virtual void SetDataToSettings(System.Configuration.SettingsBase setting)
         {
             setting.PropertyValues[this.SettingName].PropertyValue = this.pSelectedValue;

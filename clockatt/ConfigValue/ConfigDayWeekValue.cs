@@ -10,15 +10,42 @@ namespace clockatt.ConfigValue
     /// </summary>
     public class ConfigDayWeekValue : ConfigHolidayIntValue
     {
+        /// <summary>
+        /// 全て
+        /// </summary>
         public new static readonly int ALL = 0;
+        /// <summary>
+        /// 月曜日
+        /// </summary>
         public static readonly int Mon = 1;
+        /// <summary>
+        /// 火曜日
+        /// </summary>
         public static readonly int Tue = 2;
+        /// <summary>
+        /// 水曜日
+        /// </summary>
         public static readonly int Wed = 3;
+        /// <summary>
+        /// 木曜日
+        /// </summary>
         public static readonly int Thu = 4;
+        /// <summary>
+        /// 金曜日
+        /// </summary>
         public static readonly int Fri = 5;
+        /// <summary>
+        /// 土曜日
+        /// </summary>
         public static readonly int Sat = 6;
+        /// <summary>
+        /// 日曜日
+        /// </summary>
         public static readonly int Sun = 7;
 
+        /// <summary>
+        /// 不正値
+        /// </summary>
         public new static readonly int InValid = -99;
 
         /// <summary>
@@ -26,11 +53,14 @@ namespace clockatt.ConfigValue
         /// </summary>
         protected override void InitValue()
         {
-            this.pCurrentValue = ALL;
+            this.CurrentValue = ALL;
             this.MaxValue = Mon;
             this.MinValue = Sun;
             this.InitialError = "曜日の指定が不正です";
+        }
 
+        protected override void InitFormatString()
+        {
             strFormats = new string[][]{
                     new string[]{
                         "ALL",
@@ -73,8 +103,6 @@ namespace clockatt.ConfigValue
                         "日曜日"
                     }
             };
-
-
         }
 
 
@@ -114,19 +142,19 @@ namespace clockatt.ConfigValue
         /// <returns></returns>
         public bool IsSame(DayOfWeek checkValue)
         {
-            if (this.pCurrentValue == ALL)
+            if (this.CurrentValue == ALL)
             {
                 // 現時点での値が ワイルドカードであれば、全ての値に当てはまると考える
                 return true;
             }
             if (
-                (pCurrentValue == ConfigDayWeekValue.Mon && checkValue == DayOfWeek.Monday) ||
-                (pCurrentValue == ConfigDayWeekValue.Tue && checkValue == DayOfWeek.Tuesday) ||
-                (pCurrentValue == ConfigDayWeekValue.Wed && checkValue == DayOfWeek.Wednesday) ||
-                (pCurrentValue == ConfigDayWeekValue.Thu && checkValue == DayOfWeek.Thursday) ||
-                (pCurrentValue == ConfigDayWeekValue.Fri && checkValue == DayOfWeek.Friday) ||
-                (pCurrentValue == ConfigDayWeekValue.Sat && checkValue == DayOfWeek.Saturday) ||
-                (pCurrentValue == ConfigDayWeekValue.Sun && checkValue == DayOfWeek.Sunday)
+                (CurrentValue == ConfigDayWeekValue.Mon && checkValue == DayOfWeek.Monday) ||
+                (CurrentValue == ConfigDayWeekValue.Tue && checkValue == DayOfWeek.Tuesday) ||
+                (CurrentValue == ConfigDayWeekValue.Wed && checkValue == DayOfWeek.Wednesday) ||
+                (CurrentValue == ConfigDayWeekValue.Thu && checkValue == DayOfWeek.Thursday) ||
+                (CurrentValue == ConfigDayWeekValue.Fri && checkValue == DayOfWeek.Friday) ||
+                (CurrentValue == ConfigDayWeekValue.Sat && checkValue == DayOfWeek.Saturday) ||
+                (CurrentValue == ConfigDayWeekValue.Sun && checkValue == DayOfWeek.Sunday)
                 )
             {
                 return true;

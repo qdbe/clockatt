@@ -16,6 +16,7 @@ namespace clockatt.Configration
         {
             InitializeComponent();
         }
+
         public ConfigBaseForm(System.Configuration.SettingsBase settings)
         {
             InitializeComponent();
@@ -49,7 +50,7 @@ namespace clockatt.Configration
 
                 if (con is CheckBoxSelector)
                 {
-                    ((CheckBoxSelector)con).ChekedChanged += new EventHandler(ConfigBaseForm_ChekedChanged);
+                    ((CheckBoxSelector)con).SamplePropertyChanged += new EventHandler(ConfigBaseForm_ChekedChanged);
                 }
             }
         }

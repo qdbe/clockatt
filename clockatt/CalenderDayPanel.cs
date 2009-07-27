@@ -63,7 +63,10 @@ namespace clockatt
             for (int i = 0; i < panels.Length; i++)
             {
                 panels[i] = new CalenderDayPanel();
-                panels[i].MouseDownOnDay += mouseDownDay;
+                if (mouseDownDay != null)
+                {
+                    panels[i].MouseDownOnDay += mouseDownDay;
+                }
                 parents.Controls.Add(panels[i]);
             }
             parents.ResumeLayout();

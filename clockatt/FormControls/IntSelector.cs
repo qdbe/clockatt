@@ -8,18 +8,21 @@ using System.Windows.Forms;
 
 namespace clockatt.FormControls
 {
-    /// <summary>
-    /// 色選択コントロール
-    /// </summary>
-    public partial class ColorSelector : ConfigSelectorBase
+    public partial class IntSelector : ConfigSelectorBase
     {
+        /// <summary>
+        /// 値の初期値
+        /// </summary>
+        private const int INITIAL_NUM = 9;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public ColorSelector()
+        public IntSelector()
         {
             InitializeComponent();
-            this.SetValue(this.BackColor);
+            this.numText.Value = INITIAL_NUM;
+            this.numText.ValueChanged += new EventHandler(numText_ValueChanged);
         }
 
         /// <summary>
@@ -28,28 +31,24 @@ namespace clockatt.FormControls
         /// <param name="value"></param>
         public override void SetValue(object value)
         {
-            if (!(value is Color))
+            if (!(value is int))
             {
                 throw new ArgumentException(value.GetType().Name + "は引数にセットできません");
             }
-            pSelectedValue = value;
-            this.txtColorName.Text = ((Color)value).Name;
-            this.toolTip1.SetToolTip(this.txtColorName, this.txtColorName.Text);
+
+            this.pSelectedValue = value;
+            this.numText.Value = (int)value;
             this.SetSampleProperty(this.pSelectedValue);
         }
 
         /// <summary>
-        /// 色選択ダイアログの表示
+        /// 値変更イベントハンドラ
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnColorSearch_Click(object sender, EventArgs e)
+        void numText_ValueChanged(object sender, EventArgs e)
         {
-            this.colorSelectDialog.Color = (Color)this.pSelectedValue;
-            if (this.colorSelectDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                this.SetValue(this.colorSelectDialog.Color);
-            }
+            this.SetValue((int)this.numText.Value);
         }
 
         /// <summary>
@@ -58,8 +57,7 @@ namespace clockatt.FormControls
         /// <returns></returns>
         protected override Type GetSamplePropertyType()
         {
-            return typeof(Color);
+            return typeof(int);
         }
-
-   }
+    }
 }

@@ -9,16 +9,11 @@ namespace clockatt.ConfigValue
         /// <summary>
         /// 現在の値
         /// </summary>
-        protected string pCurrentValue;
-        public string CurrentValue
-        {
-            get { return pCurrentValue; }
-            set { pCurrentValue = value; }
-        }
+        public string CurrentValue { get; set; }
 
         public override string ToString()
         {
-            return pCurrentValue;
+            return CurrentValue;
         }
 
     }

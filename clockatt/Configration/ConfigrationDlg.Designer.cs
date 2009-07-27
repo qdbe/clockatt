@@ -72,12 +72,12 @@
             this.CalWeekSundayColor = new clockatt.FormControls.ColorSelector();
             this.CalDaySundayColor = new clockatt.FormControls.ColorSelector();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.LogIsLogTitleHistory = new clockatt.FormControls.CheckBoxSelector();
-            this.LogTitleHistoryLogDir = new clockatt.FormControls.FolderSelector();
-            this.LogTitleHistoryLogRetainDay = new clockatt.FormControls.NumSelector();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.LogTitleHistoryLogRetainDay = new clockatt.FormControls.IntSelector();
+            this.LogTitleHistoryLogDir = new clockatt.FormControls.FolderSelector();
+            this.LogIsLogTitleHistory = new clockatt.FormControls.CheckBoxSelector();
             CalWeekFont = new clockatt.FormControls.FontSelector();
             this.configTabs.SuspendLayout();
             this.clockTab.SuspendLayout();
@@ -129,6 +129,7 @@
             this.configTabs.SelectedIndex = 0;
             this.configTabs.ShowToolTips = true;
             this.configTabs.Size = new System.Drawing.Size(697, 436);
+            this.configTabs.TabBackColor = System.Drawing.Color.LightSteelBlue;
             this.configTabs.TabIndex = 0;
             // 
             // clockTab
@@ -214,7 +215,7 @@
             this.ClockIsShowWeek.SettingName = "IsShowWeek";
             this.ClockIsShowWeek.Size = new System.Drawing.Size(136, 20);
             this.ClockIsShowWeek.TabIndex = 4;
-            this.ClockIsShowWeek.ChekedChanged += new System.EventHandler(this.SettingIsShowWeek_ChekedChanged);
+            this.ClockIsShowWeek.SamplePropertyChanged += new System.EventHandler(this.SettingIsShowWeek_ChekedChanged);
             // 
             // label15
             // 
@@ -234,7 +235,7 @@
             this.ClockIsShowTime.SettingName = "IsShowTime";
             this.ClockIsShowTime.Size = new System.Drawing.Size(136, 20);
             this.ClockIsShowTime.TabIndex = 6;
-            this.ClockIsShowTime.ChekedChanged += new System.EventHandler(this.SettingIsShowTime_ChekedChanged);
+            this.ClockIsShowTime.SamplePropertyChanged += new System.EventHandler(this.SettingIsShowTime_ChekedChanged);
             // 
             // ClockIsWeekWareki
             // 
@@ -549,41 +550,14 @@
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "タイトル履歴";
             // 
-            // LogIsLogTitleHistory
+            // label19
             // 
-            this.LogIsLogTitleHistory.Checked = true;
-            this.LogIsLogTitleHistory.DispText = "タイトル履歴をログに記録する";
-            this.LogIsLogTitleHistory.Location = new System.Drawing.Point(60, 44);
-            this.LogIsLogTitleHistory.Name = "LogIsLogTitleHistory";
-            this.LogIsLogTitleHistory.SettingName = "IsLogTitleHistory";
-            this.LogIsLogTitleHistory.Size = new System.Drawing.Size(200, 20);
-            this.LogIsLogTitleHistory.TabIndex = 0;
-            this.LogIsLogTitleHistory.ChekedChanged += new System.EventHandler(this.LogIsLogTitleHistory_ChekedChanged);
-            // 
-            // LogTitleHistoryLogDir
-            // 
-            this.LogTitleHistoryLogDir.Location = new System.Drawing.Point(156, 72);
-            this.LogTitleHistoryLogDir.Name = "LogTitleHistoryLogDir";
-            this.LogTitleHistoryLogDir.SettingName = "TitleHistoryLogDir";
-            this.LogTitleHistoryLogDir.Size = new System.Drawing.Size(404, 20);
-            this.LogTitleHistoryLogDir.TabIndex = 1;
-            // 
-            // LogTitleHistoryLogRetainDay
-            // 
-            this.LogTitleHistoryLogRetainDay.Location = new System.Drawing.Point(156, 100);
-            this.LogTitleHistoryLogRetainDay.Name = "LogTitleHistoryLogRetainDay";
-            this.LogTitleHistoryLogRetainDay.SettingName = "TitleHistoryLogRetainDay";
-            this.LogTitleHistoryLogRetainDay.Size = new System.Drawing.Size(92, 20);
-            this.LogTitleHistoryLogRetainDay.TabIndex = 2;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(60, 76);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(94, 12);
-            this.label17.TabIndex = 3;
-            this.label17.Text = "書き出し先フォルダ";
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(256, 104);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(17, 12);
+            this.label19.TabIndex = 3;
+            this.label19.Text = "日";
             // 
             // label18
             // 
@@ -594,14 +568,41 @@
             this.label18.TabIndex = 3;
             this.label18.Text = "保存日数";
             // 
-            // label19
+            // label17
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(256, 104);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(17, 12);
-            this.label19.TabIndex = 3;
-            this.label19.Text = "日";
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(60, 76);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(94, 12);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "書き出し先フォルダ";
+            // 
+            // LogTitleHistoryLogRetainDay
+            // 
+            this.LogTitleHistoryLogRetainDay.Location = new System.Drawing.Point(156, 100);
+            this.LogTitleHistoryLogRetainDay.Name = "LogTitleHistoryLogRetainDay";
+            this.LogTitleHistoryLogRetainDay.SettingName = "TitleHistoryLogRetainDay";
+            this.LogTitleHistoryLogRetainDay.Size = new System.Drawing.Size(92, 20);
+            this.LogTitleHistoryLogRetainDay.TabIndex = 2;
+            // 
+            // LogTitleHistoryLogDir
+            // 
+            this.LogTitleHistoryLogDir.Location = new System.Drawing.Point(156, 72);
+            this.LogTitleHistoryLogDir.Name = "LogTitleHistoryLogDir";
+            this.LogTitleHistoryLogDir.SettingName = "TitleHistoryLogDir";
+            this.LogTitleHistoryLogDir.Size = new System.Drawing.Size(404, 20);
+            this.LogTitleHistoryLogDir.TabIndex = 1;
+            // 
+            // LogIsLogTitleHistory
+            // 
+            this.LogIsLogTitleHistory.Checked = true;
+            this.LogIsLogTitleHistory.DispText = "タイトル履歴をログに記録する";
+            this.LogIsLogTitleHistory.Location = new System.Drawing.Point(60, 44);
+            this.LogIsLogTitleHistory.Name = "LogIsLogTitleHistory";
+            this.LogIsLogTitleHistory.SettingName = "IsLogTitleHistory";
+            this.LogIsLogTitleHistory.Size = new System.Drawing.Size(200, 20);
+            this.LogIsLogTitleHistory.TabIndex = 0;
+            this.LogIsLogTitleHistory.SamplePropertyChanged += new System.EventHandler(this.LogIsLogTitleHistory_ChekedChanged);
             // 
             // ConfigrationDlg
             // 
@@ -676,7 +677,7 @@
         private clockatt.FormControls.CheckBoxSelector ClockIsShowYear;
         private System.Windows.Forms.TabPage tabPage1;
         private clockatt.FormControls.CheckBoxSelector LogIsLogTitleHistory;
-        private clockatt.FormControls.NumSelector LogTitleHistoryLogRetainDay;
+        private clockatt.FormControls.IntSelector LogTitleHistoryLogRetainDay;
         private clockatt.FormControls.FolderSelector LogTitleHistoryLogDir;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;

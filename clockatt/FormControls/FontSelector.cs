@@ -11,17 +11,19 @@ namespace clockatt.FormControls
 {
     public partial class FontSelector : ConfigSelectorBase
     {
-        public Font SelectedValue
-        {
-            get { return (Font)this.pSelectedValue; }
-        }
-
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public FontSelector()
         {
             InitializeComponent();
             this.SetValue(this.Font);
         }
 
+        /// <summary>
+        /// 値の設定
+        /// </summary>
+        /// <param name="value"></param>
         public override void SetValue(object value)
         {
             if (!(value is Font))
@@ -34,7 +36,11 @@ namespace clockatt.FormControls
             this.SetSampleProperty(this.pSelectedValue);
         }
 
-
+        /// <summary>
+        /// フォント選択ダイアログの表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFontSearch_Click(object sender, EventArgs e)
         {
             this.fontSelectDialog.Font = (Font)this.pSelectedValue;
@@ -44,6 +50,10 @@ namespace clockatt.FormControls
             }
         }
 
+        /// <summary>
+        /// サンプルプロパティ値の型
+        /// </summary>
+        /// <returns></returns>
         protected override Type GetSamplePropertyType()
         {
             return Font.GetType();
