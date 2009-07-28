@@ -7,12 +7,12 @@ using System.Resources;
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("ClockATT")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("アクティブウィンドウのタイトルバーに張り付く時計 \r\nカレンダー、アラーム、スケジュール管理などの機能も追加予定")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("godz")]
 [assembly: AssemblyProduct("ClockATT")]
 [assembly: AssemblyCopyright("Copyright © Y.N 2009 Under GPL-Ver.2")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Go Ahead!")]
 [assembly: AssemblyCulture("")]
 
 // ComVisible を false に設定すると、その型はこのアセンブリ内で COM コンポーネントから 
