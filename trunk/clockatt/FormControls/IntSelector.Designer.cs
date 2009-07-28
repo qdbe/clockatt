@@ -40,12 +40,12 @@
             this.numText.Size = new System.Drawing.Size(200, 19);
             this.numText.TabIndex = 0;
             // 
-            // NumSelector
+            // IntSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.numText);
-            this.Name = "NumSelector";
+            this.Name = "IntSelector";
             this.Size = new System.Drawing.Size(200, 20);
             ((System.ComponentModel.ISupportInitialize)(this.numText)).EndInit();
             this.ResumeLayout(false);
