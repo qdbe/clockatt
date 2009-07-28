@@ -14,7 +14,7 @@ namespace clockatt
 {
     public partial class MainForm : Form
     {
-
+        #region メンバ
         /// <summary>
         /// 文字描画以外に必要なウィンドウサイズのマージン
         /// </summary>
@@ -56,7 +56,9 @@ namespace clockatt
         /// 日時表示文字列
         /// </summary>
         public string DispString { get; set; }
+        #endregion メンバ
 
+        #region メイン処理
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -69,12 +71,18 @@ namespace clockatt
             logger = new TitileHistoryLogger();
         }
 
+        /// <summary>
+        /// フォームロード時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
             InitData();
             StartTimers();
             InitTaskInfoNotify();
         }
+        #endregion メイン処理
 
         #region 初期化処理
         /// <summary>
@@ -562,5 +570,45 @@ namespace clockatt
         }
 
         #endregion マウス処理
+
+        /// <summary>
+        /// Aboutダイアログの表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void miShowAbout_Click(object sender, EventArgs e)
+        {
+            ShowAboutBox dlg = new ShowAboutBox();
+            dlg.ShowDialog(this);
+        }
+
+        #region ヘルプ表示
+        /// <summary>
+        /// ヘルプファイルを表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void miShowHelp_Click(object sender, EventArgs e)
+        {
+            ShowHelpHtml();
+        }
+
+        /// <summary>
+        /// ヘルプファイルを表示
+        /// </summary>
+        private static void ShowHelpHtml()
+        {
+#if true
+            MessageBox.Show("Soory! 現在ヘルプは未実装です");
+#else
+            string helpname = AppDomain.CurrentDomain.FriendlyName;
+            helpname = helpname.Replace(".exe", "Help.htm");
+            if (File.Exists(helpname) == true)
+            {
+                System.Diagnostics.Process.Start(helpname);
+            }
+#endif
+        }
+        #endregion ヘルプ表示
     }
 }
