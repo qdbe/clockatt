@@ -209,8 +209,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="EquinoxHoliday.data" />
-    <None Include="Holiday.data" />
+    <None Include="JapaneseEquinoxHoliday.data" />
+    <None Include="JapaneseHoliday.data" />
     <None Include="Resources\clockAttIcon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -272,8 +272,8 @@
   <PropertyGroup>
     <PostBuildEvent>rd /s/q $(TargetDir)Holiday
 mkdir $(TargetDir)Holiday
-copy $(ProjectDir)Holiday.data  $(TargetDir)Holiday
-copy $(ProjectDir)EquinoxHoliday.data  $(TargetDir)Holiday
+copy $(ProjectDir)JapaneseHoliday.data  $(TargetDir)Holiday
+copy $(ProjectDir)JapaneseEquinoxHoliday.data  $(TargetDir)Holiday
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

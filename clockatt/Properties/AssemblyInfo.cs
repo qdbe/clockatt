@@ -7,7 +7,7 @@ using System.Resources;
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("ClockATT")]
-[assembly: AssemblyDescription("アクティブウィンドウのタイトルバーに張り付く時計 \r\nカレンダー、アラーム、スケジュール管理などの機能も追加予定")]
+[assembly: AssemblyDescription("アクティブウィンドウのタイトルバーに張り付く時計")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("godz")]
 [assembly: AssemblyProduct("ClockATT")]
