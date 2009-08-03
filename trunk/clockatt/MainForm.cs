@@ -66,7 +66,7 @@ namespace clockatt
         {
             this.DrawBrush = new SolidBrush(this.ForeColor);
             InitializeComponent();
-            this.Icon = clockatt.Properties.Resources.clockatt256;
+            this.Icon = clockatt.Properties.Resources.catt;
             this.SetDateTimeLabel();
             logger = new TitileHistoryLogger();
         }
@@ -90,7 +90,7 @@ namespace clockatt
         /// </summary>
         private void InitTaskInfoNotify()
         {
-            this.taskInfoNotify.Icon = clockatt.Properties.Resources.clockatt256;
+            this.taskInfoNotify.Icon = clockatt.Properties.Resources.catt;
             this.taskInfoNotify.Visible = true;
         }
 
