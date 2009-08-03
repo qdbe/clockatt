@@ -12,7 +12,7 @@
     <AssemblyName>clockatt</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>Resources\clockAttIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\catt.ico</ApplicationIcon>
     <TargetFrameworkSubset>
     </TargetFrameworkSubset>
     <IsWebBootstrapper>true</IsWebBootstrapper>
@@ -211,10 +211,10 @@
     <None Include="app.config" />
     <None Include="JapaneseEquinoxHoliday.data" />
     <None Include="JapaneseHoliday.data" />
-    <None Include="Resources\clockAttIcon.ico" />
+    <None Include="Resources\catt.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="clockAttIcon.ico">
+    <PublishFile Include="catt.ico">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -251,15 +251,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="clockatt256.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\clockatt256.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AboutImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
