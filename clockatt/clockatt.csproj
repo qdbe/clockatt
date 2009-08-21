@@ -62,17 +62,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Configration\CalendarConfigration.cs" />
     <Compile Include="CalenderDayInfo.cs" />
     <Compile Include="CalenderDayPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CalenderDrawInfo.cs" />
-    <Compile Include="CalenderForm.cs">
+    <Compile Include="CalendarForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CalenderForm.Designer.cs">
-      <DependentUpon>CalenderForm.cs</DependentUpon>
+    <Compile Include="CalendarForm.Designer.cs">
+      <DependentUpon>CalendarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Configration\ConfigBaseForm.cs">
       <SubType>Form</SubType>
@@ -148,8 +151,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CalenderForm.resx">
-      <DependentUpon>CalenderForm.cs</DependentUpon>
+    <EmbeddedResource Include="CalendarForm.resx">
+      <DependentUpon>CalendarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Configration\ConfigBaseForm.resx">
       <DependentUpon>ConfigBaseForm.cs</DependentUpon>

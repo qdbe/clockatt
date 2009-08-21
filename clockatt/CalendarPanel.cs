@@ -1,16 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 using clockatt.Configration;
 
 namespace clockatt
 {
-    /// <summary>
-    /// カレンダー表示クラス
-    /// </summary>
-    public partial class CalenderForm : Form
+    public class CalendarPanel : Panel
     {
-        /// <summary>
+        private void InitializeComponent()
+        {
+            this.dayToolTip = new System.Windows.Forms.ToolTip();
+            this.SuspendLayout();
+            // 
+            // dayToolTip
+            // 
+            this.dayToolTip.AutoPopDelay = 5000;
+            this.dayToolTip.InitialDelay = 100;
+            this.dayToolTip.ReshowDelay = 100;
+            // 
+            // CalenderForm
+            // 
+            this.BackColor = global::clockatt.Properties.Settings.Default.Cal_BackColor;
+            this.ClientSize = new System.Drawing.Size(178, 208);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::clockatt.Properties.Settings.Default, "Cal_BackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::clockatt.Properties.Settings.Default, "Cal_Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::clockatt.Properties.Settings.Default, "Cal_ForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Font = global::clockatt.Properties.Settings.Default.Cal_Font;
+            this.ForeColor = global::clockatt.Properties.Settings.Default.Cal_ForeColor;
+            this.Name = "CalenderForm";
+            this.Text = "CalenderForm";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CalenderForm_MouseDown);
+            this.ResumeLayout(false);
+        }
+
+        private System.Windows.Forms.ToolTip dayToolTip;
+
+                /// <summary>
         /// 描画開始位置 X
         /// </summary>
         private const int StartLeft = 10;
@@ -32,7 +59,7 @@ namespace clockatt
         /// <summary>
         /// 呼び出し元フォーム(親の位置に合わせてダイアログを表示するため)
         /// </summary>
-        private Form CallerForm { get; set; }
+        private Form Caller { get; set; }
 
         /// <summary>
         /// 休日設定
@@ -54,6 +81,23 @@ namespace clockatt
         /// </summary>
         private CalendarConfigration Config { get; set; }
 
+        private bool isInitialized = false;
+
+        /// <summary>
+        /// パネルのサイズ変更があった場合のイベント
+        /// </summary>
+        /// 
+        private event SizeChangedEventHandler pPanelSizeChanged = null;
+        public event SizeChangedEventHandler PanelSizeChanged
+        {
+            add { this.pPanelSizeChanged += value; }
+            remove { this.pPanelSizeChanged -= value; }
+        }
+
+        public CalendarPanel()
+        {
+        }
+
 
         /// <summary>
         /// コンストラクタ
@@ -61,9 +105,9 @@ namespace clockatt
         /// <param name="parent"></param>
         /// <param name="holidays"></param>
         /// <param name="config"></param>
-        public CalenderForm(Form parent, HolidayConfigCollection[] holidays, CalendarConfigration config)
+        public CalendarPanel(Form parent, HolidayConfigCollection[] holidays, CalendarConfigration config)
         {
-            this.CallerForm = parent;
+            this.Caller = parent;
             this.Config = config;
             this.pHolidays = holidays;
             this.BackColor = config.BackColor;
@@ -75,6 +119,8 @@ namespace clockatt
             CreateChildControls();
 
             SetPaintLocationInfo();
+
+            this.isInitialized = true;
 
             InvalidateWithChild();
         }
@@ -108,8 +154,11 @@ namespace clockatt
                 this.DispMonth,
                 dayPanes,
                 this.CreateGraphics());
+
+            SizeChangedEventArgs sizeChangeArg = new SizeChangedEventArgs(this.Size, needSize);
+
             this.Size = needSize;
-            ResetPos(needSize);
+            ResetCallerSize(sizeChangeArg);
         }
 
         /// <summary>
@@ -126,33 +175,12 @@ namespace clockatt
         /// 自身の表示位置を設定する
         /// </summary>
         /// <param name="needSize"></param>
-        private void ResetPos(Size needSize)
+        private void ResetCallerSize(SizeChangedEventArgs sizeChangeArg)
         {
-            // 親の右端から
-            Point newpos = this.CallerForm.Location;
-            newpos.X += this.CallerForm.Width;
-            newpos.Y += this.CallerForm.Height;
-
-            newpos.X -= needSize.Width;
-            if (newpos.X <= 0)
+            if (this.pPanelSizeChanged != null)
             {
-                newpos.X = 0;
+                this.pPanelSizeChanged(this, sizeChangeArg);
             }
-            if (newpos.X + needSize.Width > Screen.PrimaryScreen.WorkingArea.Width)
-            {
-                newpos.X = Screen.PrimaryScreen.WorkingArea.Width - needSize.Width;
-            }
-
-            if (newpos.Y <= 0)
-            {
-                newpos.Y = 0;
-            }
-            if (newpos.Y + needSize.Height > Screen.PrimaryScreen.WorkingArea.Height)
-            {
-                newpos.Y = Screen.PrimaryScreen.WorkingArea.Height - needSize.Height;
-            }
-
-            this.Location = newpos;
         }
 
         /// <summary>
@@ -161,6 +189,9 @@ namespace clockatt
         /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
+            if (this.DesignMode == true) return;
+            if (this.isInitialized == false) return;
+
             e.Graphics.SetClip(e.ClipRectangle);
             this.dayInfos.Draw(e.ClipRectangle, e.Graphics);
         }
@@ -211,28 +242,28 @@ namespace clockatt
             SetDisplayDateTime(dt);
         }
 
-        /// <summary>
-        /// 自身のフォーカスを失った場合には、自動的に閉じる
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void CalenderForm_LostFocus(object sender, System.EventArgs e)
-        {
-            this.Close();
-        }
-
-        /// <summary>
-        /// エスケープキーでも自身を閉じる
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CalenderForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Close();
-            }
-        }
     }
 
+    public class SizeChangedEventArgs : EventArgs
+    {
+        public Size OldSize { get; private set; }
+        public Size NewSize { get; private set; }
+        public Size DiffSize { get; private set; }
+
+        public SizeChangedEventArgs(Size oldSize, Size newSize)
+        {
+
+            this.OldSize = new Size(oldSize.Width, oldSize.Height);
+            this.NewSize = new Size(newSize.Width, newSize.Height);
+            this.DiffSize = this.CalculateDiffSize(oldSize, newSize);
+        }
+
+        private Size CalculateDiffSize(Size oldSize, Size newSize)
+        {
+            return Size.Subtract(oldSize, newSize);
+        }
+
+    }
+
+    public delegate void SizeChangedEventHandler(object sender, SizeChangedEventArgs e);
 }
