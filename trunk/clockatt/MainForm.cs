@@ -532,7 +532,7 @@ namespace clockatt
         {
             CalendarConfigration calConf = new CalendarConfigration(Properties.Settings.Default);
 
-            CalenderForm dlg = new CalenderForm(this, this.HolidaySettings, calConf);
+            CalendarForm dlg = new CalendarForm(this, this.HolidaySettings, calConf);
             dlg.ShowDialog(this);
         }
 
