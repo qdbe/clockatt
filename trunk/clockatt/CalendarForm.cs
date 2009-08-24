@@ -25,9 +25,9 @@ namespace clockatt
         {
             InitializeComponent();
 
-            this.calendarPanel = new CalendarPanel(this, holidays, config);
-            this.calendarPanel.PanelSizeChanged += new SizeChangedEventHandler(calendarPanel_PanelSizeChanged);
             this.CallerForm = parent;
+            this.calendarPanel.PanelSizeChanged += new SizeChangedEventHandler(calendarPanel_PanelSizeChanged);
+            this.calendarPanel.Initialize(this, holidays, config);
             this.BackColor = config.BackColor;
 
             InvalidateWithChild();
@@ -56,6 +56,8 @@ namespace clockatt
             Point newpos = this.CallerForm.Location;
             newpos.X += this.CallerForm.Width;
             newpos.Y += this.CallerForm.Height;
+
+            this.Size = needSize;
 
             newpos.X -= needSize.Width;
             if (newpos.X <= 0)

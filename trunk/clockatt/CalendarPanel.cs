@@ -24,14 +24,11 @@ namespace clockatt
             // 
             this.BackColor = global::clockatt.Properties.Settings.Default.Cal_BackColor;
             this.ClientSize = new System.Drawing.Size(178, 208);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::clockatt.Properties.Settings.Default, "Cal_BackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::clockatt.Properties.Settings.Default, "Cal_Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::clockatt.Properties.Settings.Default, "Cal_ForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.Font = global::clockatt.Properties.Settings.Default.Cal_Font;
             this.ForeColor = global::clockatt.Properties.Settings.Default.Cal_ForeColor;
             this.Name = "CalenderForm";
             this.Text = "CalenderForm";
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CalenderForm_MouseDown);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CalenderPanel_MouseDown);
             this.ResumeLayout(false);
         }
 
@@ -46,6 +43,8 @@ namespace clockatt
         /// 描画開始位置 Y
         /// </summary>
         private const int StartTop = 5;
+
+
 
         /// <summary>
         /// 現在表示中の年
@@ -94,25 +93,29 @@ namespace clockatt
             remove { this.pPanelSizeChanged -= value; }
         }
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public CalendarPanel()
         {
+            InitializeComponent();
+            SetDisplayDateTime(DateTime.Now);
         }
 
 
         /// <summary>
-        /// コンストラクタ
+        /// 初期化処理
+        /// 当パネルを生成した後、この処理を実施しないと描画されない
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="holidays"></param>
         /// <param name="config"></param>
-        public CalendarPanel(Form parent, HolidayConfigCollection[] holidays, CalendarConfigration config)
+        public void Initialize(Form parent, HolidayConfigCollection[] holidays, CalendarConfigration config)
         {
             this.Caller = parent;
             this.Config = config;
             this.pHolidays = holidays;
             this.BackColor = config.BackColor;
-
-            InitializeComponent();
 
             SetDisplayDateTime(DateTime.Now);
 
@@ -131,7 +134,7 @@ namespace clockatt
         private void CreateChildControls()
         {
             this.dayInfos = new CalenderDrawInfo(this.pHolidays, this.Config);
-            this.dayPanes = CalenderDayPanel.CreatePanels(this, CalenderDrawInfo.MaxDayCount, new MouseEventHandler(DoMouseClick));
+            this.dayPanes = CalenderDayPanel.CreatePanels(this, new MouseEventHandler(DoMouseClick));
         }
 
         /// <summary>
@@ -202,8 +205,9 @@ namespace clockatt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void CalenderForm_MouseDown(object sender, MouseEventArgs e)
+        public void CalenderPanel_MouseDown(object sender, MouseEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("CalenderForm_MouseDown");
             this.DoMouseClick(sender, e);
         }
 
@@ -244,10 +248,22 @@ namespace clockatt
 
     }
 
+    /// <summary>
+    /// サイズ変更に伴う情報の引数
+    /// </summary>
     public class SizeChangedEventArgs : EventArgs
     {
+        /// <summary>
+        /// 以前のサイズ
+        /// </summary>
         public Size OldSize { get; private set; }
+        /// <summary>
+        /// 新しいサイズ
+        /// </summary>
         public Size NewSize { get; private set; }
+        /// <summary>
+        /// サイズの差分
+        /// </summary>
         public Size DiffSize { get; private set; }
 
         public SizeChangedEventArgs(Size oldSize, Size newSize)
@@ -260,7 +276,7 @@ namespace clockatt
 
         private Size CalculateDiffSize(Size oldSize, Size newSize)
         {
-            return Size.Subtract(oldSize, newSize);
+            return Size.Subtract(newSize, oldSize);
         }
 
     }

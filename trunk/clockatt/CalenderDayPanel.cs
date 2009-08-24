@@ -6,12 +6,17 @@ using System.Windows.Forms;
 
 namespace clockatt
 {
-    class CalenderDayPanel : Panel, clockatt.ICalenderDayPanel
+    class CalenderDayPanel : Panel
     {
         /// <summary>
         /// 表示する日
         /// </summary>
         public int DispDay { get; private set; }
+
+        /// <summary>
+        /// 一ヶ月の最大日数
+        /// </summary>
+        public const int MaxDayCount = 31;
 
         /// <summary>
         /// 休日名称を表示する為のToolTip
@@ -47,6 +52,8 @@ namespace clockatt
             this.MouseDown += new MouseEventHandler(CalenderDayPanel_MouseDown);
         }
 
+
+
         /// <summary>
         /// コンストラクタはこのメソッドを通じてのみ行う
         /// </summary>
@@ -54,11 +61,11 @@ namespace clockatt
         /// <param name="createCount"></param>
         /// <param name="mouseDownDay"></param>
         /// <returns></returns>
-        public static CalenderDayPanel[] CreatePanels(Control parents, int createCount, MouseEventHandler mouseDownDay)
+        public static CalenderDayPanel[] CreatePanels(Control parents, MouseEventHandler mouseDownDay)
         {
             parents.SuspendLayout();
 
-            CalenderDayPanel[] panels = new CalenderDayPanel[createCount];
+            CalenderDayPanel[] panels = new CalenderDayPanel[MaxDayCount];
 
             for (int i = 0; i < panels.Length; i++)
             {
@@ -91,6 +98,8 @@ namespace clockatt
                         e.X + this.Location.X,
                         e.Y + this.Location.Y,
                         e.Delta);
+
+                    System.Diagnostics.Debug.WriteLine("CalenderDayPanel_MouseDown");
 
                     this.MouseDownOnDay(Parent, args);
                }

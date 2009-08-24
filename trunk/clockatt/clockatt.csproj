@@ -141,7 +141,6 @@
     </Compile>
     <Compile Include="HolidayConfigCollection.cs" />
     <Compile Include="HolidayConfig.cs" />
-    <Compile Include="ICalenderDayPanel.cs" />
     <Compile Include="IConfig.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
