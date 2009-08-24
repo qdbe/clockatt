@@ -150,10 +150,18 @@ namespace clockatt
             {
                 this.LogDir = this.LogDir + "\\";
             }
-            FileInfo fi = new FileInfo(this.LogDir +
-                currentDateTime.ToString(LogFileNameFormat) +
-                LogFileExtension);
+            FileInfo fi = new FileInfo(MakeLogFileName(currentDateTime));
             return fi;
+        }
+
+        private string MakeLogFileName(DateTime currentDateTime)
+        {
+            return this.LogDir +
+                            currentDateTime.ToString(LogFileNameFormat) +
+                            "." +
+                            System.Diagnostics.Process.GetCurrentProcess().Id.ToString() +
+                            "." +
+                            LogFileExtension;
         }
 
         /// <summary>

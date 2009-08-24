@@ -94,6 +94,11 @@ namespace clockatt
         /// <param name="holidays"></param>
         public CalenderDayInfo(DateTime dt, Rectangle rect, HolidayConfigCollection []holidays)
         {
+            Initialize(dt, rect, holidays);
+        }
+
+        private void Initialize(DateTime dt, Rectangle rect, HolidayConfigCollection[] holidays)
+        {
             this.pDispDay = dt;
             this.pDispRect = rect;
             this.pHolidayName = string.Empty;

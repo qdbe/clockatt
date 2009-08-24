@@ -45,7 +45,7 @@
             this.ClockIsShowSecond = new clockatt.FormControls.CheckBoxSelector();
             this.ClockIsShowYear = new clockatt.FormControls.CheckBoxSelector();
             this.calendarTab = new System.Windows.Forms.TabPage();
-            this.calendarSamplePanel = new System.Windows.Forms.Panel();
+            this.calendarSamplePanel = new clockatt.CalendarPanel();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -315,11 +315,15 @@
             // 
             // calendarSamplePanel
             // 
+            this.calendarSamplePanel.BackColor = System.Drawing.Color.LightSteelBlue;
             this.calendarSamplePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarSamplePanel.Font = new System.Drawing.Font("MS UI Gothic", 12F);
+            this.calendarSamplePanel.ForeColor = System.Drawing.Color.Black;
             this.calendarSamplePanel.Location = new System.Drawing.Point(47, 235);
             this.calendarSamplePanel.Name = "calendarSamplePanel";
             this.calendarSamplePanel.Size = new System.Drawing.Size(196, 164);
             this.calendarSamplePanel.TabIndex = 40;
+            this.calendarSamplePanel.Text = "CalenderForm";
             // 
             // label13
             // 
@@ -636,7 +640,6 @@
         private clockatt.FormControls.TabSelector configTabs;
         private System.Windows.Forms.TabPage clockTab;
         private System.Windows.Forms.TabPage calendarTab;
-        private System.Windows.Forms.Panel calendarSamplePanel;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label1;
@@ -682,5 +685,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
+        private CalendarPanel calendarSamplePanel;
     }
 }

@@ -16,14 +16,6 @@ namespace clockatt.Configration
         /// カレンダーの表示設定
         /// </summary>
         private CalendarConfigration dispConfig;
-        /// <summary>
-        /// カレンダーの描画設定
-        /// </summary>
-        private CalenderDrawInfo dayInfos;
-        /// <summary>
-        /// カレンダーの日パネル
-        /// </summary>
-        private CalenderDayPanel[] daypanels;
 
         /// <summary>
         /// デザイン用コンストラクタ
@@ -95,15 +87,15 @@ namespace clockatt.Configration
             this.CalBackColor.SetSampleObject(this.calendarSamplePanel, "BackColor");
 
             this.dispConfig = new CalendarConfigration(this.SettingData);
-            this.dayInfos = new CalenderDrawInfo(holidays, this.dispConfig);
 
-            this.daypanels = CalenderDayPanel.CreatePanels(this.calendarSamplePanel, CalenderDrawInfo.MaxDayCount, null);
-            Size needSize = dayInfos.SetLocation(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
-                this.calendarSamplePanel.CreateGraphics());
-            this.calendarSamplePanel.Width = needSize.Width;
-            this.calendarSamplePanel.Height = needSize.Height;
+            this.calendarSamplePanel.Initialize(this, holidays, this.dispConfig);
 
-            this.calendarSamplePanel.Paint += new PaintEventHandler(sampleCalendarPanel_Paint);
+            this.calendarSamplePanel.PanelSizeChanged += new SizeChangedEventHandler(calendarSamplePanel_PanelSizeChanged);
+        }
+
+        void calendarSamplePanel_PanelSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            this.Size = Size.Add(this.Size, e.DiffSize);
         }
 
         /// <summary>
@@ -116,17 +108,6 @@ namespace clockatt.Configration
             this.calendarSamplePanel.BackColor = this.dispConfig.BackColor;
         }
 
-        /// <summary>
-        /// カレンダーサンプル表示の描画は独自に行う
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void sampleCalendarPanel_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SetClip(e.ClipRectangle);
-            this.dayInfos.Draw(e.ClipRectangle, e.Graphics);
-        }
-
 
         /// <summary>
         /// サンプル連動設定変更
@@ -135,12 +116,6 @@ namespace clockatt.Configration
         /// <param name="e"></param>
         void selector_SampleCalendarPropertyChanged(object sender, EventArgs e)
         {
-            Size needSize = dayInfos.SetLocation(10, 10, DateTime.Now.Year, DateTime.Now.Month, daypanels,
-                this.calendarSamplePanel.CreateGraphics());
-            int diffHeight = needSize.Height - this.calendarSamplePanel.Height;
-            this.Height += diffHeight;
-            this.calendarSamplePanel.Width = needSize.Width;
-            this.calendarSamplePanel.Height = needSize.Height;
             this.Invalidate(true);
         }
 
