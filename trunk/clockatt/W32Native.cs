@@ -109,5 +109,19 @@ namespace W32NativeService
         /// <returns></returns>
         [DllImport("User32.dll")]
         public static extern int IsWindowVisible(IntPtr hWnd);
+
+        /// <summary>
+        /// 表示要素の幅と高さ を取得する
+        /// </summary>
+        /// <param name="nIndex">取得するべきシステムメトリックまたは現在の構成を指定</param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        static extern int GetSystemMetrics(int nIndex);
+
+        public static int GetTitleButtonSize()
+        {
+            const int SM_CXSMSIZE = 30;
+            return W32Native.GetSystemMetrics(SM_CXSMSIZE);
+        }
     }
 }
