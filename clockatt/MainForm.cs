@@ -333,6 +333,7 @@ namespace clockatt
             ar.Add(W32Native.wTITLEELEMENT.TITLE_MAX_BUTTON);
             ar.Add(W32Native.wTITLEELEMENT.TITLE_MIN_BUTTON);
             int leftLength = 0;
+            int buttonWidth = W32Native.GetTitleButtonSize();
             for (int i = 0; i < ar.Count; i++)
             {
                 if (
@@ -340,7 +341,7 @@ namespace clockatt
                     !((tbi.rgstate[(int)ar[i]] & W32Native.STATE_SYSTEM_OFFSCREEN) == W32Native.STATE_SYSTEM_OFFSCREEN)
                 )
                 {
-                    leftLength += titleHeight - 1;
+                    leftLength += buttonWidth + 1;
                 }
             }
             int leftposx = info.rcWindow.right - this.Width - leftLength - 1;
