@@ -56,6 +56,12 @@ namespace clockatt
         /// 日時表示文字列
         /// </summary>
         public string DispString { get; set; }
+
+        /// <summary>
+        /// 現在表示中か否か
+        /// </summary>
+        private bool IsShowing { get; set; }
+
         #endregion メンバ
 
         #region メイン処理
@@ -68,6 +74,7 @@ namespace clockatt
             InitializeComponent();
             this.Icon = clockatt.Properties.Resources.catt;
             this.SetDateTimeLabel();
+            this.IsShowing = true;
             logger = new TitileHistoryLogger();
         }
 
@@ -321,12 +328,69 @@ namespace clockatt
         /// <param name="info"></param>
         private void SetWindowRectangle(int hwnd, W32Native.wWINDOWINFO info)
         {
+            if (this.IsShowing == false)
+            {
+                return;
+            }
+
             W32Native.wTITLEBARINFO tbi = new W32Native.wTITLEBARINFO();
             tbi.cbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(tbi);
             bool result = W32Native.GetTitleBarInfo((IntPtr)hwnd, ref tbi);
             // Get TitleBar Size
             int titleHeight = tbi.rcTitleBar.bottom - tbi.rcTitleBar.top;
+            if (result == false ||
+                titleHeight < 0 ||
+                tbi.rcTitleBar.bottom < 0)
+            {
+                this.Hide();
+                return;
+            }
+            if (this.Visible == false)
+            {
+                this.Show();
+            }
             int titleWidth = tbi.rcTitleBar.right - tbi.rcTitleBar.left;
+
+            int buttonWidth = GetButtonWidth(tbi);
+            int leftposx = GetLeftPos(info, buttonWidth);
+            Point newpos = new Point(leftposx, info.rcWindow.top + 4);
+
+            int newheight = titleHeight - 2;
+
+            if( newheight > Screen.PrimaryScreen.WorkingArea.Height ||
+                newheight < 0 )
+            {
+                newheight = 0;
+            }
+
+            // 前回と同じ結果である
+            if (this.Height == newheight &&
+                newpos.Equals(this.Location))
+            {
+                return;
+            }
+            System.Diagnostics.Debug.WriteLine(string.Format("height={0}", newheight));
+
+            if ((titleWidth - this.Width - buttonWidth - 1) < 0)
+            {
+                this.Hide();
+            }
+            else
+            {
+                this.Show();
+            }
+            this.Location = new Point(newpos.X, newpos.Y);
+            this.Height = newheight;
+        }
+
+        private int GetLeftPos(W32Native.wWINDOWINFO info, int leftLength)
+        {
+            int leftposx = info.rcWindow.right - this.Width - leftLength - 1;
+            return leftposx;
+        }
+
+        private int GetButtonWidth(W32Native.wTITLEBARINFO tbi)
+        {
             ArrayList ar = new ArrayList();
             ar.Add(W32Native.wTITLEELEMENT.TITLE_CLOSE_BUTTON);
             ar.Add(W32Native.wTITLEELEMENT.TITLE_HELP_BUTTON);
@@ -344,34 +408,7 @@ namespace clockatt
                     leftLength += buttonWidth + 1;
                 }
             }
-            int leftposx = info.rcWindow.right - this.Width - leftLength - 1;
-            Point newpos = new Point(leftposx, info.rcWindow.top + 3);
-            int newheight = titleHeight - 2;
-
-            if( newheight > Screen.PrimaryScreen.WorkingArea.Height ||
-                newheight < 0 )
-            {
-                newheight = 0;
-            }
-
-            // 前回と同じ結果である
-            if (this.Height == newheight &&
-                newpos.Equals(this.Location))
-            {
-                return;
-            }
-
-            if ((titleWidth - this.Width - leftLength - 1) < 0)
-            {
-                this.Hide();
-            }
-            else
-            {
-                this.Show();
-            }
-            this.Location = new Point(leftposx, info.rcWindow.top + 4);
-            this.Height = newheight;
-
+            return leftLength;
         }
 
         /// <summary>
@@ -523,6 +560,7 @@ namespace clockatt
         /// </summary>
         private void OpenContextMenu()
         {
+
             this.RightClickMenu.Show(this, 0, 0);
         }
 
@@ -611,5 +649,29 @@ namespace clockatt
 #endif
         }
         #endregion ヘルプ表示
+
+        private void miShowHide_Click(object sender, EventArgs e)
+        {
+            toggleVisible();
+        }
+
+
+        private void toggleVisible()
+        {
+            if (this.Visible == true)
+            {
+                this.IsShowing = false;
+                this.Hide();
+                this.TopMost = false;
+                this.miShowHide.Text = "表示する";
+            }
+            else
+            {
+                this.IsShowing = true;
+                this.Show();
+                this.TopMost = true;
+                this.miShowHide.Text = "非表示にする";
+            }
+        }
     }
 }
