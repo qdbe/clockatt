@@ -658,7 +658,7 @@ namespace clockatt
 
         private void toggleVisible()
         {
-            if (this.Visible == true)
+            if (this.IsShowing == true)
             {
                 this.IsShowing = false;
                 this.Hide();
