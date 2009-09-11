@@ -73,6 +73,7 @@ namespace clockatt
             this.DrawBrush = new SolidBrush(this.ForeColor);
             InitializeComponent();
             this.Icon = clockatt.Properties.Resources.catt;
+            this.Height = 0;
             this.SetDateTimeLabel();
             this.IsShowing = true;
             logger = new TitileHistoryLogger();
@@ -345,10 +346,6 @@ namespace clockatt
                 this.Hide();
                 return;
             }
-            if (this.Visible == false)
-            {
-                this.Show();
-            }
             int titleWidth = tbi.rcTitleBar.right - tbi.rcTitleBar.left;
 
             int buttonWidth = GetButtonWidth(tbi);
@@ -362,14 +359,27 @@ namespace clockatt
             {
                 newheight = 0;
             }
+            if (newpos.Y < 0)
+            {
+                newpos.Y = 0;
+            }
+
+            if (newheight == 0)
+            {
+                this.Hide();
+                return;
+            }
 
             // 前回と同じ結果である
             if (this.Height == newheight &&
                 newpos.Equals(this.Location))
             {
+                if (this.Visible == false)
+                {
+                    this.Show();
+                }
                 return;
             }
-            System.Diagnostics.Debug.WriteLine(string.Format("height={0}", newheight));
 
             if ((titleWidth - this.Width - buttonWidth - 1) < 0)
             {
@@ -377,10 +387,9 @@ namespace clockatt
             }
             else
             {
+                this.Location = new Point(newpos.X, newpos.Y);
                 this.Show();
             }
-            this.Location = new Point(newpos.X, newpos.Y);
-            this.Height = newheight;
         }
 
         private int GetLeftPos(W32Native.wWINDOWINFO info, int leftLength)
