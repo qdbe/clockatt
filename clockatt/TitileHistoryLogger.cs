@@ -41,6 +41,11 @@ namespace clockatt
         /// </summary>
         private const string LogFileFormat = "{0}\t{1}\t{2}\t{3}\t{4}";
 
+        /// <summary>
+        /// ログの見出し
+        /// </summary>
+        private const string LogFileTitleFormat = "開始日時\t開始時間\t作業時間\tプロセス名\tタイトル";
+
 
         /// <summary>
         /// ログ出力用ストリーム
@@ -48,19 +53,51 @@ namespace clockatt
         private StreamWriter logStreamWriter;
 
         /// <summary>
-        /// 前回出力ログ内容
-        /// </summary>
-        private string preOutput = string.Empty;
-
-        /// <summary>
-        /// 前回出力ログ内容
-        /// </summary>
-        private DateTime preTime = DateTime.Now;
-
-        /// <summary>
         /// 一定時間にログにフラッシュする為のタイマー
         /// </summary>
         private System.Windows.Forms.Timer flushTimer;
+
+        /// <summary>
+        /// 出力情報
+        /// </summary>
+        class OutputInfo
+        {
+            internal string ProgramName { get; set; }
+            internal string TitleName { get; set; }
+            internal DateTime StartTime { get; set; }
+
+            internal OutputInfo(string pgName, string titleName, DateTime startTime)
+            {
+                this.ProgramName = pgName;
+                this.TitleName = titleName;
+                this.StartTime = startTime;
+            }
+
+            /// <summary>
+            /// 同一値か否か
+            /// </summary>
+            /// <param name="pgName"></param>
+            /// <param name="titleName"></param>
+            /// <returns></returns>
+            internal bool IsSame(string pgName, string titleName)
+            {
+                return (pgName == this.ProgramName && titleName == this.TitleName) ? true : false;
+            }
+
+            /// <summary>
+            /// 初回は空白が入るので、その情報は出力する必要なし
+            /// </summary>
+            /// <returns></returns>
+            internal bool IsValid()
+            {
+                return this.ProgramName != string.Empty ? true : false;
+            }
+        }
+
+        /// <summary>
+        /// 出力情報の記憶用
+        /// </summary>
+        OutputInfo preInfo;
 
         /// <summary>
         /// コンストラクタ
@@ -68,6 +105,8 @@ namespace clockatt
         public TitileHistoryLogger()
         {
             this.LogFile = null;
+
+            preInfo = new OutputInfo("", "", DateTime.Now);
 
             InitFlushTimer();
         }
@@ -105,11 +144,10 @@ namespace clockatt
         /// <param name="titleText"></param>
         public void LogOutput(int logRetainDay, string logDir, string titleText, string processName)
         {
-            if (preOutput == titleText)
+            if( this.preInfo.IsSame(processName, titleText ) == true )
             {
                 return;
             }
-            preOutput = titleText;
 
             DateTime currentDateTime = DateTime.Now;
 
@@ -119,8 +157,20 @@ namespace clockatt
 
             DeleteOldLogIfNeed(currentDateTime);
 
+            LogOutPutDetail(currentDateTime);
+
+            this.preInfo = new OutputInfo(processName, titleText, currentDateTime);
+        }
+
+
+        private void LogOutPutDetail(DateTime currentDateTime)
+        {
+            if (this.preInfo.IsValid() == false)
+            {
+                return;
+            }
             this.logStreamWriter.WriteLine(
-                CreateLogOutput(titleText, processName, currentDateTime)
+                CreateLogOutput(currentDateTime)
                 );
         }
 
@@ -130,15 +180,15 @@ namespace clockatt
         /// <param name="titleText"></param>
         /// <param name="currentDateTime"></param>
         /// <returns></returns>
-        private string CreateLogOutput(string titleText, string processName, DateTime currentDateTime)
+        private string CreateLogOutput(DateTime currentDateTime)
         {
             string writeLog = string.Format(
                 LogFileFormat,
-                currentDateTime.ToShortDateString(),
-                currentDateTime.ToLongTimeString(),
-                (currentDateTime - this.preTime).ToString(),
-                processName,
-                titleText);
+                this.preInfo.StartTime.ToShortDateString(),
+                this.preInfo.StartTime.ToLongTimeString(),
+                (currentDateTime - this.preInfo.StartTime).ToString(),
+                this.preInfo.ProgramName,
+                this.preInfo.TitleName);
             return writeLog;
         }
 
@@ -188,7 +238,7 @@ namespace clockatt
                 this.logStreamWriter.Close();
             }
             this.logStreamWriter = new StreamWriter(this.LogFile.Open(FileMode.Append,FileAccess.Write,FileShare.Read), Encoding.GetEncoding("shift-jis"));
-            this.logStreamWriter.WriteLine("開始日時\t開始時間\t作業時間\tプロセス名\tタイトル");
+            this.logStreamWriter.WriteLine(LogFileTitleFormat);
         }
 
         /// <summary>
@@ -233,6 +283,9 @@ namespace clockatt
             }
             if (logStreamWriter != null)
             {
+                this.logStreamWriter.WriteLine(
+                    CreateLogOutput(DateTime.Now)
+                    );
                 logStreamWriter.Flush();
                 logStreamWriter.Close();
                 logStreamWriter.Dispose();
