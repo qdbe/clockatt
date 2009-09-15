@@ -454,9 +454,17 @@ namespace clockatt
             {
                 StringBuilder titleSb = new StringBuilder(200);
                 W32Native.GetWindowText(hwnd, titleSb, 100);
+
+                uint wpid = 0;
+                W32Native.GetWindowThreadProcessId((IntPtr)hwnd, ref wpid);
+
+                Process p = Process.GetProcessById((int)wpid);
+
                 logger.LogOutput(Properties.Settings.Default.TitleHistoryLogRetainDay,
                     Properties.Settings.Default.TitleHistoryLogDir,
-                    titleSb.ToString());
+                    titleSb.ToString(),
+                    p.ProcessName
+                    );
             }
         }
 
