@@ -112,10 +112,11 @@ namespace clockatt
         /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            if( this.DrawDay != null )
+            if( this.DrawDay == null )
             {
-                this.DrawDay(this, e);
+                return;
             }
+            this.DrawDay(this, e);
         }
 
         /// <summary>

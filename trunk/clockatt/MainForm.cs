@@ -251,7 +251,7 @@ namespace clockatt
         /// <param name="e"></param>
         private void LocateTimer_Tick(object sender, EventArgs e)
         {
-            SetForeGround();
+            SetWindowOnActiveTitle();
         }
 
         #endregion タイマー関連
@@ -262,7 +262,7 @@ namespace clockatt
         /// <summary>
         /// カレントウィンドウ位置をアクティブウィンドウのタイトルバーにあわせる
         /// </summary>
-        private void SetForeGround()
+        private void SetWindowOnActiveTitle()
         {
             int hwnd = GetForeGroundWhnd();
             if (hwnd == 0)
@@ -303,18 +303,15 @@ namespace clockatt
             }
             if (hwnd == (int)this.Handle)
             {
-                // アクティブウィンドが自分自身だった場合は
+                // 直前のアクティブウィンドが自分自身だった場合は
                 if (preHwnd == 0)
                 {
-                    // 前のアクティブウィンドウがない場合にはデスクトップ右上にする
                     this.SetDeskTopRight();
                     return NOCURRENTWINDOW;
                 }
                 hwnd = this.preHwnd;
             }
-            uint wpid = 0;
-            W32Native.GetWindowThreadProcessId((IntPtr)hwnd, ref wpid);
-            if (Process.GetCurrentProcess().Id == wpid)
+            if (Process.GetCurrentProcess().Id == GetProcessIdFromHwnd(hwnd))
             {
                 return NOCURRENTWINDOW;
             }
@@ -334,68 +331,77 @@ namespace clockatt
                 return;
             }
 
-            W32Native.wTITLEBARINFO tbi = new W32Native.wTITLEBARINFO();
-            tbi.cbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(tbi);
-            bool result = W32Native.GetTitleBarInfo((IntPtr)hwnd, ref tbi);
-            // Get TitleBar Size
-            int titleHeight = tbi.rcTitleBar.bottom - tbi.rcTitleBar.top;
-            if (result == false ||
-                titleHeight < 0 ||
-                tbi.rcTitleBar.bottom < 0)
+            W32Native.wTITLEBARINFO tbi;
+            bool result = GetTitleBarInfo(hwnd, out tbi);
+
+            if (result == false || CheckHeight(tbi) == false)
             {
                 this.Hide();
                 return;
             }
-            int titleWidth = tbi.rcTitleBar.right - tbi.rcTitleBar.left;
 
             int buttonWidth = GetButtonWidth(tbi);
-            int leftposx = GetLeftPos(info, buttonWidth);
-            Point newpos = new Point(leftposx, info.rcWindow.top + 4);
 
-            int newheight = titleHeight - 2;
 
-            if( newheight > Screen.PrimaryScreen.WorkingArea.Height ||
-                newheight < 0 )
-            {
-                newheight = 0;
-            }
-            if (newpos.Y < 0)
-            {
-                newpos.Y = 0;
-            }
-
-            if (newheight == 0)
+            if( CheckWidth(tbi, buttonWidth) == false )
             {
                 this.Hide();
                 return;
             }
 
-            // 前回と同じ結果である
-            if (this.Height == newheight &&
-                newpos.Equals(this.Location))
+            this.Location = GetLeftPos(info, buttonWidth);
+            if (this.Visible == false)
             {
-                if (this.Visible == false)
-                {
-                    this.Show();
-                }
-                return;
-            }
-
-            if ((titleWidth - this.Width - buttonWidth - 1) < 0)
-            {
-                this.Hide();
-            }
-            else
-            {
-                this.Location = new Point(newpos.X, newpos.Y);
                 this.Show();
             }
         }
 
-        private int GetLeftPos(W32Native.wWINDOWINFO info, int leftLength)
+        private bool CheckWidth(W32Native.wTITLEBARINFO tbi, int buttonWidth)
         {
-            int leftposx = info.rcWindow.right - this.Width - leftLength - 1;
-            return leftposx;
+            int titleWidth = tbi.rcTitleBar.right - tbi.rcTitleBar.left;
+
+            if ((titleWidth - this.Width - buttonWidth - 1) < 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+
+        private bool CheckHeight(W32Native.wTITLEBARINFO tbi)
+        {
+            int titleHeight = tbi.rcTitleBar.bottom - tbi.rcTitleBar.top;
+            if (titleHeight < 0 ||
+                tbi.rcTitleBar.bottom < 0)
+            {
+                return false;
+            }
+            int newheight = titleHeight - 2;
+
+            if (newheight > Screen.PrimaryScreen.WorkingArea.Height ||
+                newheight == 0 ||
+                newheight < 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool GetTitleBarInfo(int hwnd, out W32Native.wTITLEBARINFO tbi)
+        {
+            tbi = new W32Native.wTITLEBARINFO();
+            tbi.cbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(tbi);
+            return W32Native.GetTitleBarInfo((IntPtr)hwnd, ref tbi);
+        }
+
+        private Point GetLeftPos(W32Native.wWINDOWINFO info, int buttonWidth)
+        {
+            return new Point(
+                info.rcWindow.right - this.Width - buttonWidth - 1, 
+                ( info.rcWindow.top + 4 ) >= 0 ? info.rcWindow.top + 4 : 0 
+                );
         }
 
         private int GetButtonWidth(W32Native.wTITLEBARINFO tbi)
@@ -450,22 +456,31 @@ namespace clockatt
         /// <param name="hwnd"></param>
         private void OutputTitleHistory(int hwnd)
         {
-            if (Properties.Settings.Default.IsLogTitleHistory == true)
+            if (Properties.Settings.Default.IsLogTitleHistory == false)
             {
-                StringBuilder titleSb = new StringBuilder(200);
-                W32Native.GetWindowText(hwnd, titleSb, 100);
-
-                uint wpid = 0;
-                W32Native.GetWindowThreadProcessId((IntPtr)hwnd, ref wpid);
-
-                Process p = Process.GetProcessById((int)wpid);
-
-                logger.LogOutput(Properties.Settings.Default.TitleHistoryLogRetainDay,
-                    Properties.Settings.Default.TitleHistoryLogDir,
-                    titleSb.ToString(),
-                    p.ProcessName
-                    );
+                return;
             }
+
+            StringBuilder titleSb = new StringBuilder(2048);
+            W32Native.GetWindowText(hwnd, titleSb, 1024);
+
+            int wpid = GetProcessIdFromHwnd(hwnd);
+
+            Process p = Process.GetProcessById(wpid);
+
+            logger.LogOutput(Properties.Settings.Default.TitleHistoryLogRetainDay,
+                Properties.Settings.Default.TitleHistoryLogDir,
+                titleSb.ToString(),
+                p.ProcessName
+                );
+
+        }
+
+        private int GetProcessIdFromHwnd(int hwnd)
+        {
+            uint wpid = 0;
+            W32Native.GetWindowThreadProcessId((IntPtr)hwnd, ref wpid);
+            return (int)wpid;
         }
 
         #endregion アクティブウィンドウ張り付き
@@ -622,6 +637,7 @@ namespace clockatt
         /// <param name="e"></param>
         private void miQuit_Click(object sender, EventArgs e)
         {
+            this.logger.Dispose();
             this.Close();
         }
 

@@ -40,11 +40,6 @@ namespace clockatt
             {
                 formatString.Append("(ddd)");
             }
-            IFormatProvider culture = System.Globalization.CultureInfo.CurrentCulture;
-            if( !isWeekWareki )
-            {
-                culture = System.Globalization.CultureInfo.InvariantCulture;
-            }
 
             if (isShowTime == true)
             {
@@ -56,6 +51,16 @@ namespace clockatt
                 {
                     formatString.Append(" HH:mm");
                 }
+            }
+
+            IFormatProvider culture;
+            if (isWeekWareki)
+            {
+                culture = System.Globalization.CultureInfo.CurrentCulture;
+            }
+            else
+            {
+                culture = System.Globalization.CultureInfo.InvariantCulture;
             }
             return nc.ToString(formatString.ToString(), culture);
         }
