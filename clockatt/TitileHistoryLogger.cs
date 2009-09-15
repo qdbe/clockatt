@@ -39,7 +39,7 @@ namespace clockatt
         /// <summary>
         /// ログ出力フォーマット
         /// </summary>
-        private const string LogFileFormat = "{0}\t{1}\t{2}";
+        private const string LogFileFormat = "{0}\t{1}\t{2}\t{3}\t{4}";
 
 
         /// <summary>
@@ -51,6 +51,11 @@ namespace clockatt
         /// 前回出力ログ内容
         /// </summary>
         private string preOutput = string.Empty;
+
+        /// <summary>
+        /// 前回出力ログ内容
+        /// </summary>
+        private DateTime preTime = DateTime.Now;
 
         /// <summary>
         /// 一定時間にログにフラッシュする為のタイマー
@@ -98,7 +103,7 @@ namespace clockatt
         /// <param name="logRetainDay"></param>
         /// <param name="logDir"></param>
         /// <param name="titleText"></param>
-        public void LogOutput(int logRetainDay, string logDir, string titleText)
+        public void LogOutput(int logRetainDay, string logDir, string titleText, string processName)
         {
             if (preOutput == titleText)
             {
@@ -114,9 +119,9 @@ namespace clockatt
 
             DeleteOldLogIfNeed(currentDateTime);
 
-            string writeLog = CreateLogOutput(titleText, currentDateTime);
-
-            this.logStreamWriter.WriteLine(writeLog);
+            this.logStreamWriter.WriteLine(
+                CreateLogOutput(titleText, processName, currentDateTime)
+                );
         }
 
         /// <summary>
@@ -125,12 +130,14 @@ namespace clockatt
         /// <param name="titleText"></param>
         /// <param name="currentDateTime"></param>
         /// <returns></returns>
-        private static string CreateLogOutput(string titleText, DateTime currentDateTime)
+        private string CreateLogOutput(string titleText, string processName, DateTime currentDateTime)
         {
             string writeLog = string.Format(
                 LogFileFormat,
                 currentDateTime.ToShortDateString(),
                 currentDateTime.ToLongTimeString(),
+                (currentDateTime - this.preTime).ToString(),
+                processName,
                 titleText);
             return writeLog;
         }
@@ -181,6 +188,7 @@ namespace clockatt
                 this.logStreamWriter.Close();
             }
             this.logStreamWriter = new StreamWriter(this.LogFile.Open(FileMode.Append,FileAccess.Write,FileShare.Read), Encoding.GetEncoding("shift-jis"));
+            this.logStreamWriter.WriteLine("開始日時\t開始時間\t作業時間\tプロセス名\tタイトル");
         }
 
         /// <summary>
