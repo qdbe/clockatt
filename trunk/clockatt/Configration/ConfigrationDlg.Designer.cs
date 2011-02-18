@@ -616,6 +616,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfigrationDlg";
+            this.Text = "設定変更";
             this.Load += new System.EventHandler(this.ConfigrationDlg_Load);
             this.Controls.SetChildIndex(this.configTabs, 0);
             this.Controls.SetChildIndex(this.btnReset, 0);

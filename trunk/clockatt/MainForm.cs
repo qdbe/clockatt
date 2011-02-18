@@ -392,8 +392,15 @@ namespace clockatt
         private bool GetTitleBarInfo(int hwnd, out W32Native.wTITLEBARINFO tbi)
         {
             tbi = new W32Native.wTITLEBARINFO();
-            tbi.cbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(tbi);
-            return W32Native.GetTitleBarInfo((IntPtr)hwnd, ref tbi);
+            try
+            {
+                tbi.cbSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(tbi);
+                return W32Native.GetTitleBarInfo((IntPtr)hwnd, ref tbi);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private Point GetLeftPos(W32Native.wWINDOWINFO info, int buttonWidth)
@@ -436,7 +443,15 @@ namespace clockatt
         {
             info = new W32Native.wWINDOWINFO();
             info.cbSize = (uint)Marshal.SizeOf(info);
-            bool ret = W32Native.GetWindowInfo((IntPtr)hwnd, ref info);
+            bool ret;
+            try
+            {
+                ret = W32Native.GetWindowInfo((IntPtr)hwnd, ref info);
+            }
+            catch
+            {
+                return false;
+            }
             return ret;
         }
 
@@ -462,12 +477,20 @@ namespace clockatt
             }
 
             StringBuilder titleSb = new StringBuilder(2048);
-            W32Native.GetWindowText(hwnd, titleSb, 1024);
+            Process p;
+            try
+            {
+                W32Native.GetWindowText(hwnd, titleSb, 1024);
 
-            int wpid = GetProcessIdFromHwnd(hwnd);
+                int wpid = GetProcessIdFromHwnd(hwnd);
 
-            Process p = Process.GetProcessById(wpid);
+                p = Process.GetProcessById(wpid);
 
+            }
+            catch
+            {
+                return;
+            }
             logger.LogOutput(Properties.Settings.Default.TitleHistoryLogRetainDay,
                 Properties.Settings.Default.TitleHistoryLogDir,
                 titleSb.ToString(),
@@ -479,7 +502,14 @@ namespace clockatt
         private int GetProcessIdFromHwnd(int hwnd)
         {
             uint wpid = 0;
-            W32Native.GetWindowThreadProcessId((IntPtr)hwnd, ref wpid);
+            try
+            {
+                W32Native.GetWindowThreadProcessId((IntPtr)hwnd, ref wpid);
+            }
+            catch
+            {
+                return -1;
+            }
             return (int)wpid;
         }
 
