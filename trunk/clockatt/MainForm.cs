@@ -700,7 +700,7 @@ namespace clockatt
         /// </summary>
         private static void ShowHelpHtml()
         {
-#if true
+#if false
             MessageBox.Show("Soory! 現在ヘルプは未実装です");
 #else
             string helpname = AppDomain.CurrentDomain.FriendlyName;

@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("godz")]
 [assembly: AssemblyProduct("ClockATT")]
-[assembly: AssemblyCopyright("Copyright © Y.N 2009 Under GPL-Ver.2")]
+[assembly: AssemblyCopyright("Copyright © Y.N 2009-2011 Under GPL-Ver.2")]
 [assembly: AssemblyTrademark("Go Ahead!")]
 [assembly: AssemblyCulture("")]
 
@@ -33,6 +33,7 @@ using System.Resources;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.*")]
-[assembly: AssemblyFileVersion("0.1.*.*")]
+[assembly: AssemblyVersion("1.0.0.*")]
+//[assembly: AssemblyFileVersion("1.0.0.*")]
+//[assembly: AssemblyInformationalVersion("1.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("ja-JP")]
