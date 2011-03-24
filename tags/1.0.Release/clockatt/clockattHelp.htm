@@ -1,0 +1,1109 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=Generator content="Microsoft Word 14 (filtered)">
+<title>clockAtt とは</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"ＭＳ 明朝";
+	panose-1:2 2 6 9 4 2 5 8 3 4;}
+@font-face
+	{font-family:"ＭＳ ゴシック";
+	panose-1:2 11 6 9 7 2 5 8 2 4;}
+@font-face
+	{font-family:Century;
+	panose-1:2 4 6 4 5 5 5 2 3 4;}
+@font-face
+	{font-family:Century;
+	panose-1:2 4 6 4 5 5 5 2 3 4;}
+@font-face
+	{font-family:"\@ＭＳ 明朝";
+	panose-1:2 2 6 9 4 2 5 8 3 4;}
+@font-face
+	{font-family:"\@ＭＳ ゴシック";
+	panose-1:2 11 6 9 7 2 5 8 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Century","serif";}
+h1
+	{margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:41.25pt;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:-21.25pt;
+	page-break-before:always;
+	page-break-after:avoid;
+	font-size:18.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:normal;}
+h2
+	{margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:48.35pt;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:-10.0mm;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Arial","sans-serif";
+	font-weight:normal;}
+h3
+	{margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:40.45pt;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	text-indent:-35.45pt;
+	page-break-after:avoid;
+	font-size:10.5pt;
+	font-family:"Arial","sans-serif";
+	font-weight:normal;}
+h4
+	{margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:20.0pt;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	page-break-after:avoid;
+	font-size:10.5pt;
+	font-family:"Century","serif";}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Century","serif";}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:10.5pt;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Century","serif";}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:21.0pt;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Century","serif";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	layout-grid-mode:char;
+	font-size:10.5pt;
+	font-family:"Century","serif";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	layout-grid-mode:char;
+	font-size:10.5pt;
+	font-family:"Century","serif";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p.MsoDocumentMap, li.MsoDocumentMap, div.MsoDocumentMap
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	background:navy;
+	font-size:10.5pt;
+	font-family:"Arial","sans-serif";}
+pre
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"ＭＳ ゴシック";}
+var
+	{font-family:"Times New Roman","serif";}
+ /* Page Definitions */
+ @page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:30.0mm 20.0mm 70.9pt 20.0mm;
+	layout-grid:18.0pt;}
+div.WordSection1
+	{page:WordSection1;}
+@page WordSection2
+	{size:595.3pt 841.9pt;
+	margin:20.0mm 20.0mm 70.9pt 20.0mm;
+	layout-grid:18.0pt;}
+div.WordSection2
+	{page:WordSection2;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0mm;}
+ul
+	{margin-bottom:0mm;}
+-->
+</style>
+
+</head>
+
+<body lang=JA link=blue vlink=purple style='text-justify-trim:punctuation'>
+
+<div class=WordSection1 style='layout-grid:18.0pt'>
+
+<p class=MsoToc1><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoToc1><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:48.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+style='font-size:48.0pt'>clockAtt</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
+style='font-size:48.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:48.0pt;font-family:"ＭＳ 明朝","serif"'>利用マニュアル</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:48.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoToc1><span lang=EN-US>&nbsp;</span></p>
+
+<span lang=EN-US style='font-size:10.5pt;font-family:"Century","serif"'><br
+clear=all style='page-break-before:always'>
+</span>
+
+<p class=MsoToc1></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591516">1.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>概要</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>1</span></a></span></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591517">1.1.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span>clockAtt
+<span lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>とは</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>1</span></a></span></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591518">1.2.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>動作環境</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>1</span></a></span></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591519">2.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>利用方法</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>2</span></a></span></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591520">2.1.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>インストール方法</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>2</span></a></span></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591521">2.2.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>アンインストール方法</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>2</span></a></span></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591522">2.3.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>利用方法</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>2</span></a></span></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591523">2.4.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>設定変更について</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>4</span></a></span></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591524">2.4.1.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span>[<span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>時計</span></span>]
+<span lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>タブ</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>4</span></a></span></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591525">2.4.2.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span>[<span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>カレンダー</span></span>]
+<span lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>タブ</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>5</span></a></span></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591526">2.4.3.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span>[<span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>タイトル履歴</span></span>]
+<span lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>タブ</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>6</span></a></span></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591527">2.4.4.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>設定の保存</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>7</span></a></span></span></p>
+
+<p class=MsoToc2><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591528">2.5.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>その他の機能</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>7</span></a></span></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591529">2.5.1.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>一時的な非表示</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>7</span></a></span></span></p>
+
+<p class=MsoToc3><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591530">2.5.2.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>プログラムの終了</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>8</span></a></span></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><span lang=EN-US><a
+href="#_Toc288591531">3.<span style='color:windowtext;text-decoration:none'>&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'><span lang=EN-US>ライセンス等</span></span><span
+style='color:windowtext;display:none;text-decoration:none'>... </span><span
+style='color:windowtext;display:none;text-decoration:none'>9</span></a></span></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+</div>
+
+<span lang=EN-US style='font-size:10.5pt;font-family:"Century","serif"'><br
+clear=all style='page-break-before:always'>
+</span>
+
+<div class=WordSection2 style='layout-grid:18.0pt'>
+
+<h1><a name="_Toc288591516"><span lang=EN-US>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>概要</span></a><span
+lang=EN-US> </span></h1>
+
+<h2><a name="_Toc288591517"><span lang=EN-US>1.1.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US>clockAtt </span></a><span style='font-family:
+"ＭＳ ゴシック"'>とは</span></h2>
+
+<p class=MsoNormal><span lang=EN-US>.NET Framework 2.0</span><span
+style='font-family:"ＭＳ 明朝","serif"'>以上で動作する、アクティブウィンドウのタイトルバーに表示される時計およびカレンダーです。</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>時計を見るのがつらい場合や、ちょっとだけカレンダーを表示したい場合などに便利です。</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>祝日の設定はファイルで設定可能であり、独自の祝日を設定することもできます。</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>※アクティブウィンドウとは、現在利用しているアプリケーションのウィンドウのことです。</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>アプリケーションやウィンドウを切り替えても</span><span
+lang=EN-US>clockAtt</span><span style='font-family:"ＭＳ 明朝","serif"'>が常にタイトルバーにあるので、素早くカレンダー等にアクセスできます。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>以下の機能を持ちます。</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>・日付・時刻の表示</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>・カレンダーの表示</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>・表示色やフォント等の変更</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>・時計表示項目の変更</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>・アクティブウィンドウのタイトル履歴をログとして記録する</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h2><a name="_Toc288591518"><span lang=EN-US>1.2.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>動作環境</span></a></h2>
+
+<p class=MsoNormal style='margin-left:18.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'>・<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US>.NET Framework 2.0(Service Pack 1)</span><span
+style='font-family:"ＭＳ 明朝","serif"'>以上</span> <span style='font-family:"ＭＳ 明朝","serif"'>がインストールされている</span><span
+lang=EN-US>Windows</span><span style='font-family:"ＭＳ 明朝","serif"'>マシン</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h1><a name="_Toc288591519"><span lang=EN-US>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>利用方法</span></a></h1>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h2><a name="_Toc288591520"><span lang=EN-US>2.1.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>インストール方法</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>clockatt.exe</span><span style='font-family:
+"ＭＳ 明朝","serif"'>　と祝日の設定ファイルを管理するフォルダ</span> <span lang=EN-US>Holiday </span><span
+style='font-family:"ＭＳ 明朝","serif"'>を任意のフォルダにコピーして下さい。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h2><a name="_Toc288591521"><span lang=EN-US>2.2.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>アンインストール方法</span></a></h2>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>インストールした</span><span
+lang=EN-US>clockatt.exe</span><span style='font-family:"ＭＳ 明朝","serif"'>、</span><span
+lang=EN-US>Holiday</span><span style='font-family:"ＭＳ 明朝","serif"'>フォルダを削除して下さい。</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>また、個人別の設定が下記のフォルダに記録されますのでこれを削除します。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Windows XP </span><span style='font-family:
+"ＭＳ 明朝","serif"'>の場合</span></p>
+
+<p class=MsoNormal><span lang=EN-US>C:\Documents and Settings\[</span><span
+style='font-family:"ＭＳ 明朝","serif"'>ユーザー名</span><span lang=EN-US>]\Local
+Settings\Application Data\[</span><span style='font-family:"ＭＳ 明朝","serif"'>ユーザー名</span><span
+lang=EN-US>]\ clockatt.exeXXXXXX(XXXXXX</span><span style='font-family:"ＭＳ 明朝","serif"'>はランダムな文字列</span><span
+lang=EN-US>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Windows Vista </span><span
+style='font-family:"ＭＳ 明朝","serif"'>以上の場合</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>※レジストリは利用していません。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h2><a name="_Toc288591522"><span lang=EN-US>2.3.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>利用方法</span></a></h2>
+
+<p class=MsoNormal style='margin-left:18.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'>・<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US>clockAtt.exe </span><span style='font-family:
+"ＭＳ 明朝","serif"'>を起動すると、アクティブウィンドウのタイトルバーに時計が表示されます。</span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'>・<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US><img width=508 height=309
+src="clockattHelp.files/image001.jpg"></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'>・<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"ＭＳ 明朝","serif"'>時計部分をクリックすると当月のカレンダーが表示されます</span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'>・<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US><img width=517 height=319
+src="clockattHelp.files/image002.jpg"></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'>・<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"ＭＳ 明朝","serif"'>カレンダーの月を切り替えるには、カレンダー上をクリックします。左半分をクリックすると前月を表示し、右半分をクリックすると翌月を表示します。</span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'>・<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='position:absolute;z-index:251655680;left:0px;
+margin-left:9px;margin-top:4px;width:111px;height:167px'><img width=111
+height=167 src="clockattHelp.files/image003.gif"></span><span style='position:
+absolute;z-index:251654656;left:0px;margin-left:114px;margin-top:4px;
+width:107px;height:163px'><img width=107 height=163
+src="clockattHelp.files/image004.gif"></span><span lang=EN-US><img width=191
+height=148 src="clockattHelp.files/image005.jpg"></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'>・<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt;text-indent:-18.0pt'><span
+lang=EN-US style='font-family:"ＭＳ 明朝","serif"'>・<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='position:relative;z-index:251656704'><span
+style='left:0px;position:absolute;left:39px;top:-26px;width:294px;height:91px'>
+
+<table cellpadding=0 cellspacing=0 align=left>
+ <tr>
+  <td width=0 height=0></td>
+  <td width=136></td>
+  <td width=22></td>
+  <td width=136></td>
+ </tr>
+ <tr>
+  <td height=91></td>
+  <td align=left valign=top><img width=136 height=91
+  src="clockattHelp.files/image006.gif" alt="四角形吹き出し: 左半分をクリックすると前月表示"></td>
+  <td></td>
+  <td align=left valign=top><img width=136 height=91
+  src="clockattHelp.files/image007.gif" alt="四角形吹き出し: 右半分をクリックすると翌月表示"></td>
+ </tr>
+</table>
+
+</span></span><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<br clear=ALL>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>・表示色等を変更したい場合、時計表示部分を右クリックすることでメニューが表示されます。その中から、「設定</span><span
+lang=EN-US>(<u>C</u>)</span><span style='font-family:"ＭＳ 明朝","serif"'>」を選択することで、設定変更ウィンドウが表示されますので、ここで設定値を変更して下さい。</span></p>
+
+<p class=MsoNormal>
+
+<table cellpadding=0 cellspacing=0 align=left>
+ <tr>
+  <td width=95 height=19></td>
+ </tr>
+ <tr>
+  <td></td>
+  <td><img width=251 height=85 src="clockattHelp.files/image008.gif"
+  alt="角丸四角形吹き出し: ここを右クリックするとメニューが表示されます"></td>
+ </tr>
+</table>
+
+<span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<br clear=ALL>
+
+<p class=MsoNormal><span style='position:absolute;z-index:251659776;left:0px;
+margin-left:171px;margin-top:34px;width:306px;height:83px'><img width=306
+height=83 src="clockattHelp.files/image009.gif"
+alt="角丸四角形吹き出し: 「設定」をクリックすると設定変更の画面が表示されます"></span><span lang=EN-US><img
+width=246 height=142 src="clockattHelp.files/image010.jpg"></span></p>
+
+<h2><a name="_Toc288591523"><span lang=EN-US>2.4.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>設定変更について</span></a></h2>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>・設定変更ウィンドウでは次の設定変更が可能です。</span></p>
+
+<p class=MsoNormal style='text-indent:20.0pt'><span style='font-family:"ＭＳ 明朝","serif"'>・日付・時計の表示項目</span><span
+lang=EN-US>/</span><span style='font-family:"ＭＳ 明朝","serif"'>表示色</span><span
+lang=EN-US>/</span><span style='font-family:"ＭＳ 明朝","serif"'>フォント</span></p>
+
+<p class=MsoNormal style='text-indent:20.0pt'><span style='font-family:"ＭＳ 明朝","serif"'>・カレンダーの表示色</span><span
+lang=EN-US>/</span><span style='font-family:"ＭＳ 明朝","serif"'>フォント</span></p>
+
+<p class=MsoNormal style='text-indent:20.0pt'><span style='font-family:"ＭＳ 明朝","serif"'>・タイトル履歴の記録</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h3 style='margin-left:45.95pt'><a name="_Toc288591524"><span lang=EN-US>2.4.1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>[</span></a><span style='font-family:"ＭＳ ゴシック"'>時計</span><span
+lang=EN-US>] </span><span style='font-family:"ＭＳ ゴシック"'>タブ</span></h3>
+
+<p class=MsoNormal><span lang=EN-US><img width=642 height=436
+src="clockattHelp.files/image011.jpg"></span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>時計表示の設定を変更します。設定を変更するたびに</span><span
+lang=EN-US> [</span><span style='font-family:"ＭＳ 明朝","serif"'>サンプル表示</span><span
+lang=EN-US>]</span><span style='font-family:"ＭＳ 明朝","serif"'>に表示されている部分が変わりますので、それを参考に設定をして下さい。</span>
+</p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  background:navy;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><b><span style='font-family:"ＭＳ 明朝","serif";color:white'>項目</span></b></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border:solid navy 1.0pt;
+  border-left:none;background:navy;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><b><span style='font-family:"ＭＳ 明朝","serif";color:white'>内容</span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>フォント名</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日付・時計表示に利用するフォントを指定します。</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>文字色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日付・時計の文字の色を指定します。</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>背景色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日付・時計表示時の背景色を指定します。タイトルバーに近い色を指定することで目立たなくすることができます。</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>年表示</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日付の年を西暦で表示します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日表示</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>チェックがついている場合、日付の後ろに曜日を表示します。</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日和暦</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日を漢字表記する場合にチェックします。チェックがないと英字表記になります。</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>時間表示</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>時間を表示する場合にチェックします。表示は</span><span
+  lang=EN-US>24</span><span style='font-family:"ＭＳ 明朝","serif"'>時間形式のみです。</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>秒表示</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>時刻の秒を表示する場合にチェックします。</span></p>
+  </td>
+ </tr>
+</table>
+
+<h3 style='margin-left:45.95pt'><a name="_Toc288591525"><span lang=EN-US>2.4.2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>[</span></a><span style='font-family:"ＭＳ ゴシック"'>カレンダー</span><span
+lang=EN-US>] </span><span style='font-family:"ＭＳ ゴシック"'>タブ</span></h3>
+
+<p class=MsoNormal><span lang=EN-US><img width=642 height=436
+src="clockattHelp.files/image012.jpg"></span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>カレンダー表示時の設定を変更します。設定を変更するたびに</span>
+<span style='font-family:"ＭＳ 明朝","serif"'>下に表示されているカレンダー部分が変わりますので、それを参考に設定をして下さい。</span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  background:navy;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><b><span style='font-family:"ＭＳ 明朝","serif";color:white'>項目</span></b></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border:solid navy 1.0pt;
+  border-left:none;background:navy;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><b><span style='font-family:"ＭＳ 明朝","serif";color:white'>内容</span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>背景色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>カレンダー全体の背景色を指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日フォント</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日見出し部分のフォントを指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>表示色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日見出し部分の平日の文字色を指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>土曜表示色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日見出し部分の土曜日の文字色を指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>日曜表示色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>曜日見出し部分の日曜日の文字色を指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>年月</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>フォント</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>年月表記部分のフォントを指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>年月</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>表示色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>年月表記部分の文字色を指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>フォント</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日の表示部分のフォントを指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>表示色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日の表示部分の平日の文字色を指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>土曜表示色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日の表示部分の土曜日の文字色を指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>日曜表示色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日の表示部分の日曜日の文字色を指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>休日</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>表示色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日の表示部分の休日の文字色を指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>当日</span> <span
+  style='font-family:"ＭＳ 明朝","serif"'>背景色</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>日の表示部分の当日をハイライトする為の背景色を指定します</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h3 style='margin-left:45.95pt'><a name="_Toc288591526"><span lang=EN-US>2.4.3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span lang=EN-US>[</span></a><span style='font-family:"ＭＳ ゴシック"'>タイトル履歴</span><span
+lang=EN-US>] </span><span style='font-family:"ＭＳ ゴシック"'>タブ</span></h3>
+
+<p class=MsoNormal><span lang=EN-US><img width=642 height=436
+src="clockattHelp.files/image013.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>アクティブウィンドウのタイトル文字の履歴を記録する場合の設定を行います</span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  background:navy;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><b><span style='font-family:"ＭＳ 明朝","serif";color:white'>項目</span></b></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border:solid navy 1.0pt;
+  border-left:none;background:navy;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><b><span style='font-family:"ＭＳ 明朝","serif";color:white'>内容</span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>タイトル履歴をログに記録する</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>チェックすることで、アクティブウィンドウのタイトル文字の履歴を指定したフォルダにテキストファイルで書き出します。</span></p>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>その日のパソコン上での作業履歴をさかのぼってみたい場合に有効です。</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>書き出し先フォルダ</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>ログを書き出す先のフォルダを指定します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>保存日数</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>ログを何日分のこしておくかを指定します</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>書き出し先のファイル名は</span></p>
+
+<p class=MsoNormal><span lang=EN-US>YYYYMMDD.[</span><span style='font-family:
+"ＭＳ 明朝","serif"'>任意の数値</span><span lang=EN-US>].log </span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>となります。</span><span
+lang=EN-US>[</span><span style='font-family:"ＭＳ 明朝","serif"'>任意の数値</span><span
+lang=EN-US>]</span><span style='font-family:"ＭＳ 明朝","serif"'>は不定です。</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>ログには下記のような記録が残ります。</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>開始日時</span><span
+lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style='font-family:"ＭＳ 明朝","serif"'>開始時間</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style='font-family:"ＭＳ 明朝","serif"'>作業時間</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style='font-family:"ＭＳ 明朝","serif"'>プロセス名</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style='font-family:"ＭＳ 明朝","serif"'>タイトル</span></p>
+
+<p class=MsoNormal><span lang=EN-US>2011/02/17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 02:02:47
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00:00:03.2656250&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; explorer C:\</span></p>
+
+<p class=MsoNormal><span lang=EN-US>2011/02/17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 02:02:51&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00:00:01.9531250&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; explorer </span><span
+style='font-family:"ＭＳ 明朝","serif"'>マイ</span> <span style='font-family:"ＭＳ 明朝","serif"'>コンピュータ</span></p>
+
+<p class=MsoNormal><span lang=EN-US>2011/02/17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 02:02:53&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00:00:04.1562500&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; explorer C:\</span></p>
+
+<p class=MsoNormal><span lang=EN-US>2011/02/17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 02:02:57&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00:00:17.9375000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; explorer C:\work</span></p>
+
+<p class=MsoNormal><span lang=EN-US>2011/02/17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 02:03:15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00:00:15.8750000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WINWORD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; clockatt.doc
+[</span><span style='font-family:"ＭＳ 明朝","serif"'>互換モード</span><span lang=EN-US>]
+- Microsoft Word</span></p>
+
+<p class=MsoNormal><span lang=EN-US>2011/02/17&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 22:03:31&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00:00:03.0625000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; explorer C:\work</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>作業時間はそのウィンドを連続して表示していた時間です。</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>同じ日に複数のウィンドウ間を切り替えながら作業をしていた場合、それぞれのアクティブであった時間が複数回記録されます。また、作業によりタイトル文字列が途中で変わった場合も複数の記録が残ります。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h3 style='margin-left:45.95pt'><a name="_Toc288591527"><span lang=EN-US>2.4.4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>設定の保存</span></a></h3>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>ウィンドウの下にある各ボタンの意味は次の通りです。</span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  background:navy;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><b><span style='font-family:"ＭＳ 明朝","serif";color:white'>項目</span></b></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border:solid navy 1.0pt;
+  border-left:none;background:navy;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><b><span style='font-family:"ＭＳ 明朝","serif";color:white'>内容</span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>決定</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>変更した設定を保存します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>今回の変更を元に戻す</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>設定変更ウィンドウを開いてからの変更内容を破棄し、もう一度設定をやり直します</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>既定値に戻して閉じる</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>今までの設定をすべて破棄しプログラムの初期設定値に戻します。</span></p>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>すべての設定が消えてしまいますので注意して下さい。</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=121 valign=top style='width:90.45pt;border:solid navy 1.0pt;
+  border-top:none;padding:0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>キャンセル</span></p>
+  </td>
+  <td width=535 valign=top style='width:401.35pt;border-top:none;border-left:
+  none;border-bottom:solid navy 1.0pt;border-right:solid navy 1.0pt;padding:
+  0mm 5.4pt 0mm 5.4pt'>
+  <p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>変更をキャンセルし、ウィンドウを閉じます</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h2><a name="_Toc288591528"><span lang=EN-US>2.5.<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>その他の機能</span></a></h2>
+
+<h3 style='margin-left:45.95pt'><a name="_Toc288591529"><span lang=EN-US>2.5.1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>一時的な非表示</span></a></h3>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>一時的に表示が不要な場合は、右クリックメニューから</span>
+<span style='font-family:"ＭＳ 明朝","serif"'>「非表示にする」を選択します。</span></p>
+
+<p class=MsoNormal><span style='position:absolute;z-index:251660800;left:0px;
+margin-left:195px;margin-top:64px;width:306px;height:83px'><img width=306
+height=83 src="clockattHelp.files/image014.gif"
+alt="角丸四角形吹き出し: 非表示にする をクリックすると、表示が消えます"></span><span lang=EN-US><img
+width=246 height=142 src="clockattHelp.files/image010.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>再度表示する場合、タスクトレイにあるアイコンをクリックし、</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img width=247 height=144
+src="clockattHelp.files/image015.jpg"></span></p>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>メニューから</span> <span
+style='font-family:"ＭＳ 明朝","serif"'>「表示する」を選択することで、再度表示されます。</span></p>
+
+<h3 style='margin-left:45.95pt'><a name="_Toc288591530"><span lang=EN-US>2.5.2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>プログラムの終了</span></a></h3>
+
+<p class=MsoNormal><span style='font-family:"ＭＳ 明朝","serif"'>右クリックメニューから　「終了</span><span
+lang=EN-US>(<u>Q</u>)</span><span style='font-family:"ＭＳ 明朝","serif"'>」を選択することで、プログラムは終了します。</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<h1><a name="_Toc288591531"><span lang=EN-US>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-family:"ＭＳ ゴシック"'>ライセンス等</span></a></h1>
+
+<pre><span lang=EN-US>Copyright (C) </span><span lang=EN-US style='font-size:
+10.0pt;color:#A31515'>2009-2011</span><span style='font-size:10.0pt;color:#A31515'>　</span><var><span
+lang=EN-US>Y.N(godz)</span></var></pre><pre><span lang=EN-US>&nbsp;</span></pre><pre><span
+lang=EN-US>This program is free software; you can redistribute it and/or</span></pre><pre><span
+lang=EN-US>modify it under the terms of the GNU General Public License</span></pre><pre><span
+lang=EN-US>as published by the Free Software Foundation; either version 2</span></pre><pre><span
+lang=EN-US>of the License, or (at your option) any later version.</span></pre><pre><span
+lang=EN-US>&nbsp;</span></pre><pre><span lang=EN-US>This program is distributed in the hope that it will be useful,</span></pre><pre><span
+lang=EN-US>but WITHOUT ANY WARRANTY; without even the implied warranty of</span></pre><pre><span
+lang=EN-US>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&nbsp; See the</span></pre><pre><span
+lang=EN-US>GNU General Public License for more details.</span></pre><pre><span
+lang=EN-US>&nbsp;</span></pre><pre><span lang=EN-US>You should have received a copy of the GNU General Public License</span></pre><pre><span
+lang=EN-US>along with this program; if not, write to the Free Software</span></pre><pre><span
+lang=EN-US>Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA&nbsp; 02111-1307, USA.</span></pre><pre><span
+lang=EN-US>&nbsp;</span></pre><pre><span lang=EN-US>&nbsp;</span></pre><pre><span
+lang=EN-US>&nbsp;</span></pre><pre>このプログラムはフリーソフトウェアです。あなたはこれを、フリーソフトウェ</pre><pre>ア財団によって発行された<span
+lang=EN-US> GNU </span>一般公衆利用許諾契約書<span lang=EN-US>(</span>バージョン<span
+lang=EN-US>2</span>か、希</pre><pre>望によってはそれ以降のバージョンのうちどれか<span lang=EN-US>)</span>の定める条件の下で再頒布</pre><pre>または改変することができます。</pre><pre><span
+lang=EN-US>&nbsp;</span></pre><pre>このプログラムは有用であることを願って頒布されますが、<span lang=EN-US>*</span>全くの無保証<span
+lang=EN-US>* </span></pre><pre>です。商業可能性の保証や特定の目的への適合性は、言外に示されたものも含</pre><pre>め全く存在しません。詳しくは<span
+lang=EN-US>GNU </span>一般公衆利用許諾契約書をご覧ください。</pre><pre><span lang=EN-US> </span></pre><pre>あなたはこのプログラムと共に、<span
+lang=EN-US>GNU </span>一般公衆利用許諾契約書の複製物を一部</pre><pre>受け取ったはずです。もし受け取っていなければ、フリーソフトウェア財団ま</pre><pre>で請求してください<span
+lang=EN-US>(</span>宛先は<span lang=EN-US> the Free Software Foundation, Inc., 59</span></pre><pre><span
+lang=EN-US>Temple Place, Suite 330, Boston, MA 02111-1307 USA)</span>。</pre>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal align=left style='text-align:left;text-autospace:none'><span
+lang=EN-US>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>

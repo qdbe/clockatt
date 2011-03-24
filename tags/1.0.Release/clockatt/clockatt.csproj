@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="2.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0E8C919C-54B2-46DA-B796-5F999989FB06}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>clockatt</RootNamespace>
+    <AssemblyName>clockatt</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>Resources\catt.ico</ApplicationIcon>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>http://localhost/clockatt/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CalendarPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Configration\CalendarConfigration.cs" />
+    <Compile Include="CalenderDayInfo.cs" />
+    <Compile Include="CalenderDayPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CalenderDrawInfo.cs" />
+    <Compile Include="CalendarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalendarForm.Designer.cs">
+      <DependentUpon>CalendarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configration\ConfigBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configration\ConfigBaseForm.Designer.cs">
+      <DependentUpon>ConfigBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configration\ConfigrationDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configration\ConfigrationDlg.Designer.cs">
+      <DependentUpon>ConfigrationDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigValue\ConfigAbstract.cs" />
+    <Compile Include="ConfigValue\ConfigDayValue.cs" />
+    <Compile Include="ConfigValue\ConfigHolidayIntValue.cs" />
+    <Compile Include="ConfigValue\ConfigHolidayName.cs" />
+    <Compile Include="ConfigValue\ConfigInitException.cs" />
+    <Compile Include="ConfigValue\ConfigIntValue.cs" />
+    <Compile Include="ConfigValue\ConfigMonthValue.cs" />
+    <Compile Include="ConfigValue\ConfigStringValue.cs" />
+    <Compile Include="ConfigValue\ConfigWeekOfMonthValue.cs" />
+    <Compile Include="ConfigValue\ConfigYearValue.cs" />
+    <Compile Include="ConfigValue\ConfigDayWeekValue.cs" />
+    <Compile Include="FormControls\CheckBoxSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormControls\CheckBoxSelector.Designer.cs">
+      <DependentUpon>CheckBoxSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormControls\ColorSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormControls\ColorSelector.Designer.cs">
+      <DependentUpon>ColorSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormControls\ConfigSelectorBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormControls\ConfigSelectorBase.Designer.cs">
+      <DependentUpon>ConfigSelectorBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormControls\FolderSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormControls\FolderSelector.Designer.cs">
+      <DependentUpon>FolderSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormControls\FontSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormControls\FontSelector.Designer.cs">
+      <DependentUpon>FontSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormControls\IntSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormControls\IntSelector.Designer.cs">
+      <DependentUpon>IntSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormControls\TabSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HolidayConfigCollection.cs" />
+    <Compile Include="HolidayConfig.cs" />
+    <Compile Include="IConfig.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CalendarForm.resx">
+      <DependentUpon>CalendarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configration\ConfigBaseForm.resx">
+      <DependentUpon>ConfigBaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configration\ConfigrationDlg.resx">
+      <DependentUpon>ConfigrationDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControls\CheckBoxSelector.resx">
+      <DependentUpon>CheckBoxSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControls\ColorSelector.resx">
+      <DependentUpon>ColorSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControls\FolderSelector.resx">
+      <DependentUpon>FolderSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControls\FontSelector.resx">
+      <DependentUpon>FontSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControls\IntSelector.resx">
+      <DependentUpon>IntSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowAboutBox.resx">
+      <DependentUpon>ShowAboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ShowAboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowAboutBox.Designer.cs">
+      <DependentUpon>ShowAboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimeUtil.cs" />
+    <Compile Include="TitileHistoryLogger.cs" />
+    <Compile Include="W32Native.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="JapaneseEquinoxHoliday.data" />
+    <None Include="JapaneseHoliday.data" />
+    <None Include="Resources\catt.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="catt.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>rd /s/q $(TargetDir)Holiday
+mkdir $(TargetDir)Holiday
+copy $(ProjectDir)JapaneseHoliday.data  $(TargetDir)Holiday
+copy $(ProjectDir)JapaneseEquinoxHoliday.data  $(TargetDir)Holiday
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>
