@@ -1,4 +1,50 @@
-Copyright (C) 2009-2011Y.N(godz)
+/*---------------------------------------------
+		clockAtt
+		
+		Authoer : Y.N
+		URL:	http://code.google.com/p/clockatt/
+		mailto: accept　＠　qdbe　.　rgr　.　jp　(文字を半角にし、かつ全角スペースを削除してください)
+----------------------------------------------*/
+
+
+1.1.	clockAtt とは
+アクティブウィンドウのタイトルバーに張り付く時計
+・すばやいカレンダー表示が可能
+・祝日は設定ファイルでカスタマイズ可能、独自の祝日設定ができますし新しい祝日の為にプログラムの更新を待つ必要がありません
+・アクティブウィンドウのタイトル履歴をログに出力可能
+
+ソースも公開しています
+http://code.google.com/p/clockatt/
+
+1.2.	動作環境
+・	.NET Framework 2.0(Service Pack 1) がインストールされているWindowsマシン
+
+2.	利用方法
+
+2.1.	起動方法
+・	clockAtt を起動します。
+・	起動後アクティブウィンドウのタイトル右側に時計が表示されます。
+
+
+ヘルプについては、インストール後の clockAttHelp.htm を参照してください。
+
+
+3.	インストール・アンインストール
+
+3.1.		インストール方法
+	clockAtt.1.0.zip を任意の場所に解凍して下さい。
+	レジストリなどは利用していません。
+
+3.2.		アンインストール方法
+	インストール時に展開したファイルを削除していただくだけで結構です。
+	レジストリは利用していません。
+
+
+4.	ライセンス等について
+
+4.1		ライセンス等の詳細
+
+Copyright (C) 2004-2011　Y.N(godz)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

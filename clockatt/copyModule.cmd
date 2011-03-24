@@ -7,7 +7,7 @@ mkdir ..\installPack\clockatt
 rem copy .\bin\release\*.dll ..\installPack\clockatt
 copy .\bin\release\clockatt.exe ..\installPack\clockatt
 xcopy /S/I/Y .\bin\release\Holiday ..\installPack\clockatt\Holiday
-rem copy .\readme.txt ..\installPack\clockatt
+copy .\readme.txt ..\installPack\clockatt
 copy .\license.txt ..\installPack\clockatt
 rem copy .\ƒ‰ƒCƒZƒ“ƒX.rtf   ..\installPack\clockatt
 copy .\Resources\catt.ico ..\installPack\clockatt
