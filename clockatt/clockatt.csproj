@@ -214,6 +214,7 @@
     <None Include="JapaneseEquinoxHoliday.data" />
     <None Include="JapaneseHoliday.data" />
     <None Include="Resources\catt.ico" />
+    <None Include="JapaneseHoliday2.data" />
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="catt.ico">
@@ -266,6 +267,7 @@
     <PostBuildEvent>rd /s/q $(TargetDir)Holiday
 mkdir $(TargetDir)Holiday
 copy $(ProjectDir)JapaneseHoliday.data  $(TargetDir)Holiday
+copy $(ProjectDir)JapaneseHoliday2.data  $(TargetDir)Holiday
 copy $(ProjectDir)JapaneseEquinoxHoliday.data  $(TargetDir)Holiday
 </PostBuildEvent>
   </PropertyGroup>
