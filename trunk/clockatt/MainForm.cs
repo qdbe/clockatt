@@ -251,7 +251,11 @@ namespace clockatt
         /// <param name="e"></param>
         private void LocateTimer_Tick(object sender, EventArgs e)
         {
-            SetWindowOnActiveTitle();
+            try
+            {
+                SetWindowOnActiveTitle();
+            }
+            catch {}
         }
 
         #endregion タイマー関連
